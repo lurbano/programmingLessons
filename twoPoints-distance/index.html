@@ -72,18 +72,28 @@
     </style>
   </head>
   <body>
-    <h1>Plotting Two Points using vpython (Glowscript)</h1>
+    <h1>Find the Distance between two points.</h1>
 
     <div class="setup">
-      Our objective is to plot two points on a graph and to learn how to use vpython.
+      Our objective is to plot the two points <b>(1,3) and (5,6)</b> on a graph and calculate the distance between them.
       <figure>
-          <img src="pts_bare_points.png" style="width:400px;">
-          <figcaption>Fig 1. Two points. Point 1: (2,4) and Point2: (6,7).</figcaption>
+          <img src="twoPoints-d-1.png" style="width:400px;">
+          <figcaption>Fig 1. Two points. Point 1: (1,3) and Point2: (5,6).</figcaption>
       </figure>
     </div>
 
 
-    You will then draw a straight line between the two points, and then extend the line to the y-axis.
+    <ul>
+      <li>Plot the two points on a graph.</li>
+      <li>Draw a line between the two points.</li>
+      <li>Draw a <b>red</b> line to show the change in x (Δx) between the two points
+        <b>and</b> print Δx.</li>
+      <li>Draw a second line (<b>yellow</b>) to show the change in y (Δy) <b>and</b> print Δy.</li>
+      <li>Use a mathematical formula to calculate the distance between the two points along the
+        diagonal.</li>
+    </ul>
+
+    <p><hr>
 
 
     <table>
@@ -99,207 +109,79 @@
       <tr>
         <td>
           <div class="comment">
-            Create the first point at (2, 4): Create a <b>sphere object </b> with a <b>variable</b> name "<b>p1</b>" and two
-            <b> properties</b>: the <b>position</b> is at the coordinate (2, 4), and the <b>radius</b> is 0.25 units.
-          </div>
-          <div class="pythonCode">
-            <pre><code class="language-python">
-              p1 = sphere(pos=vec(2,4,0), radius=0.25)
-            </code></pre>
-          </div>
-
-        </td>
-        <td>
-          <div class="graph">
-            <img src="gs-01.png" style="width:400px;">
-          </div>
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-
-          <div class="comment">
-            Add axes so you can see where things are. To draw lines you use a <b>curve</b>
-            object and give the coordinates of points that will be connected by straight lines.
-            The positions of the points are given in an <b>array</b>.
-          </div>
-          <div class="pythonCode">
-            <pre><code class="language-python">
-              p1 = sphere(pos=vec(2,4,0), radius=0.25)
-
-              axes = curve(pos=[vec(0, 10, 0), vec(0, 0, 0), vec(10,0,0)])
-            </code></pre>
-          </div>
-
-        </td>
-        <td>
-
-          <div class="graph">
-            <img src="gs-02.png" style="width:400px;">
-          </div>
-
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-
-          <div class="comment">
-            Now add the second point at (6, 7)
-          </div>
-          <div class="pythonCode">
-          </div>
-
-        </td>
-        <td>
-
-          <div class="graph">
-            <img src="gs-03.png" style="width:400px;">
-          </div>
-
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-
-          <div class="comment">
-            Draw a line between the two points.
+            Plot the two points (1,3) and (5,6).
           </div>
           <div class="pythonCode">
             <div class="toggle-next">Show Notes ▼</div>
             <div class="test" hidden>
-              You can use the position property (.pos) of the points to set the end points of the line.
-              <pre><code class="language-python">
-                p1 = sphere(pos=vec(2,4,0), radius=0.25)
-                p2 = sphere(pos=vec(6,7,0), radius=0.25)
+              To make things easier for myself, I've made the x and y values
+              of the points variables. I've also added the axes which is not
+              shown in the code below.
+              <pre><code class="language-python" style="user-select: none">
+                x1 = 1
+                y1 = 3
 
-                axes = curve(pos=[vec(0, 10, 0), vec(0, 0, 0), vec(10,0,0)])
+                x2 = 5
+                y2 = 6
 
-                line = curve(pos=[p1.pos, p2.pos])
+                p1 = sphere(pos=vec(x1, y1, 0), radius=0.25)
+                p2 = sphere(pos=vec(x2, y2, 0), radius=0.25)
               </code></pre>
             </div>
           </div>
 
         </td>
         <td>
-
           <div class="graph">
-            <img src="gs-04.png" style="width:400px;">
+            <img src="twoPoints-d-2.png" style="width:400px;">
           </div>
-
         </td>
       </tr>
       <!-- END ROW -->
 
+
       <!-- NEW ROW -->
       <tr>
         <td>
+          <div class="comment">
+            Draw lines between the two points, including the lines that show
+             Δx and Δy.
+          </div>
+          <div class="pythonCode">
+            <div class="toggle-next">Show Notes ▼</div>
+            <div class="test" hidden>
 
-          <div class="code">
-            <div class="comment">
-              Plot a point halfway between the two points (the midpoint).
-            </div>
-            <div class="pythonCode">
             </div>
           </div>
 
         </td>
         <td>
-
           <div class="graph">
-            <img src="gs-midpoint.png" style="width:400px;">
+            <img src="twoPoints-d-3.png" style="width:400px;">
           </div>
-
         </td>
       </tr>
       <!-- END ROW -->
 
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-
-          <div class="code">
-            <div class="comment">
-              Extend the line between the two points so it <b>intercepts</b> the y-axis.
-            </div>
-            <div class="pythonCode">
-            </div>
-          </div>
-
-        </td>
-        <td>
-
-          <div class="graph">
-            <img src="gs-05.png" style="width:400px;">
-          </div>
-
-        </td>
-      </tr>
-      <!-- END ROW -->
 
       <!-- NEW ROW -->
       <tr>
         <td>
+          <div class="comment">
+            Calculate the change in x (Δx) and y (Δy)
+          </div>
+          <div class="pythonCode">
+            <div class="toggle-next">Show Notes ▼</div>
+            <div class="test" hidden>
 
-          <div class="code">
-            <div class="comment">
-              Plot the following x and y values, and determine if the relation is a function.
-              <table>
-                <tr>
-                  <th>x</th><th>y</th>
-                </tr>
-                <tr>
-                  <td>2</td><td>4</td>
-                </tr>
-                <tr>
-                  <td>-3</td><td>1</td>
-                </tr>
-                <tr>
-                  <td>5</td><td>-3</td>
-                </tr>
-                <tr>
-                  <td>4</td><td>7</td>
-                </tr>
-                <tr>
-                  <td>0</td><td>3</td>
-                </tr>
-                <tr>
-                  <td>-1</td><td>-1</td>
-                </tr>
-                <tr>
-                  <td>-2</td><td>3</td>
-                </tr>
-                <tr>
-                  <td>-3</td><td>-3</td>
-                </tr>
-                <tr>
-                  <td>6</td><td>2</td>
-                </tr>
-                <tr>
-                  <td>-7</td><td>-2</td>
-                </tr>
-              </table>
-            </div>
-            <div class="pythonCode">
             </div>
           </div>
 
         </td>
         <td>
-
           <div class="graph">
-
+            <img src="twoPoints-d-3.png" style="width:400px;">
           </div>
-
         </td>
       </tr>
       <!-- END ROW -->
