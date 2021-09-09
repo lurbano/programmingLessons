@@ -1,0 +1,70 @@
+.pRow {
+  display: grid;
+  border: 1px solid black;
+  grid-template-columns: 45% 45%;
+  padding: 1em;
+}
+.graph {
+  align-self: center;
+  justify-self: center;
+  z-index: -1;
+  padding: 0.5em;
+}
+
+.code {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  <!-- align-self: center;
+  justify-self: left; -->
+}
+.comment {
+  /* border: 1px solid black; */
+  padding: 1em;
+  width: 90%;
+}
+.pythonCode {
+  margin-top: 0.25em;
+  padding: 0.5em;
+  border: 1px solid red;
+}
+.setup{
+  background-color: PaleGoldenrod;
+}
+.toggle-next {
+  width: 12em;
+  margin: 2px;
+  color: blue;
+}
+.toggle-next:hover {
+  cursor: pointer;
+  background-color: #bbbbff;
+}
+
+table, th, td {
+  border: 1px solid green;
+}
+/* zebra striping */
+tbody tr:nth-child(odd) {
+  background-color: khaki;
+}
+tbody tr:nth-child(even) {
+  background-color: Aqua;
+}
+tbody tr {
+  background-image: url(noise.png);
+}
+table {
+  background-color: #ff33cc;
+}
+code {
+  background-color: #ccc;
+}
+
+.myButton {
+  background-color: Chartreuse;
+  border: 3px inset grey;
+  cursor: pointer;
+}
+.myButton:hover {
+  border: 3px outset grey;
+}
