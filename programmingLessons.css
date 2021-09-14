@@ -48,7 +48,7 @@ tbody tr:nth-child(odd) {
   background-color: khaki;
 }
 tbody tr:nth-child(even) {
-  background-color: Aqua;
+  background-color: white;
 }
 tbody tr {
   background-image: url(noise.png);
