@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <h1>Writing Functions</h1>
+
+    <div class="setup">
+      Functions are bits of code that do specific things so you don't have to recreate the wheel every time you have to do something complicated. Here we'll program few mathematical functions
+
+      \[ f(x) = x -  4  \tag{1} \]
+
+      $$ g(x) = -2x + 1 \tag{2} $$
+
+      $$ h(x) = \frac{x^2}{12} \tag{3} $$
+
+      and graph them individually and in combination.
+
+      <figure>
+          <img src="mf-05.png" style="width:300px;">
+          <figcaption>Combining functions.</figcaption>
+      </figure>
+    </div>
+
+
+    <table>
+
+
+
+      <tr>
+        <th>Notes and Code</th>
+        <th>Outcome</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Plotting a Math Function</h3>
+            First we graph equation (3)
+
+            $$ h(x) = \frac{x^2}{12} \tag{3} $$
+
+            by creating a loop to generate x values, and then using the equation to calculate the corresponding y values. We'll plot these points as spheres.
+          </div>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python" >
+              xaxis = curve(pos=[vec(-10,0,0), vec(10,0,0)])
+              yaxis = curve(pos=[vec(0,-10,0), vec(0,10,0)])
+
+              for x in range(-10, 10, 1):
+                  y = x**2 / 12.0
+                  sphere(pos=vec(x,y,0), radius=0.25)
+
+            </code></pre>
+          </div>
+
+          <div class="comment">
+
+            <p>
+              <b>Line 4</b>: The for loop that creates values of <code>x</code> between -10 and 10 with a step of 1.
+            </p>
+
+            <p>
+              <b>Lines 5</b>: Calculate y using equation (3)
+            </p>
+
+            <p>
+              <b>Line 6</b>: Draw the sphere.
+            </p>
+
+          </div>
+        </td>
+        <td>
+          <div class="graph">
+            <img src="mf-01.png" style="width:400px;">
+          </div>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+
+          <div class="comment">
+            <h3>Connect the dots</h3>
+            We can draw line segments between the dots by creating a curve and appending points to the curve within the loop.
+          </div>
+
+
+
+          <div class="pythonCode" >
+            <pre class="line-numbers"><code class="language-python">
+              # create curve
+              line = curve()
+
+              for x in range(-10, 10, 1):
+                  y = x**2 / 12
+                  sphere(pos=vec(x,y,0), radius=0.25)
+                  #append points to curve
+                  line.append(pos=vec(x,y,0))
+            </code></pre>
+          </div>
+
+          <div class="comment">
+
+            <p>
+              <b>Line 2</b>: create curve
+            </p>
+
+            <p>
+              <b>Lines 8</b>: Add points to the curve.
+            </p>
+
+          </div>
+
+        </td>
+        <td>
+
+          <div class="graph">
+            <img src="mf-02.png" style="width:400px;">
+          </div>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+            <!-- NEW ROW -->
+            <tr>
+              <td>
+
+                <div class="comment">
+                  <h3>Creating a Function</h3>
+                  Now, we're going to calculate the y-value for <b>Equation 3</b>
+                  \[ h(x) = \frac{x^2}{12} \tag{3} \]
+
+                  using a function. A function needs input/s and has output/s.
+
+                  <p>
+                    <b>Input:</b>
+                    Our equation needs an x value.
+                  </p>
+
+                  <p>
+                    <b>Output/s:</b>
+                    The function <b>returns</b> a y value
+                  </p>
+                </div>
+
+
+
+                <div class="comment">
+
+                  The function is defined on <b>Lines 1-3</b>
+                  <p>
+                    <b>Line 1</b>:
+                    <ul>
+                      <li>The <code>def</code> keyword indicates that we're defining a function.</li>
+                      <li>the name of the function is <code>h</code>, it can be pretty much anything, but adheres to the naming rules for variables (can't start with a number for example)</li>
+                      <li>the <b>input</b> of the function is listed within parentheses. The function recieves the input value and gives it the variable name <code>x_in</code> for use within the function. This variable only exists within this function, making it a <b>local variable</b>, so I could have named it anything. In fact, it would probably have been better to name it simply <code>x</code> but I thought giving it a different name would clarify the difference between the value sent to the function (on line 12) and the variable name in the function.</li>
+                    </ul>
+                  </p>
+
+                  <p>
+                    <b>Line 2</b>:
+                    <ul>
+                      <li>Here we calculate the y value of the function.</li>
+                    </ul>
+                  </p>
+
+                  <p>
+                    <b>Line 3</b>:
+                    <ul>
+                      <li>Here we <b>return</b> the calculated value (<code>s</code>) to the program.</li>
+                      <li><b>NOTE:</b> Functions stand alone. When you run the program, the function definition is stored in memory and saved until the function is <b>called</b>.</li>
+                    </ul>
+                  </p>
+
+                  <p>
+                    <b>Line 12</b>:
+                    <ul>
+                      <li><b>Calling the function</b>. The function is called by using its name, and <b>passing</b> the input values. The function returns the result to the place in the code where the function is called. </li>
+                    </ul>
+                  </p>
+
+                </div>
+
+              </td>
+              <td>
+
+                <div class="pythonCode" >
+                  <pre class="line-numbers"><code class="language-python">
+                    def h(x_in):
+                        y_out = x_in**2 / 12
+                        return y_out
+
+                    xaxis = curve(pos=[vec(-10,0,0), vec(10,0,0)])
+                    yaxis = curve(pos=[vec(0,-10,0), vec(0,10,0)])
+
+                    # create curve
+                    line = curve()
+
+                    for x in range(-10, 10, 1):
+                        y = h(x)
+                        sphere(pos=vec(x,y,0), radius=0.25)
+                        #append points to curve
+                        line.append(pos=vec(x,y,0))
+
+                  </code></pre>
+                </div>
+
+                <div class="graph">
+                  <img src="mf-02.png" style="width:400px;">
+                </div>
+
+              </td>
+            </tr>
+            <!-- END ROW -->
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+
+          <div class="comment">
+            <h3>Adding a second function</h3>
+
+            <p>
+              To demonstrate that you can use the same variable names within a function (so they're local variables) without affecting the variables outside the function, I'll add equation (1)
+            </p>
+
+          </div>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              def f(x):
+                  y = x - 4
+                  return y
+
+              def h(x_in):
+                  y_out = x_in**2 / 12
+                  return y_out
+
+              xaxis = curve(pos=[vec(-10,0,0), vec(10,0,0)])
+              yaxis = curve(pos=[vec(0,-10,0), vec(0,10,0)])
+
+              # create curves
+              line = curve()
+              line1 = curve()
+
+              for x in range(-10, 10, 1):
+                  y = h(x)
+                  sphere(pos=vec(x,y,0), radius=0.25)
+                  #append points to curve
+                  line.append(pos=vec(x,y,0))
+
+                  #draw equation 1
+                  y = f(x)
+                  sphere(pos=vec(x,y,0), radius=.25, color=color.red)
+                  line1.append(pos=vec(x,y,0), color=color.red)
+
+            </pre></code>
+          </div>
+
+          <div class="comment">
+            <p>Now you should be able to add as many functions as you'd like (and reuse the same variable names).</p>
+
+          </div>
+
+
+        </td>
+        <td>
+
+          <div class="graph">
+            <img src="mf-03.png" style="width:400px;">
+          </div>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+
+          <div class="comment">
+            <h3>Adding Functions</h3>
+            What happens if we add equations (1) and (3)
+
+            $$ k(x) = f(x) + h(x) $$
+
+          </div>
+          <div class="pythonCode">
+            <div class="toggle-next">Show Notes ▼</div>
+            <div class="test" hidden>
+
+              <pre><code class="language-python">
+                def f(x):
+                    y = x - 4
+                    return y
+
+                def h(x_in):
+                    y_out = x_in**2 / 12
+                    return y_out
+
+                xaxis = curve(pos=[vec(-10,0,0), vec(10,0,0)])
+                yaxis = curve(pos=[vec(0,-10,0), vec(0,10,0)])
+
+                # create curves
+                line = curve()
+                line1 = curve()
+                line2 = curve()
+
+                for x in range(-10, 10, 1):
+                    y = h(x)
+                    sphere(pos=vec(x,y,0), radius=0.25)
+                    #append points to curve
+                    line.append(pos=vec(x,y,0))
+
+                    #draw equation 1
+                    y = f(x)
+                    sphere(pos=vec(x,y,0), radius=.25, color=color.red)
+                    line1.append(pos=vec(x,y,0), color=color.red)
+
+                    # combine equations
+                    y = f(x) + h(x)
+                    sphere(pos=vec(x,y,0), radius=.25, color=color.green)
+                    line2.append(pos=vec(x,y,0), color=color.green)
+
+              </code></pre>
+            </div>
+            <p>
+
+          </div>
+
+          <div class="comment">
+            <p>
+              You can add, subtract, multiply, and divide functions in a similar way. And, you can use as many functions as you'd like.
+            </p>
+
+          </div>
+
+        </td>
+        <td>
+
+          <div class="graph">
+            <img src="mf-04.png" >
+          </div>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+            <!-- NEW ROW -->
+            <tr>
+              <td>
+
+                <div class="comment">
+                  <h3>Functions within Functions</h3>
+                  What happens if we put equation (1) into equation (3):
+
+                  \[ m(x) = f \circ h \]
+
+                  which can also be written as:
+
+                  \[ m(x) = f(h(x)) \]
+
+                </div>
+                <div class="pythonCode">
+                  <div class="toggle-next">Show Notes ▼</div>
+                  <div class="test" hidden>
+
+                    <pre><code class="language-python">
+                      y = h(f(x))
+                    </code></pre>
+                  </div>
+                  <p>
+
+                </div>
+
+              </td>
+              <td>
+
+                <div class="graph">
+                  <img src="mf-05.png" >
+                </div>
+
+              </td>
+            </tr>
+            <!-- END ROW -->
+
+
+            <!-- NEW ROW -->
+            <tr>
+              <td>
+
+                <div class="comment">
+                  <h3>A Function to Draw Functions: Passing a function to another function</h3>
+
+                  <p>
+                    You will have noticed that in the <code>for</code> loop where we're drawing the spheres and lines, we're repeating the same code for each function.
+                  </p>
+
+                  <p>
+                    Whenever you see repetition in code it usually indicates that there's some way to simplify or combine things. So, we'll write a function that takes a mathematical function, and draws it.
+                  </p>
+                </div>
+                <div class="pythonCode">
+
+                  <div class="test">
+
+                    <pre class='line-numbers'><code class="language-python">
+                      def f(x):
+                          y = x - 4
+                          return y
+
+                      def h(x_in):
+                          y_out = x_in**2 / 12
+                          return y_out
+
+                      def drawFunction(f):
+                          c = curve()
+                          for x in range(-10,10,1):
+                              y = f(x)
+                              sphere(pos=vec(x,y,0), radius=0.25)
+                              c.append(pos=vec(x,y,0))
+
+                      xaxis = curve(pos=[vec(-10,0,0), vec(10,0,0)])
+                      yaxis = curve(pos=[vec(0,-10,0), vec(0,10,0)])
+
+                      # draw the functions:
+                      drawFunction(f)
+                      drawFunction(h)
+                    </code></pre>
+                  </div>
+                  <p>
+
+                </div>
+
+                <div class="comment">
+                  <p>
+                    Notice how much shorter the code is.
+                  </p>
+
+                </div>
+
+              </td>
+              <td>
+
+                <div class="graph">
+                  <img src="mf-06.png" >
+                </div>
+
+              </td>
+            </tr>
+            <!-- END ROW -->
+
+
+            <!-- NEW ROW -->
+            <tr>
+              <td>
+
+                <div class="comment">
+                  <h3>Default Values</h3>
+
+                  <p>
+                    Of course the <code>drawFunction</code> function only draws white points and curves. Let's leave that as the default, allow it to be changed. We'll do this by adding another input variable to the <code>drawFunction</code> function, but give it a default value (of white: <code>color.white</code>)
+                  </p>
+
+
+                </div>
+                <div class="pythonCode">
+
+                  <div class="test">
+
+                    <pre class='line-numbers'><code class="language-python">
+                      def f(x):
+                          y = x - 4
+                          return y
+
+                      def h(x_in):
+                          y_out = x_in**2 / 12
+                          return y_out
+
+                      def drawFunction(f, col=color.white):
+                          c = curve()
+                          for x in range(-10,10,1):
+                              y = f(x)
+                              sphere(pos=vec(x,y,0), radius=0.25, color=col)
+                              c.append(pos=vec(x,y,0), color=col)
+
+                      xaxis = curve(pos=[vec(-10,0,0), vec(10,0,0)])
+                      yaxis = curve(pos=[vec(0,-10,0), vec(0,10,0)])
+
+                      # draw the functions:
+                      drawFunction(f)
+                      drawFunction(h, color.red)
+                    </code></pre>
+                  </div>
+                  <p>
+
+                </div>
+
+                <div class="comment">
+                  <p>
+                    With a default value, we don't break our old code like:
+                    <pre><code class="language-python">
+                      drawFunction(f)
+                    </code></pre>
+
+                    But can change any of the other function calls to give it a different color.
+                    <pre><code class="language-python">
+                      drawFunction(f, color.red)
+                    </code></pre>
+
+                  </p>
+
+                </div>
+
+              </td>
+              <td>
+
+                <div class="graph">
+                  <img src="mf-07.png" >
+                </div>
+
+              </td>
+            </tr>
+            <!-- END ROW -->
+
+
+
+
+            <!-- NEW ROW -->
+            <tr>
+              <td>
+
+                <div class="comment">
+                  <h3>Exercise</h3>
+
+                  <p>
+                    A. Create a function that graphs:
+                  </p>
+
+                  $$ n(x) = \left| \frac{x^2}{10} - 2 \right| \tag{4} $$
+
+                  <p>
+                    B. Change the <code>drawFunction</code> function so it takes a second, optional variable, that sets the step in the for loop to allow you to plot more points, and make smoother curves.
+                  </p>
+
+
+                </div>
+
+
+              </td>
+              <td>
+
+                <div class="graph">
+                  <img src="mf-08.png" >
+                </div>
+
+              </td>
+            </tr>
+            <!-- END ROW -->
+
+            <!-- NEW ROW -->
+            <tr>
+              <td>
+
+                <div class="comment">
+                  <h3>Exercise</h3>
+
+                  <p>
+                    B. Change the <code>drawFunction</code> function so it takes a second, optional variable, that sets the step in the for loop to allow you to plot more points, and make smoother curves.
+                  </p>
+
+                  Use this to graph equation (4):
+
+                  $$ n(x) = \left| \frac{x^2}{10} - 2 \right| \tag{4} $$
+
+                  <p>Hint: to use non-integer steps, you'll have to use the <code>arange</code> function instead of <code>range</code> in your for loop. </p>
+
+
+                </div>
+
+
+              </td>
+              <td>
+
+                <div class="graph">
+                  <img src="mf-09.png" >
+                </div>
+
+              </td>
+            </tr>
+            <!-- END ROW -->
+
+
+
+    </table>
+
+  </body>
+  <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+  <script type="text/javascript">
+
+
+
+  </script>
+</html>
