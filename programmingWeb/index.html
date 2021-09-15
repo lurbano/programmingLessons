@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      .poem {
+        margin: 1em;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="poetry">
+
+
+      <div id="laws" class="poem">
+        Laws of god,<br>
+        Laws of man<br>
+        He may keep as will and can <br>
+      </div>
+
+      <div id="tiger" class="poem">
+        Tiger, tiger burning bright<br>
+        In the forests of the night<br>
+      </div>
+
+    </div>
+
+    <div id="newPoem">
+      Press here for a new poem
+    </div>
+
+
+  </body>
+
+
+  <script type="text/javascript">
+    myButton = document.getElementById("newPoem");
+
+    myButton.addEventListener("click", function(){
+      console.log("clicked");
+    })
+  </script>
+
+</html>
