@@ -29,6 +29,7 @@
 }
 .setup{
   background-color: PaleGoldenrod;
+  padding: 0.25em;
 }
 .toggle-next {
   width: 12em;
@@ -56,6 +57,9 @@ tbody tr {
 table {
   background-color: #ff33cc;
 }
+td {
+  padding: 0.25em;
+}
 code {
   background-color: #ccc;
 }
@@ -67,4 +71,14 @@ code {
 }
 .myButton:hover {
   border: 3px outset grey;
+}
+
+.logic_statement {
+  margin-left:3em;
+  padding: 0.5em;
+  border: 1px solid grey;
+}
+
+li {
+  margin-bottom: 0.5em;
 }

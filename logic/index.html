@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Logic</title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <h1>Logical Statements</h1>
+
+    <div class="setup">
+      We use logical statements to make choices. For example, we could have the statement:
+
+      <p class="logic_statement">
+        <b>If</b> a number is exactly divisible by 2 <b>then</b> it is an even number.
+      </p>
+
+      There is, however, not a straight off way of testing if a number is divisible by 2. Instead we can make the statement.
+
+      <p class="logic_statement">
+        <b>If</b> the remainder is zero when we divide two numbers <b>then</b> the first number is exactly divisible by the second.
+      </p>
+
+      which means that:
+
+      <p  class="logic_statement">
+        <b>If</b> the remainder is zero when we divide a number by 2 <b>then</b> the number is even.
+      </p>
+
+
+      We can find the remainder when you divide two numbers by using the modulus operator (<code>%</code>). For example:
+
+      <div class="pythonCode">
+        <pre class="line-numbers"><code class="language-python">
+          >>> 10 % 3
+          1
+          >>> 12 % 3
+          0
+          >>> 24 % 5
+          4
+      </pre></code></div>
+
+      We can see that 12 is exactly divisible by 3 because the modulus is zero.
+
+    </div>
+
+
+    <table>
+
+
+
+      <tr>
+        <th>Notes and Code</th>
+        <th>Outcome</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Testing for even numbers</h3>
+            Write a program that determines if a number is even by checking:
+            <p class="logic_statement"> <b>if</b> the remainder when the number is divided by 2 is zero <b>then</b> the number is even <b>else</b> the number is odd.
+            </p>
+          </div>
+
+          <div class="comment">
+            Notice that:
+            <ul>
+              <li>the <code>if</code> statement (line 5) ends with a colon (:) and what happens if the statement is <b>true</b> is indented. The <code>else</code> statement also ends with a colon and what happens when the if statement is <b>false</b> is also indented.</li>
+              <li><b>==</b>: (Line 5) testing if two things are equal uses a double equal sign. </li>
+            </ul>
+          </div>
+
+        </td>
+        <td>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              n = 12
+
+              remainder = n % 2
+
+              if remainder == 0:
+                  print(n, " is even")
+              else:
+                  print(n, " is odd")
+
+            </pre></code>
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Comparison Operators</h3>
+            Testing for equality uses the <code>==</code> operator. The operators are:
+          </div>
+
+          <div class="comment">
+
+
+            <table>
+              <tr>
+                <td> == </td><td>equal to</td>
+              </tr>
+              <tr>
+                <td> > </td><td>greater than</td>
+              </tr>
+              <tr>
+                <td> < </td><td>less than</td>
+              </tr>
+              <tr>
+                <td> <= </td><td>less than or equal to</td>
+              </tr>
+              <tr>
+                <td> >= </td><td>greater than or equal to</td>
+              </tr>
+              <tr>
+                <td> != </td><td><b>not</b> equal to</td>
+              </tr>
+            </table>
+          </div>
+
+        </td>
+        <td>
+          Code
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              def sphereSurfaceArea(r):
+                  A = 4 * pi * r**2
+                  return A
+
+              print("Surface area:", sphereSurfaceArea(5))
+            </pre></code>
+          </div>
+
+          Results.
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              Surface area: 314.159
+            </pre></code>
+          </div>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Sphere function test (multiple values)</h3>
+            Use your sphere function to find the surface areas of spheres with radii: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10.
+          </div>
+
+        </td>
+        <td>
+          Code.
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              def sphereSurfaceArea(r):
+                  A = 4 * pi * r**2
+                  return A
+
+              for i in range(1, 11):
+                  area = sphereSurfaceArea(i)
+                  print(f'Area of sphere of radius {i} = {area}')
+            </pre></code>
+          </div>
+          Results.
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              Area of sphere of radius 1 = 12.566370614359172
+              Area of sphere of radius 2 = 50.26548245743669
+              Area of sphere of radius 3 = 113.09733552923255
+              Area of sphere of radius 4 = 201.06192982974676
+              Area of sphere of radius 5 = 314.1592653589793
+              Area of sphere of radius 6 = 452.3893421169302
+              Area of sphere of radius 7 = 615.7521601035994
+              Area of sphere of radius 8 = 804.247719318987
+              Area of sphere of radius 9 = 1017.8760197630929
+              Area of sphere of radius 10 = 1256.6370614359173
+            </pre></code>
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Sphere: Volume</h3>
+            Write a function that calculates the volume (V) of a sphere of radius (r).
+
+            $$ V = \frac{4}{3} \pi r^3 $$
+          </div>
+
+        </td>
+        <td>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Cylinder</h3>
+            Write functions to find the surface area and volumes of cylinders.
+          </div>
+
+        </td>
+        <td>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Rectangular Prisms</h3>
+            Write functions to find the surface area and volumes of rectangular prisms.
+          </div>
+
+        </td>
+        <td>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Triangles</h3>
+            Challenge:
+            <ul>
+              <li>Write a function to find the area of a triangle given three points.</li>
+              <li>Write a function that draws a triangle (using Glowscript) given three points.</li>
+            </ul>
+
+
+        </td>
+        <td>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+    </table>
+
+  </body>
+  <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+  <script type="text/javascript">
+
+    function distance(v1, v2){
+      d = ( (v1[1]-v2[1])**2 + (v1[0]-v2[0])**2 )**0.5;
+      return d;
+    }
+    function arrToStr(a, varName="x"){
+      let t = varName + " = [";
+      for (let i = 0; i< a.length; i++){
+        t += a[i] + ", ";
+      }
+      t = t.slice(0,-2) + "]";
+      return t;
+    }
+    $("#generatePts").click(function(){
+
+      let circleRadius = 5.0;
+      let nNodes = parseInt($("#nPts").val())-1;
+      console.log("clicked", nNodes);
+
+      xs = [];
+      ys = [];
+      pts = [];
+
+      let dAngle = 2 * Math.PI / nNodes;
+
+      for (let i=0; i<nNodes; i++){
+        let x = circleRadius * Math.cos(dAngle*i);
+        let y = circleRadius * Math.sin(dAngle*i);
+        xs.push(x.toFixed(2));
+        ys.push(y.toFixed(2));
+        pts.push([x.toFixed(2), y.toFixed(2)]);
+      }
+
+      pts.push(pts[0]);
+      xs.push(xs[0]);
+      ys.push(ys[0]);
+      console.log( `pts = ${pts}`);
+      console.log(arrToStr(xs));
+      console.log(arrToStr(ys, "y"));
+
+      $("#ptData").html(arrToStr(xs) + '\n' + arrToStr(ys, "y"));
+
+      //calculate total distance
+      let d = 0;
+      for (let i=0; i<pts.length-1; i++){
+        d += distance(pts[0], pts[1]);
+        console.log(d);
+      }
+
+      $("#ptsDistance").html(d.toFixed(2));
+
+    })
+
+  </script>
+</html>
