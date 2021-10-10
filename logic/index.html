@@ -105,12 +105,70 @@
       </tr>
       <!-- END ROW -->
 
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>User input</h3>
+            To speed up the testing of different numbers, we can give the program a list of number to test.
+          </div>
+
+          <div class="comment">
+            Notice that:
+            <ul>
+              <li>Line 1: We create a list of numbers by putting the numbers in square brackets (<code>[]</code>) and each value is comma separated.</li>
+              <li>Line 3: We <b>iterate</b> through the list of numbers, which means that we create a loop and go through each number, one at a time, in the sequence given in the list.</li>
+            </ul>
+
+            <b>Exercise (optional)</b>: Adapt the code to make the test for odd or even be a function.
+            <div class="toggle-next">Show Notes ▼</div>
+            <div class="pythonCode" hidden>
+              <pre class="line-numbers"><code class="language-python">
+                def oddEven(n):
+                    remainder = n % 2
+                    if remainder == 0:
+                      print(n, " is even")
+                    else:
+                      print(n, " is odd")
+
+                numbers = [2, 5, 22, 50, 16562, 11]
+
+                for n in numbers:
+                    oddEven(n)
+              </pre></code>
+            </div>
+          </div>
+
+        </td>
+        <td>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              numbers = [2, 5, 22, 50, 16562, 11]
+
+              for n in numbers:
+                  remainder = n % 2
+
+                  if remainder == 0:
+                    print(n, " is even")
+                  else:
+                    print(n, " is odd")
+
+            </pre></code>
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
       <!-- NEW ROW -->
       <tr>
         <td>
           <div class="comment">
             <h3>Comparison Operators</h3>
-            Testing for equality uses the <code>==</code> operator. The operators are:
+            Testing for equality uses the <code>==</code> operator. The comparison operators are:
           </div>
 
           <div class="comment">
@@ -140,25 +198,6 @@
 
         </td>
         <td>
-          Code
-          <div class="toggle-next">Show Notes ▼</div>
-          <div class="pythonCode" hidden>
-            <pre class="line-numbers"><code class="language-python">
-              def sphereSurfaceArea(r):
-                  A = 4 * pi * r**2
-                  return A
-
-              print("Surface area:", sphereSurfaceArea(5))
-            </pre></code>
-          </div>
-
-          Results.
-          <div class="toggle-next">Show Notes ▼</div>
-          <div class="pythonCode" hidden>
-            <pre class="line-numbers"><code class="language-python">
-              Surface area: 314.159
-            </pre></code>
-          </div>
         </td>
       </tr>
       <!-- END ROW -->
@@ -167,8 +206,7 @@
       <tr>
         <td>
           <div class="comment">
-            <h3>Sphere function test (multiple values)</h3>
-            Use your sphere function to find the surface areas of spheres with radii: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10.
+            <b>Exercise:</b> Write a program to test if a number is greater than 10.
           </div>
 
         </td>
@@ -177,29 +215,25 @@
           <div class="toggle-next">Show Notes ▼</div>
           <div class="pythonCode" hidden>
             <pre class="line-numbers"><code class="language-python">
-              def sphereSurfaceArea(r):
-                  A = 4 * pi * r**2
-                  return A
+              numbers = [2, 5, 22, 50, 16562, 11]
 
-              for i in range(1, 11):
-                  area = sphereSurfaceArea(i)
-                  print(f'Area of sphere of radius {i} = {area}')
+              for n in numbers:
+                  if n > 10:
+                      print(n, "is greater than 10")
+                  else:
+                      print(n, "is less than 10")
             </pre></code>
           </div>
           Results.
           <div class="toggle-next">Show Notes ▼</div>
           <div class="pythonCode" hidden>
             <pre class="line-numbers"><code class="language-python">
-              Area of sphere of radius 1 = 12.566370614359172
-              Area of sphere of radius 2 = 50.26548245743669
-              Area of sphere of radius 3 = 113.09733552923255
-              Area of sphere of radius 4 = 201.06192982974676
-              Area of sphere of radius 5 = 314.1592653589793
-              Area of sphere of radius 6 = 452.3893421169302
-              Area of sphere of radius 7 = 615.7521601035994
-              Area of sphere of radius 8 = 804.247719318987
-              Area of sphere of radius 9 = 1017.8760197630929
-              Area of sphere of radius 10 = 1256.6370614359173
+              2 is less than 10
+              5 is less than 10
+              22 is greater than 10
+              50 is greater than 10
+              1.6562e+4 is greater than 10
+              11 is greater than 10
             </pre></code>
           </div>
 
@@ -212,64 +246,143 @@
       <tr>
         <td>
           <div class="comment">
-            <h3>Sphere: Volume</h3>
-            Write a function that calculates the volume (V) of a sphere of radius (r).
-
-            $$ V = \frac{4}{3} \pi r^3 $$
+            <b>Exercise:</b> Write a program to test if a number is less than or equal to 22.
           </div>
 
         </td>
         <td>
+          Code.
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              Do you really need to see the code for this?
+            </pre></code>
+          </div>
+          Results.
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              2 is <= 22
+              5 is <= 22
+              22 is <= 22
+              50 is not <= 22
+              1.6562e+4 is not <= 22
+              11 is <= 22
+            </pre></code>
+          </div>
+
+
         </td>
       </tr>
       <!-- END ROW -->
+
+
 
       <!-- NEW ROW -->
       <tr>
         <td>
           <div class="comment">
-            <h3>Cylinder</h3>
-            Write functions to find the surface area and volumes of cylinders.
-          </div>
-
-        </td>
-        <td>
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-            <h3>Rectangular Prisms</h3>
-            Write functions to find the surface area and volumes of rectangular prisms.
-          </div>
-
-        </td>
-        <td>
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-            <h3>Triangles</h3>
-            Challenge:
+            <h3>Logical Operators</h3>
+            We can combine different comparisons with the logical operators
             <ul>
-              <li>Write a function to find the area of a triangle given three points.</li>
-              <li>Write a function that draws a triangle (using Glowscript) given three points.</li>
+              <li> <code>and</code></li>
+              <li><code>or</code> </li>
+              <li> <code>not</code> </li>
             </ul>
+          </div>
 
+          <div class="comment">
+              <b>Example</b>: Write a program to test if a number is between 5 and 50.</li>
+          </div>
 
         </td>
         <td>
+          Code.
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              numbers = [2, 5, 22, 50, 16562, 11]
+
+              for n in numbers:
+                  if (n > 5) and (n < 50):
+                      print(n, "is between 5 and 50")
+                  else:
+                      print(n, "is not between 5 and 50")
+            </pre></code>
+          </div>
+          Results.
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              2 is not between 5 and 50
+              5 is not between 5 and 50
+              22 is between 5 and 50
+              50 is not between 5 and 50
+              1.6562e+4 is not between 5 and 50
+              11 is between 5 and 50
+            </pre></code>
+          </div>
         </td>
       </tr>
       <!-- END ROW -->
 
+
+
+
+            <!-- NEW ROW -->
+            <tr>
+              <td>
+                <div class="comment">
+                  <b>Exercise:</b> Write a program check if a number is divisible by <b>either 3 or 7</b>. Use the test list:
+                </div>
+                <div class="pythonCode" >
+                  <pre><code class="language-python">
+                    numbers = [42, 5, 22, 50, 16562, 11]
+                  </pre></code>
+                </div>
+              </td>
+              <td>
+
+              </td>
+            </tr>
+            <!-- END ROW -->
+
+
+
+            <!-- NEW ROW -->
+            <tr>
+              <td>
+                <div class="comment">
+                  <b>Exercise:</b> Write a program check if a number is divisible by <b>both 3 and 7</b>. Use the test list:
+                </div>
+                <div class="pythonCode" >
+                  <pre><code class="language-python">
+                    numbers = [42, 5, 22, 50, 16562, 11]
+                  </pre></code>
+                </div>
+              </td>
+              <td>
+
+              </td>
+            </tr>
+            <!-- END ROW -->
+
+            <!-- NEW ROW -->
+            <tr>
+              <td>
+                <div class="comment">
+                  <b>Practice:</b> Write a program that prints the square root of positive and negative numbers. For example, for the square root of -4 you should print "2i". Use the test list:
+                </div>
+                <div class="pythonCode" >
+                  <pre><code class="language-python">
+                    numbers = [4, 3, 2, 1, 0, -1, -2, -3, -4]
+                  </pre></code>
+                </div>
+              </td>
+              <td>
+
+              </td>
+            </tr>
+            <!-- END ROW -->
 
     </table>
 
