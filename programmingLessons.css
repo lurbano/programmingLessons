@@ -1,3 +1,7 @@
+body {
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
 .pRow {
   display: grid;
   border: 1px solid black;
@@ -30,6 +34,8 @@
 .setup{
   background-color: PaleGoldenrod;
   padding: 0.25em;
+  width: 50em;
+  margin-bottom: 1em;
 }
 .toggle-next {
   width: 12em;

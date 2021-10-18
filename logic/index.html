@@ -21,39 +21,43 @@
     <h1>Logical Statements</h1>
 
     <div class="setup">
-      We use logical statements to make choices. For example, we could have the statement:
-
-      <p class="logic_statement">
-        <b>If</b> a number is exactly divisible by 2 <b>then</b> it is an even number.
-      </p>
-
-      There is, however, not a straight off way of testing if a number is divisible by 2. Instead we can make the statement.
-
-      <p class="logic_statement">
-        <b>If</b> the remainder is zero when we divide two numbers <b>then</b> the first number is exactly divisible by the second.
-      </p>
-
-      which means that:
-
-      <p  class="logic_statement">
-        <b>If</b> the remainder is zero when we divide a number by 2 <b>then</b> the number is even.
-      </p>
+      <div class="comment">
 
 
-      We can find the remainder when you divide two numbers by using the modulus operator (<code>%</code>). For example:
+        We use logical statements to make choices. For example, we could have the statement:
 
-      <div class="pythonCode">
-        <pre class="line-numbers"><code class="language-python">
-          >>> 10 % 3
-          1
-          >>> 12 % 3
-          0
-          >>> 24 % 5
-          4
-      </pre></code></div>
+        <p class="logic_statement">
+          <b>If</b> a number is exactly divisible by 2 <b>then</b> it is an even number.
+        </p>
 
-      We can see that 12 is exactly divisible by 3 because the modulus is zero.
+        There is, however, not a straight off way of testing if a number is divisible by 2. Instead we can make the statement.
 
+        <p class="logic_statement">
+          <b>If</b> the remainder is zero when we divide two numbers <b>then</b> the first number is exactly divisible by the second.
+        </p>
+
+        which means that:
+
+        <p  class="logic_statement">
+          <b>If</b> the remainder is zero when we divide a number by 2 <b>then</b> the number is even.
+        </p>
+
+
+        We can find the remainder when you divide two numbers by using the modulus operator (<code>%</code>). For example:
+
+        <div class="pythonCode">
+          <pre class="line-numbers"><code class="language-python">
+            >>> 10 % 3
+            1
+            >>> 12 % 3
+            0
+            >>> 24 % 5
+            4
+        </pre></code></div>
+
+        We can see that 12 is exactly divisible by 3 because the modulus is zero.
+
+      </div>
     </div>
 
 
@@ -110,7 +114,7 @@
       <tr>
         <td>
           <div class="comment">
-            <h3>User input</h3>
+            <h3>A List and a Loop</h3>
             To speed up the testing of different numbers, we can give the program a list of number to test.
           </div>
 
@@ -383,6 +387,101 @@
               </td>
             </tr>
             <!-- END ROW -->
+
+            <!-- NEW ROW -->
+            <tr>
+              <td>
+                <div class="comment">
+                  <h3>Else If</h3>
+                  What if we had multiple conditions to check, such as in assigning a letter grade to a numerical value or a piecewise defined function. Let's say the grade scheme was:
+
+                  <table>
+                    <tr>
+                      <th>Grade</th><th>Score (s)</th>
+                    </tr>
+                    <tr>
+                      <td>A</td><td>$$ 90 \lt s \le 100 $$ </td>
+                    </tr>
+                    <tr>
+                      <td>B</td><td>$$ 80 \lt s \le 90 $$ </td>
+                    </tr>
+                    <tr>
+                      <td>C</td><td>$$ 70 \lt s \le 80 $$ </td>
+                    </tr>
+                    <tr>
+                      <td>D</td><td>$$ 60 \lt s \le 70 $$ </td>
+                    </tr>
+                    <tr>
+                      <td>F</td><td>$$ s \le 60 $$ </td>
+                    </tr>
+                  </table>
+
+
+
+                </div>
+
+              </td>
+              <td>
+                <div class="pythonCode" >
+                  <pre><code class="language-python">
+                    scores = [50, 95, 82, 88, 99, 70, 79]
+
+                    for s in scores:
+                        if (s > 90):
+                            grade = "A"
+                        elif (s > 80):
+                            grade = "B"
+                        elif (s > 70):
+                            grade = "C"
+                        elif (s > 60):
+                            grade = "D"
+                        else:
+                            grade = "F"
+
+                        print(f"Score = {s}, Grade = {grade}")
+
+                  </pre></code>
+                </div>
+              </td>
+            </tr>
+            <!-- END ROW -->
+
+
+            <!-- NEW ROW -->
+            <tr>
+              <td>
+                <div class="comment">
+                  <h3>Exercise</h3>
+                  Draw a graph for the piecewise defined function below:
+
+                  $$
+                  f(x) = \left\{
+                    \begin{array}{ll}
+                        x & \quad x \lt -2 \\[.5em]
+                        2x-1 & \quad -2 \le x \le 3 \\[.5em]
+                        -1   & \quad x > 3
+                    \end{array}
+                    \right.
+                  $$
+
+                  Ref: Remember how to <a href="../twoPoints/">draw a simple graph and plot points</a>.
+
+
+                </div>
+
+              </td>
+              <td>
+                The result could look something like this:
+                <div class="toggle-next">Show Notes ▼</div>
+                <div class="" hidden>
+                  <img src="piecewise-01.png" alt="result">
+                </div>
+
+              </td>
+            </tr>
+            <!-- END ROW -->
+
+
 
     </table>
 
