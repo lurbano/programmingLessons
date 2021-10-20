@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vectors</title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <h1>Vectors (bouncing ball)</h1>
+
+    <div class="setup">
+      <div class="comment">
+
+        The difference between velocity and speed is that velocity has a direction associated with it. Speed is a <b>scalar</b> and velocity is a <b>vector</b>.
+
+      </div>
+
+      <div class="comment">
+        So, an object can be moving with a speed of 2 m/s to the right, hit a wall, bounce back, and still be moving at a speed of 2 m/s. However, its velocity would have changed: it would be 2 m/s when moving to the right, but -2 m/s after the bounce when moving to the left.
+
+      </div>
+
+      <div class="comment">
+
+        We can draw an arrow that points in the <b>direction</b> of motion, and scale the length of the arrow to show the <b>magnitude</b> of the vector (the speed in this case).
+
+      </div>
+    </div>
+
+
+    <table class="bodyTable">
+
+      <tr>
+        <th>Notes and Code</th>
+        <th>Outcome</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Creating a ball and an arrow (for its velocity vector) in vpython.</h3>
+
+            We'll start by creating a simple ball, assigning it a velocity, and draw an arrow to show the vector.
+
+          </div>
+
+          <div class="comment">
+            Notice that:
+            <ul>
+              <li><b>Line 1</b>:
+                <pre><code class="language-python">
+                  ball = sphere()
+                </code></pre>
+                Create a sphere named <b>ball</b> (the default position is (0,0,0) and the default radius is 1.)</li>
+              <li><b>Line 3</b>:
+                <pre><code class="language-python">
+                  ball.v = vector(5, 0, 0)
+                </code></pre>
+                Give the ball a velocity that is a vector with x, y, and z components (5, 0, 0). We could have made a separate variable for <b>v</b>, but making it a <em>property</em> of the ball makes more intuitive sense.
+              </li>
+              <li><b>Line 5</b>:
+                <pre><code class="language-python">
+                  ball.arrow = arrow(pos = ball.pos, axis = ball.v)
+                </code></pre>
+                Create an arrow. There are a few thing to unpack here.
+                <ul>
+                  <li>
+                    The arrow is also a <em>property</em> of the ball. It does not have to be but it makes sense to tie the two together. </li>
+                  <li>The arrow's <b>position</b> is set to the ball's position because the arrow's position property is the location of the arrow's base.</li>
+                  <li>The <b>axis</b> of the arrow is the velocity vector. The axis property sets the length and direction of the arrow. </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+        </td>
+        <td>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              ball = sphere()
+
+              ball.v = vector(5, 0, 0)
+
+              ball.arrow = arrow(pos = ball.pos, axis = ball.v)
+            </pre></code>
+          </div>
+
+          <div class="comment">
+            The result should look like:
+          </div>
+
+
+          <div class="" >
+            <img src="bb-01.png" alt="result">
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Making the Ball Move (Animation)</h3>
+            As we all know, velocity is the change in distance over time. Considering only motion in the x direction (v<sub>x</sub>):
+
+            $$ v_x = \dfrac{\Delta x}{\Delta t} $$
+
+            We can write the change in distance (Δx) as the difference in the old and new positions:
+
+            $$ v_x = \dfrac{x_{new} - x_{old}}{\Delta t} $$
+
+            Therefore, if we know the velocity (v), the time step (Δt), and the starting position (x<sub>old</sub>), then we can solve this equation to find the new position (x<sub>new</sub>).
+
+            $$ x_{new} = x_{old} + v_x \cdot \Delta t \tag{1}$$
+
+            This could be read as: the new position is equal to the old position plus the change in position.
+          </div>
+
+
+
+          </div>
+
+        </td>
+
+        <td>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+            <h3>Making the Ball Move (Animation): The Code</h3>
+
+          <div class="comment">
+            Notice that:
+            <ul>
+              <li><b>Line 9</b>:
+                <pre><code class="language-python">
+                  sleep(dt)
+                </code></pre>
+                The <code>sleep</code> function tells the program to pause for the specified length of time. Otherwise the ball would move so fast, we would not be able to see the move.
+              </li>
+              <li><b>Line 10</b>:
+                <pre><code class="language-python">
+                  ball.pos.x = ball.pos.x + ball.v.x * dt
+                </code></pre>
+                Use the equation above (Eqn. 1) to calculate the new position in the x direction.
+              </li>
+              <li><b>Line 11</b>:
+                <pre><code class="language-python">
+                  ball.arrow.pos = ball.pos
+                </code></pre>
+                Move the arrow as well, since it does not move automatically.
+              </li>
+            </ul>
+
+          </div>
+
+        </td>
+        <td>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              ball = sphere()
+
+              ball.v = vector(5, 0, 0)
+
+              ball.arrow = arrow(pos = ball.pos, axis = ball.v)
+
+              dt = 0.1
+
+              sleep(dt)
+              ball.pos.x = ball.pos.x + ball.v.x * dt
+              ball.arrow.pos = ball.pos
+
+            </code></pre>
+          </div>
+
+          <div class="comment">
+            The result should look like this (but only move once):
+          </div>
+
+
+          <div class="" >
+            <img src="bb-02.gif" alt="result">
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+            <h3>Continuous Motion</h3>
+
+          <div class="comment">
+            To make the ball move continuously, we put the position update (and time sleep delay) into an infinite loop.
+          </div>
+
+          <div class="comment">
+            Notice that:
+            <ul>
+              <li><b>Line 9</b>:
+                <pre><code class="language-python">
+                  while True:
+                </code></pre>
+                The while loop tests to see if a condition is True, and continues to loop as long as the condition is True. Here we just tell it to test the built-in True, which is always true, so the loop continues on forever (or until you stop the program).
+              </li>
+            </ul>
+
+          </div>
+
+        </td>
+        <td>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              ball = sphere()
+
+              ball.v = vector(5, 0, 0)
+
+              ball.arrow = arrow(pos = ball.pos, axis = ball.v)
+
+              dt = 0.1
+
+              while True:
+                  sleep(dt)
+                  ball.pos.x = ball.pos.x + ball.v.x * dt
+                  ball.arrow.pos = ball.pos
+            </code></pre>
+          </div>
+
+          <div class="comment">
+            The result should look like this (but continues on forever):
+          </div>
+
+
+          <div class="" >
+            <img src="bb-03.gif" alt="result">
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+            <h3>Vertical Motion</h3>
+
+          <div class="comment">
+            Thus far, we have only seen horizontal motion. The ball has a component of velocity in the x-direction, but no velocity in any other direction.
+            <p>The velocities in the 3 <em>orthogonal</em> directions are:</p>
+            $$
+            \begin{align}
+              v_x &= 5 \\
+              v_y &= 0 \\
+              v_z &= 0
+            \end{align}
+            $$
+            <p>So the <em>velocity vector </em> can be written as:</p>
+            $$ \vec{v} = \: <5, 0, 0> $$
+          </div>
+
+          <div class="comment">
+            <h4>Vertical velocity component: v<sub>y</sub></h4>
+            Let's introduce a vertical component to velocity of 2 m/s. Therefore:
+            $$ v_y = 2 $$
+            and,
+            $$ \vec{v} = \: <5, 2, 0> $$
+            So, we need to change our program to account for the vertical component.
+          </div>
+
+          <div class="comment">
+            Notice that:
+            <ul>
+              <li><b>Line 3</b>:
+                Gives the new velocity vector:
+                <pre><code class="language-python">
+                  ball.v = vector(5, 2, 0)
+                </code></pre>
+
+              </li>
+              <li> <b>Line 12</b>: We add the equation to update the ball's <em>y</em> position based on <em>v<sub>y</sub></em>.
+                <pre><code class="language-python">
+                  ball.pos.y = ball.pos.y + ball.v.y * dt
+                </code></pre>
+              </li>
+            </ul>
+
+          </div>
+
+        </td>
+        <td>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              ball = sphere()
+
+              ball.v = vector(5, 2, 0)
+
+              ball.arrow = arrow(pos = ball.pos, axis = ball.v)
+
+              dt = 0.1
+
+              while True:
+                  sleep(dt)
+                  ball.pos.x = ball.pos.x + ball.v.x * dt
+                  ball.pos.y = ball.pos.y + ball.v.y * dt
+                  ball.arrow.pos = ball.pos
+            </code></pre>
+          </div>
+
+          <div class="comment">
+            The result should look like this (but continues on forever):
+          </div>
+
+
+          <div class="" >
+            <img src="bb-04.gif" alt="result">
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+            <h3>Showing the Component Vectors (<em>v<sub>x</sub> and v<sub>y</sub>  </em>)</h3>
+
+          <div class="comment">
+            We can draw two vectors to show the components of the main vector in the x and y directions.
+          </div>
+
+          <div class="comment">
+            Notice that:
+            <ul>
+              <li><b>Line 6</b>:
+                Creates a red arrow for <em>only</em> the horizontal component of velocity (<em>v<sub>x</sub></em>)
+                <pre><code class="language-python">
+                  ball.vx_arrow = arrow(pos = ball.pos,
+                                        axis = vec(ball.v.x, 0, 0),
+                                        color=color.red)
+                </code></pre>
+
+              </li>
+
+            </ul>
+
+          </div>
+
+        </td>
+        <td>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              ball = sphere()
+
+              ball.v = vector(5, 2, 0)
+
+              ball.arrow = arrow(pos = ball.pos, axis = ball.v)
+              ball.vx_arrow = arrow(pos = ball.pos, axis = vec(ball.v.x, 0, 0), color=color.red)
+              ball.vy_arrow = arrow(pos = ball.pos, axis = vec(0, ball.v.y, 0), color=color.yellow)
+
+              dt = 0.1
+
+              while True:
+                  sleep(dt)
+                  ball.pos.x = ball.pos.x + ball.v.x * dt
+                  ball.pos.y = ball.pos.y + ball.v.y * dt
+                  ball.arrow.pos = ball.pos
+            </code></pre>
+          </div>
+
+          <div class="comment">
+            The result should look like this:
+          </div>
+
+
+          <div class="" >
+            <img src="bb-05.png" alt="result">
+          </div>
+
+          <div class="comment">
+            You may notice that when the ball moves off the component vectors stay at the origin. It would be nice if you could alter the code so the component vectors move with the ball.
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+            <h3>A Little Styling</h3>
+
+          <div class="comment">
+
+            <p> To make things a little easer to see, we'll:
+              <ol>
+                <li>split the code for the arrows across multiple lines to make it easier to read (e.g. lines 6-9),
+                </li>
+                <li> make the shaft sizes of all the arrows the same: (<code>shaftwidth = 0.2 </code>)  (on lines 5-13)
+                </li>
+                <li> reduce the radius of the ball on line 1 (<code>radius = 0.5</code>)</li>
+              </ol>
+            </p>
+          </div>
+
+        </td>
+        <td>
+          <p>The code should appear more organized:
+          </p>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              ball = sphere()
+
+              ball.v = vector(5, 2, 0)
+
+              ball.arrow = arrow(pos = ball.pos, axis = ball.v, shaftwidth=0.2)
+              ball.vx_arrow = arrow(pos = ball.pos,
+                                    axis = vec(ball.v.x, 0, 0),
+                                    color=color.red,
+                                    shaftwidth=0.2)
+              ball.vy_arrow = arrow(pos = ball.pos,
+                                    axis = vec(0, ball.v.y, 0),
+                                    color=color.yellow,
+                                    shaftwidth=0.2)
+
+              dt = 0.1
+
+              while True:
+                  sleep(dt)
+                  ball.pos.x = ball.pos.x + ball.v.x * dt
+                  ball.pos.y = ball.pos.y + ball.v.y * dt
+                  ball.arrow.pos = ball.pos
+            </code></pre>
+          </div>
+
+          <div class="comment">
+            The result should be a little prettier:
+          </div>
+
+
+          <div class="" >
+            <img src="bb-06.png" alt="result">
+          </div>
+
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+            <h3>Summing the Component Vectors</h3>
+
+          <div class="comment">
+            You can graphically add vectors by placing the vectors end-to-end. So where the last vector stops, the new one begins.
+
+            <p> We'll do this to sum the component vectors by moving the <em>v<sub>y</sub></em> vector to the end of the <em>v<sub>x</sub></em> arrow.
+            </p>
+          </div>
+
+          <div class="comment">
+            Notice that:
+            <ul>
+              <li><b>Line 10</b>:
+                Moves the <em>v<sub>y</sub></em> arrow by adding the ball's position to the <em>axis</em>= of the <em>v<sub>x</sub></em> arrow.
+                <pre><code class="language-python">
+                  ball.vx_arrow = arrow(pos = ball.pos + ball.vx_arrow.axis,
+                </code></pre>
+
+              </li>
+
+            </ul>
+
+          </div>
+
+        </td>
+        <td>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              ball = sphere(radius=0.5)
+
+              ball.v = vector(5, 2, 0)
+
+              ball.arrow = arrow(pos = ball.pos, axis = ball.v, shaftwidth=0.2)
+              ball.vx_arrow = arrow(pos = ball.pos,
+                                    axis = vec(ball.v.x, 0, 0),
+                                    color=color.red,
+                                    shaftwidth=0.2)
+              ball.vy_arrow = arrow(pos = ball.pos + ball.vx_arrow.axis,
+                                    axis = vec(0, ball.v.y, 0),
+                                    color=color.yellow,
+                                    shaftwidth=0.2)
+
+              dt = 0.1
+
+              while True:
+                  sleep(dt)
+                  ball.pos.x = ball.pos.x + ball.v.x * dt
+                  ball.pos.y = ball.pos.y + ball.v.y * dt
+                  ball.arrow.pos = ball.pos
+            </code></pre>
+          </div>
+
+          <div class="comment">
+            The result should look like this:
+          </div>
+
+
+          <div class="" >
+            <img src="bb-07.png" alt="result">
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+            <h3>Building a Wall</h3>
+
+          <div class="comment">
+            As the ball moves to the right, it seems to get smaller as the field of view zooms out. Let's make it static, but putting in a wall for the ball to bounce off of.
+
+            <p> First we draw the wall as a simple, vertical line that's 20 m tall and 10 m from the origin (along the x-axis).
+            </p>
+          </div>
+
+          <div class="comment">
+            Notice that:
+            <ul>
+              <li><b>Line 2</b>:
+                Draw a line to represent a wall.
+                <pre><code class="language-python">
+                  wall = curve(pos=[vec(20,-20,0), vec(20,20,0)])
+                </code></pre>
+
+              </li>
+
+            </ul>
+
+          </div>
+
+        </td>
+        <td>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              ball = sphere(radius=0.5)
+              wall = curve(pos=[vec(10,-10,0), vec(10,10,0)])
+
+              ball.v = vector(5, 2, 0)
+
+              ball.arrow = arrow(pos = ball.pos, axis = ball.v, shaftwidth=0.2)
+              ball.vx_arrow = arrow(pos = ball.pos,
+                                    axis = vec(ball.v.x, 0, 0),
+                                    color=color.red,
+                                    shaftwidth=0.2)
+              ball.vy_arrow = arrow(pos = ball.pos + ball.vx_arrow.axis,
+                                    axis = vec(0, ball.v.y, 0),
+                                    color=color.yellow,
+                                    shaftwidth=0.2)
+
+              dt = 0.01
+
+              while True:
+                  sleep(dt)
+
+                  # update ball position based on velocity vector
+                  ball.pos.x = ball.pos.x + ball.v.x * dt
+                  ball.pos.y = ball.pos.y + ball.v.y * dt
+
+                  #update positions of the arrows
+                  ball.arrow.pos = ball.pos
+                  ball.vx_arrow.pos = ball.pos
+                  ball.vy_arrow.pos = ball.pos + ball.vx_arrow.axis
+            </code></pre>
+          </div>
+
+          <div class="comment">
+            The result should look like this, but the ball will not bounce off the wall:
+          </div>
+
+
+          <div class="" >
+            <img src="bb-08.png" alt="result">
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+            <h3>Bouncing off the Wall</h3>
+
+          <div class="comment">
+            The ball does not know that there is a wall. We need to write some code to let it know.
+
+            <p> Since the wall is a vertical line 10 m away from the origin we can just say:
+            </p>
+            <p class="logic_statement"> <b>If</b> the ball hits the wall,
+              <br>
+              <b>then</b> reverse the x component of the velocity of the ball (<em>v<sub>x</sub> </em>)
+            </p>
+
+            <p>
+              However, we have to be more specific about what the condition is when the ball hits the wall. So, we can recognise that:
+            </p>
+
+            <p class="logic_statement"> <b>If</b> the ball's <em>x</em> position is greater than or equal to 10 m,
+              <br>
+              <b>then</b> the ball must have hit the wall.
+            </p>
+
+            <p>So we combine these two logical statements to set up a bounce:</p>
+
+            <p class="logic_statement"> <b>If</b> the ball's <em>x</em> position is greater than or equal to 10 m,
+              <br>
+              <b>then</b> reverse the x component of the velocity vector (<em>v<sub>x</sub> </em>):
+            </p>
+          </div>
+
+          <div class="comment">
+            Codewise, this looks like:
+            <pre><code class="language-python">
+              if ball.pos.x >= 10:
+                  ball.v.x = -1 * ball.pos.x
+            </code></pre>
+          </div>
+
+          <div class="comment">
+            Note that we also need to update the directions of the arrows (axes in this case) so that they keep track of the actual vectors:
+            <pre><code class="language-python">
+              ball.arrow.axis = ball.v
+              ball.vx_arrow.axis = vec(ball.v.x, 0, 0)
+              ball.vy_arrow.axis = vec(0, ball.v.y, 0)
+            </code></pre>
+          </div>
+
+        </td>
+        <td>
+          <div class="pythonCode">
+            <pre class="line-numbers" data-line="30-37"><code class="language-python">
+              ball = sphere(radius=0.5)
+              wall = curve(pos=[vec(10,-10,0), vec(10,10,0)])
+
+              ball.v = vector(5, 2, 0)
+
+              ball.arrow = arrow(pos = ball.pos, axis = ball.v, shaftwidth=0.2)
+              ball.vx_arrow = arrow(pos = ball.pos,
+                                    axis = vec(ball.v.x, 0, 0),
+                                    color=color.red,
+                                    shaftwidth=0.2)
+              ball.vy_arrow = arrow(pos = ball.pos + ball.vx_arrow.axis,
+                                    axis = vec(0, ball.v.y, 0),
+                                    color=color.yellow,
+                                    shaftwidth=0.2)
+
+              dt = 0.1
+
+              while True:
+                  sleep(dt)
+                  #sleep(1)
+
+                  # update ball position based on velocity vector
+                  ball.pos.x = ball.pos.x + ball.v.x * dt
+                  ball.pos.y = ball.pos.y + ball.v.y * dt
+
+                  #update positions of the arrows
+                  ball.arrow.pos = ball.pos
+                  ball.vx_arrow.pos = ball.pos
+                  ball.vy_arrow.pos = ball.pos + ball.vx_arrow.axis
+                  # update directions of arrows
+                  ball.arrow.axis = ball.v
+                  ball.vx_arrow.axis = vec(ball.v.x, 0, 0)
+                  ball.vy_arrow.axis = vec(0, ball.v.y, 0)
+
+                  # check to see if the ball needs to bounce
+                  if ball.pos.x >= 10:
+                      ball.v.x = -1 * ball.v.x
+            </code></pre>
+          </div>
+
+          <div class="comment">
+            The result should look like this:
+          </div>
+
+
+          <div class="" >
+            <img src="bb-09.gif" alt="result">
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+            <h3>Make Four Walls</h3>
+
+          <div class="comment">
+            Now, you should be able to make three more walls, such that the ball is bouncing around inside a box.
+          </div>
+
+        </td>
+        <td>
+
+
+          <div class="comment">
+
+          </div>
+
+
+          <div class="" >
+            <img src="bb-10.png" alt="result">
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+    </table>
+
+  </body>
+  <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+  <script type="text/javascript">
+
+    function distance(v1, v2){
+      d = ( (v1[1]-v2[1])**2 + (v1[0]-v2[0])**2 )**0.5;
+      return d;
+    }
+    function arrToStr(a, varName="x"){
+      let t = varName + " = [";
+      for (let i = 0; i< a.length; i++){
+        t += a[i] + ", ";
+      }
+      t = t.slice(0,-2) + "]";
+      return t;
+    }
+    $("#generatePts").click(function(){
+
+      let circleRadius = 5.0;
+      let nNodes = parseInt($("#nPts").val())-1;
+      console.log("clicked", nNodes);
+
+      xs = [];
+      ys = [];
+      pts = [];
+
+      let dAngle = 2 * Math.PI / nNodes;
+
+      for (let i=0; i<nNodes; i++){
+        let x = circleRadius * Math.cos(dAngle*i);
+        let y = circleRadius * Math.sin(dAngle*i);
+        xs.push(x.toFixed(2));
+        ys.push(y.toFixed(2));
+        pts.push([x.toFixed(2), y.toFixed(2)]);
+      }
+
+      pts.push(pts[0]);
+      xs.push(xs[0]);
+      ys.push(ys[0]);
+      console.log( `pts = ${pts}`);
+      console.log(arrToStr(xs));
+      console.log(arrToStr(ys, "y"));
+
+      $("#ptData").html(arrToStr(xs) + '\n' + arrToStr(ys, "y"));
+
+      //calculate total distance
+      let d = 0;
+      for (let i=0; i<pts.length-1; i++){
+        d += distance(pts[0], pts[1]);
+        console.log(d);
+      }
+
+      $("#ptsDistance").html(d.toFixed(2));
+
+    })
+
+  </script>
+</html>

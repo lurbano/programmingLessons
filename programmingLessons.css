@@ -1,5 +1,6 @@
 body {
   font-family: "Lucida Console", "Courier New", monospace;
+  line-height: 1.3em;
 }
 
 .pRow {
@@ -83,8 +84,22 @@ code {
   margin-left:3em;
   padding: 0.5em;
   border: 1px solid grey;
+  line-height: 1.5em;
+  font-family: "Georgia", serif;
+  text-align: center;
 }
 
 li {
   margin-bottom: 0.5em;
+
+}
+
+.bodyTable tbody td:nth-child(1) {
+  background-color: white;
+}
+.bodyTable tbody td:nth-child(2) {
+  background-color: khaki;
+}
+.bodyTable tr {
+  border: 5px inset green;
 }
