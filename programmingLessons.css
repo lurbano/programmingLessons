@@ -96,10 +96,13 @@ li {
 
 .bodyTable tbody td:nth-child(1) {
   background-color: white;
+  vertical-align: top;
+  border: 5px inset green;
 }
 .bodyTable tbody td:nth-child(2) {
   background-color: khaki;
 }
 .bodyTable tr {
   border: 5px inset green;
+
 }
