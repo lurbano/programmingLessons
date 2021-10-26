@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Line Class</title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <h1>Classes: Straight Lines</h1>
+
+    <div class="setup">
+      <div class="comment">
+
+      The <b><em>specific</em></b> equation for a straight line might be:
+
+        $$ y = 2 x + 1 $$
+
+        where:
+
+        $$ m = 2 $$
+        and,
+        $$ b = 1 $$
+
+        We want a program that can handle any straight line equation we throw at it, so we need to work with the general equation.
+
+      </div>
+    </div>
+
+
+    <table>
+
+
+
+      <tr>
+        <th>Notes and Code</th>
+        <th>Outcome</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>General Equation for a Stright Line</h3>
+
+            <div class="comment">
+              We want a program that can handle any straight line equation we throw at it, so we need to work with the <b><em>general</em></b> equation:
+
+              $$ y = mx + b \tag{1}$$
+
+              We can use it to find and do things like:
+
+              <ul>
+                <li><b>Slope</b>:
+                  $$ \text{slope} = m $$
+                </li>
+                <li><b>y-intercept</b>:
+                  $$ \text{y-intercept} = b $$
+                </li>
+                <li><b>x-intercept</b>:
+                  $$ \text{x-intercept} = \dfrac{-b}{m} $$
+                </li>
+              </ul>
+            </div>
+
+        </td>
+        <td>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Creating a Class</h3>
+
+          <div class="comment">
+            Notice that:
+            <ul>
+              <li><b>Naming the Class</b> (Line 1):
+                This class' name is <code>straightLine</code>:
+                <pre><code class="language-python">
+                  class straightLine:
+                </code></pre>
+              </li>
+              <li><b>Initializing the Class</b> (Line 3): We want to give the class the basic information it needs, <em>m</em> and <em>b</em> in this case.
+                <pre><code class="language-python">
+                      def __init__(self, m, b):
+                </code></pre>
+
+                <code>self</code> is passed as the first <em>parameter</em>. <code>self</code> lets the class refer to things internally, which we'll see in a moment.
+              </li>
+              <li><b>Setting properties</b> (Lines 4-9) :
+                <pre><code class="language-python">
+                      self.slope = m
+                </code></pre>
+                 These are variables that are unique to each <b><em>instance</em> </b> of the class. They are known within the class, and naming them things like <code>self.slope</code> allows us to refer to them internally, and externally.
+                 <pre><code class="language-python">
+                       self.xintercept = -b/m
+                 </code></pre>
+                 Note that we can set properties by doing calculations.
+              </li>
+            </ul>
+          </div>
+
+        </td>
+        <td>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              class straightLine:
+
+              def __init__(self, m, b):
+                  self.m = m
+                  self.b = b
+
+                  self.slope = m
+                  self.yintercept = b
+                  self.xintercept = -b/m
+
+            </pre></code>
+          </div>
+
+          <div class="comment">
+            If you run this code, nothing will happen. Just like with a function, classes are stored in memory until they are used.
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Using the <code>straightLine</code> Class</h3>
+            Let's use the <code>straightLine</code> class to create two lines and find which has the steeper slope. We'll use the two lines:
+            $$ y = 2x + 1 \tag{2}$$
+            $$ y = -3x + 4 \tag{3}$$
+          </div>
+
+          <div class="comment">
+            <ul>
+              <li><b>Creating <em>instances</em> of the class</b>  (lines 11 and 12):
+                <pre><code class="language-python">
+                  line1 = straightLine(2, 1)  # y =  2x + 1
+                  line2 = straightLine(-3, 4) # y = -3x + 4
+                </code></pre>
+                We pass the m and b values for Equations (2) and (3) to the <code>__init__</code> method in the class by calling the class name.
+              </li>
+              <li><b>Using <em>properties</em> of the instances</b> (line 14):
+                <pre><code class="language-python">
+                  if line1.slope > line2.slope:
+                </code></pre>
+                Here we compare the <code>slope</code> properties of one line to the other.
+              </li>
+            </ul>
+
+          </div>
+
+        </td>
+        <td>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              class straightLine:
+
+                  def __init__(self, m, b):
+                      self.m = m
+                      self.b = b
+
+                      self.slope = m
+                      self.yintercept = b
+                      self.xintercept = -b/m
+
+              line1 = straightLine(2, 1)  # y =  2x + 1
+              line2 = straightLine(-3, 4) # y = -3x + 4
+
+              if line1.slope > line2.slope:
+                  print("Line 1 has the steeper slope")
+              else:
+                  print("Line 2 has the steeper slope")
+            </pre></code>
+          </div>
+
+          The result should look like:
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              Line 1 has the steeper slope
+            </pre></code>
+          </div>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Exercise</h3>
+            Find which line has an x-intercept closer to zero of the two lines:
+            $$ y = 4x - 5 \tag{4}$$
+            $$ y = x + 2 \tag{5}$$
+          </div>
+
+        </td>
+        <td>
+          Code:
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              class straightLine:
+
+                  def __init__(self, m, b):
+                      self.m = m
+                      self.b = b
+
+                      self.slope = m
+                      self.yintercept = b
+                      self.xintercept = -b/m
+
+              line1 = straightLine(4, -5)
+              line2 = straightLine(1, 2)
+
+              if abs(line1.xintercept) < abs(line2.xintercept):
+                  print(f"Line 1's intercept is closer to zero: |{line1.xintercept}| < |{line2.xintercept}|")
+              else:
+                  print(f"Line 2's intercept is closer to zero: |{line1.xintercept}| > |{line2.xintercept}|")
+
+            </pre></code>
+          </div>
+
+          Result:
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              Line 1's intercept is closer to zero: |1.25| < |-2|
+            </pre></code>
+          </div>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Methods: Finding the y values given x </h3>
+            Something we'll very likely want to do if we have an equation is to find the value of y for a given x. To do so we'll create a <b><em>method</em> </b> within the class. A method is a function that exists inside a class.
+          </div>
+
+          <div class="comment">
+            <ul>
+              <li><b>Creating the <code>get_y</code> method:</b> (Line 11)
+                <pre><code class="language-python">
+                  def get_y(self, x):
+                </code></pre>
+                As with the <code>__init__</code> initialization method, the first parameter in the method is <code>self</code>, however, when we call the method, we do not need to send the <code>self</code> value because the class already knows its self.
+              </li>
+              <li><b>Using properties internally:</b> (Line 12)
+                <pre><code class="language-python">
+                    y = self.m * x + self.b
+                </code></pre>
+                We calculate the <em>y</em> value from the equation for the given <em>x</em>. We did not have to tell the instance of the class what the <em>m</em> and <em>b</em> values were, because the instance stores this as properties (self.m and self.b) when it was initialized. However, we do have to refer to <em>m</em> and <em>b</em> by their property names (self.m and self.b).
+              </li>
+              <li><b>Using the method:</b> (Line 17):
+                <pre><code class="language-python">
+                    print("For x = 5, y =", line1.get_y(5))
+                </code></pre>
+                With <code>line1.get_y(5)</code> we call the method with the instance name <code>line1</code> and its method name <code>get_y</code> and pass it the <em>x</em> value. The method returns the y value (Line 13).
+              </li>
+            </ul>
+
+          </div>
+
+        </td>
+        <td>
+          Code.
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              class straightLine:
+
+                  def __init__(self, m, b):
+                      self.m = m
+                      self.b = b
+
+                      self.slope = m
+                      self.yintercept = b
+                      self.xintercept = -b/m
+
+                  def get_y(self, x):
+                      y = self.m * x + self.b
+                      return y
+
+              line1 = straightLine(2, 1)
+
+              print("For x = 5, y =", line1.get_y(5))
+            </pre></code>
+          </div>
+          Results.
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              For x = 5, y = 11
+            </pre></code>
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Exercise:</h3>
+            <div class="comment">
+              Add a method to the class that calculates the <em>x</em> value for a given <em>y</em>. Use this method to find <em>x</em> value when:
+              $$ y = 11 $$
+              for the line
+              $$ y = 2x + 1 $$
+            </div>
+          </div>
+
+        </td>
+        <td>
+          Code.
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              class straightLine:
+
+                  def __init__(self, m, b):
+                      self.m = m
+                      self.b = b
+
+                      self.slope = m
+                      self.yintercept = b
+                      self.xintercept = -b/m
+
+                  def get_y(self, x):
+                      y = self.m * x + self.b
+                      return y
+
+                  def get_x(self, y):
+                      x = (y - self.b) / self.m
+                      return x
+
+              line1 = straightLine(2, 1)
+
+              print("For y = 11, y =", line1.get_x(11))
+            </pre></code>
+          </div>
+          Results.
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              For y = 11, y = 5
+            </pre></code>
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+    </table>
+
+  </body>
+  <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+  <script type="text/javascript">
+
+    function distance(v1, v2){
+      d = ( (v1[1]-v2[1])**2 + (v1[0]-v2[0])**2 )**0.5;
+      return d;
+    }
+    function arrToStr(a, varName="x"){
+      let t = varName + " = [";
+      for (let i = 0; i< a.length; i++){
+        t += a[i] + ", ";
+      }
+      t = t.slice(0,-2) + "]";
+      return t;
+    }
+    $("#generatePts").click(function(){
+
+      let circleRadius = 5.0;
+      let nNodes = parseInt($("#nPts").val())-1;
+      console.log("clicked", nNodes);
+
+      xs = [];
+      ys = [];
+      pts = [];
+
+      let dAngle = 2 * Math.PI / nNodes;
+
+      for (let i=0; i<nNodes; i++){
+        let x = circleRadius * Math.cos(dAngle*i);
+        let y = circleRadius * Math.sin(dAngle*i);
+        xs.push(x.toFixed(2));
+        ys.push(y.toFixed(2));
+        pts.push([x.toFixed(2), y.toFixed(2)]);
+      }
+
+      pts.push(pts[0]);
+      xs.push(xs[0]);
+      ys.push(ys[0]);
+      console.log( `pts = ${pts}`);
+      console.log(arrToStr(xs));
+      console.log(arrToStr(ys, "y"));
+
+      $("#ptData").html(arrToStr(xs) + '\n' + arrToStr(ys, "y"));
+
+      //calculate total distance
+      let d = 0;
+      for (let i=0; i<pts.length-1; i++){
+        d += distance(pts[0], pts[1]);
+        console.log(d);
+      }
+
+      $("#ptsDistance").html(d.toFixed(2));
+
+    })
+
+  </script>
+</html>
