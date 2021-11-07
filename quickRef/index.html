@@ -18,17 +18,22 @@
         font-family: "Lucida Console", "Courier New", monospace;
         line-height: 1.3em;
       }
+      .box {
+        display: flex;
+      }
+
       #sidebar {
         width: 15%;
         position: fixed;
+        top: 0em;
         font-size: 0.75em;
         border: 4px outset red;
         padding: 0.25em;
       }
       #mainPage {
-        left: 18%;
-        width: 75%;
-        position: relative;
+        margin-left: 18%;
+        postion: relative;
+        width: 90%;
       }
       code {
         background-color: #ddd;
@@ -57,464 +62,904 @@
       .subsection {
         border: 1px solid blue;
       }
+      .dropdownSide {
+        cursor: pointer;
+      }
     </style>
 
   </head>
   <body>
+    <div class="box">
 
-    <div id="sidebar">
-      <b>Quick Reference</b>
-          <ol>
+      <div id="sidebar">
+        <b><a href="#mainPage">Quick Reference</a></b>
+            <ol>
 
-            <li> <a href="#variables">Variables</a>
-            </li>
+              <li> <a href="#variables">Variables</a>
+              </li>
 
-            <li> <a href="#lists">Lists</a>
-              <ol type="a">
-                <li> <a href="#indexingLists">Indexing</a>
-                </li>
-                <li> <a href="#slicing">Slicing</a>
-                </li>
-                <li> <a href="#forInLoop">For ... in list</a>
-                </li>
-                <li> <a href="#stringLists">strings as Lists</a>
-                </li>
-              </ol>
-            </li>
+              <li> <a href="#comments">Comments</a>
+                <span class="dropdownSide">⇨</span>
+                <ol type="a" hidden>
+                  <li> <a href="#hashTag">#</a>
+                  </li>
+                  <li> <a href="#multiLineComment">Multi-line</a>
+                  </li>
+                </ol>
+              </li>
 
-            <li> <a href="#loops">Loops</a>
-              <ol type="a">
-                <li> <a href="#range">For ... in range()</a>
-                </li>
-              </ol>
-            </li>
+              <li> <a href="#indentation">Indentation</a>
+                <span class='dropdownSide'>⇒</span>
+                <ol type="a" hidden>
+                  <li> <a href="#indentedFor"><code>for</code> loop</a>
+                  </li>
+                </ol>
+              </li>
 
-            <li> <a href="#logic">Logic</a>
-              <ol type="a">
-                <li> <a href="#ifThen">If/Elif/Then</a>
-                </li>
-                <li> <a href="#comparisonOperators"><code>==</code> <code><</code> Operators</a>
-                </li>
-                <li> <a href="#logicOperators"><code>and</code>/<code>or</code>/<code>not</code> </a>
-                </li>
-              </ol>
-            </li>
+              <li> <a href="#lists">Lists</a>
+                <span class='dropdownSide'>⇒</span>
+                <ol type="a" hidden>
+                  <li> <a href="#indexingLists">Indexing</a>
+                  </li>
+                  <li> <a href="#slicing">Slicing</a>
+                  </li>
+                  <li> <a href="#forInLoop">For ... in list</a>
+                  </li>
+                  <li> <a href="#stringLists">strings as Lists</a>
+                  </li>
+                </ol>
+              </li>
 
-            <li> <a href="#functions">Functions</a>
-              <ol type="a">
-                <li> <a href="#def">Defining</a>
-                </li>
-                <li> <a href="#call">Calling</a>
-                </li>
-                <li> <a href="#parameters">Parameters </a>
-                </li>
-                <li> <a href="#returns">Returning </a>
-                </li>
-              </ol>
-            </li>
+              <li> <a href="#loops">Loops</a>
+                <span class="dropdownSide">⇨</span>
+                <ol type="a" hidden>
+                  <li> <a href="#range">For ... in range()</a>
+                  </li>
+                </ol>
+              </li>
 
-          </ol>
-    </div>
+              <li> <a href="#logic">Logic</a>
+                <span class="dropdownSide">⇨</span>
+                <ol type="a" hidden>
+                  <li> <a href="#ifThen">If/Elif/Then</a>
+                  </li>
+                  <li> <a href="#comparisonOperators"><code>==</code> <code><</code> Operators</a>
+                  </li>
+                  <li> <a href="#logicOperators"><code>and</code>/<code>or</code>/<code>not</code> </a>
+                  </li>
+                </ol>
+              </li>
 
-    <div id="mainPage">
+              <li> <a href="#functions">Functions</a>
+                <span class="dropdownSide">⇨</span>
+                <ol type="a" hidden>
+                  <li> <a href="#def">Defining</a>
+                  </li>
+                  <li> <a href="#call">Calling</a>
+                  </li>
+                  <li> <a href="#parameters">Parameters </a>
+                  </li>
+                  <li> <a href="#returns">Returning </a>
+                  </li>
+                  <li> <a href="#scope">Scope</a>
+                  </li>
+                </ol>
+              </li>
 
-      <!-- START OF SECTION -->
-      <div class="section">
+              <li> <a href="#classes">Classes</a>
+                <span class="dropdownSide">⇨</span>
+                <ol type="a" hidden>
+                  <li> <a href="#classDef">Defining</a>
+                  </li>
+                  <li> <a href="#classUsing">Using</a>
+                  </li>
+                  <li> <a href="#classMethods">Methods </a>
+                  </li>
+                </ol>
+              </li>
 
-        <h2 id="variables">Variables</h2>
-        Names of the memory locations of specific values. There can be different types. In python, pretty much anything can be a variable.
-        <table>
-          <tr>
-            <th>Type</th>
-            <th>Example</th>
-            <th>Notes</th>
-          </tr>
-          <tr>
-            <td>Integer</td>
-            <td><code>a = 5</code></td>
-            <td>Whole number (positive or negative). </td>
-          </tr>
-          <tr>
-            <td>Float</td>
-            <td><code>pi = 3.14</code></td>
-            <td>Number with decimals.</td>
-          </tr>
-          <tr>
-            <td>String</td>
-            <td><code>pieType = "apple"</code> </td>
-            <td>Letters and text. For special characters ("α²") search with "utf8"</td>
-          </tr>
-          <tr>
-            <td>List</td>
-            <td><code>students = ["Max", "Jace", "Adam", "Thomas"]</code> </td>
-          </tr>
-
-        </table>
-
-        <p></p>
-        Variable names must:
-        <ul>
-          <li>Start with a letter</li>
-          <li>Can have an underscore: e.g. <code>pie_type</code></li>
-          <li>Often use camel case: e.g. <code>buildingType</code></li>
-          <li>Not contain spaces or operators like "<code>+ - / *</code>"</li>
-          <li>Avoid weird characters</li>
-        </ul>
+            </ol>
       </div>
-      <!-- END OF SECTION -->
 
+      <div id="mainPage">
 
+        <h1>Python Reference Guide</h1>
+        <em>Lensyl Urbano, 2021.</em>
 
-      <!-- START OF SECTION -->
-      <div class="section">
+        <!-- START OF SECTION -->
+        <div class="section">
 
-        <h2 id="lists">Lists</h2>
-        Lists are ways of grouping data. For example:
+          <h2 id="variables">Variables</h2>
+          Names of the memory locations of specific values. There can be different types. In python, pretty much anything can be a variable.
+          <table>
+            <tr>
+              <th>Type</th>
+              <th>Example</th>
+              <th>Notes</th>
+            </tr>
+            <tr>
+              <td>Integer</td>
+              <td><code>a = 5</code></td>
+              <td>Whole number (positive or negative). </td>
+            </tr>
+            <tr>
+              <td>Float</td>
+              <td><code>pi = 3.14</code></td>
+              <td>Number with decimals.</td>
+            </tr>
+            <tr>
+              <td>String</td>
+              <td><code>pieType = "apple"</code> </td>
+              <td>Letters and text. For special characters ("α²") search with "utf8"</td>
+            </tr>
+            <tr>
+              <td>List</td>
+              <td><code>students = ["Max", "Jace", "Adam", "Thomas"]</code> </td>
+            </tr>
 
-        <div class="pythonCode">
-          <pre class="line-numbers"><code class="language-python">
-            students = ["Max", "Jace", "Adam", "Thomas"]
-          </pre></code>
-        </div>
-
-        <div class="subsection">
-          <h3 id="indexingLists">Indexing (Finding an item in a List)</h3>
-
-          Use square brackets and the index (e.g. <code>students[1]</code>):
-          <pre class="line-numbers"><code class="language-python">
-            students = ["Max", "Jace", "Adam", "Thomas"]
-            s = student[1]
-            print("Student 1 is:", s)
-          </pre></code>
-          to get:
-          <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
-            Student 1 is: Jace
-          </pre></code>
-          because the index starts at zero.
+          </table>
 
           <p></p>
-          You can index backwards:
-          <pre class="line-numbers"><code class="language-python">
-            students = ["Max", "Jace", "Adam", "Thomas"]
-            print(students[-2])
-          </pre></code>
-          gives:
-          <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
-            Adam
-          </pre></code>
+          Variable names must:
+          <ul>
+            <li>Start with a letter</li>
+            <li>Can have an underscore: e.g. <code>pie_type</code></li>
+            <li>Often use camel case: e.g. <code>buildingType</code></li>
+            <li>Not contain spaces or operators like "<code>+ - / *</code>"</li>
+            <li>Avoid weird characters</li>
+          </ul>
         </div>
+        <!-- END OF SECTION -->
 
-        <div class="subsection">
-          <h3 id="slicing">Slicing Lists</h3>
-          To get a contiguous group of items from a list you can slice:
-          <pre class="line-numbers"><code class="language-python">
-            students = ["Max", "Jace", "Adam", "Thomas"]
-            print(students[1:3])
-          </pre></code>
-          gives:
-          <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python" class="pythonOutput">
-            ['Jace', 'Adam']
-          </pre></code>
-          It work like: <code>students[start, stop-1]</code>
+        <!-- START OF SECTION -->
+        <div class="section">
+            <h2 id="comments">Comments</h2>
+
+            If you want to leave a note to yourself that the computer will ignore when running the program, or take out a bit of code temporarily, use a comment.
+
+            <!-- START SUBSECTION -->
+            <div class="subsection">
+
+              <h3 id='hashTag'># Comment</h3>
+
+              A hash-tag at the beginning of a line comments out that line:
+
+              <div class="pythonCode">
+                <pre class="line-numbers"><code class="language-python">
+                  # names of students
+                  students = ["Max", "Jace", "Adam", "Thomas"]
+
+                  # print the name of the first student
+                  print(students[0])
+                </pre></code>
+              </div>
+              which prints out only:
+              <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+                Max
+              </pre></code>
+
+            </div>
+            <!-- END SUBSECTION -->
+
+
+
+
+          <!-- START SUBSECTION -->
+          <div class="subsection">
+            <h3 id="multiLineComment">Multi-line</h3>
+
+            For comments that span multiple lines use three single apostrophies:
+            <div class="pythonCode">
+              <pre class="line-numbers"><code class="language-python">
+                ''' Make a list of the names of the students
+                    and then print out the first student's name
+                '''
+                students = ["Max", "Jace", "Adam", "Thomas"]
+                print(students[0])
+              </pre></code>
+            </div>
+            which prints out only:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              Max
+            </pre></code>
+
+          </div>
+          <!-- END SUBSECTION -->
+
 
         </div>
+        <!-- END OF SECTION -->
 
-        <div class="subsection">
-          <h3 id="forInLoop">For ... in Loop</h3>
-          You can iterate (loop) through a list using <code>for ... in ...</code>:
-          <pre class="line-numbers"><code class="language-python">
-            students = ["Max", "Jace", "Adam", "Thomas"]
-            for s in students:
-              print(s)
-          </pre></code>
-          which gives:
 
-          <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
-            Max
-            Jace
-            Adam
-            Thomas
-          </pre></code>
+
+        <!-- START OF SECTION -->
+        <div class="section">
+            <h2 id="indentation">Indentation</h2>
+
+            Indentation is crucial in python, because the language uses indentation to indicate blocks of code.
+
+            <!-- START SUBSECTION -->
+            <div class="subsection">
+              <h3 id="indentedFor">Indented <code>for</code> loop </h3>
+
+              <div class="pythonCode">
+                <pre class="line-numbers"><code class="language-python">
+                  for i in range(5):
+                      print(i)
+                  print("done")
+                </pre></code>
+              </div>
+
+              <p>The <code>print(i)</code> statement on line 2 is in the for loop, while the <code>print("done")</code> statement is outside the loop, so the result is:
+              </p>
+
+              <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+                0
+                1
+                2
+                3
+                4
+                done
+              </pre></code>
+
+              <p>However, if the <code>print("done")</code> statment was indented, it would be inside the <code>for</code> loop:
+              </p>
+
+              <div class="pythonCode">
+                <pre class="line-numbers"><code class="language-python">
+                  for i in range(5):
+                      print(i)
+                      print("done")
+                </pre></code>
+              </div>
+
+              giving:
+              <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+                0
+                done
+                1
+                done
+                2
+                done
+                3
+                done
+                4
+                done
+              </pre></code>
+
+            </div>
+            <!-- END SUBSECTION -->
+
 
         </div>
+        <!-- END OF SECTION -->
 
-        <div class="subsection">
-          <h3 id="stringLists">Strings as Lists</h3>
-          Strings can be treated as lists. So they can be sliced:
-          <pre class="line-numbers"><code class="language-python">
-            t = "This is a string"
-            print( t[0:10] )
-          </pre></code>
-          gives:
-          <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
-            This is a
-          </pre></code>
 
-          They can be looped through using <a href="#forInLoop"><code>for ... in</code> loops</a> :
+
+        <!-- START OF SECTION -->
+        <div class="section">
+
+          <h2 id="lists">Lists</h2>
+          Lists are ways of grouping data. For example:
+
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              students = ["Max", "Jace", "Adam", "Thomas"]
+            </pre></code>
+          </div>
+
+          <div class="subsection">
+            <h3 id="indexingLists">Indexing (Finding an item in a List)</h3>
+
+            Use square brackets and the index (e.g. <code>students[1]</code>):
+            <pre class="line-numbers"><code class="language-python">
+              students = ["Max", "Jace", "Adam", "Thomas"]
+              s = student[1]
+              print("Student 1 is:", s)
+            </pre></code>
+            to get:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              Student 1 is: Jace
+            </pre></code>
+            because the index starts at zero.
+
+            <p></p>
+            You can index backwards:
+            <pre class="line-numbers"><code class="language-python">
+              students = ["Max", "Jace", "Adam", "Thomas"]
+              print(students[-2])
+            </pre></code>
+            gives:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              Adam
+            </pre></code>
+          </div>
+
+          <div class="subsection">
+            <h3 id="slicing">Slicing Lists</h3>
+            To get a contiguous group of items from a list you can slice:
+            <pre class="line-numbers"><code class="language-python">
+              students = ["Max", "Jace", "Adam", "Thomas"]
+              print(students[1:3])
+            </pre></code>
+            gives:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python" class="pythonOutput">
+              ['Jace', 'Adam']
+            </pre></code>
+            It work like: <code>students[start, stop-1]</code>
+
+          </div>
+
+          <div class="subsection">
+            <h3 id="forInLoop">For ... in Loop</h3>
+            You can iterate (loop) through a list using <code>for ... in ...</code>:
+            <pre class="line-numbers"><code class="language-python">
+              students = ["Max", "Jace", "Adam", "Thomas"]
+              for s in students:
+                print(s)
+            </pre></code>
+            which gives:
+
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              Max
+              Jace
+              Adam
+              Thomas
+            </pre></code>
+
+          </div>
+
+          <div class="subsection">
+            <h3 id="stringLists">Strings as Lists</h3>
+            Strings can be treated as lists. So they can be sliced:
+            <pre class="line-numbers"><code class="language-python">
+              t = "This is a string"
+              print( t[0:10] )
+            </pre></code>
+            gives:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              This is a
+            </pre></code>
+
+            They can be looped through using <a href="#forInLoop"><code>for ... in</code> loops</a> :
+          </div>
+
+
         </div>
+        <!-- END OF SECTION -->
 
 
-      </div>
-      <!-- END OF SECTION -->
+        <!-- START OF SECTION -->
+        <div class="section">
+          <h2 id="loops">Loops/Iteration</h2>
+          Use loops to repeat things. You can iterate through a list or string by using a <a href="#forInLoop"><code>for ... in</code> loops</a>
 
+          <div class="subsection">
+            <h3 id="range">for i in range()</h3>
+            To repeat something five times you can use a <code>for</code> loop with the <code>range</code> function:
 
-      <!-- START OF SECTION -->
-      <div class="section">
-        <h2 id="loops">Loops/Iteration</h2>
-        Use loops to repeat things. You can iterate through a list or string by using a <a href="#forInLoop"><code>for ... in</code> loops</a>
+            <pre class="line-numbers"><code class="language-python">
+              for i in range(5):
+                print(i)
+            </pre></code>
 
-        <div class="subsection">
-          <h3 id="range">for i in range()</h3>
-          To repeat something five times you can use a <code>for</code> loop with the <code>range</code> function:
+            which generates,
 
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              0
+              1
+              2
+              3
+              4
+            </pre></code>
+
+            The numbers generated start at zero by default, and so end at one less than the number specified. For more control you can use the form <code>range(start, stop, step)</code>:
+            <pre class="line-numbers"><code class="language-python">
+              for i in range(4, 12, 2):
+                print(i)
+            </pre></code>
+            to get:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              4
+              6
+              8
+              10
+            </pre></code>
+          </div>
+
+          You do not have to use the variable <code>i</code>, you can use any variable name you want in the loop, such as:
           <pre class="line-numbers"><code class="language-python">
-            for i in range(5):
-              print(i)
-          </pre></code>
-
-          which generates,
-
-          <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
-            0
-            1
-            2
-            3
-            4
-          </pre></code>
-
-          The numbers generated start at zero by default, and so end at one less than the number specified. For more control you can use the form <code>range(start, stop, step)</code>:
-          <pre class="line-numbers"><code class="language-python">
-            for i in range(4, 12, 2):
-              print(i)
+            for x in range(6, -5, -2):
+              print(x)
           </pre></code>
           to get:
           <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
-            4
             6
-            8
-            10
-          </pre></code>
-        </div>
-
-        You do not have to use the variable <code>i</code>, you can use any variable name you want in the loop, such as:
-        <pre class="line-numbers"><code class="language-python">
-          for x in range(4, 12, 2):
-            print(x)
-        </pre></code>
-
-      </div>
-      <!-- END OF SECTION -->
-
-
-
-
-      <!-- START OF SECTION -->
-      <div class="section">
-        <h2 id="logic">Logic</h2>
-        Use <code>if ... then ... else</code> statements. In python the "then" is implied.
-
-        <div class="subsection">
-          <h3 id="ifThen">If/Elif/Then</h3>
-          Choose between options.
-
-          <pre class="line-numbers"><code class="language-python">
-            x = 5
-            if x < 10:
-              print("x is less than 10.")
-          </pre></code>
-
-          which generates,
-
-          <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
-            x is less than 10.
-          </pre></code>
-
-          Nothing would be printed if x was greater than or equal to 10. So, we can use the <code>else</code> part of the statement to catch this:
-          <pre class="line-numbers"><code class="language-python">
-            x = 20
-            if x < 10:
-              print("x is less than 10.")
-            else:
-              print("x is greater than or equal to 10")
-          </pre></code>
-          to get:
-          <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
-            x is greater than or equal to 10
-          </pre></code>
-
-          Finally, if we want to catch more than two conditions--say we also want to print when x is equal to 10, we use <code>elif</code> (short for else if):
-          <pre class="line-numbers"><code class="language-python">
-            x  = 10
-            if x < 10:
-              print("x is less than 10.")
-            elif x == 10:
-              print("x is equal to 10.")
-            else:
-              print("x is greater than or equal to 10")
-          </pre></code>
-          to get:
-          <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
-            x is equal to 10
-          </pre></code>
-
-          You can have as many <code>elif</code> statements as you want. Note: for simple choice sets you can also use <code>case</code>
-        </div>
-
-
-
-        <div class="subsection">
-          <h3 id="comparisonOperators">Comparison Operators</h3>
-
-          <table>
-            <tr>
-              <th>Operator</th>
-              <th>Meaning</th>
-              <th>Example</th>
-            </tr>
-            <tr>
-              <td><code>==</code> </td>
-              <td>equal to</td>
-              <td><code>x == 10</code> </td>
-            </tr>
-            <tr>
-              <td><code>!=</code> </td>
-              <td>not equal to</td>
-              <td><code>x != 10</code> </td>
-            </tr>
-            <tr>
-              <td><code> < </code> </td>
-              <td>less than</td>
-              <td><code>x < 10</code> </td>
-            </tr>
-            <tr>
-              <td><code> <= </code> </td>
-              <td>less than <b>or</b> equal to</td>
-              <td><code>x <= 10</code> </td>
-            </tr>
-            <tr>
-              <td><code> > </code> </td>
-              <td>greater than</td>
-              <td><code>x >= 10</code> </td>
-            </tr>
-            <tr>
-              <td><code> >= </code> </td>
-              <td>greater than <b>or</b> equal to</td>
-              <td><code>x >= 10</code> </td>
-            </tr>
-
-
-          </table>
-        </div>
-
-
-        <div class="subsection">
-          <h3 id="logicalOperators">Logical Operators (<code>and</code>/<code>or</code>/<code>not</code>)</h3>
-          Use these to combine logical statements.
-
-          <pre class="line-numbers"><code class="language-python">
-            x = 7
-            if (x > 0) and (x < 10):
-                print("x is between 0 and 10.")
-          </pre></code>
-          to get:
-          <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
-            x is between 0 and 10.
-          </pre></code>
-
-
-
-          <table>
-            <tr>
-              <th>Operator</th>
-              <th>Meaning</th>
-              <th>Example</th>
-            </tr>
-            <tr>
-              <td><code>and</code> </td>
-              <td>logical <b>and</b> </td>
-              <td> <code>if (x > 0) and (x > 10):</code> </td>
-            </tr>
-            <tr>
-              <td><code>or</code> </td>
-              <td>logical <b>or</b> </td>
-              <td><code>x != 10</code> </td>
-            </tr>
-            <tr>
-              <td><code> not </code> </td>
-              <td>less than</td>
-              <td><code>if (not (x > 10)):</code> </td>
-            </tr>
-
-          </table>
-        </div>
-
-
-
-      </div>
-      <!-- END OF SECTION -->
-
-
-
-
-
-      <!-- START OF SECTION -->
-      <div class="section">
-        <h2 id="functions">Functions</h2>
-
-
-        <div class="subsection">
-          <h3 id="def">Creating Functions</h3>
-
-          A function to square a number.
-          <pre class="line-numbers"><code class="language-python">
-            def squared(x):
-              s = x**2
-              return s
-          </pre></code>
-
-          This function takes <code>x</code> as a parameter, squares it, and returns the result.
-
-          This function is loaded into memory when you run your program. It is not used until you <b>call</b> it in your main program.
-
-        </div>
-
-
-        <div class="subsection">
-          <h3 id="call">Calling a Function</h3>
-
-          Here we create a function called <b>squared</b> and call it a few times.
-
-          A function to square a number.
-          <pre class="line-numbers"><code class="language-python">
-            def squared(x):
-              s = x**2
-              return s
-
-            print( squared(2) )
-            print( "3 squared is", squared(3))
-            print( "3² + 4² =", squared(3) + squared(4))
-          </pre></code>
-
-          giving:
-          <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
             4
-            3 squared is 9
-            3² + 4² = 25
+            2
+            0
+            -2
+            -4
           </pre></code>
 
         </div>
+        <!-- END OF SECTION -->
+
+
+
+
+        <!-- START OF SECTION -->
+        <div class="section">
+          <h2 id="logic">Logic</h2>
+          Use <code>if ... then ... else</code> statements. In python the "then" is implied.
+
+          <div class="subsection">
+            <h3 id="ifThen">If/Elif/Then</h3>
+            Choose between options.
+
+            <pre class="line-numbers"><code class="language-python">
+              x = 5
+              if x < 10:
+                print("x is less than 10.")
+            </pre></code>
+
+            which generates,
+
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              x is less than 10.
+            </pre></code>
+
+            Nothing would be printed if x was greater than or equal to 10. So, we can use the <code>else</code> part of the statement to catch this:
+            <pre class="line-numbers"><code class="language-python">
+              x = 20
+              if x < 10:
+                print("x is less than 10.")
+              else:
+                print("x is greater than or equal to 10")
+            </pre></code>
+            to get:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              x is greater than or equal to 10
+            </pre></code>
+
+            Finally, if we want to catch more than two conditions--say we also want to print when x is equal to 10, we use <code>elif</code> (short for else if):
+            <pre class="line-numbers"><code class="language-python">
+              x  = 10
+              if x < 10:
+                print("x is less than 10.")
+              elif x == 10:
+                print("x is equal to 10.")
+              else:
+                print("x is greater than or equal to 10")
+            </pre></code>
+            to get:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              x is equal to 10
+            </pre></code>
+
+            You can have as many <code>elif</code> statements as you want. Note: for simple choice sets you can also use <code>case</code>
+          </div>
+
+
+
+          <div class="subsection">
+            <h3 id="comparisonOperators">Comparison Operators</h3>
+
+            <table>
+              <tr>
+                <th>Operator</th>
+                <th>Meaning</th>
+                <th>Example</th>
+              </tr>
+              <tr>
+                <td><code>==</code> </td>
+                <td>equal to</td>
+                <td><code>x == 10</code> </td>
+              </tr>
+              <tr>
+                <td><code>!=</code> </td>
+                <td>not equal to</td>
+                <td><code>x != 10</code> </td>
+              </tr>
+              <tr>
+                <td><code> < </code> </td>
+                <td>less than</td>
+                <td><code>x < 10</code> </td>
+              </tr>
+              <tr>
+                <td><code> <= </code> </td>
+                <td>less than <b>or</b> equal to</td>
+                <td><code>x <= 10</code> </td>
+              </tr>
+              <tr>
+                <td><code> > </code> </td>
+                <td>greater than</td>
+                <td><code>x >= 10</code> </td>
+              </tr>
+              <tr>
+                <td><code> >= </code> </td>
+                <td>greater than <b>or</b> equal to</td>
+                <td><code>x >= 10</code> </td>
+              </tr>
+
+
+            </table>
+          </div>
+
+
+          <div class="subsection">
+            <h3 id="logicalOperators">Logical Operators (<code>and</code>/<code>or</code>/<code>not</code>)</h3>
+            Use these to combine logical statements.
+
+            <pre class="line-numbers"><code class="language-python">
+              x = 7
+              if (x > 0) and (x < 10):
+                  print("x is between 0 and 10.")
+            </pre></code>
+            to get:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              x is between 0 and 10.
+            </pre></code>
+
+
+
+            <table>
+              <tr>
+                <th>Operator</th>
+                <th>Meaning</th>
+                <th>Example</th>
+              </tr>
+              <tr>
+                <td><code>and</code> </td>
+                <td>logical <b>and</b> </td>
+                <td> <code>if (x > 0) and (x > 10):</code> </td>
+              </tr>
+              <tr>
+                <td><code>or</code> </td>
+                <td>logical <b>or</b> </td>
+                <td><code>x != 10</code> </td>
+              </tr>
+              <tr>
+                <td><code> not </code> </td>
+                <td>less than</td>
+                <td><code>if (not (x > 10)):</code> </td>
+              </tr>
+
+            </table>
+          </div>
+
+
+
+        </div>
+        <!-- END OF SECTION -->
+
+
+
+
+
+        <!-- START OF SECTION -->
+        <div class="section">
+          <h2 id="functions">Functions</h2>
+
+
+          <div class="subsection">
+            <h3 id="def">Creating Functions</h3>
+
+            A function to square a number.
+            <pre class="line-numbers"><code class="language-python">
+              def squared(x):
+                s = x**2
+                return s
+            </pre></code>
+
+            This function takes <code>x</code> as a parameter, squares it, and returns the result.
+
+            This function is loaded into memory when you run your program. It is not used until you <b>call</b> it in your main program.
+
+          </div>
+
+
+          <!-- START SUBSECTION -->
+          <div class="subsection">
+            <h3 id="call">Calling a Function</h3>
+
+            Here we create a function called <b>squared</b> and call it a few times.
+
+            A function to square a number.
+            <pre class="line-numbers"><code class="language-python">
+              def squared(x):
+                s = x**2
+                return s
+
+              print( squared(2) )
+              print( "3 squared is", squared(3))
+              print( "3² + 4² =", squared(3) + squared(4))
+            </pre></code>
+
+            giving:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              4
+              3 squared is 9
+              3² + 4² = 25
+            </pre></code>
+
+          </div>
+          <!-- END SUBSECTION -->
+
+
+
+
+          <!-- START SUBSECTION -->
+          <div class="subsection">
+            <h3 id="parameters">Passing Parameters</h3>
+
+            You can pass multiple parameters to a function. A function to find the zeros of a quadratic, using the <a href="https://en.wikipedia.org/wiki/Quadratic_formula">quadratic formula</a>:
+
+            $$ x = \dfrac{-b \pm \sqrt{b^2-4ac}}{2a} $$
+
+            <pre class="line-numbers"><code class="language-python">
+              def quadraticFormula(a, b, c):
+                    x1 = (b + (b**2 - (4*a*c))**0.5) / (2*a)
+                    x2 = (b - (b**2 - (4*a*c))**0.5) / (2*a)
+                    return (x1, x2)
+
+              print("The zeros for y = x² + 3x - 4 are:", quadraticFormula(1,3,-4))
+            </pre></code>
+
+            giving:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              The zeros for y = x² + 3x - 4 are: (4.0, -1.0)
+            </pre></code>
+
+          </div>
+          <!-- END SUBSECTION -->
+
+
+
+          <!-- START SUBSECTION -->
+          <div class="subsection">
+            <h3 id="returns">Returning Values</h3>
+
+            You can return multiple values from a function. This can be done as a list, or as a tuple. The function to find the zeros of a quadratic, using the <a href="https://en.wikipedia.org/wiki/Quadratic_formula">quadratic formula</a> is:
+
+            $$ x = \dfrac{-b \pm \sqrt{b^2-4ac}}{2a} $$
+
+            It returns two values of x (one for the + and one for the -). The values, when returned as a tuple (in parentheses) or list (square brackets) can be unpacked in your main program.
+
+            <pre class="line-numbers"><code class="language-python">
+              def quadraticFormula(a, b, c):
+                    x1 = (b + (b**2 - (4*a*c))**0.5) / (2*a)
+                    x2 = (b - (b**2 - (4*a*c))**0.5) / (2*a)
+                    return (x1, x2)
+
+              # main program
+              (z1, z2)  = quadraticFormula(1, 3, -4)
+              print("zero 1 =", z1, "and zero 2 = ", z2)
+
+            </pre></code>
+
+            giving:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              zero 1 = 4.0 and zero 2 =  -1.0
+            </pre></code>
+
+          </div>
+          <!-- END SUBSECTION -->
+
+
+
+
+          <!-- START SUBSECTION -->
+          <div class="subsection">
+            <h3 id="scope">Scope</h3>
+
+            Variables created within a function only exist within that function. Their scope is <b>local</b>. This way you can have multiple functions reusing the same variable names without causing conflict.
+
+            <pre class="line-numbers"><code class="language-python">
+              def f1(x):
+                  y = 2 * x + 3
+                  return y
+
+              def f2(x):
+                  y = -x + 4
+                  return y
+
+              # main program
+              print(f1(5), f2(3))
+            </pre></code>
+
+            <p>Two functions, both recieving values into variables named <b>x</b>, but <code>f1</code> recieves a <b>5</b> while <code>f2</code> recieves <b>3</b>. </p>
+
+            giving:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              13 1
+            </pre></code>
+
+            <p>Because <code>y</code> is <em>local</em> to our functions, if we tried to print <code>y</code> in the main program (line 11 below), we would get an error. So: </p>
+            <pre class="line-numbers" data-line="11"><code class="language-python">
+              def f1(x):
+                  y = 2 * x + 3
+                  return y
+
+              def f2(x):
+                  y = -x + 4
+                  return y
+
+              # main program
+              print(f1(5), f2(3))
+              print(y)
+            </pre></code>
+
+            gives the error:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              13 1
+              Traceback (most recent call last):
+                File "function-examples.py", line 11, in <module>
+                  print(y)
+              NameError: name 'y' is not defined
+            </pre></code>
+
+          </div>
+          <!-- END SUBSECTION -->
+
+
+        </div>
+        <!-- END OF SECTION -->
+
+
+
+
+        <!-- START OF SECTION -->
+        <div class="section">
+          <h2 id="classes">Classes</h2>
+
+          A class to handle straight lines based on the slope-intercept equation:
+          $$ y = m x + b $$
+
+          <pre class="line-numbers"><code class="language-python">
+            # Create Class: The class' name is "straightLine"
+            class straightLine:
+                def __init__(self, m, b):     # initialize
+                    self.slope = m            # set properties
+                    self.y_intercept = b
+                    self.x_intercept = -b/m
+
+            #   BEGIN PROGRAM
+            line_1 = straightLine(2, 3)     # create an instance for y = 2x + 3
+            print("slope =", line_1.slope)  # print slope
+          </pre></code>
+
+
+          <!-- START SUBSECTION -->
+          <div class="subsection">
+            <h3 id="classDef">Defining a Class</h3>
+
+            Creating the "straightLine" class:
+            <pre class="line-numbers" data-start="2"><code class="language-python" >
+              class straightLine:
+                  def __init__(self, m, b):     # initialize
+                      self.slope = m            # set properties
+                      self.y_intercept = b
+                      self.x_intercept = -b/m
+
+            </pre></code>
+
+
+            <ul>
+              <li><b>Line 2:</b> <b>Create</b> class named "straightLine"
+              </li>
+              <li><b>Line 3:</b> An <b>initialization</b> function (always named "__init__").
+                <ul>
+                  <li>The class needs two parameters, a and b, to define the straight line, but functions/methods within a class will almost always require the additional parameter "self", to pass information from one method to the next.</li>
+                </ul>
+              </li>
+              <li><b>Line 4-6: </b> Set <b>properties</b> of the class, we'll be able to used these in other methods when we write them (see below).
+              </li>
+            </ul>
+
+          </div>
+          <!-- END SUBSECTION -->
+
+
+          <!-- START SUBSECTION -->
+          <div class="subsection">
+            <h3 id="classUsing">Using/Instantiating a Class</h3>
+
+            To use a class you create an <b>instance</b> of it. The term <em>instance</em> is used because you can have multiple instances of a class with different parameters.
+
+            <pre class="line-numbers" data-start="9"><code class="language-python">
+              #   BEGIN PROGRAM
+              line_1 = straightLine(2, 3)     # create an instance for y = 2x + 3
+              print("slope =", line_1.slope)  # print slope
+            </pre></code>
+
+            <ul>
+              <li><b>Line 10:</b> Create an <b>instance</b> of the class. Name the instance "line_1".
+                <ul>
+                  <li>Pass the m and b values.</li>
+                </ul>
+              </li>
+              <li><b>Line 11:</b> Use the slope property of this instance of the class (<code>line_1.slope</code>) to print the slope.
+              </li>
+            </ul>
+
+            giving:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              slope = 2
+            </pre></code>
+
+          </div>
+          <!-- END SUBSECTION -->
+
+
+
+
+          <!-- START SUBSECTION -->
+          <div class="subsection">
+            <h3 id="classMethods">Adding Methods to a Class</h3>
+
+            The <code>straightLine</code> class has an initialization method/function (<code>__init__</code>). Here we add another method called <code>get_y</code> to get the y value when you pass the program a value for x.
+
+            <pre class="line-numbers" data-line="8-10"><code class="language-python">
+              # Create Class: The class' name is "straightLine"
+              class straightLine:
+                  def __init__(self, m, b):     # initialize
+                      self.slope = m            # set properties
+                      self.y_intercept = b
+                      self.x_intercept = -b/m
+
+                  def get_y(self, x):
+                      y = self.slope * x + self.y_intercept
+                      return y
+
+              line_1 = straightLine(2, 3)     # create an instance for y = 2x + 3
+              line_2 = straightLine(-1, 4)    # create an instance for y = -x + 4
+
+              # Get y when x = 5 for line 2
+              print("For x = 5, y =", line_2.get_y(5))
+              print()
+
+              # get y values for both lines
+              print("x,y1,y2")
+              for i in range(5):
+                  print( i, line_1.get_y(i), line_2.get_y(i))
+            </pre></code>
+
+            giving:
+            <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+              For x = 5, y = -1
+
+              x,y1,y2
+              0 3 4
+              1 5 3
+              2 7 2
+              3 9 1
+              4 11 0
+
+            </pre></code>
+
+          </div>
+          <!-- END SUBSECTION -->
+
+
+
+        </div>
+        <!-- END OF SECTION -->
+
 
 
       </div>
-      <!-- END OF SECTION -->
+
 
     </div>
-
-
-
   </body>
   <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="../prism.js"></script>
   <!-- <script type="text/javascript" src="../exercises.js"></script> -->
+  <script type="text/javascript">
+    $(".dropdownSide").click(function(){
+      $(this).next().toggle();
+    })
+  </script>
 
 </html>
