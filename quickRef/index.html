@@ -6,6 +6,7 @@
     <title>Quick Reference</title>
 
     <link href="../prism.css" rel="stylesheet" />
+    <link href="../progLess.css" rel="stylesheet" />
     <!-- <link href="../programmingLessons.css" rel="stylesheet" /> -->
 
 
@@ -14,57 +15,7 @@
     </script>
 
     <style media="screen">
-      body {
-        font-family: "Lucida Console", "Courier New", monospace;
-        line-height: 1.3em;
-      }
-      .box {
-        display: flex;
-      }
 
-      #sidebar {
-        width: 15%;
-        position: fixed;
-        top: 0em;
-        font-size: 0.75em;
-        border: 4px outset red;
-        padding: 0.25em;
-      }
-      #mainPage {
-        margin-left: 18%;
-        postion: relative;
-        width: 90%;
-      }
-      code {
-        background-color: #ddd;
-        padding-left: 0.25em;
-        padding-right: 0.25em;
-      }
-      table, td, th {
-        /* background-color: khaki; */
-        border: 1px solid black;
-      }
-      ol {
-        padding-left: 2em;
-        /* list-style: none; */
-      }
-      li {
-        padding-top: 0.3em;
-      }
-      h1, h2, h3, h4 {
-        padding-left: 1em;
-      }
-      .section, .subsection{
-        border: 1px solid black;
-        padding: 1em;
-        margin-top: 1em;
-      }
-      .subsection {
-        border: 1px solid blue;
-      }
-      .dropdownSide {
-        cursor: pointer;
-      }
     </style>
 
   </head>
@@ -190,7 +141,7 @@
             <tr>
               <td>String</td>
               <td><code>pieType = "apple"</code> </td>
-              <td>Letters and text. For special characters ("α²") search with "utf8"</td>
+              <td>Letters and text. For special characters (like "α" and "²") search with "utf8"</td>
             </tr>
             <tr>
               <td>List</td>
@@ -955,11 +906,8 @@
   </body>
   <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../progLess.js"></script>
   <!-- <script type="text/javascript" src="../exercises.js"></script> -->
-  <script type="text/javascript">
-    $(".dropdownSide").click(function(){
-      $(this).next().toggle();
-    })
-  </script>
+
 
 </html>
