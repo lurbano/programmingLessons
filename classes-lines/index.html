@@ -335,7 +335,7 @@
       <tr>
         <td>
           <div class="comment">
-            <h3>Exercise:</h3>
+            <h3>Exercise: find x given y</h3>
             <div class="comment">
               Add a method to the class that calculates the <em>x</em> value for a given <em>y</em>. Use this method to find <em>x</em> value when:
               $$ y = 11 $$
@@ -349,7 +349,7 @@
           Code.
           <div class="toggle-next">Show Notes ▼</div>
           <div class="pythonCode" hidden>
-            <pre class="line-numbers"><code class="language-python">
+            <pre class="line-numbers" data-line="15-17"><code class="language-python">
               class straightLine:
 
                   def __init__(self, m, b):
@@ -364,6 +364,7 @@
                       y = self.m * x + self.b
                       return y
 
+                  # method to get x given y
                   def get_x(self, y):
                       x = (y - self.b) / self.m
                       return x
@@ -386,6 +387,74 @@
       </tr>
       <!-- END ROW -->
 
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Exercise: perpendicular slope </h3>
+            <div class="comment">
+              Add a method to: calculate the slope of a line perpendicular to the given line.
+            </div>
+          </div>
+
+        </td>
+        <td>
+          Code.
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers" data-line="15-17"><code class="language-python">
+              # This one is on you...
+            </pre></code>
+          </div>
+          Results.
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              # Try a number of test cases to check
+              #    if your code works well.
+            </pre></code>
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Exercise: Check if a point is on the line </h3>
+            <div class="comment">
+              Add a method to: determine if a given point (x,y) is on the line.
+
+              <p>
+                Your method should return 'True' if the point is on the line and 'False' if not.
+              </p>
+            </div>
+          </div>
+
+        </td>
+        <td>
+          Code.
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+              <a href="../quickRef/index.html#logic">Logic Reference</a>
+          </div>
+          Results.
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              # Try a number of test cases to check
+              #    if your code works well.
+            </pre></code>
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
 
 
 
@@ -395,59 +464,5 @@
   <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="../prism.js"></script>
   <script type="text/javascript" src="../exercises.js"></script>
-  <script type="text/javascript">
 
-    function distance(v1, v2){
-      d = ( (v1[1]-v2[1])**2 + (v1[0]-v2[0])**2 )**0.5;
-      return d;
-    }
-    function arrToStr(a, varName="x"){
-      let t = varName + " = [";
-      for (let i = 0; i< a.length; i++){
-        t += a[i] + ", ";
-      }
-      t = t.slice(0,-2) + "]";
-      return t;
-    }
-    $("#generatePts").click(function(){
-
-      let circleRadius = 5.0;
-      let nNodes = parseInt($("#nPts").val())-1;
-      console.log("clicked", nNodes);
-
-      xs = [];
-      ys = [];
-      pts = [];
-
-      let dAngle = 2 * Math.PI / nNodes;
-
-      for (let i=0; i<nNodes; i++){
-        let x = circleRadius * Math.cos(dAngle*i);
-        let y = circleRadius * Math.sin(dAngle*i);
-        xs.push(x.toFixed(2));
-        ys.push(y.toFixed(2));
-        pts.push([x.toFixed(2), y.toFixed(2)]);
-      }
-
-      pts.push(pts[0]);
-      xs.push(xs[0]);
-      ys.push(ys[0]);
-      console.log( `pts = ${pts}`);
-      console.log(arrToStr(xs));
-      console.log(arrToStr(ys, "y"));
-
-      $("#ptData").html(arrToStr(xs) + '\n' + arrToStr(ys, "y"));
-
-      //calculate total distance
-      let d = 0;
-      for (let i=0; i<pts.length-1; i++){
-        d += distance(pts[0], pts[1]);
-        console.log(d);
-      }
-
-      $("#ptsDistance").html(d.toFixed(2));
-
-    })
-
-  </script>
 </html>
