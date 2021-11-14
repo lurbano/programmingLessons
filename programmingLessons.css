@@ -58,14 +58,15 @@ tbody tr:nth-child(odd) {
 tbody tr:nth-child(even) {
   background-color: white;
 }
-tbody tr {
+/* tbody tr {
   background-image: url(noise.png);
-}
+} */
 table {
   background-color: #ff33cc;
 }
 td {
   padding: 0.25em;
+  vertical-align: top;
 }
 code {
   background-color: #ccc;
@@ -111,6 +112,15 @@ code {
   padding: 0.2em;
 }
 
-/* svg {
-  border: 1px solid black;
-} */
+.codeNote {
+  display: block;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+.dropdownSide {
+  cursor: pointer;
+}
+.outputCell {
+  padding-top: 4em;
+}

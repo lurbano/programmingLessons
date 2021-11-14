@@ -61,44 +61,79 @@
             <h3>Plotting points</h3>
             First, let's plot the points. We'll do it a little differently from some of the other lessons because we want to make all these calculations about the points.
           </div>
-          <div class="pythonCode">
-            <pre class="line-numbers"><code class="language-python" >
-              xaxis = curve(pos=[vec(-10,0,0), vec(10,0,0)])
-              yaxis = curve(pos=[vec(0,-10,0), vec(0,10,0)])
 
-              p1 = vec(-3,1,0)
-              p2 = vec(5,7,0)
-
-              s1 = sphere(pos=p1, radius=0.5, color=color.red)
-              s2 = sphere(pos=p2, radius=0.5, color=color.yellow)
-
-              line = curve(pos=[p1, p2])
-              print("Point 1:", p1.x, ",", p1.y)
-
-            </code></pre>
-          </div>
 
           <div class="comment">
 
-            <p>
-              <b>Lines 4&5</b>: The two points are created as vectors and named <code>p1</code> and <code>p2</code>.
+            <p class="codeNote">
+              <b>Lines 6&7</b>: The two points are created as vectors and named <code>p1</code> and <code>p2</code>.
+              <div class="pythonCode">
+                <pre class="line-numbers" data-start="5"><code class="language-python" >
+                  # Create points as vectors
+                  p1 = vec(-3,1,0)
+                  p2 = vec(5,7,0)
+                </code></pre>
+              </div>
             </p>
 
-            <p>
-              <b>Lines 7</b>: Since the points are vectors, when we create sphere for the first point, we can set the position by using p1: <code>pos=p1</code>
+            <p class="codeNote">
+              <b>Lines 10</b>: Since the points are vectors, when we create sphere for the first point, we can set the position by using p1: <code>pos=p1</code>
+              <div class="pythonCode">
+                <pre class="line-numbers" data-start="9" data-line="10"><code class="language-python" >
+                  # Draw spheres to show the points
+                  s1 = sphere(pos=p1, radius=0.5, color=color.red)
+                </code></pre>
+              </div>
             </p>
 
-            <p>
-              <b>Line 10</b>: We can also use <code>p1</code> and <code>p2</code> when we create the line between the points.
+            <p class="codeNote">
+              <b>Line 14</b>: We can also use <code>p1</code> and <code>p2</code> when we create the line between the points.
+              <div class="pythonCode">
+                <pre class="line-numbers" data-start="13" data-line="14"><code class="language-python" >
+                  # Draw line between two points
+                  line = curve(pos=[p1, p2])
+                </code></pre>
+              </div>
             </p>
 
-            <p>
-              <b>Line 11</b>: One of the reasons we're making the points vectors is that vectors have a few useful properties. One of these is the fact that you can refer to the x-coordinate of the vector using the dot notation. So, p1's x-coordinate is <code>p1.x</code>.
+            <p class="codeNote">
+              <b>Line 17</b>: One of the reasons we're making the points vectors is that vectors have a few useful properties. One of these is the fact that you can refer to the x-coordinate of the vector using the dot notation. So, p1's x-coordinate is <code>p1.x</code>.
+              <div class="pythonCode">
+                <pre class="line-numbers" data-start="17"><code class="language-python" >
+                  print("Point 1:", p1.x, ",", p1.y)
+                </code></pre>
+              </div>
             </p>
 
           </div>
         </td>
         <td>
+
+          <em>Full program for plotting two points</em>
+          <div class="pythonCode">
+            <pre class="line-numbers" data-line="6-7,10,14,17"><code class="language-python" >
+              # Draw axes
+              xaxis = curve(pos=[vec(-10,0,0), vec(10,0,0)])
+              yaxis = curve(pos=[vec(0,-10,0), vec(0,10,0)])
+
+              # Create points as vectors
+              p1 = vec(-3,1,0)
+              p2 = vec(5,7,0)
+
+              # Draw spheres to show the points
+              s1 = sphere(pos=p1, radius=0.5, color=color.red)
+              s2 = sphere(pos=p2, radius=0.5, color=color.yellow)
+
+              # Draw line between two points
+              line = curve(pos=[p1, p2])
+
+              # Output the x and y values of point 1 (<code>p1</code>)
+              print("Point 1:", p1.x, ",", p1.y)
+
+            </code></pre>
+          </div>
+
+          <em>Output</em>
           <div class="graph">
             <img src="tpf-02.png" style="width:400px;">
           </div>
@@ -128,6 +163,35 @@
         </td>
         <td>
 
+          <span class="dropdownSide">⇨</span>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers" data-line="6-7,10,14,17"><code class="language-python" >
+              # Draw axes
+              xaxis = curve(pos=[vec(-10,0,0), vec(10,0,0)])
+              yaxis = curve(pos=[vec(0,-10,0), vec(0,10,0)])
+
+              # Create points as vectors
+              p1 = vec(-3,1,0)
+              p2 = vec(5,7,0)
+
+              # Draw spheres to show the points
+              s1 = sphere(pos=p1, radius=0.5, color=color.red)
+              s2 = sphere(pos=p2, radius=0.5, color=color.yellow)
+
+              # Draw line between two points
+              line = curve(pos=[p1, p2])
+
+              # Output the x and y values of point 1 (<code>p1</code>)
+              print("Point 1:", p1.x, ",", p1.y)
+              print("Point 1:", p1.x, ",", p1.y)
+
+              # calculate slope
+              m = (p2.y - p1.y) / (p2.x - p1.x)
+
+              print("The slope between the two points is:", m)
+
+            </code></pre>
+          </div>
           <div class="graph">
             <img src="tpf-03.png" style="width:400px;">
           </div>
@@ -156,9 +220,78 @@
                   </p>
                 </div>
 
-                We create the function like so:
+                <h4>Writing and Calling the Function</h4>
+
+                <h5>The slope Function</h5>
+
+                <div class="comment">
+
+                  The function is defined on <b>Lines 1-3</b>
+                  <div class="pythonCode" >
+                    <pre class="line-numbers" data-start="2"><code class="language-python">
+                      def slope(x1, y1, x2, y2):
+                          s = (y2 - y1) / (x2 - x1)
+                          return s
+                    </code></pre>
+                  </div>
+
+                  <p class='codeNote'>
+                    <b>Line 2</b>:
+                    <ul>
+                      <li>The <code>def</code> keyword indicates that we're defining a function.</li>
+                      <li>the name of the function is <code>slope</code> </li>
+                      <li>the inputs of the function are listed within parentheses.</li>
+                    </ul>
+
+                  </p>
+
+                  <p class='codeNote'>
+                    <b>Line 3</b>: Here we calculate the slope.
+                  </p>
+
+                  <p class='codeNote'>
+                    <b>Line 4</b>: Here we <b>return</b> the value of the slope (<code>s</code>) to the program.
+                  </p>
+
+                  <hr>
+                  <h5>Calling the slope function</h5>
+                  <p>
+                    Functions stand alone. When you run the program, the function definition is stored in memory and saved until the function is <b>called</b>.
+                  </p>
+
+                  <div class="pythonCode" >
+                    <pre class="line-numbers" data-start="20"><code class="language-python">
+                      m = slope(p1.x, p1.y, p2.x, p2.y)
+                    </code></pre>
+                  </div>
+
+                  <p class='codeNote'>
+                    <b>Line 19</b>: The function is called by using its name, and <b>passing</b> the input values. The function returns the result to the place in the code where the function is called.
+                  </p>
+
+                  <p>
+                    WE could have also called the function and <em>passed</em> the x and y values directly like:
+
+                  </p>
+                  <div class="pythonCode" >
+                    <pre class="line-numbers" data-start="20"><code class="language-python">
+                      m = slope(-3, 1, 5, 7)
+                    </code></pre>
+                  </div>
+
+                  <p>
+                    This function call is a little clunky with the four inputs, so next we'll create another function that takes two vectors as inputs.
+                  </p>
+
+                </div>
+
+              </td>
+              <td class='outputCell'>
+
+                Code with slope function:
                 <div class="pythonCode" >
-                  <pre class="line-numbers"><code class="language-python">
+                  <pre class="line-numbers" data-line="2-4,20"><code class="language-python">
+                    # function to find the slope of a line given the coordinates of two points.
                     def slope(x1, y1, x2, y2):
                         s = (y2 - y1) / (x2 - x1)
                         return s
@@ -183,39 +316,6 @@
                   </code></pre>
                 </div>
 
-                <div class="comment">
-
-                  The function is defined on <b>Lines 1-3</b>
-                  <p>
-                    <b>Lines 1</b>:
-                    <ul>
-                      <li>The <code>def</code> keyword indicates that we're defining a function.</li>
-                      <li>the name of the function is <code>slope</code> </li>
-                      <li>the inputs of the function are listed within parentheses.</li>
-                    </ul>
-                  </p>
-
-                  <p>
-                    <b>Line 2</b>: Here we calculate the slope.
-                  </p>
-
-                  <p>
-                    <b>Line 3</b>: Here we <b>return</b> the value of the slope (<code>s</code>) to the program.
-                  </p>
-
-                  <p>
-                    Functions stand alone. When you run the program, the function definition is stored in memory and saved until the function is <b>called</b>.
-                  </p>
-
-                  <p>
-                    <b>Line 19</b>: <b>Calling the function</b>. The function is called by using its name, and <b>passing</b> the input values. The function returns the result to the place in the code where the function is called. This function call is a little clunky with the four inputs, so next we'll create another function that takes two vectors as inputs.
-                  </p>
-
-                </div>
-
-              </td>
-              <td>
-
                 <div class="graph">
                   <img src="tpf-03.png" style="width:400px;">
                 </div>
@@ -234,13 +334,57 @@
             <h3>Function using vectors as inputs.</h3>
 
           </div>
+
+          <div class="comment">
+
+            <p class='codeNote'>
+              <b>Line 26</b>:
+              The call to the new function is much simpler and, hopefully, more intuitive, now you sent only two values, the vectors for the two points.
+
+              <div class="pythonCode">
+                <pre class="line-numbers" data-start="26"><code class="language-python">
+                  m = slopeVectors(p1, p2)
+                </pre></code>
+              </div>
+
+            </p>
+
+            <p class='codeNote'>
+              <b>Line 7-9</b>: The new function, called <code>slopeVectors</code> that calculates the slope using vector inputs.
+            </p>
+
+
+            <div class="pythonCode">
+              <pre class="line-numbers" data-start="6" data-line='7-9'><code class="language-python">
+                # function for slope given two points as vectors
+                def slopeVectors(v1, v2):
+                    s = (v2.y - v1.y) / (v2.x - v1.x)
+                    return s
+              </pre></code>
+            </div>
+
+            <hr>
+            <p>
+              <b>Local Variables</b>: Notice that both functions (<code>slope</code> and <code>slopeVectors</code>) use the variable name <code>s</code> when they calculate the slope. This causes no conflice with each other, or with other places in the code where we might want to use a variable named <code>s</code> because <b> variables created in a function only exist in that function </b>. These are refered to as <em>local variables</em>.
+
+            </p>
+
+
+
+          </div>
+
+
+        </td>
+        <td>
           <div class="toggle-next">Show Notes ▼</div>
-          <div class="pythonCode" hidden>
-            <pre class="line-numbers"><code class="language-python">
+          <div class="pythonCode">
+            <pre class="line-numbers" data-line='7-9, 26'><code class="language-python">
+              # function to find slope given the coordinates of two points.
               def slope(x1, y1, x2, y2):
                   s = (y2 - y1) / (x2 - x1)
                   return s
 
+              # function for slope given two points as vectors
               def slopeVectors(v1, v2):
                   s = (v2.y - v1.y) / (v2.x - v1.x)
                   return s
@@ -259,34 +403,12 @@
               print("Point 1:", p1.x, ",", p1.y)
               print("Point 2:", p2.x, ",", p2.y)
 
+              # calling the slopeVectors function
               m = slopeVectors(p1, p2)
 
               print("The slope between the two points is:", m)
             </pre></code>
           </div>
-          <div class="comment">
-
-            <p>
-              <b>Line 23</b>:
-              The call to the new function is much simpler and, hopefully, more intuitive, now you sent only two values, the vectors for the two points.
-            </p>
-
-            <p>
-              <b>Line 5-7</b>: The new function, called <code>slopeVectors</code> that calculates the slope using vector inputs.
-            </p>
-
-            <p>
-              <b>Local Variables</b>: Notice that both functions (<code>slope</code> and <code>slopeVectors</code>) use the variable name <code>s</code> when they calculate the slope. This causes no conflice with each other, or with other places in the code where we might want to use a variable named <code>s</code> because <b> variables created in a function only exist in that function </b>. These are refered to as <em>local variables</em>.
-
-            </p>
-
-
-
-          </div>
-
-
-        </td>
-        <td>
 
           <div class="graph">
             <img src="tpf-03.png">
@@ -307,6 +429,13 @@
             $$ d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
 
           </div>
+
+
+          </div>
+
+        </td>
+        <td>
+
           <div class="pythonCode">
             <div class="toggle-next">Show Notes ▼</div>
             <div class="test" hidden>
@@ -316,15 +445,6 @@
               </code></pre>
             </div>
             <p>
-
-          </div>
-
-        </td>
-        <td>
-
-          <div class="graph">
-            <img src="lr-05.png" >
-          </div>
 
         </td>
       </tr>
@@ -341,23 +461,23 @@
             Write a function that calculates the intercept of the line that passes through the points:
 
           </div>
-          <div class="pythonCode">
-            <div class="toggle-next">Show Notes ▼</div>
-            <div class="test" hidden>
 
-              <pre><code class="language-python">
-                # no notes yet. You're flying solo.
-              </code></pre>
-            </div>
-            <p>
-
-          </div>
 
         </td>
         <td>
 
           <div class="graph">
-            <img src="lr-05.png" >
+            <div class="pythonCode">
+              <div class="toggle-next">Show Notes ▼</div>
+              <div class="test" hidden>
+
+                <pre><code class="language-python">
+                  # get the algebra right and this should be easy
+                </code></pre>
+              </div>
+              <p>
+
+            </div>
           </div>
 
         </td>
@@ -370,23 +490,24 @@
 
           <div class="comment">
             <h3>Distance along a curve</h3>
-            Take the following points and find the total distance along the curve. ...
-
-            <p>
-            Number of points: <input type="number" id="nPts" value="12" style="width:4em;">
-            <input type="button" id="generatePts" value="Generate Points">
+            Generate a number of points, and use your distance function to calculate the total distance along the curve.
 
           </div>
 
         </td>
         <td>
 
+          <p>
+            Number of points: <input type="number" id="nPts" value="12" style="width:4em;">
+            <input type="button" id="generatePts" value="Generate Points">
+          </p>
+
           <div class="graph">
             <pre><code class="language-python" id="ptData">
 
             </code></pre>
             <p></p>
-            Answer (total distance):
+            Check your answer (total distance):
             <div class="toggle-next">Show Notes ▼</div>
             <div id="ptsDistance" hidden>
             </div>
@@ -410,6 +531,7 @@
   <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="../prism.js"></script>
   <script type="text/javascript" src="../exercises.js"></script>
+  <script type="text/javascript" src="../progLess.js"></script>
   <script type="text/javascript">
 
     function distance(v1, v2){
