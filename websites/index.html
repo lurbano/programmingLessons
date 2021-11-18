@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Cylinder Website</title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <h1>Websites: Volume of a Cylinder</h1>
+
+    <div class="setup">
+      <div class="comment">
+        Create a website that allows the visitor to enter the <b>radius</b> and <b>height</b> of a cylinder, and it calculates the volume and puts it on the webpage.
+      </div>
+
+      <figure>
+          <a href="./cylinder.html">
+            <img src="cylinderWebpage.png" style="width:400px;">
+            <figcaption>Example webpage. </figcaption>
+          </a>
+      </figure>
+
+    </div>
+
+
+    <table>
+
+
+
+      <tr>
+        <th>Notes and Code</th>
+        <th>Outcome</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>HTML</h3>
+
+            The structure of the page is laid out in the HTML code.
+
+          </div>
+
+        </td>
+        <td>
+          <em>cylinder.html</em>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-markup">
+              &lt;!DOCTYPE html>
+              &lt;html lang="en" dir="ltr">
+                &lt;head>
+                  &lt;meta charset="utf-8">
+                  &lt;title>Cylinders&lt;/title>
+                  &lt;link href="cylinder.css" rel="stylesheet" />
+                &lt;/head>
+                &lt;body>
+
+                  &lt;h1>Geometry of Cylinders&lt;/h1>
+
+                  &lt;p>
+                    In order to calculate the volume and surface area of a cylinder, you will need to enter its &lt;b>radius&lt;/b> and its &lt;b>height:&lt;/b>
+                  &lt;/p>
+
+                  &lt;div id="inputs">
+                    &lt;h2>Inputs&lt;/h2>
+                    radius: &lt;input type="number" id="r" value="1">&lt;br>
+                    height: &lt;input type="number" id="h" value="1">
+
+                    &lt;p>
+                      Units: &lt;input type="text" id="units" value="cm">
+                    &lt;/p>
+                  &lt;/div>
+
+                  &lt;div id="outputs">
+                    &lt;h2>Output&lt;/h2>
+                    Volume = &lt;span id="volume" class="outputValue">&lt;/span>
+                  &lt;/div>
+
+                &lt;/body>
+
+                &lt;script type="text/javascript" src='cylinder.js'>
+                &lt;/script>
+
+              &lt;/html>
+            </pre></code>
+
+          </div>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>JavaScript</h3>
+
+            Javascript does the actual calculations. It gets the values input from the page, does the calculations, and outputs the results to the page.
+
+          </div>
+
+        </td>
+        <td>
+          <em>cylinder.js</em>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-js">
+              // Function to calculate the volume of a cylinder
+              function volCylinder(){
+                // Get input from webpage
+                let r = document.getElementById("r").value;
+                let h = document.getElementById("h").value;
+                let u = document.getElementById("units").value;
+
+                // do calculations
+                let vol = Math.PI * r**2 * h;
+
+                // output to webage
+                let vOut = document.getElementById("volume");
+                vUnits = " " + u + "<sup>3</sup>";
+                vOut.innerHTML = vol + vUnits;
+
+              }
+
+              // call function/s when page loads
+              volCylinder();
+
+              //   add event listeners to run function whenever a change
+              // is made to one of the inputs
+              rInput = document.getElementById("r");
+              rInput.addEventListener("change", volCylinder);
+
+              hInput = document.getElementById("h");
+              hInput.addEventListener("change", volCylinder);
+
+              uInput = document.getElementById("units");
+              uInput.addEventListener("input", volCylinder);
+
+            </pre></code>
+
+          </div>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>CSS</h3>
+
+            Styles the page to make it look pretty.
+
+          </div>
+
+        </td>
+        <td>
+          <em>cylinder.css</em>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-css">
+              body {
+                background-color: khaki;
+              }
+
+              h1 {
+                font-family: "Times New Roman", Times, serif;
+                color: blue;
+                padding-left: 2em;
+              }
+
+              input[type="number"]{
+                width: 5em;
+                text-align: center;
+              }
+
+              #inputs {
+                border: 1px solid black;
+                width: 50%;
+              }
+
+              .outputValue {
+                background-color: lightgreen;
+                border: 4px inset green;
+                padding: 5px;
+              }
+
+            </pre></code>
+
+          </div>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+    </table>
+
+  </body>
+  <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+  <script type="text/javascript">
+
+
+
+  </script>
+</html>

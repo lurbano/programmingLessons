@@ -1,0 +1,25 @@
+body {
+  background-color: khaki;
+}
+
+h1 {
+  font-family: "Times New Roman", Times, serif;
+  color: blue;
+  padding-left: 2em;
+}
+
+input[type="number"]{
+  width: 5em;
+  text-align: center;
+}
+
+#inputs {
+  border: 1px solid black;
+  width: 50%;
+  padding: 5px;
+}
+
+.outputValue {
+  background-color: lightgreen;
+  border: 4px inset green;
+}
