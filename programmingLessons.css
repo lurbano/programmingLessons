@@ -124,3 +124,12 @@ code {
 .outputCell {
   padding-top: 4em;
 }
+
+.nav a {
+  border: 4px outset lightSeaGreen;
+  padding: 0.25em;
+  background-color: #64E764;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Times New Roman', serif;
+}

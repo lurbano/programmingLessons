@@ -19,7 +19,18 @@
 
   </head>
   <body>
+
+    <!-- HEADERS -->
+    <div class="nav">
+      <a href="../index.html">← Main</a>
+      <a href="../quickRef/">Quick Ref</a>
+      <hr>
+    </div>
+    <!-- END HEADERS -->
+
     <h1>Websites: Volume of a Cylinder</h1>
+
+
 
     <div class="setup">
       <div class="comment">
@@ -216,6 +227,123 @@
         </td>
       </tr>
       <!-- END ROW -->
+
+
+
+            <!-- NEW ROW -->
+            <tr>
+              <td>
+                <div class="comment">
+
+                  <h3>Test: A Class in Javascript</h3>
+
+                  Using a class for cylinders. (in progress).
+
+                  <h4>Creating the Class</h4>
+
+                  <div class="pythonCode">
+                    <pre class="line-numbers"><code class="language-js">
+                      // a class to deal with cylinders
+                      class cylinder{
+
+                        constructor(r, h) {
+                          this.r = r;
+                          this.h = h;
+                        }
+
+                        // method for calculating the volume of the cylinder
+                        volume(){
+                          let v = Math.PI * this.r**2 * this.h;
+                          return v;
+                        }
+
+                      }
+
+                    </pre></code>
+                  </div>
+
+                  <ul>
+                    <li>
+                      The class requires you to pass two variables, <b>r</b> and <b>h</b>. You can see this in the class' <code>constructor</code>.
+                    </li>
+                    <li>
+                      This class has one method (<code>volume</code>) that calculates and returns the volume of the cylinder.
+                    </li>
+                  </ul>
+
+                  <h4>Using the Class</h4>
+                  An instance of the class is created using the <code>new</code> keyword.
+
+                  <div class="pythonCode">
+                    <pre class="line-numbers" data-start="24"><code class="language-js">
+                        // do CALCULATIONS USING THE CYLINDER CLASS
+                        let c = new cylinder(r, h);
+                        let vol = c.volume()
+                    </pre></code>
+                  </div>
+
+                </div>
+
+              </td>
+              <td>
+                <em>cylinderClass.js</em>
+                <div class="pythonCode">
+                  <pre class="line-numbers" data-line="1-15,24-26"><code class="language-js">
+                    // a class to deal with cylinders
+                    class cylinder{
+
+                      constructor(r, h) {
+                        this.r = r;
+                        this.h = h;
+                      }
+
+                      // method for calculating the volume of the cylinder
+                      volume(){
+                        let v = Math.PI * this.r**2 * this.h;
+                        return v;
+                      }
+
+                    }
+
+                    // Function to calculate the volume of a cylinder
+                    function volCylinder(){
+                      // Get input from webpage
+                      let r = document.getElementById("r").value;
+                      let h = document.getElementById("h").value;
+                      let u = document.getElementById("units").value;
+
+                      // do CALCULATIONS USING THE CYLINDER CLASS
+                      let c = new cylinder(r, h);
+                      let vol = c.volume()
+
+                      // output to webage
+                      let vOut = document.getElementById("volume");
+                      vUnits = " " + u + "<sup>3</sup>";
+                      vOut.innerHTML = vol + vUnits;
+
+                    }
+
+                    // call function/s when page loads
+                    volCylinder();
+
+                    //   add event listeners to run function whenever a change
+                    // is made to one of the inputs
+                    rInput = document.getElementById("r");
+                    rInput.addEventListener("change", volCylinder);
+
+                    hInput = document.getElementById("h");
+                    hInput.addEventListener("change", volCylinder);
+
+                    uInput = document.getElementById("units");
+                    uInput.addEventListener("input", volCylinder);
+
+                  </pre></code>
+
+                </div>
+
+              </td>
+            </tr>
+            <!-- END ROW -->
 
 
     </table>
