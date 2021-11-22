@@ -23,7 +23,7 @@
     <!-- HEADERS -->
     <div class="nav">
       <a href="../index.html">← Main</a>
-      <a href="../quickRef/">Quick Ref</a>
+      <a href="../webDev.html">Web Dev.</a>
       <hr>
     </div>
     <!-- END HEADERS -->
@@ -64,6 +64,37 @@
             <h3>HTML</h3>
 
             The structure of the page is laid out in the HTML code.
+
+            <ul>
+              <li>
+                <b>Input Elements:</b> (Lines 18-22)
+                <div class="pythonCode">
+                  <pre class="line-numbers" data-start="18"><code class="language-markup">
+
+                      radius: &lt;input type="number" id="r" value="1">&lt;br>
+                      height: &lt;input type="number" id="h" value="1">
+
+                      &lt;p>
+                        Units: &lt;input type="text" id="units" value="cm">
+                      &lt;/p>
+                    &lt;/div>
+                  </pre></code>
+                </div>
+
+                Radius and height are entered as "number" types so when your javascript gets these values they'll already be numbers and not strings (text).
+              </li>
+
+              <li>
+                <b>An Element for Output</b> (Line 28)
+                <div class="pythonCode">
+                  <pre class="line-numbers" data-start="18"><code class="language-markup">
+                    Volume = &lt;span id="volume" class="outputValue">&lt;/span>
+                  </pre></code>
+                </div>
+
+                The <b>span</b> element with the id <code>outputValue</code> is set as a placeholder for the JavaScript code to put the results of the calculations.
+              </li>
+            </ul>
 
           </div>
 
@@ -128,6 +159,51 @@
             <h3>JavaScript</h3>
 
             Javascript does the actual calculations. It gets the values input from the page, does the calculations, and outputs the results to the page.
+
+            <ul>
+              <li>
+                <b>volCylinder</b> function: (Line 2):
+                <pre><code class="language-js">
+                      function volCylinder(){
+                </code></pre>
+                Create function that recieves no parameters (it will read the radius and height from the input elements on the webpage).
+              </li>
+              <li>
+                <b>Get radius (r), height (h), and units (u) from webpage </b>:
+                <pre><code class="language-js">
+                  let r = document.getElementById("r").value;
+                  let h = document.getElementById("h").value;
+                  let u = document.getElementById("units").value;
+                </code></pre>
+                Get values from elements with the given id's.
+              </li>
+              <li>
+                <b>Calculate volume</b> (Line 9):
+                <pre><code class="language-js">
+                  let vol = Math.PI * r**2 * h;
+                </code></pre>
+                Javascript has some built in constants like <code>Math.PI</code>
+              </li>
+              <li>
+                <b>Output result to webpage</b> (Line 12-14):
+                Get the webpage element where the output is going to go:
+                <pre><code class="language-js">
+                  let vOut = document.getElementById("volume");
+                </code></pre>
+
+                We've already calculated the volume (see above) but now we'll set up the units as whatever input units there were cubed:
+
+                <pre><code class="language-js">
+                  vUnits = " " + u + "<sup>3</sup>";
+                </code></pre>
+
+                Place the volume calculated (vol), and the units (vUnits) into the output element (vOut) using the  <code>innerHTML</code> attribute.
+
+                <pre><code class="language-js">
+                  vOut.innerHTML = vol + vUnits;
+                </code></pre>
+              </li>
+            </ul>
 
           </div>
 
