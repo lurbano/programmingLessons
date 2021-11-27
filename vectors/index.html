@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vectors</title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="./uSvg.js"></script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <h1>Vectors</h1>
+
+    <div class="setup">
+      <div class="comment">
+
+        Velocity is a vector. It has a magnitude (the speed) and a direction.
+      </div>
+
+      <div class="comment">
+        <script type="text/javascript" id="v0">
+          svg = new uSvg("vec0");
+          svg.setZero(new uPoint(100,100));
+          svg.drawAxes({w:"200", h:"150"});
+          svg.addArrow(new uPoint(0, 0), new uPoint(100,-50));
+          //v1 = new vector({'pos': new uPoint(10,-10),
+          //                 'vx': -50, 'vy': 50});
+          svg.addVector({'pos': new uPoint(10,-10),
+                           'vx': -50, 'vy': 50});
+
+        </script>
+      </div>
+
+      <div class="comment">
+
+        <!-- <div id="vec0">
+        </div> -->
+        <script type="text/javascript" id="v0">
+          svg = new uSvg("vec0");
+          svg.setZero(new uPoint(100,100));
+          svg.drawAxes({w:"200", h:"150"});
+          svg.addLine(new uPoint(0, 50), new uPoint(200,50));
+          svg.addArrow(new uPoint(0, 0), new uPoint(100,50));
+        </script>
+
+      </div>
+
+
+    </div>
+
+
+    <table class="bodyTable">
+
+      <tr>
+        <th>Notes</th>
+        <th>Code and Results</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <h3>Vector</h3>
+
+          <div class="comment">
+            Velocity is a vector. It has a magnitude (the spped) and a direction. For example, we could have a velocity vector that is 10 m/s to the right (the positive x direction).
+
+            $$ \vec{v} = <10, 0> $$
+
+          </div>
+
+          <div class="comment">
+            Notice that:
+            <ul>
+              <li><b>Line 1</b>:
+                <pre><code class="language-python">
+                  scene.range = 10
+                </code></pre>
+                Sets a constant field of view so we don't automatically zoom in or out as the ball moves.</li>
+            </ul>
+
+          </div>
+
+        </td>
+        <td>
+          <svg width="300" height="200">
+            <defs>
+              <marker id="arrowhead" markerWidth="10" markerHeight="7"
+              refX="0" refY="1.75" orient="auto">
+                <polygon points="0 0, 5 1.75, 0 3.5" />
+              </marker>
+            </defs>
+            <line x1="0" y1="50" x2="200" y2="50" stroke="#000"
+    stroke-width="4" marker-end="url(#arrowhead)" />
+          </svg>
+
+
+          <div class="comment">
+            The result should look like:
+          </div>
+
+          <script type="text/javascript">
+            svg = new uSvg("vec1");
+            svg.setZero(new uPoint(100,100));
+            svg.drawAxes({w:"200", h:"150"});
+            svg.addLine(new uPoint(0, 50), new uPoint(200,50));
+            svg.addArrow(new uPoint(0, 0), new uPoint(100,50));
+          </script>
+
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Adding gravity (acceleration)</h3>
+
+            Acceleration is the change in velocity (Δv) with time (Δt) so:
+
+            $$ a = \dfrac{v_{new} - v_{old}}{\Delta t} $$
+
+            So for each timestep, we'll solve this equation for the new velocity (<em>v<sub>new</sub> </em>):
+
+            $$ v_{new} = v_{old} + a \cdot \Delta t \tag{1}$$
+
+            The acceleration due to gravity (<em>g</em>) is:
+
+            $$ a = g = -9.8 \, \text{m/s}^2 $$
+
+            So, for vertical, ballistic motion we can write the equation as:
+
+            $$ v_{new} = v_{old} + g \cdot \Delta t \tag{2}$$
+
+            We can add this as a single line to the previous program, before we calculate the new position.
+
+            <ul>
+              <li><b>Line 23:</b>
+                <pre><code class="language-python">
+                  ball.v.y = ball.v.y - 9.8 * dt
+                </code></pre>
+              </li>
+            </ul>
+
+
+          </div>
+
+
+
+          </div>
+
+        </td>
+
+        <td>
+
+          <pre class="line-numbers"><code class="language-python">
+            scene.range = 10
+
+            ball = sphere(radius=0.5)
+
+            ball.v = vector(0, 10, 0)
+
+            ball.arrow = arrow(pos = ball.pos, axis = ball.v, shaftwidth=0.2)
+            ball.vx_arrow = arrow(pos = ball.pos,
+                                  axis = vec(ball.v.x, 0, 0),
+                                  color=color.red,
+                                  shaftwidth=0.2)
+            ball.vy_arrow = arrow(pos = ball.pos + ball.vx_arrow.axis,
+                                  axis = vec(0, ball.v.y, 0),
+                                  color=color.yellow,
+                                  shaftwidth=0.2)
+
+            dt = 0.05
+
+            while True:
+                sleep(dt)
+                #sleep(1)
+
+                # update velocity based on gravitational acceleration
+                ball.v.y = ball.v.y - 9.8 * dt
+
+                # update ball position based on velocity vector
+                ball.pos.x = ball.pos.x + ball.v.x * dt
+                ball.pos.y = ball.pos.y + ball.v.y * dt
+
+                #update positions of the arrows
+                ball.arrow.pos = ball.pos
+                ball.vx_arrow.pos = ball.pos
+                ball.vy_arrow.pos = ball.pos + ball.vx_arrow.axis
+                # update directions of arrows
+                ball.arrow.axis = ball.v
+                ball.vx_arrow.axis = vec(ball.v.x, 0, 0)
+                ball.vy_arrow.axis = vec(0, ball.v.y, 0)
+
+
+          </pre></code>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+            <h3>Add a floor</h3>
+
+          <div class="comment">
+            Add a floor to your model so the ball bounces.
+          </div>
+
+        </td>
+        <td>
+
+
+          <div class="comment">
+
+          </div>
+
+
+          <div class="" >
+            <img src="ballistic-03.gif" alt="result">
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+    </table>
+
+  </body>
+
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+  <script type="text/javascript">
+
+    function distance(v1, v2){
+      d = ( (v1[1]-v2[1])**2 + (v1[0]-v2[0])**2 )**0.5;
+      return d;
+    }
+    function arrToStr(a, varName="x"){
+      let t = varName + " = [";
+      for (let i = 0; i< a.length; i++){
+        t += a[i] + ", ";
+      }
+      t = t.slice(0,-2) + "]";
+      return t;
+    }
+    $("#generatePts").click(function(){
+
+      let circleRadius = 5.0;
+      let nNodes = parseInt($("#nPts").val())-1;
+      console.log("clicked", nNodes);
+
+      xs = [];
+      ys = [];
+      pts = [];
+
+      let dAngle = 2 * Math.PI / nNodes;
+
+      for (let i=0; i<nNodes; i++){
+        let x = circleRadius * Math.cos(dAngle*i);
+        let y = circleRadius * Math.sin(dAngle*i);
+        xs.push(x.toFixed(2));
+        ys.push(y.toFixed(2));
+        pts.push([x.toFixed(2), y.toFixed(2)]);
+      }
+
+      pts.push(pts[0]);
+      xs.push(xs[0]);
+      ys.push(ys[0]);
+      console.log( `pts = ${pts}`);
+      console.log(arrToStr(xs));
+      console.log(arrToStr(ys, "y"));
+
+      $("#ptData").html(arrToStr(xs) + '\n' + arrToStr(ys, "y"));
+
+      //calculate total distance
+      let d = 0;
+      for (let i=0; i<pts.length-1; i++){
+        d += distance(pts[0], pts[1]);
+        console.log(d);
+      }
+
+      $("#ptsDistance").html(d.toFixed(2));
+
+    })
+
+  </script>
+</html>

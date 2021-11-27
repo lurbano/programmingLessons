@@ -1,3 +1,8 @@
+body {
+  font-family: "Lucida Console", "Courier New", monospace;
+  line-height: 1.3em;
+}
+
 .pRow {
   display: grid;
   border: 1px solid black;
@@ -29,6 +34,9 @@
 }
 .setup{
   background-color: PaleGoldenrod;
+  padding: 0.25em;
+  width: 50em;
+  margin-bottom: 1em;
 }
 .toggle-next {
   width: 12em;
@@ -50,11 +58,15 @@ tbody tr:nth-child(odd) {
 tbody tr:nth-child(even) {
   background-color: white;
 }
-tbody tr {
+/* tbody tr {
   background-image: url(noise.png);
-}
+} */
 table {
   background-color: #ff33cc;
+}
+td {
+  padding: 0.25em;
+  vertical-align: top;
 }
 code {
   background-color: #ccc;
@@ -67,4 +79,57 @@ code {
 }
 .myButton:hover {
   border: 3px outset grey;
+}
+
+.logic_statement {
+  margin-left:3em;
+  padding: 0.5em;
+  border: 1px solid grey;
+  line-height: 1.5em;
+  font-family: "Georgia", serif;
+  text-align: center;
+}
+
+li {
+  margin-bottom: 0.5em;
+
+}
+
+.bodyTable tbody td:nth-child(1) {
+  background-color: white;
+  vertical-align: top;
+  border: 5px inset green;
+}
+.bodyTable tbody td:nth-child(2) {
+  background-color: khaki;
+}
+.bodyTable tr {
+  border: 5px inset green;
+
+}
+
+code {
+  padding: 0.2em;
+}
+
+.codeNote {
+  display: block;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+.dropdownSide {
+  cursor: pointer;
+}
+.outputCell {
+  padding-top: 4em;
+}
+
+.nav a {
+  border: 4px outset lightSeaGreen;
+  padding: 0.25em;
+  background-color: #64E764;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Times New Roman', serif;
 }

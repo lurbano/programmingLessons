@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Using your Quadratic Class</title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <h1>Distance between two points on the curve</h1>
+
+    <div class="setup">
+      <div class="comment">
+        Solve the following problems using your quadratic class. Feel free to create new methods for your class if needed.
+
+
+    </div>
+
+
+    <table>
+
+
+
+      <tr>
+        <th>Notes and Code</th>
+        <th>Outcome</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Distance between points on the line.</h3>
+
+            Find the straight line distance between the points on the line when:
+            <ul>
+              <li>x = -6 </li>
+              <li>x = 2</li>
+            </ul>
+
+            For the quadratic function:
+            $$ f(x) = 0.5 x^2 + 3 x - 5 $$
+          </div>
+
+
+
+          </div>
+
+        </td>
+        <td>
+
+          <h3>Output</h3>
+          <figure>
+              <a href="qa-01.png"> <img src="qa-01.png" style="width:300px;"></a>
+              <figcaption>Fig 1. Graph showing the line connecting the points on the function <em>y = 0.5 x² + 3x - 5</em> where <em>x = -6</em> and <em>x = 2</em> </figcaption>
+          </figure>
+
+          <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+            for x = -6: point 1 = <-6, -5, 0>
+            for x = 2: point 2 = <2, 3, 0>
+            Distance between point 1 and 2: 11.313708498984761
+          </pre></code>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Slope between two points on the line.</h3>
+
+            Find the slope of the line that connects two points on the curve when
+            <ul>
+              <li>x = 1 </li>
+              <li>x = 2</li>
+            </ul>
+
+            For the quadratic function:
+            $$ f(x) = 0.5 x^2 +  x - 3 $$
+          </div>
+
+          <hr>
+          <div class="comment">
+
+            <b>Part B</b>
+
+            Complete the table below and answer the question: What happens as we bring the two points closer together (what is the limit as dx goes to zero).
+            <table>
+              <tr>
+                <th style="width:3em;">x<sub>1</sub> </th><th style="width:3em;">x<sub>2</sub></th><th>slope</th>
+              </tr>
+              <tr>
+                <td>1</td><td>2</td><td></td>
+              </tr>
+              <tr>
+                <td>0.5</td><td>2</td><td></td>
+              </tr>
+              <tr>
+                <td>0.75</td><td>2</td><td></td>
+              </tr>
+              <tr>
+                <td>0.9</td><td>2</td><td></td>
+              </tr>
+            </table>
+          </div>
+
+
+        </td>
+        <td>
+
+          <h3>Output</h3>
+          <figure>
+              <a href="qa-02.png"> <img src="qa-02.png" style="width:300px;"></a>
+              <figcaption>Fig 1. Graph showing the line connecting the points on the function <em>y = 0.5 x² + x - 3</em> where <em>x = 1</em> and <em>x = 2</em> </figcaption>
+          </figure>
+
+          <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+            for x = 1: point 1 = <1, -1.5, 0>
+            for x = 2: point 2 = <2, 1, 0>
+
+            Slope between x = 1 and 2 is: 2.5
+          </pre></code>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+    </table>
+
+  </body>
+  <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+  <script type="text/javascript">
+
+    function distance(v1, v2){
+      d = ( (v1[1]-v2[1])**2 + (v1[0]-v2[0])**2 )**0.5;
+      return d;
+    }
+    function arrToStr(a, varName="x"){
+      let t = varName + " = [";
+      for (let i = 0; i< a.length; i++){
+        t += a[i] + ", ";
+      }
+      t = t.slice(0,-2) + "]";
+      return t;
+    }
+    $("#generatePts").click(function(){
+
+      let circleRadius = 5.0;
+      let nNodes = parseInt($("#nPts").val())-1;
+      console.log("clicked", nNodes);
+
+      xs = [];
+      ys = [];
+      pts = [];
+
+      let dAngle = 2 * Math.PI / nNodes;
+
+      for (let i=0; i<nNodes; i++){
+        let x = circleRadius * Math.cos(dAngle*i);
+        let y = circleRadius * Math.sin(dAngle*i);
+        xs.push(x.toFixed(2));
+        ys.push(y.toFixed(2));
+        pts.push([x.toFixed(2), y.toFixed(2)]);
+      }
+
+      pts.push(pts[0]);
+      xs.push(xs[0]);
+      ys.push(ys[0]);
+      console.log( `pts = ${pts}`);
+      console.log(arrToStr(xs));
+      console.log(arrToStr(ys, "y"));
+
+      $("#ptData").html(arrToStr(xs) + '\n' + arrToStr(ys, "y"));
+
+      //calculate total distance
+      let d = 0;
+      for (let i=0; i<pts.length-1; i++){
+        d += distance(pts[0], pts[1]);
+        console.log(d);
+      }
+
+      $("#ptsDistance").html(d.toFixed(2));
+
+    })
+
+  </script>
+</html>

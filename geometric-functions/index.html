@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <h1>Writing Functions for Geometric Shapes</h1>
+
+    <div class="setup">
+      Here we'll practice writing functions by creating functions that calculate things like the surface-areas and volumes of different 2d and 3d shapes.
+
+      <figure>
+          <img src="sphere.png" style="width:400px;">
+          <figcaption>What is the volume and surface area of a sphere?</figcaption>
+      </figure>
+    </div>
+
+
+    <table>
+
+
+
+      <tr>
+        <th>Notes and Code</th>
+        <th>Outcome</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Sphere</h3>
+            Write a function that calculates the surface area (A) of a sphere of radius (r).
+
+            $$ A = 4 \pi r^2 $$
+          </div>
+
+        </td>
+        <td>
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              def sphereSurfaceArea(r):
+                  A = 4 * pi * r**2
+                  return A
+
+            </pre></code>
+          </div>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Sphere</h3>
+            Test the function by finding the surface area of a sphere with radius 5.
+          </div>
+
+        </td>
+        <td>
+          Code
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              def sphereSurfaceArea(r):
+                  A = 4 * pi * r**2
+                  return A
+
+              print("Surface area:", sphereSurfaceArea(5))
+            </pre></code>
+          </div>
+
+          Results.
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              Surface area: 314.159
+            </pre></code>
+          </div>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Sphere function test (multiple values)</h3>
+            Use your sphere function to find the surface areas of spheres with radii: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10.
+          </div>
+
+        </td>
+        <td>
+          Code.
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              def sphereSurfaceArea(r):
+                  A = 4 * pi * r**2
+                  return A
+
+              for i in range(1, 11):
+                  area = sphereSurfaceArea(i)
+                  print(f'Area of sphere of radius {i} = {area}')
+            </pre></code>
+          </div>
+          Results.
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              Area of sphere of radius 1 = 12.566370614359172
+              Area of sphere of radius 2 = 50.26548245743669
+              Area of sphere of radius 3 = 113.09733552923255
+              Area of sphere of radius 4 = 201.06192982974676
+              Area of sphere of radius 5 = 314.1592653589793
+              Area of sphere of radius 6 = 452.3893421169302
+              Area of sphere of radius 7 = 615.7521601035994
+              Area of sphere of radius 8 = 804.247719318987
+              Area of sphere of radius 9 = 1017.8760197630929
+              Area of sphere of radius 10 = 1256.6370614359173
+            </pre></code>
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Sphere: Volume</h3>
+            Write a function that calculates the volume (V) of a sphere of radius (r).
+
+            $$ V = \frac{4}{3} \pi r^3 $$
+          </div>
+
+        </td>
+        <td>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Cylinder</h3>
+            Write functions to find the surface area and volumes of cylinders.
+          </div>
+
+        </td>
+        <td>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Rectangular Prisms</h3>
+            Write functions to find the surface area and volumes of rectangular prisms.
+          </div>
+
+        </td>
+        <td>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Triangles</h3>
+            Challenge:
+            <ul>
+              <li>Write a function to find the area of a triangle given three points.</li>
+              <li>Write a function that draws a triangle (using Glowscript) given three points.</li>
+            </ul>
+
+
+        </td>
+        <td>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+    </table>
+
+  </body>
+  <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+  <script type="text/javascript">
+
+    function distance(v1, v2){
+      d = ( (v1[1]-v2[1])**2 + (v1[0]-v2[0])**2 )**0.5;
+      return d;
+    }
+    function arrToStr(a, varName="x"){
+      let t = varName + " = [";
+      for (let i = 0; i< a.length; i++){
+        t += a[i] + ", ";
+      }
+      t = t.slice(0,-2) + "]";
+      return t;
+    }
+    $("#generatePts").click(function(){
+
+      let circleRadius = 5.0;
+      let nNodes = parseInt($("#nPts").val())-1;
+      console.log("clicked", nNodes);
+
+      xs = [];
+      ys = [];
+      pts = [];
+
+      let dAngle = 2 * Math.PI / nNodes;
+
+      for (let i=0; i<nNodes; i++){
+        let x = circleRadius * Math.cos(dAngle*i);
+        let y = circleRadius * Math.sin(dAngle*i);
+        xs.push(x.toFixed(2));
+        ys.push(y.toFixed(2));
+        pts.push([x.toFixed(2), y.toFixed(2)]);
+      }
+
+      pts.push(pts[0]);
+      xs.push(xs[0]);
+      ys.push(ys[0]);
+      console.log( `pts = ${pts}`);
+      console.log(arrToStr(xs));
+      console.log(arrToStr(ys, "y"));
+
+      $("#ptData").html(arrToStr(xs) + '\n' + arrToStr(ys, "y"));
+
+      //calculate total distance
+      let d = 0;
+      for (let i=0; i<pts.length-1; i++){
+        d += distance(pts[0], pts[1]);
+        console.log(d);
+      }
+
+      $("#ptsDistance").html(d.toFixed(2));
+
+    })
+
+  </script>
+</html>

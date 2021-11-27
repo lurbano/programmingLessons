@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+
+    <style media="screen">
+
+    </style>
+  </head>
+  <body>
+    <h1>Two Points: Find Slope and Intercept.</h1>
+
+    <div class="setup">
+      Given two points,
+      $$ p_1 = (x_1, y_1)$$
+      $$ p_2 = (x_2, y_2)$$
+
+      For the line passing through these two points, find the:
+      <ul>
+        <li>slope, and</li>
+        <li>intercept</li>
+      </ul>
+
+      <figure>
+          <img src="pts-mb-01.svg" style="width:400px;">
+          <figcaption>Fig 1. Two points. Point 1: (1, 2) and Point2: (5, 4).</figcaption>
+      </figure>
+    </div>
+
+
+
+    <table>
+
+
+
+      <tr>
+        <th>Notes and Code</th>
+        <th>Outcome</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Slope</h3>
+            The slope of the line is the change in y divided by the change in x:
+            $$ \text{slope} = \frac{\Delta y}{\Delta x}$$
+          </div>
+
+          <div class="graph">
+            <img src="pts-mb-02.svg" style="width:400px;">
+          </div>
+
+          For two points, the change in y and change in x are:
+          $$ \Delta y = y_2 - y_1 $$
+          $$ \Delta x = x_2 - x_1 $$
+
+
+        </td>
+        <td>
+          <div class='dropdownSide'>⇨</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              # INPUT
+              #   Set the two points
+              (x1, y1) = (1, 2)
+              (x2, y2) = (5, 4)
+
+              # CALCULATIONS
+              #   calculate the changes in x and y
+              dx = x2 - x1
+              dy = y2 - y1
+
+              #   calculate the slope
+              slope = dy / dx
+
+              #OUTPUT
+              print("The slope is:", slope)
+
+            </pre></code>
+          </div>
+          The output of your program should be something like:
+          <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+            The slope is: 0.5
+          </pre></code>
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+
+          <div class="comment">
+            <h3>Intercept</h3>
+
+            Finding the intercept requires a little algebra. Since the general equation for a straight line is:
+
+            $$ y = mx+b$$
+            where:
+            $$ m = \text{slope} $$
+            $$ b = \text{intercept}$$
+
+            so to find the intercept we solve this equation for <em>b</em>:
+            $$ y - mx = b $$
+            therefore,
+            $$ b = y - mx $$
+
+            since we already calculated the slope (<em>m</em>), and we know the x and y values of at least one point, we can substitute in the values:
+            $$ x = x_1 $$
+            $$ y = y_1 $$
+            to get:
+
+            $$ b = y_1 - m x_1 $$
+
+            <div class="graph">
+              <img src="pts-mb-03.svg" style="width:400px;">
+            </div>
+
+        </td>
+        <td>
+
+          <div class='dropdownSide'>⇨</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              # INPUT
+              #   Set the two points
+              (x1, y1) = (1, 2)
+              (x2, y2) = (5, 4)
+
+              # CALCULATIONS
+              #   calculate the changes in x and y
+              dx = x2 - x1
+              dy = y2 - y1
+
+              #   calculate the slope
+              slope = dy / dx
+
+              #   calculate the intercept
+              intercept = y1 - slope * x1
+
+              #OUTPUT
+              print("The slope is:", slope)
+              print("The intercept is:", intercept)
+
+            </pre></code>
+          </div>
+          The output of your program should be something like:
+          <pre style='background-color:#002; position:relative; left:1em; width:90%;'><code class="language-python">
+            The slope is: 0.5
+            The intercept is: 1.5
+          </pre></code>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+
+          <div class="comment">
+            Exercise: Draw a graph showing the two points and the line between them, then extend the line to the boundaries of your graph.
+          </div>
+
+        </td>
+        <td>
+          <div class="graph">
+            <img src="pts-mb-04.svg" style="width:400px;">
+          </div>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+    </table>
+
+  </body>
+  <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+  <script type="text/javascript" src="../progLess.js"></script>
+</html>

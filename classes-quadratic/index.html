@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Quadratic Class</title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <h1>Classes: Quadratic Functions</h1>
+
+    <div class="setup">
+      <div class="comment">
+        Create a class that can handle Quadratic functions.
+      </div>
+
+      <figure>
+          <img src="cq-01.png" style="width:200px;">
+          <figcaption>Fig 1. Graph of y = x² + 2x - 8 </figcaption>
+      </figure>
+
+    </div>
+
+
+    <table>
+
+
+
+      <tr>
+        <th>Notes and Code</th>
+        <th>Outcome</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Specifications</h3>
+
+            Use the general equation:
+
+              $$ y = a x^2 + b x + c \tag{1}$$
+
+              Required methods:
+              <ol>
+                <li> Return the value of <em>y</em> for a given <em>x</em> (<em>f(x)</em>).
+                </li>
+                <li> Return the <em>x</em> coordinate of the vertex.
+                </li>
+                <li> Return the <em>y</em> coordinate of the vertex.
+                </li>
+                <li> Return both the <em>x</em> and <em>y</em> coordinates of the vertex.
+                </li>
+                <li> Return the y-intercept
+                </li>
+                <li> Find the zeros of the function (the x-intercepts: values of x where <em>y = 0</em>)
+                </li>
+                <li> Print out the equation like: <code> y = x² + 2x - 8 </code>
+                </li>
+                <li> Draw the curve.
+                </li>
+                <li> Find the slope of the line at a given <em>x</em> value.
+                </li>
+              </ol>
+
+              <h3>Test</h3>
+              <div class="comment">
+                Test your class using the equation:
+                $$ y = x^2 + 2x - 8 $$
+              </div>
+
+            </div>
+
+        </td>
+        <td>
+          <h3>Test</h3>
+          <div class="comment">
+            Test your class using the equation:
+            $$ y = x^2 + 2x - 8 $$
+          </div>
+
+          <h3>Output</h3>
+          Your program's output should look something like this:
+          <div class="toggle-next">Show Notes ▼</div>
+          <div class="pythonCode" hidden>
+            <pre class="line-numbers"><code class="language-python">
+              For the equation: y = x² + 2x - 8
+              (1) If x = 3 then y = 7
+              (2) The x-coordinate of the vertex is -1.0
+              (3) The y-coordinate of the vertex is -9.0
+              (4) The (x, y) coordinates of the vertex are (-1.0, -9.0)
+              (5) The y-intercept is at y = -8
+              (6) The x intercepts (zeros) of the function are: [2.0, -4.0]
+              (7) The human readable form of the equation is: y = x² + 2x - 8
+              (8) Drawing graph (see below) ...
+              (9) The slope of the line at x = -1.0: dy/dx = 0.0
+              (9) The slope of the line at x = 3: dy/dx = 8
+            </pre></code>
+
+            <figure>
+                <img src="cq-01.png" style="width:400px;">
+                <figcaption>Fig 1. Graph of y = x² + 2x - 8 </figcaption>
+            </figure>
+          </div>
+
+
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Area (by Integration)</h3>
+
+          <div class="comment">
+            <ol>
+              <li>Add a method to find the area bounded by the curve and the <em>x</em> axis between two <em>x</em> values.
+              </li>
+              <li> Use the method to find the area bounded by <em>x = 0</em> and <em>x = 2 </em>.
+              </li>
+            </ol>
+
+          </div>
+
+        </td>
+        <td>
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python">
+              The area under the curve between 0 and 2
+                  is -9.333
+            </pre></code>
+          </div>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+    </table>
+
+  </body>
+  <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+  <script type="text/javascript">
+
+    function distance(v1, v2){
+      d = ( (v1[1]-v2[1])**2 + (v1[0]-v2[0])**2 )**0.5;
+      return d;
+    }
+    function arrToStr(a, varName="x"){
+      let t = varName + " = [";
+      for (let i = 0; i< a.length; i++){
+        t += a[i] + ", ";
+      }
+      t = t.slice(0,-2) + "]";
+      return t;
+    }
+    $("#generatePts").click(function(){
+
+      let circleRadius = 5.0;
+      let nNodes = parseInt($("#nPts").val())-1;
+      console.log("clicked", nNodes);
+
+      xs = [];
+      ys = [];
+      pts = [];
+
+      let dAngle = 2 * Math.PI / nNodes;
+
+      for (let i=0; i<nNodes; i++){
+        let x = circleRadius * Math.cos(dAngle*i);
+        let y = circleRadius * Math.sin(dAngle*i);
+        xs.push(x.toFixed(2));
+        ys.push(y.toFixed(2));
+        pts.push([x.toFixed(2), y.toFixed(2)]);
+      }
+
+      pts.push(pts[0]);
+      xs.push(xs[0]);
+      ys.push(ys[0]);
+      console.log( `pts = ${pts}`);
+      console.log(arrToStr(xs));
+      console.log(arrToStr(ys, "y"));
+
+      $("#ptData").html(arrToStr(xs) + '\n' + arrToStr(ys, "y"));
+
+      //calculate total distance
+      let d = 0;
+      for (let i=0; i<pts.length-1; i++){
+        d += distance(pts[0], pts[1]);
+        console.log(d);
+      }
+
+      $("#ptsDistance").html(d.toFixed(2));
+
+    })
+
+  </script>
+</html>
