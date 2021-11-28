@@ -11,6 +11,7 @@
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
     </script>
+    <script type="text/javascript" src="../uSvg.js"></script>
 
     <style media="screen">
 
@@ -55,7 +56,7 @@
       <tr>
         <td>
           <div class="comment">
-            <h3>General Equation for a Stright Line</h3>
+            <h3>General Equation for a Straight Line</h3>
 
             <div class="comment">
               We want a program that can handle any straight line equation we throw at it, so we need to work with the <b><em>general</em></b> equation:
@@ -79,6 +80,21 @@
 
         </td>
         <td>
+          <div class="comment">
+            <p>
+              Example: Graph of the linear function:
+              $$ y = 2x -1 $$
+              where,
+              $$ m = 2 , \,\,\,  b = -1 $$
+            </p>
+            <script type="text/javascript">
+              svg = new uSvgGraph({elementInfo:{width:300,height:300, style:'border:5px inset grey;'}});
+              line1 = new uLine(2, -1);
+              svg.drawLinearFunction(line1, {style:{stroke:"#0000ff"}});
+              svg.labelLinearFunction(line1, x=4, offset=new uPoint(0.5,-0.5));
+            </script>
+
+          </div>
 
 
         </td>
@@ -464,5 +480,6 @@
   <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="../prism.js"></script>
   <script type="text/javascript" src="../exercises.js"></script>
+
 
 </html>

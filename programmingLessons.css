@@ -33,10 +33,11 @@ body {
   border: 1px solid red;
 }
 .setup{
-  background-color: PaleGoldenrod;
+  background-color: #F9F9EA;
   padding: 0.25em;
   width: 50em;
   margin-bottom: 1em;
+  border: 4px inset #118F92;
 }
 .toggle-next {
   width: 12em;
@@ -53,7 +54,7 @@ table, th, td {
 }
 /* zebra striping */
 tbody tr:nth-child(odd) {
-  background-color: khaki;
+  background-color: #F9F9EA;
 }
 tbody tr:nth-child(even) {
   background-color: white;
