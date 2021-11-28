@@ -83,15 +83,15 @@
           <div class="comment">
             <p>
               Example: Graph of the linear function:
-              $$ y = 2x -1 $$
+              $$ y = 2x + 1 $$
               where,
-              $$ m = 2 , \,\,\,  b = -1 $$
+              $$ m = 2 , \,\,\,  b = 1 $$
             </p>
             <script type="text/javascript">
               svg = new uSvgGraph({elementInfo:{width:300,height:300, style:'border:5px inset grey;'}});
-              line1 = new uLine(2, -1);
+              line1 = new uLine(2, 1);
               svg.drawLinearFunction(line1, {style:{stroke:"#0000ff"}});
-              svg.labelLinearFunction(line1, x=4, offset=new uPoint(0.5,-0.5));
+              svg.labelLinearFunction(line1, {x:4, offset:new uPoint(0.5,-0.5)});
             </script>
 
           </div>

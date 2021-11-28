@@ -34,10 +34,10 @@
           line1 = new uLine(2, -1);
           svg = new uSvgGraph({elementInfo:{width:300,height:300, style:'border:5px inset grey;'}});
           svg.drawLinearFunction(line1, {style:{"stroke-width":"2"}});
-          svg.labelLinearFunction(line1, x=4, offset=new uPoint(0.5,-0.5), {style:{"font-size":12, fill:"black"}});
+          svg.labelLinearFunction(line1, {x:4, offset:new uPoint(0.5,-0.5), style:{"font-size":12, fill:"black"}});
           svg.drawPoint(p1, {style:{"stroke":"blue"}});
           svg.labelPoint(p1, new uPoint(-3,0.75), {style:{"font-size":12, fill:"blue"}});
-          linePerp = svg.get_uLine_from_slope_and_point(line1.perpSlope(), p1, drawPoint=false, drawLine=false);
+          linePerp = svg.get_uLine_from_slope_and_point(line1.perpSlope(), p1, {drawPoint:false, drawLine:false});
           pIntersect = svg.get_intersection_of_two_uLines(line1, linePerp, drawPoint=false);
           //svg.labelPoint(pIntersect);
           svg.addLine(p1, pIntersect, {style:{stroke:"#0000ff","stroke-width":2, "stroke-dasharray":"4 3"}});
@@ -82,6 +82,23 @@
         <td>
           <div class="comment">
             <h3>1) Find the Equation of the Perpendicular Line (using the General Equations)</h3>
+
+            <div class="comment">
+              <script type="text/javascript">
+                p1 = new uPoint(-4,6);
+                line1 = new uLine(2, -1);
+                svg = new uSvgGraph({elementInfo:{width:300,height:300, style:'border:5px inset grey;'}});
+                svg.drawLinearFunction(line1, {style:{"stroke-width":"2"}});
+                svg.labelLinearFunction(line1, x=4, offset=new uPoint(0.5,-0.5), {style:{"font-size":12, fill:"black"}});
+                svg.drawPoint(p1, {style:{"stroke":"blue"}});
+                svg.labelPoint(p1, new uPoint(-3,-1), {style:{"font-size":12, fill:"blue"}});
+                linePerp = svg.get_uLine_from_slope_and_point(line1.perpSlope(), p1, drawPoint=false, drawLine=false);
+                svg.drawLinearFunction(linePerp, {style:{"stroke-width":"2", stroke:"blue"}})
+                svg.labelLinearFunction(linePerp, {x:-9, offset:new uPoint(0.5,0.5), style:{"font-size":14, fill:"blue"}});
+
+              </script>
+            </div>
+
             We first need to find the equation of the perpendicular line.
 
             <p>
@@ -111,21 +128,7 @@
             </p>
           </div>
 
-          <div class="comment">
-            <script type="text/javascript">
-              p1 = new uPoint(-4,6);
-              line1 = new uLine(2, -1);
-              svg = new uSvgGraph({elementInfo:{width:300,height:300, style:'border:5px inset grey;'}});
-              svg.drawLinearFunction(line1, {style:{"stroke-width":"2"}});
-              svg.labelLinearFunction(line1, x=4, offset=new uPoint(0.5,-0.5), {style:{"font-size":12, fill:"black"}});
-              svg.drawPoint(p1, {style:{"stroke":"blue"}});
-              svg.labelPoint(p1, new uPoint(-3,-1), {style:{"font-size":12, fill:"blue"}});
-              linePerp = svg.get_uLine_from_slope_and_point(line1.perpSlope(), p1, drawPoint=false, drawLine=false);
-              svg.drawLinearFunction(linePerp, {style:{"stroke-width":"2", stroke:"blue"}})
-              svg.labelLinearFunction(linePerp, x=-9, offset=new uPoint(0.5,0.5), {style:{"font-size":14, fill:"blue"}});
 
-            </script>
-          </div>
 
         </td>
         <td>
@@ -174,6 +177,24 @@
           <div class="comment">
             <h3>2) Find the Intersection Point of the Two Lines</h3>
 
+            <div class="comment">
+              <script type="text/javascript">
+                p1 = new uPoint(-4,6);
+                line1 = new uLine(2, -1);
+                svg = new uSvgGraph({elementInfo:{width:300,height:300, style:'border:5px inset grey;'}});
+                svg.drawLinearFunction(line1, {style:{"stroke-width":"2"}});
+                svg.labelLinearFunction(line1, {x:4, offset:new uPoint(0.5,-0.5), style:{"font-size":12, fill:"black"}});
+                svg.drawPoint(p1, {style:{"stroke":"blue"}});
+                svg.labelPoint(p1, new uPoint(-3,-1), {style:{"font-size":12, fill:"blue"}});
+                linePerp = svg.get_uLine_from_slope_and_point(line1.perpSlope(), p1, drawPoint=false, drawLine=false);
+                svg.drawLinearFunction(linePerp, {style:{"stroke-width":"2", stroke:"blue"}})
+                svg.labelLinearFunction(linePerp, {x:-9, offset:new uPoint(0.5,0.5), style:{"font-size":14, fill:"blue"}});
+                pIntersect = svg.get_intersection_of_two_uLines(line1, linePerp, drawPoint=true, {style:{"stroke-width":"2", stroke:"red"}});
+                svg.labelPoint(pIntersect, new uPoint(1,.25), {style:{"font-size":14, fill:"red"}});
+
+              </script>
+            </div>
+
           <div class="comment">
             The lines intersect when they share the same x and y values, therefore for the lines:
             $$ y = 2x - 1 \tag{1} $$
@@ -205,23 +226,6 @@
             Therefore the intersection point is:
             $$ p_i = (2, 3) \tag{6} $$
 
-            <div class="comment">
-              <script type="text/javascript">
-                p1 = new uPoint(-4,6);
-                line1 = new uLine(2, -1);
-                svg = new uSvgGraph({elementInfo:{width:300,height:300, style:'border:5px inset grey;'}});
-                svg.drawLinearFunction(line1, {style:{"stroke-width":"2"}});
-                svg.labelLinearFunction(line1, x=4, offset=new uPoint(0.5,-0.5), {style:{"font-size":12, fill:"black"}});
-                svg.drawPoint(p1, {style:{"stroke":"blue"}});
-                svg.labelPoint(p1, new uPoint(-3,-1), {style:{"font-size":12, fill:"blue"}});
-                linePerp = svg.get_uLine_from_slope_and_point(line1.perpSlope(), p1, drawPoint=false, drawLine=false);
-                svg.drawLinearFunction(linePerp, {style:{"stroke-width":"2", stroke:"blue"}})
-                svg.labelLinearFunction(linePerp, x=-9, offset=new uPoint(0.5,0.5), {style:{"font-size":14, fill:"blue"}});
-                pIntersect = svg.get_intersection_of_two_uLines(line1, linePerp, drawPoint=true, {style:{"stroke-width":"2", stroke:"red"}});
-                svg.labelPoint(pIntersect, new uPoint(1,.25), {style:{"font-size":14, fill:"red"}});
-
-              </script>
-            </div>
 
           </div>
 
@@ -272,13 +276,11 @@
                 line1 = new uLine(2, -1);
                 svg = new uSvgGraph({elementInfo:{width:300,height:300, style:'border:5px inset grey;'}});
                 svg.drawLinearFunction(line1, {style:{"stroke-width":"2"}});
-                svg.labelLinearFunction(line1, x=4, offset=new uPoint(0.5,-0.5), {style:{"font-size":12, fill:"black"}});
+                svg.labelLinearFunction(line1, {x:4, offset:new uPoint(0.5,-0.5), style:{"font-size":12, fill:"black"}});
                 svg.drawPoint(p1, {style:{"stroke":"blue"}});
                 svg.labelPoint(p1, new uPoint(-3,-1), {style:{"font-size":12, fill:"blue"}});
-                linePerp = svg.get_uLine_from_slope_and_point(line1.perpSlope(), p1, drawPoint=false, drawLine=false);
-                // svg.drawLinearFunction(linePerp, {style:{"stroke-width":"2", stroke:"blue"}})
-                // svg.labelLinearFunction(linePerp, x=-9, offset=new uPoint(0.5,0.5), {style:{"font-size":14, fill:"blue"}});
-                pIntersect = svg.get_intersection_of_two_uLines(line1, linePerp, drawPoint=true, {style:{"stroke-width":"2", stroke:"red"}});
+                linePerp = svg.get_uLine_from_slope_and_point(line1.perpSlope(), p1, {drawPoint:false, drawLine:false});
+                pIntersect = svg.get_intersection_of_two_uLines(line1, linePerp, {drawPoint:true, style:{"stroke-width":"2", stroke:"red"}});
                 svg.labelPoint(pIntersect, new uPoint(1,.25), {style:{"font-size":14, fill:"red"}});
                 svg.addLine(p1, pIntersect, {style:{stroke:"#0000ff","stroke-width":2, "stroke-dasharray":"4 3"}});
                 console.log(p1, pIntersect, p1.distanceTo(pIntersect).toFixed(1));
@@ -290,6 +292,19 @@
           </div>
 
           <div class="comment">
+            We now have two points:
+            $$ p_1 = (-4, 6) $$
+            $$ p_i = (2, 3) $$
+
+            The distance equation between points is:
+            $$ d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2} $$
+            therefore:
+            $$ d = \sqrt{(2-(-4))^2 + (3-6)^2} $$
+            $$ d = \sqrt{(2+4)^2 + (-3)^2} $$
+            $$ d = \sqrt{(6)^2 + (-3)^2} $$
+            $$ d = \sqrt{36 + 9} $$
+            $$ d = \sqrt{45} $$
+            $$ d = 6.7 $$
 
 
           </div>
