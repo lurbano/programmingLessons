@@ -72,8 +72,8 @@
 
 
       <tr>
-        <th>Notes and Code</th>
-        <th>Outcome</th>
+        <th>Example</th>
+        <th>Algebra</th>
       </tr>
 
       <!-- NEW ROW -->
@@ -196,7 +196,7 @@
             </div>
 
           <div class="comment">
-            The lines intersect when they share the same x and y values, therefore for the lines:
+            The lines intersect when they share the same x and y values, therefore at the point of intersection (<em>(x<sub>i</sub>, y<sub>i</sub>)</em>):
             $$ y = 2x - 1 \tag{1} $$
             $$ y = -\frac{1}{2} x + 4 \tag{2} $$
             if the y values are the same:
@@ -236,26 +236,26 @@
             <h3>2) Find the Intersection Point of the Two Lines</h3>
 
           <div class="comment">
-            The lines intersect when they share the same x and y values, therefore for the lines:
-            $$ y = mx + b \tag{7} $$
-            $$ y = m_p x + b_p \tag{8} $$
+            The lines intersect when they share the same x and y values, therefore at the point of intersection (<em>(x<sub>i</sub>, y<sub>i</sub>)</em>):
+            $$ y_i = mx_i + b \tag{7} $$
+            $$ y_i = m_p x_i + b_p \tag{8} $$
             if the y values are the same:
-            $$ mx + b = m_p x + b_p $$
-            then solving for x, we move all the terms with x to the same side:
-            $$ \begin{align} mx + b &= m_p x + b_p \\
-                             mx - m_p x + b &= b_p \end{align}$$
+            $$ mx_i + b = m_p x_i + b_p $$
+            then solving for x<sub>i</sub>, we move all the terms with x to the same side:
+            $$ \begin{align} m x_i + b &= m_p x_i + b_p \\
+                             m x_i - m_p x_i + b &= b_p \end{align}$$
             and all the constants to the other side:
-            $$ \begin{align} mx - m_p x + b &= b_p \\
-                             mx - m_p x  &= b_p - b \end{align}$$
+            $$ \begin{align} m x_i - m_p x_i + b &= b_p \\
+                             m x_i - m_p x_i  &= b_p - b \end{align}$$
             factor out the x:
-            $$ \begin{align} mx - m_p x  &= b_p - b \\
-                             (m - m_p) x &= b_p - b \end{align}$$
+            $$ \begin{align} m x_i - m_p x_i  &= b_p - b \\
+                             (m - m_p) x_i &= b_p - b \end{align}$$
             and divide:
-            $$  \frac{(m - m_p) x}{(m - m_p)} = \frac{b_p - b}{(m - m_p)} $$
+            $$  \frac{(m - m_p) x_i}{(m - m_p)} = \frac{b_p - b}{(m - m_p)} $$
             to get:
-            $$ x = \frac{b_p - b}{m - m_p} \tag{9}$$
+            $$ x_i = \frac{b_p - b}{m - m_p} \tag{9}$$
             which we can plug into either one of the two equations (let's do the first one: Eqn 4) to get y:
-            $$ y = m \frac{b_p - b}{m - m_p} + b \tag{10}$$
+            $$ y_i = m \frac{b_p - b}{m - m_p} + b \tag{10}$$
 
           </div>
 
@@ -311,11 +311,93 @@
 
         </td>
         <td>
+          <div class="comment">
+            We now have two points:
+            $$ p_1 = (x_1, y_1) $$
+            $$ p_i = (x_i, y_i) $$
 
+            The distance equation between points is:
+            $$ d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2} $$
+            therefore:
+            $$ d = \sqrt{(x_i - x_1)^2 + (y_i - y_1)^2} $$
+
+          </div>
         </td>
       </tr>
       <!-- END ROW -->
 
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Assignment: Write a program</h3>
+            <div class="comment">
+              Write a program to find the perpendicular distance between the point:
+              <div id="AssignmentPoint" style='margin:1em 1em 1em 3em;'></div>
+              and the line:
+              <div id="AssignmentLine" style='margin:1em 1em 1em 3em; font-style: italic;'></div>
+              <input type="button" id="AssignmentPointLineReset" value="Reset">
+            </div>
+
+
+          </div>
+
+
+        </td>
+        <td>
+          <div class="comment">
+            Results:
+            <div id="assignmentGraphDiv"></div>
+            <div id="assignmentDistance"></div>
+          </div>
+          <div class="comment">
+            <script type="text/javascript">
+
+              function perpLinePointAssignment() {
+                x1 = Math.floor(Math.random()*18 - 9);
+                y1 = Math.floor(Math.random()*18 - 9);
+                m = (Math.floor(Math.random()*12 - 6)/2).toFixed(1);
+                b = Math.floor(Math.random()*8 - 4);
+                p1 = new uPoint(x1, y1);
+                line1 = new uLine(m, b);
+
+                pE = document.getElementById("AssignmentPoint");
+                lE = document.getElementById("AssignmentLine");
+                pE.innerHTML = `<em>p<sub>1</sub> = ${p1.asText()}`;
+                lE.innerHTML = `${line1.asText()}`;
+
+                svg = new uSvgGraph({divId:'assignmentGraphDiv', elementInfo:{width:300,height:300,  style:'border:5px inset grey;'}});
+                svg.drawLinearFunction(line1, {style:{"stroke-width":"2"}});
+                svg.labelLinearFunction(line1, {x:4, offset:new uPoint(0.5,-0.5), style:{"font-size":12, fill:"black"}});
+                svg.drawPoint(p1, {style:{"stroke":"blue"}});
+                svg.labelPoint(p1, new uPoint(-3,-1), {style:{"font-size":12, fill:"blue"}});
+                linePerp = svg.get_uLine_from_slope_and_point(line1.perpSlope(), p1, {drawPoint:false, drawLine:false});
+                pIntersect = svg.get_intersection_of_two_uLines(line1, linePerp, {drawPoint:true, style:{"stroke-width":"2", stroke:"red"}});
+                svg.labelPoint(pIntersect, new uPoint(1,.25), {style:{"font-size":14, fill:"red"}});
+                svg.addLine(p1, pIntersect, {style:{stroke:"#0000ff","stroke-width":2, "stroke-dasharray":"4 3"}});
+                d = p1.distanceTo(pIntersect).toFixed(1);
+                svg.addText(`d = ${d}`, new uPoint(-3, 3), {style:{"font-size":12, fill:"blue"}});
+
+                document.getElementById('assignmentDistance').innerHTML = `Distance = ${d}`;
+                return svg;
+              }
+              aSvg = perpLinePointAssignment();
+
+              resetBut = document.getElementById("AssignmentPointLineReset");
+              resetBut.addEventListener("click", function(){
+                aSvg.remove();
+                aSvg = perpLinePointAssignment();
+              });
+
+            </script>
+          </div>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
 
 
     </table>
