@@ -152,7 +152,7 @@ class uSvgGraph{
 
     circ.setAttribute("cx", p.x);
     circ.setAttribute("cy", p.y);
-    circ.setAttribute("r", style.r);
+    // circ.setAttribute("r", style.r);
     this.setAttributes(circ, style);
 
     this.svg.appendChild(circ);
@@ -195,20 +195,25 @@ class uSvgGraph{
     }
     style = {...defaultStyle, ...style};
 
-    let ymin = f.y(this.xmin);
-    let xmin = this.xmin;
-    if (ymin < this.ymin){
-      xmin = f.x(this.ymin);
-      ymin = f.y(xmin);
+    //let [xm, ym] = [this.xmin, this.ymin];
+    let p1 = new uPoint(this.xmin, f.y(this.xmin));
+    let p2 = new uPoint(this.xmax, f.y(this.xmax));
+
+    if (p1.y > this.ymax) {
+      p1.y = this.ymax;
     }
-    let ymax = f.y(this.xmax);
-    let xmax = this.xmax;
-    if ( ymax > this.ymax){
-      xmax = f.x(this.ymax);
-      ymax = f.y(xmax);
+    if (p1.y < this.ymin){
+      p1.y = this.ymin;
     }
-    let p1 = new uPoint(xmin, ymin);
-    let p2 = new uPoint(xmax, ymax);
+    p1.x = f.x(p1.y);
+    if (p2.y > this.ymax) {
+      p2.y = this.ymax;
+    }
+    if (p2.y < this.ymin){
+      p2.y = this.ymin;
+    }
+    p2.x = f.x(p2.y);
+
     let newLine = this.addLine(p1, p2, {style: style});
     if (this.lineList === undefined){this.lineList = []};
     this.lineList.push(newLine);
@@ -255,26 +260,26 @@ class uSvgGraph{
     return t;
   }
 
-  drawPoint(p = new uPoint(), r=0.2, {style = {}} = {}){
+  drawPoint(p = new uPoint(), {style = {}} = {}){
     let defaultStyle = {
-      stroke:"#000", "stroke-width":"2"
+      stroke:"#000", "stroke-width":"2", r:0.2
     }
     style = {...defaultStyle, ...style}
 
-    r = this.elemScale(r);
-    style.r = r;
+    style.r = this.elemScale(style.r);
+    // style.r = r;
     if (this.pointsList === undefined){this.pointsList = []};
     let c = this.addCircle(p, {style});
     this.pointsList.push(c);
   }
-  drawPoints(pts = [new uPoint()], r=0.1, { style = {}} = {}){
+  drawPoints(pts = [new uPoint()], { style = {}} = {}){
     let defaultStyle = {
-      stroke:"#000", "stroke-width":"2"
+      stroke:"#000", "stroke-width":"2", r:0.2
     }
     style = {...defaultStyle, ...style}
 
-    r = this.elemScale(r);
-    style.r = r;
+    style.r = this.elemScale(style.r);
+    // style.r = r;
 
     if (this.pointsList === undefined){this.pointsList = []};
     for (const p of pts){
@@ -291,11 +296,18 @@ class uSvgGraph{
     return line;
   }
 
-  get_intersection_of_two_uLines(l1, l2, drawPoint=true){
+  get_intersection_of_two_uLines(l1, l2, drawPoint=true, { style = {}} = {}){
     //let p = get_intersection_of_two_uLines(l1, l2);
     let p = l1.intersectWith(l2);
-    if (drawPoint) {this.drawPoints([p])}
+    if (drawPoint) {this.drawPoints([p], {style:style});}
     return p;
+  }
+
+  get_uLine_from_slope_and_point(m = 1, pt = new uPoint(1,1), drawPoint=true, drawLine=true){
+    let line = get_uLine_from_slope_and_point(m, pt);
+    if (drawPoint) {this.drawPoints([pt])}
+    if (drawLine) {this.drawLinearFunction(line)}
+    return line;
   }
 
 }
@@ -305,6 +317,10 @@ class uPoint{
   constructor(x=0, y=0) {
     this.x = parseFloat(x);
     this.y = parseFloat(y);
+  }
+  distanceTo(p = new uPoint()){
+    let d = ((this.x-p.x)**2 + (this.y-p.y)**2)**0.5
+    return d;
   }
   flip(ymax){
     this.y = ymax - this.y;
@@ -328,6 +344,7 @@ class uLine{
     return y;
   }
   x(y){ return (y - this.b) / this.m; }
+  perpSlope(){ return -(1/this.slope);}
 
   eqnAsText(){
     let txt = 'y =';
@@ -355,6 +372,10 @@ class uLine{
 function get_uLine_from_two_points(p1 = new uPoint(), p2 = new uPoint(1,1)){
   let m = (p2.y - p1.y) / (p2.x - p1.x);
   let b = p1.y - m * p1.x;
+  return new uLine(m, b);
+}
+function get_uLine_from_slope_and_point(m = 1, pt = new uPoint(1,1)){
+  let b = pt.y - m * pt.x;
   return new uLine(m, b);
 }
 // function get_intersection_of_two_uLines(l1, l2){

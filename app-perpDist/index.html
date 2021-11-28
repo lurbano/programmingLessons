@@ -11,6 +11,7 @@
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
     </script>
+    <script type="text/javascript" src="../uSvg.js"></script>
 
     <style media="screen">
 
@@ -18,25 +19,49 @@
 
   </head>
   <body>
-    <h1>Classes: Straight Lines</h1>
+    <h1>Find the Perpendicular Distance Between a Point and a Line</h1>
 
     <div class="setup">
       <div class="comment">
-        Classes are ways of grouping functions and values together to make them easier to use.
+        Find the shortest distance between the point:
+        $$ p_1 = (-4, 6) $$
+        and the line:
+        $$ y = 2x-1$$
       </div>
       <div class="comment">
+        <script type="text/javascript">
+          p1 = new uPoint(-4,6);
+          line1 = new uLine(2, -1);
+          svg = new uSvgGraph({elementInfo:{width:300,height:300, style:'border:5px inset grey;'}});
+          svg.drawLinearFunction(line1, {style:{"stroke-width":"2"}});
+          svg.labelLinearFunction(line1, x=4, offset=new uPoint(0.5,-0.5), {style:{"font-size":12, fill:"black"}});
+          svg.drawPoint(p1, {style:{"stroke":"blue"}});
+          svg.labelPoint(p1, new uPoint(-3,0.75), {style:{"font-size":12, fill:"blue"}});
+          linePerp = svg.get_uLine_from_slope_and_point(line1.perpSlope(), p1, drawPoint=false, drawLine=false);
+          pIntersect = svg.get_intersection_of_two_uLines(line1, linePerp, drawPoint=false);
+          //svg.labelPoint(pIntersect);
+          svg.addLine(p1, pIntersect, {style:{stroke:"#0000ff","stroke-width":2, "stroke-dasharray":"4 3"}});
+          console.log(p1, pIntersect, p1.distanceTo(pIntersect).toFixed(1));
+          d = p1.distanceTo(pIntersect).toFixed(1);
+          //svg.addText(`d = ${d}`, new uPoint(-3, 3), {style:{"font-size":12, fill:"blue"}});
 
-      The <b><em>specific</em></b> equation for a straight line might be:
+        </script>
+      </div>
 
-        $$ y = 2 x + 1 $$
+      <div class="comment">
 
-        where:
-
-        $$ m = 2 $$
-        and,
-        $$ b = 1 $$
-
-        We want a program that can handle any straight line equation we throw at it, so we need to work with the general equation.
+        We can do this if we:
+        <ol>
+          <li>
+            Find the equation of the perpendicular line that runs through the point.
+          </li>
+          <li>
+            Find the intersection point of the line and the perpendicular line.
+          </li>
+          <li>
+            Find the distance between the point and the intersection point.
+          </li>
+        </ol>
 
       </div>
     </div>
@@ -53,404 +78,224 @@
 
       <!-- NEW ROW -->
       <tr>
+
         <td>
           <div class="comment">
-            <h3>General Equation for a Stright Line</h3>
+            <h3>1) Find the Equation of the Perpendicular Line (using the General Equations)</h3>
+            We first need to find the equation of the perpendicular line.
+
+            <p>
+              The slope of the perpendicular line is the negative reciprocal of the slope of the line. So, for the line:
+              $$ y = 2x - 1 \tag{1} $$
+              the slope is <em>m</em>:
+              $$ \text{slope} = 2 $$
+              Therefore, the slope of the perpendicular line is:
+              $$ \text{perpendicular slope} = m_p  $$
+              $$ m_p = -\frac{1}{2} $$
+
+              To find the equation of the perpendicular line we can substitute in the point (<em>p<sub>1</sub></em>) into the general equation for a straight line (Eqn 3) and solve for the intercept <em>b<sub>p</sub> </em>.
+              $$ p_1 = (-4, 6) $$
+              Equation for perpendicular line:
+              $$ y = m_p x + b_p $$
+              $$ 6 = -\frac{1}{2} (-4) + b_p $$
+              Simplifying gives:
+              $$ 6 = 2 + b_p $$
+              Solving for <em>b<sub>p</sub> </em>, we subtract <em>m<sub>p</sub>x<sub>1</sub> </em> from both sides:
+              $$\begin{aligned} 6 &= 2 + b_p \\
+                                6 - 2 &= b_p \\
+                                4 &= b_p \\
+                                b_p &=  4
+                                \end{aligned}$$
+              Therefore the equation for the perpendicular line is:
+              $$ y = -\frac{1}{2} x + 4 \tag{2}$$
+            </p>
+          </div>
+
+          <div class="comment">
+            <script type="text/javascript">
+              p1 = new uPoint(-4,6);
+              line1 = new uLine(2, -1);
+              svg = new uSvgGraph({elementInfo:{width:300,height:300, style:'border:5px inset grey;'}});
+              svg.drawLinearFunction(line1, {style:{"stroke-width":"2"}});
+              svg.labelLinearFunction(line1, x=4, offset=new uPoint(0.5,-0.5), {style:{"font-size":12, fill:"black"}});
+              svg.drawPoint(p1, {style:{"stroke":"blue"}});
+              svg.labelPoint(p1, new uPoint(-3,-1), {style:{"font-size":12, fill:"blue"}});
+              linePerp = svg.get_uLine_from_slope_and_point(line1.perpSlope(), p1, drawPoint=false, drawLine=false);
+              svg.drawLinearFunction(linePerp, {style:{"stroke-width":"2", stroke:"blue"}})
+              svg.labelLinearFunction(linePerp, x=-9, offset=new uPoint(0.5,0.5), {style:{"font-size":14, fill:"blue"}});
+
+            </script>
+          </div>
+
+        </td>
+        <td>
+
+          <div class="comment">
+            <h3>1) Find the Equation of the Perpendicular Line</h3>
 
             <div class="comment">
-              We want a program that can handle any straight line equation we throw at it, so we need to work with the <b><em>general</em></b> equation:
-
-              $$ y = mx + b \tag{1}$$
-
-              We can use it to find and do things like:
-
-              <ul>
-                <li><b>Slope</b>:
-                  $$ \text{slope} = m $$
-                </li>
-                <li><b>y-intercept</b>:
-                  $$ \text{y-intercept} = b $$
-                </li>
-                <li><b>x-intercept</b>:
-                  $$ \text{x-intercept} = \dfrac{-b}{m} $$
-                </li>
-              </ul>
-            </div>
-
-        </td>
-        <td>
-
-
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-
-
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-            <h3>Creating a Class</h3>
-
-          <div class="comment">
-            Notice that:
-            <ul>
-              <li><b>Naming the Class</b> (Line 1):
-                This class' name is <code>straightLine</code>:
-                <pre><code class="language-python">
-                  class straightLine:
-                </code></pre>
-              </li>
-              <li><b>Initializing the Class</b> (Line 3): We want to give the class the basic information it needs, <em>m</em> and <em>b</em> in this case.
-                <pre><code class="language-python">
-                      def __init__(self, m, b):
-                </code></pre>
-
-                <code>self</code> is passed as the first <em>parameter</em>. <code>self</code> lets the class refer to things internally, which we'll see in a moment.
-              </li>
-              <li><b>Setting properties</b> (Lines 4-9) :
-                <pre><code class="language-python">
-                      self.slope = m
-                </code></pre>
-                 These are variables that are unique to each <b><em>instance</em> </b> of the class. They are known within the class, and naming them things like <code>self.slope</code> allows us to refer to them internally, and externally.
-                 <pre><code class="language-python">
-                       self.xintercept = -b/m
-                 </code></pre>
-                 Note that we can set properties by doing calculations.
-              </li>
-            </ul>
-          </div>
-
-        </td>
-        <td>
-          <div class="pythonCode">
-            <pre class="line-numbers"><code class="language-python">
-              class straightLine:
-
-                def __init__(self, m, b):
-                    self.m = m
-                    self.b = b
-
-                    self.slope = m
-                    self.yintercept = b
-                    self.xintercept = -b/m
-
-            </pre></code>
-          </div>
-
-          <div class="comment">
-            If you run this code, nothing will happen. Just like with a function, classes are stored in memory until they are used.
-          </div>
-
-
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-            <h3>Using the <code>straightLine</code> Class</h3>
-            Let's use the <code>straightLine</code> class to create two lines and find which has the steeper slope. We'll use the two lines:
-            $$ y = 2x + 1 \tag{2}$$
-            $$ y = -3x + 4 \tag{3}$$
-          </div>
-
-          <div class="comment">
-            <ul>
-              <li><b>Creating <em>instances</em> of the class</b>  (lines 11 and 12):
-                <pre><code class="language-python">
-                  line1 = straightLine(2, 1)  # y =  2x + 1
-                  line2 = straightLine(-3, 4) # y = -3x + 4
-                </code></pre>
-                We pass the m and b values for Equations (2) and (3) to the <code>__init__</code> method in the class by calling the class name.
-              </li>
-              <li><b>Using <em>properties</em> of the instances</b> (line 14):
-                <pre><code class="language-python">
-                  if line1.slope > line2.slope:
-                </code></pre>
-                Here we compare the <code>slope</code> properties of one line to the other.
-              </li>
-            </ul>
-
-          </div>
-
-        </td>
-        <td>
-          <div class="pythonCode">
-            <pre class="line-numbers"><code class="language-python">
-              class straightLine:
-
-                  def __init__(self, m, b):
-                      self.m = m
-                      self.b = b
-
-                      self.slope = m
-                      self.yintercept = b
-                      self.xintercept = -b/m
-
-              line1 = straightLine(2, 1)  # y =  2x + 1
-              line2 = straightLine(-3, 4) # y = -3x + 4
-
-              if line1.slope > line2.slope:
-                  print("Line 1 has the steeper slope")
-              else:
-                  print("Line 2 has the steeper slope")
-            </pre></code>
-          </div>
-
-          The result should look like:
-          <div class="toggle-next">Show Notes ▼</div>
-          <div class="pythonCode" hidden>
-            <pre class="line-numbers"><code class="language-python">
-              Line 1 has the steeper slope
-            </pre></code>
-          </div>
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-            <h3>Exercise</h3>
-            Find which line has an x-intercept closer to zero of the two lines:
-            $$ y = 4x - 5 \tag{4}$$
-            $$ y = x + 2 \tag{5}$$
-          </div>
-
-        </td>
-        <td>
-          Code:
-          <div class="toggle-next">Show Notes ▼</div>
-          <div class="pythonCode" hidden>
-            <pre class="line-numbers"><code class="language-python">
-              class straightLine:
-
-                  def __init__(self, m, b):
-                      self.m = m
-                      self.b = b
-
-                      self.slope = m
-                      self.yintercept = b
-                      self.xintercept = -b/m
-
-              line1 = straightLine(4, -5)
-              line2 = straightLine(1, 2)
-
-              if abs(line1.xintercept) < abs(line2.xintercept):
-                  print(f"Line 1's intercept is closer to zero: |{line1.xintercept}| < |{line2.xintercept}|")
-              else:
-                  print(f"Line 2's intercept is closer to zero: |{line1.xintercept}| > |{line2.xintercept}|")
-
-            </pre></code>
-          </div>
-
-          Result:
-          <div class="toggle-next">Show Notes ▼</div>
-          <div class="pythonCode" hidden>
-            <pre class="line-numbers"><code class="language-python">
-              Line 1's intercept is closer to zero: |1.25| < |-2|
-            </pre></code>
-          </div>
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-            <h3>Methods: Finding the y values given x </h3>
-            Something we'll very likely want to do if we have an equation is to find the value of y for a given x. To do so we'll create a <b><em>method</em> </b> within the class. A method is a function that exists inside a class.
-          </div>
-
-          <div class="comment">
-            <ul>
-              <li><b>Creating the <code>get_y</code> method:</b> (Line 11)
-                <pre><code class="language-python">
-                  def get_y(self, x):
-                </code></pre>
-                As with the <code>__init__</code> initialization method, the first parameter in the method is <code>self</code>, however, when we call the method, we do not need to send the <code>self</code> value because the class already knows its self.
-              </li>
-              <li><b>Using properties internally:</b> (Line 12)
-                <pre><code class="language-python">
-                    y = self.m * x + self.b
-                </code></pre>
-                We calculate the <em>y</em> value from the equation for the given <em>x</em>. We did not have to tell the instance of the class what the <em>m</em> and <em>b</em> values were, because the instance stores this as properties (self.m and self.b) when it was initialized. However, we do have to refer to <em>m</em> and <em>b</em> by their property names (self.m and self.b).
-              </li>
-              <li><b>Using the method:</b> (Line 17):
-                <pre><code class="language-python">
-                    print("For x = 5, y =", line1.get_y(5))
-                </code></pre>
-                With <code>line1.get_y(5)</code> we call the method with the instance name <code>line1</code> and its method name <code>get_y</code> and pass it the <em>x</em> value. The method returns the y value (Line 13).
-              </li>
-            </ul>
-
-          </div>
-
-        </td>
-        <td>
-          Code.
-          <div class="pythonCode">
-            <pre class="line-numbers"><code class="language-python">
-              class straightLine:
-
-                  def __init__(self, m, b):
-                      self.m = m
-                      self.b = b
-
-                      self.slope = m
-                      self.yintercept = b
-                      self.xintercept = -b/m
-
-                  def get_y(self, x):
-                      y = self.m * x + self.b
-                      return y
-
-              line1 = straightLine(2, 1)
-
-              print("For x = 5, y =", line1.get_y(5))
-            </pre></code>
-          </div>
-          Results.
-          <div class="pythonCode">
-            <pre class="line-numbers"><code class="language-python">
-              For x = 5, y = 11
-            </pre></code>
-          </div>
-
-
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-            <h3>Exercise: find x given y</h3>
-            <div class="comment">
-              Add a method to the class that calculates the <em>x</em> value for a given <em>y</em>. Use this method to find <em>x</em> value when:
-              $$ y = 11 $$
-              for the line
-              $$ y = 2x + 1 $$
-            </div>
-          </div>
-
-        </td>
-        <td>
-          Code.
-          <div class="toggle-next">Show Notes ▼</div>
-          <div class="pythonCode" hidden>
-            <pre class="line-numbers" data-line="15-17"><code class="language-python">
-              class straightLine:
-
-                  def __init__(self, m, b):
-                      self.m = m
-                      self.b = b
-
-                      self.slope = m
-                      self.yintercept = b
-                      self.xintercept = -b/m
-
-                  def get_y(self, x):
-                      y = self.m * x + self.b
-                      return y
-
-                  # method to get x given y
-                  def get_x(self, y):
-                      x = (y - self.b) / self.m
-                      return x
-
-              line1 = straightLine(2, 1)
-
-              print("For y = 11, y =", line1.get_x(11))
-            </pre></code>
-          </div>
-          Results.
-          <div class="toggle-next">Show Notes ▼</div>
-          <div class="pythonCode" hidden>
-            <pre class="line-numbers"><code class="language-python">
-              For y = 11, y = 5
-            </pre></code>
-          </div>
-
-
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-            <h3>Exercise: perpendicular slope </h3>
-            <div class="comment">
-              Add a method to: calculate the slope of a line perpendicular to the given line.
-            </div>
-          </div>
-
-        </td>
-        <td>
-          Code.
-          <div class="toggle-next">Show Notes ▼</div>
-          <div class="pythonCode" hidden>
-            <pre class="line-numbers" data-line="15-17"><code class="language-python">
-              # This one is on you...
-            </pre></code>
-          </div>
-          Results.
-          <div class="toggle-next">Show Notes ▼</div>
-          <div class="pythonCode" hidden>
-            <pre class="line-numbers"><code class="language-python">
-              # Try a number of test cases to check
-              #    if your code works well.
-            </pre></code>
-          </div>
-
-
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-            <h3>Exercise: Check if a point is on the line </h3>
-            <div class="comment">
-              Add a method to: determine if a given point (x,y) is on the line.
+              We first need to find the equation of the perpendicular line.
 
               <p>
-                Your method should return 'True' if the point is on the line and 'False' if not.
+                The slope of the perpendicular line is the negative reciprocal of the slope of the line. So, for the line:
+                $$ y = mx + b \tag{3} $$
+                the slope is <em>m</em>:
+                $$ \text{slope} = m $$
+                Therefore, the slope of the perpendicular line is:
+                $$ \text{perpendicular slope} = m_p  $$
+                $$ m_p = -\frac{1}{m} $$
+
+                To find the equation of the perpendicular line we can substitute in the point (<em>p<sub>1</sub></em>) into the general equation for a straight line (Eqn 1) and solve for the intercept <em>b<sub>p</sub> </em>.
+                $$ p_1 = (x_1, y_1) $$
+                Equation for perpendicular line:
+                $$ y = mx + b $$
+                $$ y_1 = m_p x_1 + b_p $$
+                Solving for <em>b<sub>p</sub> </em>, we subtract <em>m<sub>p</sub>x<sub>1</sub> </em> from both sides:
+                $$\begin{aligned} y_1 &= m_p x_1 + b_p \\
+                                  y_1 - m_p x_1 &= b_p \\
+                                  b_p &=  y_1 - m_p x_1
+                                  \end{aligned}$$
+
               </p>
             </div>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+
+        <td>
+
+          <div class="comment">
+            <h3>2) Find the Intersection Point of the Two Lines</h3>
+
+          <div class="comment">
+            The lines intersect when they share the same x and y values, therefore for the lines:
+            $$ y = 2x - 1 \tag{1} $$
+            $$ y = -\frac{1}{2} x + 4 \tag{2} $$
+            if the y values are the same:
+            $$ 2x - 1 = -\frac{1}{2} x + 4 $$
+            then solving for x, we move all the terms with x to the same side:
+            $$ \begin{align} 2x -1 &= -\frac{1}{2} x + 4 \\
+                             2x + \frac{1}{2} x -1 &= 4 \end{align}$$
+            and all the constants to the other side:
+            $$ \begin{align} 2x + \frac{1}{2} x - 1 &= 4 \\
+                             2x + \frac{1}{2} x  &= 4 + 1 \\
+                             2x + \frac{1}{2} x  &= 5
+                             \end{align}$$
+            factor out the x:
+            $$ \begin{align} 2x + \frac{1}{2} x  &= 5 \\
+                             \left(2 + \frac{1}{2}\right) x &= 5 \\
+                             \frac{5}{2} x &= 5
+                              \end{align}$$
+            and multiply by the reciprocal of the constant with the <em>x</em>:
+            $$ \left( \frac{2}{5} \right) \cdot \frac{5}{2} x = 5 \cdot \left( \frac{2}{5} \right) $$
+            to get:
+            $$ x = 2 \tag{4}$$
+            which we can plug into either one of the two equations (let's do the first one: Eqn 4) to get y:
+            $$ y = 2 (2) - 1$$
+            this:
+            $$ y = 3 \tag{5}$$
+
+            Therefore the intersection point is:
+            $$ p_i = (2, 3) \tag{6} $$
+
+            <div class="comment">
+              <script type="text/javascript">
+                p1 = new uPoint(-4,6);
+                line1 = new uLine(2, -1);
+                svg = new uSvgGraph({elementInfo:{width:300,height:300, style:'border:5px inset grey;'}});
+                svg.drawLinearFunction(line1, {style:{"stroke-width":"2"}});
+                svg.labelLinearFunction(line1, x=4, offset=new uPoint(0.5,-0.5), {style:{"font-size":12, fill:"black"}});
+                svg.drawPoint(p1, {style:{"stroke":"blue"}});
+                svg.labelPoint(p1, new uPoint(-3,-1), {style:{"font-size":12, fill:"blue"}});
+                linePerp = svg.get_uLine_from_slope_and_point(line1.perpSlope(), p1, drawPoint=false, drawLine=false);
+                svg.drawLinearFunction(linePerp, {style:{"stroke-width":"2", stroke:"blue"}})
+                svg.labelLinearFunction(linePerp, x=-9, offset=new uPoint(0.5,0.5), {style:{"font-size":14, fill:"blue"}});
+                pIntersect = svg.get_intersection_of_two_uLines(line1, linePerp, drawPoint=true, {style:{"stroke-width":"2", stroke:"red"}});
+                svg.labelPoint(pIntersect, new uPoint(1,.25), {style:{"font-size":14, fill:"red"}});
+
+              </script>
+            </div>
+
           </div>
 
         </td>
         <td>
-          Code.
-          <div class="toggle-next">Show Notes ▼</div>
-          <div class="pythonCode" hidden>
-              <a href="../quickRef/index.html#logic">Logic Reference</a>
-          </div>
-          Results.
-          <div class="toggle-next">Show Notes ▼</div>
-          <div class="pythonCode" hidden>
-            <pre class="line-numbers"><code class="language-python">
-              # Try a number of test cases to check
-              #    if your code works well.
-            </pre></code>
+
+          <div class="comment">
+            <h3>2) Find the Intersection Point of the Two Lines</h3>
+
+          <div class="comment">
+            The lines intersect when they share the same x and y values, therefore for the lines:
+            $$ y = mx + b \tag{7} $$
+            $$ y = m_p x + b_p \tag{8} $$
+            if the y values are the same:
+            $$ mx + b = m_p x + b_p $$
+            then solving for x, we move all the terms with x to the same side:
+            $$ \begin{align} mx + b &= m_p x + b_p \\
+                             mx - m_p x + b &= b_p \end{align}$$
+            and all the constants to the other side:
+            $$ \begin{align} mx - m_p x + b &= b_p \\
+                             mx - m_p x  &= b_p - b \end{align}$$
+            factor out the x:
+            $$ \begin{align} mx - m_p x  &= b_p - b \\
+                             (m - m_p) x &= b_p - b \end{align}$$
+            and divide:
+            $$  \frac{(m - m_p) x}{(m - m_p)} = \frac{b_p - b}{(m - m_p)} $$
+            to get:
+            $$ x = \frac{b_p - b}{m - m_p} \tag{9}$$
+            which we can plug into either one of the two equations (let's do the first one: Eqn 4) to get y:
+            $$ y = m \frac{b_p - b}{m - m_p} + b \tag{10}$$
+
           </div>
 
+        </td>
+
+      </tr>
+      <!-- END ROW -->
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+            <h3>Find the Distance between the Two Points</h3>
+            <div class="comment">
+              <script type="text/javascript">
+                p1 = new uPoint(-4,6);
+                line1 = new uLine(2, -1);
+                svg = new uSvgGraph({elementInfo:{width:300,height:300, style:'border:5px inset grey;'}});
+                svg.drawLinearFunction(line1, {style:{"stroke-width":"2"}});
+                svg.labelLinearFunction(line1, x=4, offset=new uPoint(0.5,-0.5), {style:{"font-size":12, fill:"black"}});
+                svg.drawPoint(p1, {style:{"stroke":"blue"}});
+                svg.labelPoint(p1, new uPoint(-3,-1), {style:{"font-size":12, fill:"blue"}});
+                linePerp = svg.get_uLine_from_slope_and_point(line1.perpSlope(), p1, drawPoint=false, drawLine=false);
+                // svg.drawLinearFunction(linePerp, {style:{"stroke-width":"2", stroke:"blue"}})
+                // svg.labelLinearFunction(linePerp, x=-9, offset=new uPoint(0.5,0.5), {style:{"font-size":14, fill:"blue"}});
+                pIntersect = svg.get_intersection_of_two_uLines(line1, linePerp, drawPoint=true, {style:{"stroke-width":"2", stroke:"red"}});
+                svg.labelPoint(pIntersect, new uPoint(1,.25), {style:{"font-size":14, fill:"red"}});
+                svg.addLine(p1, pIntersect, {style:{stroke:"#0000ff","stroke-width":2, "stroke-dasharray":"4 3"}});
+                console.log(p1, pIntersect, p1.distanceTo(pIntersect).toFixed(1));
+                d = p1.distanceTo(pIntersect).toFixed(1);
+                svg.addText(`d = ${d}`, new uPoint(-3, 3), {style:{"font-size":12, fill:"blue"}});
+
+              </script>
+            </div>
+          </div>
+
+          <div class="comment">
+
+
+          </div>
+
+        </td>
+        <td>
 
         </td>
       </tr>
