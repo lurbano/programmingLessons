@@ -370,13 +370,28 @@
                 lE.innerHTML = `${line1.asText()}`;
 
                 svg = new uSvgGraph({divId:'assignmentGraphDiv', elementInfo:{width:300,height:300,  style:'border:5px inset grey;'}});
+
+                console.log(line1.asText(), line1);
+
                 svg.drawLinearFunction(line1, {style:{"stroke-width":"2"}});
                 svg.labelLinearFunction(line1, {x:4, offset:new uPoint(0.5,-0.5), style:{"font-size":12, fill:"black"}});
+
+                console.log('drawPoint', p1);
                 svg.drawPoint(p1, {style:{"stroke":"blue"}});
                 svg.labelPoint(p1, new uPoint(-3,-1), {style:{"font-size":12, fill:"blue"}});
-                linePerp = svg.get_uLine_from_slope_and_point(line1.perpSlope(), p1, {drawPoint:false, drawLine:false});
-                pIntersect = svg.get_intersection_of_two_uLines(line1, linePerp, {drawPoint:true, style:{"stroke-width":"2", stroke:"red"}});
+                perpSlope = line1.perpSlope();
+                if (perpSlope !== undefined) {
+                  linePerp = svg.get_uLine_from_slope_and_point(perpSlope, p1, {drawPoint:false, drawLine:false});
+
+                  console.log("pIntersect", linePerp);
+                  pIntersect = svg.get_intersection_of_two_uLines(line1, linePerp, {drawPoint:true, style:{"stroke-width":"2", stroke:"red"}});
+                }
+                else {
+                  pIntersect = new uPoint(p1.x, line1.b);
+                }
                 svg.labelPoint(pIntersect, new uPoint(1,.25), {style:{"font-size":14, fill:"red"}});
+
+                console.log("addLine", p1, pIntersect);
                 svg.addLine(p1, pIntersect, {style:{stroke:"#0000ff","stroke-width":2, "stroke-dasharray":"4 3"}});
                 d = p1.distanceTo(pIntersect).toFixed(1);
                 svg.addText(`d = ${d}`, new uPoint(-3, 3), {style:{"font-size":12, fill:"blue"}});
