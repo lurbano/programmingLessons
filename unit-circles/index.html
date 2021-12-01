@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Unit Circle</title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <h1>Working with Trigonometry</h1>
+
+    <div class="setup">
+      <div class="comment">
+
+        Write programs/functions to:
+        <ul>
+          <li>Convert from degrees to radians</li>
+          <li>Convert from radians to degrees</li>
+          <li>Find the length of the <b>adjacent</b> side of a right angled triangle, given an angle and the length of the hypotenuse. </li>
+          <li>Find the length of the <b>opposite</b> side of a right angled triangle, given an angle and the length of the hypotenuse. </li>
+          <li>Find the x and y coordinates on the unit circle for a given angle.</li>
+          <li>Draw the unit circle by plotting points.</li>
+        </ul>
+
+
+    </div>
+
+
+    <table>
+
+
+
+      <tr>
+        <th>Notes and Code</th>
+        <th>Outcome</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Convert from radians to degrees</h3>
+
+            The equation to convert from radians to degrees is:
+            $$ \text{degrees} = \frac{\text{radians}}{\pi} \cdot 180^{\circ} $$
+
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+            Check your answer:
+            <p>
+              Angle (in radians):
+              <input type="number" id="rad0" style="width:5em;">
+            </p>
+            <p>
+              Angle (in radians): <span id="deg0"></span>
+            </p>
+            <input type="button" id="radToDegBut" value="New Numbers">
+            <script type="text/javascript">
+              function radToDeg(rad=undefined){
+                if (rad===undefined){
+                  let rad = (Math.random()*2*Math.PI).toFixed(2);
+                }
+                document.getElementById("rad0").value = rad;
+                let deg = (rad/Math.PI)* 180;
+                document.getElementById("deg0").innerHTML = deg.toFixed(2)+'°';
+              }
+              radToDeg();
+              document.getElementById('radToDegBut').addEventListener("click", radToDeg);
+              document.getElementById('rad0').addEventListener("change", function(){
+                let r = document.getElementById("rad0").value;
+                radToDeg(r);
+              });
+            </script>
+          </div>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Convert from Degrees to Radians</h3>
+
+            The equation to convert from degrees to radians is:
+            $$ \text{radians} = \frac{\text{degrees}}{180^{\circ}} \cdot \pi $$
+
+          </div>
+
+        </td>
+        <td>
+
+          <div class="comment">
+            Check your answer:
+            <p>
+              Angle (in degrees): <span id="deg1"></span>
+            </p>
+            <p>
+              Angle (in radians): <span id="rad1"></span>
+            </p>
+            <input type="button" id="degToRadBut" value="New Numbers">
+            <script type="text/javascript">
+              function degToRad(){
+                let deg = Math.floor(Math.random()*360);
+                document.getElementById("deg1").innerHTML = deg+'°';
+                let rad = (deg/180)* Math.PI;
+                document.getElementById("rad1").innerHTML = rad.toFixed(2);
+              }
+              degToRad();
+              document.getElementById('degToRadBut').addEventListener("click", degToRad);
+            </script>
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+
+    </table>
+
+  </body>
+  <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+  <script type="text/javascript">
+
+    function distance(v1, v2){
+      d = ( (v1[1]-v2[1])**2 + (v1[0]-v2[0])**2 )**0.5;
+      return d;
+    }
+    function arrToStr(a, varName="x"){
+      let t = varName + " = [";
+      for (let i = 0; i< a.length; i++){
+        t += a[i] + ", ";
+      }
+      t = t.slice(0,-2) + "]";
+      return t;
+    }
+    $("#generatePts").click(function(){
+
+      let circleRadius = 5.0;
+      let nNodes = parseInt($("#nPts").val())-1;
+      console.log("clicked", nNodes);
+
+      xs = [];
+      ys = [];
+      pts = [];
+
+      let dAngle = 2 * Math.PI / nNodes;
+
+      for (let i=0; i<nNodes; i++){
+        let x = circleRadius * Math.cos(dAngle*i);
+        let y = circleRadius * Math.sin(dAngle*i);
+        xs.push(x.toFixed(2));
+        ys.push(y.toFixed(2));
+        pts.push([x.toFixed(2), y.toFixed(2)]);
+      }
+
+      pts.push(pts[0]);
+      xs.push(xs[0]);
+      ys.push(ys[0]);
+      console.log( `pts = ${pts}`);
+      console.log(arrToStr(xs));
+      console.log(arrToStr(ys, "y"));
+
+      $("#ptData").html(arrToStr(xs) + '\n' + arrToStr(ys, "y"));
+
+      //calculate total distance
+      let d = 0;
+      for (let i=0; i<pts.length-1; i++){
+        d += distance(pts[0], pts[1]);
+        console.log(d);
+      }
+
+      $("#ptsDistance").html(d.toFixed(2));
+
+    })
+
+  </script>
+</html>
