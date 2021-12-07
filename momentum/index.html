@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Momentum</title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="../uSvg.js"></script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <!-- HEADERS -->
+    <div class="nav">
+      <a href="../index.html">← Main</a>
+      <a href="../quickRef/">Quick Ref</a>
+      <a href="../physics.html">Physics</a>
+      <hr>
+    </div>
+    <!-- END HEADERS -->
+
+    <h1>Momentum</h1>
+
+    <div class="setup">
+      <div class="comment">
+        For two objects colliding in 1-dimension.
+
+        <p>
+          <b>Before Collision:</b>
+
+        <div class="uGraph">
+          <script type="text/javascript">
+            svg = new uSvg({
+              elementInfo:{width:500,height:150}
+            });
+            p1 = new uPoint(4,3);
+            p2 = new uPoint(16, 3);
+            svg.addCircle(p1, {style:{fill:'#f00'}});
+            v1 = new uVector(p1, new uPoint(2,0));
+            svg.addArrow(v1);
+            svg.addText("v₁ = 2 m/s", p1.addxy(0, 1));
+            svg.addText("m₁ = 4 kg", p1.addxy(0, -1.25));
+            svg.addCircle(p2, {style:{fill:'#0f0', r:5}});
+            v2 = new uVector(p2, new uPoint(-3,0));
+            svg.addArrow(v2);
+            svg.addText("v₂ = -3 m/s", p2.addxy(0, 1));
+            svg.addText("m₂ = 6 kg", p2.addxy(0, -1.25));
+
+          </script>
+        </div>
+      </p>
+
+
+        <h3>Basic Principles</h3>
+
+        <p>
+          <b>Conservation of Momentum</b>: The total momentum of the system (both objects) is the same before and after the collision.
+        </p>
+        Momentum is:
+        $$ \text{Momentum} = M = m \cdot v $$
+
+        where:
+        <ul>
+          <li>
+            <em>m</em> = mass
+          </li>
+          <li>
+            <em>v</em> = velocity
+          </li>
+        </ul>
+
+        The total momentum <b>before collision</b> is:
+        $$ \begin{align*}
+           M_{before} &= m_1 \cdot v_1 + m_2 \cdot v_2 \\
+                      &= 4 \cdot 2 + 6 \cdot (-3) \\
+                      &= 8 + (-18) \\
+                      &= -10 \; \text{kg m/s}
+            \end{align*}
+        $$
+        <br>
+
+        Write a programs for:
+        <ol>
+          <li>
+            <b>Inelastic Collision</b>: If the two objects stick together after the collision, what is their final velocity.
+          </li>
+          <li>
+            <b>Elastic Collision</b>: Velocity of the first object (m₁) after the collision, if you are given the velocity of the second object after the collision, and the masses of both objects.
+          </li>
+        </ol>
+
+        The underlying principle is that <b>momentum</b> is conserved after the collision, so the total momentum before collision is equal to the total momentum after collision.
+
+
+    </div>
+
+
+    <table>
+
+
+
+      <tr>
+        <th>Notes and Code</th>
+        <th>Outcome</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Inelastic Collision</h3>
+
+            In inelastic collisions the two objects stick together after they collide. Therefore, after collision they can be considered a single mass.
+
+            <div class="uGraph">
+              <script type="text/javascript">
+                svg = new uSvg({
+                  elementInfo:{width:500,height:150}
+                });
+                p1 = new uPoint(4,3);
+                p2 = new uPoint(16, 3);
+                svg.addCircle(p1, {style:{fill:'#f00'}});
+                v1 = new uVector(p1, new uPoint(2,0));
+                svg.addArrow(v1);
+                svg.addText("v₁ = 2 m/s", p1.addxy(0, 1));
+                svg.addText("m₁ = 4 kg", p1.addxy(0, -1.25));
+                svg.addCircle(p2, {style:{fill:'#0f0', r:5}});
+                v2 = new uVector(p2, new uPoint(-3,0));
+                svg.addArrow(v2);
+                svg.addText("v₂ = -3 m/s", p2.addxy(0, 1));
+                svg.addText("m₂ = 6 kg", p2.addxy(0, -1.25));
+
+              </script>
+            </div>
+
+            <p>
+              <b>After Collision</b>
+
+              <div class="uGraph">
+                <script type="text/javascript">
+                  svg = new uSvg({
+                    elementInfo:{width:500,height:150}
+                  });
+                  p1 = new uPoint(9,3);
+                  //p2 = new uPoint(16, 3);
+                  svg.addCircle(p1, {style:{fill:'#0f0', r:6}});
+
+                  v1 = new uVector(p1, new uPoint(-1,0));
+                  svg.addArrow(v1);
+                  svg.addText("vₐ = ?", p1.addxy(0, 1));
+                  svg.addText("mₐ = 10 kg", p1.addxy(0, -1.25));
+
+
+                </script>
+              </div>
+            </p>
+
+            <p>
+              The total momentum <b>after collision (<em>M<sub>a</sub> </em>) is equal to the momentum before collision (<em>M<sub>b</sub> </em>):</b>
+              $$
+                \begin{align}
+                  M_{a} &= M_{b} \\
+                  &= -10 \; \text{kg m/s}
+                \end{align}
+              $$
+
+              Therefore <b>after collision</b>:
+              $$
+                \begin{align}
+                  M_{a} &= m \cdot v_a \\
+                  -10  &= 10 \cdot v_a \\
+                  \frac{-10}{10} &= v \\
+                  v &= -1 \; \text{m/s}
+                \end{align}
+              $$
+            </p>
+
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+            Check your answer:
+            <p>
+              Angle (in radians):
+              <input type="number" id="rad0" style="width:5em;" step="0.1" value='0.5'>
+            </p>
+            <p>
+              Angle (in degrees): <span id="deg0"></span>
+            </p>
+            <!-- <input type="button" id="radToDegBut" value="New Numbers"> -->
+            <script type="text/javascript">
+              function radToDeg(){
+                let rad = document.getElementById("rad0").value;
+                console.log(rad);
+                if (!rad) {
+                  rad = Math.random()*2*Math.PI;
+                }
+                console.log(rad);
+                document.getElementById("rad0").value = rad;
+                let deg = (rad/Math.PI)* 180;
+                document.getElementById("deg0").innerHTML = deg.toFixed(2)+'°';
+              }
+              radToDeg();
+              //document.getElementById('radToDegBut').addEventListener("click", radToDeg);
+              document.getElementById('rad0').addEventListener("change", function(){
+                radToDeg();
+              });
+            </script>
+          </div>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Convert from Degrees to Radians</h3>
+
+            The equation to convert from degrees to radians is:
+            $$ \text{radians} = \frac{\text{degrees}}{180^{\circ}} \cdot \pi $$
+
+          </div>
+
+        </td>
+        <td>
+
+          <div class="comment">
+            Check your answer:
+
+            <p>
+              <span id="deg1" style="margin-left:2em;"></span>  <span id="rad1"></span>
+            </p>
+            <input type="button" id="degToRadBut" value="New Numbers">
+            <script type="text/javascript">
+              function degToRad(){
+                let deg = Math.floor(Math.random()*360);
+                document.getElementById("deg1").innerHTML = deg+'° = ';
+                let rad = (deg/180)* Math.PI;
+                let radpi = deg/180;
+                document.getElementById("rad1").innerHTML = rad.toFixed(2) + " rad. = " + radpi.toFixed(2) + " π rad.";
+              }
+              degToRad();
+              document.getElementById('degToRadBut').addEventListener("click", degToRad);
+            </script>
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+
+    </table>
+
+  </body>
+  <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+
+</html>

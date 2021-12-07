@@ -1,4 +1,236 @@
-class uSvgGraph{
+class uSvg{
+  constructor({
+    divId = undefined,
+    elementInfo = {}, //html element data
+    axesInfo = {} //coordinate system information
+  }={}){
+
+    let defaultElementInfo = {
+      width: 400,
+      height: 400,
+      id:undefined,
+      scale:"auto"
+    }
+    this.elementInfo = {...defaultElementInfo, ...elementInfo};
+
+    this.divId = divId;
+    let defaultAxesInfo = {
+      zero: new uPoint(0, this.elementInfo.height),
+      xmax: 10,
+      ymax: 10
+    }
+    this.axesInfo = {...defaultAxesInfo, ...axesInfo};
+
+    if (this.elementInfo.scale === 'auto') {
+     this.elementInfo.scale = Math.max(this.elementInfo.height, this.elementInfo.width) / (2*this.axesInfo.xmax);
+    }
+
+    this.namespaceURI = 'http://www.w3.org/2000/svg';
+    this.arrows = [];
+    this.setScale(this.elementInfo.scale);
+
+    this.elementInfo.id = this.createElement();
+
+    //return this.elementInfo.id;
+  }
+
+  remove(){
+    this.svg.remove();
+  }
+
+  setScale(scale){
+    this.scale = scale;
+  }
+
+  addText(txt, p, {style = {}} = {}){
+    let defaultStyle = {
+      //"font-size": "10px",
+      "text-anchor": "middle"
+    }
+    style = {...defaultStyle, ...style};
+
+    let t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    p = this.elemCoords(p);
+    t.setAttribute("x", p.x);
+    t.setAttribute("y", p.y);
+    this.setAttributes(t, style);
+    t.textContent = txt;
+    this.svg.appendChild(t);
+  }
+
+  setAttributes(element, style){
+    for (const [key, value] of Object.entries(style)){
+      //console.log(`${key} | ${value}`);
+      element.setAttribute(key, value);
+    }
+  }
+
+  addLine(p1, p2, {style = {}} = {}){
+    let defaultStyle = {
+      stroke:"#000", "stroke-width":"4"
+    };
+    style = {...defaultStyle, ...style};
+    var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    p1 = this.elemCoords(p1);
+    p2 = this.elemCoords(p2);
+    line.setAttribute("x1", p1.x);
+    line.setAttribute("y1", p1.y);
+    line.setAttribute("x2", p2.x);
+    line.setAttribute("y2", p2.y);
+    this.setAttributes(line, style);
+
+    this.svg.appendChild(line);
+    return line;
+  }
+
+  addCircle(p = new uPoint(0,0), {style={}} = {}){
+    let defaultStyle = {
+      r:4, fill:"none", stroke:"#000000",
+      "stroke-width": 1
+    };
+    style = {...defaultStyle, ...style};
+
+    let circ = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    p = this.elemCoords(p);
+
+    circ.setAttribute("cx", p.x);
+    circ.setAttribute("cy", p.y);
+    // circ.setAttribute("r", style.r);
+    this.setAttributes(circ, style);
+
+    this.svg.appendChild(circ);
+    return circ;
+  }
+
+  setArrowHeadMarker({markerStyle = {}, pathStyle={}} = {}){
+
+    let newMarker = isEmpty(markerStyle) ? false : true;
+
+    let defaultMarkerStyle = {
+      id:"arrow_0", viewBox:"0 -5 10 10", refX:"5", refY:"0", markerWidth:"4", markerHeight:"4", orient:"auto"
+    };
+    markerStyle = {...defaultMarkerStyle, ...markerStyle};
+
+    let defaultPathStyle = {
+      d:"M0,-5L10,0L0,5", class:"arrowHead"
+    }
+    pathStyle = {...defaultPathStyle, ...pathStyle};
+
+    let arrowHeadPath = document.createElementNS(this.namespaceURI, "path");
+    this.setAttributes(arrowHeadPath, pathStyle);
+
+    let markerNum = 0;
+
+    // set default arrowhead if necessary (arrowHeads[0])
+    if (this.arrowHeads === undefined){ // set initial arrowhead
+      this.arrowHeads = [document.createElementNS(this.namespaceURI, "marker")];
+      //markerStyle.id = "arrow_0";
+      this.setAttributes(this.arrowHeads[0], markerStyle);
+
+      this.arrowHeads[0].appendChild(arrowHeadPath);
+      this.svg.appendChild(this.arrowHeads[0]);
+    }
+
+    if (newMarker) { // add a new marker
+      this.arrowHeads.push(document.createElementNS(this.namespaceURI, "marker"));
+      markerNum = this.arrowHeads.length-1;
+      markerStyle.id = "arrow_"+markerNum;
+      this.setAttributes(this.arrowHeads[markerNum], markerStyle);
+      this.arrowHeads[markerNum].appendChild(arrowHeadPath);
+      this.svg.appendChild(this.arrowHeads[markerNum]);
+    }
+
+
+
+    return markerStyle.id;
+  }
+
+  addArrow(v = new uVector(), {markerStyle = {}, style = {}} = {}){
+
+    let defaultStyle = {
+      stroke:"#0000ff", "stroke-width":"2"
+    };
+    style = {...defaultStyle, ...style};
+
+    let arrowHeadId = this.setArrowHeadMarker({markerStyle});
+
+    style["marker-end"] = `url(#${arrowHeadId})`;
+    let arrow = this.addLine(v.pos, v.endpt, {style});
+    //arrow.setAttribute("marker-end", `url(#${arrowHeadId})`);
+    this.arrows.push(arrow);
+
+
+
+  }
+
+  elemCoords(p){ //convert from graph coordinates to element coordinates
+    let pn = new uPoint(0,0);
+    pn.x = p.x * this.scale + this.axesInfo.zero.x;
+    pn.y = -p.y * this.scale + this.axesInfo.zero.y;
+    //console.log(p, pn);
+    return pn;
+  }
+
+  elemScale(x){
+    return x * this.scale;
+  }
+
+  createElement({elementInfo = undefined} = {}){
+    elementInfo = (elementInfo === undefined) ? this.elementInfo : elementInfo;
+    elementInfo = {...this.elementInfo, ...elementInfo};
+
+    elementInfo.id = (elementInfo.id === undefined) ? "svg_" + Math.random().toString(36).substr(2, 5) : id;
+
+    this.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    this.setAttributes(this.svg, elementInfo);
+
+    if (this.divId === undefined) {
+      let scriptElement = document.currentScript;
+      let parentElement = scriptElement.parentNode;
+      parentElement.insertBefore(this.svg, scriptElement);
+      }
+    else {
+      let parentElement = document.getElementById(this.divId);
+      parentElement.appendChild(this.svg);
+    }
+
+    return elementInfo.id;
+  }
+
+  addPolyline(pts=[new uPoint(0,0), new uPoint(2,3)], {style={}}={}){
+    // pts is an array of uPoints
+
+    let defaultStyle = {
+      fill:"none", stroke:"#000000",
+      "stroke-width": 2, points: ""
+    };
+    style = {...defaultStyle, ...style};
+
+
+    for (let n=0; n<pts.length; n++){
+      let p = this.elemCoords(pts[n]);
+      style.points += `${p.x.toFixed(4)},${p.y.toFixed(4)} `;
+    }
+
+    let line = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+    this.setAttributes(line, style);
+    this.svg.appendChild(line);
+
+    return line;
+
+  }
+
+}
+
+
+
+
+
+
+
+
+
+class uSvgGraph extends uSvg {
   constructor({
     divId = undefined,
     elementInfo = {}, //html element data
@@ -11,9 +243,13 @@ class uSvgGraph{
       id:undefined,
       scale:"auto"
     }
-    this.elementInfo = {...defaultElementInfo, ...elementInfo};
+    elementInfo = {...defaultElementInfo, ...elementInfo};
+
+    super({divId:divId, elementInfo:elementInfo});
+    this.elementInfo = elementInfo;
 
     let defaultAxesInfo = {
+      showAxes:true,
       zero: new uPoint(this.elementInfo.width/2, this.elementInfo.height/2),
       xmax: 10,
       ymax: 10,
@@ -41,23 +277,11 @@ class uSvgGraph{
     if (this.elementInfo.scale === 'auto') {
      this.elementInfo.scale = Math.max(this.elementInfo.height, this.elementInfo.width) / (2*this.axesInfo.xmax);
    }
-    //console.log(this.elementInfo.height);
-
-    //console.log(this.axesInfo.zero);
 
     this.setScale(this.elementInfo.scale);
 
-    this.elementInfo.id = this.createElement();
-    this.drawAxes();
-    return this.elementInfo.id;
-  }
+    if (this.axesInfo.showAxes) {this.drawAxes();}
 
-  remove(){
-    this.svg.remove();
-  }
-
-  setScale(scale){
-    this.scale = scale;
   }
 
   drawAxes({axesInfo = undefined} = {}){
@@ -105,101 +329,6 @@ class uSvgGraph{
 
   }
 
-  addText(txt, p, {style = {}} = {}){
-    let defaultStyle = {
-      //"font-size": "10px",
-      "text-anchor": "middle"
-    }
-    style = {...defaultStyle, ...style};
-
-    let t = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    p = this.elemCoords(p);
-    t.setAttribute("x", p.x);
-    t.setAttribute("y", p.y);
-    this.setAttributes(t, style);
-    t.textContent = txt;
-    this.svg.appendChild(t);
-  }
-
-  setAttributes(element, style){
-    for (const [key, value] of Object.entries(style)){
-      //console.log(`${key} | ${value}`);
-      element.setAttribute(key, value);
-    }
-  }
-
-  addLine(p1, p2, {style = {}} = {}){
-    let defaultStyle = {
-      stroke:"#000", "stroke-width":"4"
-    };
-    style = {...defaultStyle, ...style};
-    var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    p1 = this.elemCoords(p1);
-    p2 = this.elemCoords(p2);
-    line.setAttribute("x1", p1.x);
-    line.setAttribute("y1", p1.y);
-    line.setAttribute("x2", p2.x);
-    line.setAttribute("y2", p2.y);
-    // line.setAttribute("stroke", stroke);
-    // line.setAttribute("stroke-width", stroke_width);
-    this.setAttributes(line, style);
-
-    this.svg.appendChild(line);
-    return line;
-  }
-
-  addCircle(p = new uPoint(0,0), {style={}} = {}){
-    let defaultStyle = {
-      r:4, fill:"none", stroke:"#000000",
-      "stroke-width": 1
-    };
-    style = {...defaultStyle, ...style};
-
-    let circ = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    p = this.elemCoords(p);
-
-    circ.setAttribute("cx", p.x);
-    circ.setAttribute("cy", p.y);
-    // circ.setAttribute("r", style.r);
-    this.setAttributes(circ, style);
-
-    this.svg.appendChild(circ);
-    return circ;
-  }
-
-  elemCoords(p){ //convert from graph coordinates to element coordinates
-    let pn = new uPoint(0,0);
-    pn.x = p.x * this.scale + this.axesInfo.zero.x;
-    pn.y = -p.y * this.scale + this.axesInfo.zero.y;
-    //console.log(p, pn);
-    return pn;
-  }
-
-  elemScale(x){
-    return x * this.scale;
-  }
-
-  createElement({elementInfo = undefined} = {}){
-    elementInfo = (elementInfo === undefined) ? this.elementInfo : elementInfo;
-    elementInfo = {...this.elementInfo, ...elementInfo};
-
-    elementInfo.id = (elementInfo.id === undefined) ? "svg_" + Math.random().toString(36).substr(2, 5) : id;
-
-    this.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    this.setAttributes(this.svg, elementInfo);
-
-    if (this.divId === undefined) {
-      let scriptElement = document.currentScript;
-      let parentElement = scriptElement.parentNode;
-      parentElement.insertBefore(this.svg, scriptElement);
-      }
-    else {
-      let parentElement = document.getElementById(this.divId);
-      parentElement.appendChild(this.svg);
-    }
-
-    return elementInfo.id;
-  }
 
   drawLinearFunction(f = new uLine(), {style = {}} = {}){
     let defaultStyle = {
@@ -326,7 +455,45 @@ class uSvgGraph{
     return line;
   }
 
+  drawQuadratic(q = new uQuadratic(), {dx = 0.1, style = {}} = {}){
+    let defaultStyle = {
+      stroke:"#000", "stroke-width":"2", fill:'none', points:''
+    }
+    style = {...defaultStyle, ...style};
+
+    let pts = [];
+
+    for (let x=this.xmin; x<=this.xmax; x+=dx){
+
+      let y = q.y(x);
+
+      if (y < this.ymax && y > this.ymin){
+        pts.push(new uPoint(x,y));
+      }
+    }
+
+    q = this.addPolyline(pts, {style});
+
+  }
+
 }
+
+
+
+
+
+
+
+function isEmpty(obj) {
+   for (var x in obj) { console.log(x); return false; }
+   return true;
+}
+
+
+
+
+
+
 
 
 class uPoint{
@@ -344,6 +511,11 @@ class uPoint{
   add(p = new uPoint()){
     let x = this.x + p.x;
     let y = this.y + p.y;
+    return new uPoint(x,y);
+  }
+  addxy(x,y){
+    x = this.x + x;
+    y = this.y + y;
     return new uPoint(x,y);
   }
   asText({round=1}={}){
@@ -423,3 +595,19 @@ function get_uLine_from_slope_and_point(m = 1, pt = new uPoint(1,1)){
 //   let y = l1.m * x + l1.b;
 //   return new uPoint(x, y);
 // }
+
+class uQuadratic{
+  constructor(a=1, b=0, c=0){
+    this.a = a; this.b = b; this.c = c;
+  }
+  y(x){
+    return this.a * x**2 + this.b*x + this.c;
+  }
+}
+
+class uVector{
+  constructor(pos = new uPoint(), v = new uPoint(1,1)){
+    this.pos = pos; this.v = v;
+    this.endpt = this.pos.add(this.v);
+  }
+}

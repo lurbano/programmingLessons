@@ -66,26 +66,28 @@
             Check your answer:
             <p>
               Angle (in radians):
-              <input type="number" id="rad0" style="width:5em;">
+              <input type="number" id="rad0" style="width:5em;" step="0.1" value='0.5'>
             </p>
             <p>
-              Angle (in radians): <span id="deg0"></span>
+              Angle (in degrees): <span id="deg0"></span>
             </p>
-            <input type="button" id="radToDegBut" value="New Numbers">
+            <!-- <input type="button" id="radToDegBut" value="New Numbers"> -->
             <script type="text/javascript">
-              function radToDeg(rad=undefined){
-                if (rad===undefined){
-                  let rad = (Math.random()*2*Math.PI).toFixed(2);
+              function radToDeg(){
+                let rad = document.getElementById("rad0").value;
+                console.log(rad);
+                if (!rad) {
+                  rad = Math.random()*2*Math.PI;
                 }
+                console.log(rad);
                 document.getElementById("rad0").value = rad;
                 let deg = (rad/Math.PI)* 180;
                 document.getElementById("deg0").innerHTML = deg.toFixed(2)+'°';
               }
               radToDeg();
-              document.getElementById('radToDegBut').addEventListener("click", radToDeg);
+              //document.getElementById('radToDegBut').addEventListener("click", radToDeg);
               document.getElementById('rad0').addEventListener("change", function(){
-                let r = document.getElementById("rad0").value;
-                radToDeg(r);
+                radToDeg();
               });
             </script>
           </div>
@@ -111,19 +113,18 @@
 
           <div class="comment">
             Check your answer:
+
             <p>
-              Angle (in degrees): <span id="deg1"></span>
-            </p>
-            <p>
-              Angle (in radians): <span id="rad1"></span>
+              <span id="deg1" style="margin-left:2em;"></span>  <span id="rad1"></span>
             </p>
             <input type="button" id="degToRadBut" value="New Numbers">
             <script type="text/javascript">
               function degToRad(){
                 let deg = Math.floor(Math.random()*360);
-                document.getElementById("deg1").innerHTML = deg+'°';
+                document.getElementById("deg1").innerHTML = deg+'° = ';
                 let rad = (deg/180)* Math.PI;
-                document.getElementById("rad1").innerHTML = rad.toFixed(2);
+                let radpi = deg/180;
+                document.getElementById("rad1").innerHTML = rad.toFixed(2) + " rad. = " + radpi.toFixed(2) + " π rad.";
               }
               degToRad();
               document.getElementById('degToRadBut').addEventListener("click", degToRad);
@@ -146,59 +147,5 @@
   <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="../prism.js"></script>
   <script type="text/javascript" src="../exercises.js"></script>
-  <script type="text/javascript">
 
-    function distance(v1, v2){
-      d = ( (v1[1]-v2[1])**2 + (v1[0]-v2[0])**2 )**0.5;
-      return d;
-    }
-    function arrToStr(a, varName="x"){
-      let t = varName + " = [";
-      for (let i = 0; i< a.length; i++){
-        t += a[i] + ", ";
-      }
-      t = t.slice(0,-2) + "]";
-      return t;
-    }
-    $("#generatePts").click(function(){
-
-      let circleRadius = 5.0;
-      let nNodes = parseInt($("#nPts").val())-1;
-      console.log("clicked", nNodes);
-
-      xs = [];
-      ys = [];
-      pts = [];
-
-      let dAngle = 2 * Math.PI / nNodes;
-
-      for (let i=0; i<nNodes; i++){
-        let x = circleRadius * Math.cos(dAngle*i);
-        let y = circleRadius * Math.sin(dAngle*i);
-        xs.push(x.toFixed(2));
-        ys.push(y.toFixed(2));
-        pts.push([x.toFixed(2), y.toFixed(2)]);
-      }
-
-      pts.push(pts[0]);
-      xs.push(xs[0]);
-      ys.push(ys[0]);
-      console.log( `pts = ${pts}`);
-      console.log(arrToStr(xs));
-      console.log(arrToStr(ys, "y"));
-
-      $("#ptData").html(arrToStr(xs) + '\n' + arrToStr(ys, "y"));
-
-      //calculate total distance
-      let d = 0;
-      for (let i=0; i<pts.length-1; i++){
-        d += distance(pts[0], pts[1]);
-        console.log(d);
-      }
-
-      $("#ptsDistance").html(d.toFixed(2));
-
-    })
-
-  </script>
 </html>
