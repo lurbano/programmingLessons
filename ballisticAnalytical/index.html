@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Ballistics (Analytical)</title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="../uSvg.js"></script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <!-- HEADERS -->
+    <div class="nav">
+      <a href="../index.html">← Main</a>
+      <a href="../quickRef/">Quick Ref</a>
+      <a href="../physics.html">Physics</a>
+      <hr>
+    </div>
+    <!-- END HEADERS -->
+
+    <h1>Ballistic Motion (Analytical)</h1>
+
+    <div class="setup">
+      <div class="comment">
+        <h3>1D Vertical Motion</h3>
+        <p>
+          The equation for the height (y) as a function of time for an object (ignoring air resistance) is:
+
+          $$ y(t) = \frac{1}{2} a t^2 + v_0 t + y_0 $$
+
+          where:
+          $$ a = \text{acceleration} $$
+          $$ t = \text{time} $$
+          $$ v_0 = \text{initial velocity} $$
+          $$ y_0 = \text{initial position/height} $$
+
+          and the velocity (v) is:
+
+          $$ v(t) = at + v_0 $$
+
+        <div class="uGraph" style="width:200px">
+          <script type="text/javascript">
+            svg = new uSvg({
+              elementInfo:{width:200,height:300}
+            });
+            p1 = new uPoint(4,3);
+            svg.addCircle(p1, {style:{fill:'#f00'}});
+            v1 = new uVector(p1, new uPoint(0,5));
+            svg.addArrow(v1);
+            svg.addText("v₀ = 5 m/s", p1.addxy(0, -1.25));
+
+            </script>
+          </div>
+        </p>
+
+      </div>
+
+
+    <table>
+
+
+
+      <tr>
+        <th>Notes and Code</th>
+        <th>Outcome</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Basic Program</h3>
+
+            <p>
+              Write a program that calculates the position and velocity of an object with:
+
+              <ul>
+                <li>Inital velocity = 5 m/s</li>
+                <li>Initial height = 20 m</li>
+                <li>acceleration = -9.8 m/s²</li>
+              </ul>
+
+              at the following times:
+
+              <table>
+                <tr>
+                  <th>Time (s)</th>
+                  <th>Position (m)</th>
+                  <th>Velocity (m/s)</th>
+                </tr>
+                <tr>
+                  <td>0</td><td></td><td></td>
+                </tr>
+                <tr>
+                  <td>1</td><td></td><td></td>
+                </tr>
+                <tr>
+                  <td>2</td><td></td><td></td>
+                </tr>
+                <tr>
+                  <td>3</td><td></td><td></td>
+                </tr>
+                <tr>
+                  <td>4</td><td></td><td></td>
+                </tr>
+                <tr>
+                  <td>5</td><td></td><td></td>
+                </tr>
+                <tr>
+                  <td>6</td><td></td><td></td>
+                </tr>
+                <tr>
+                  <td>7</td><td></td><td></td>
+                </tr>
+                <tr>
+                  <td>8</td><td></td><td></td>
+                </tr>
+                <tr>
+                  <td>9</td><td></td><td></td>
+                </tr>
+                <tr>
+                  <td>10</td><td></td><td></td>
+                </tr>
+              </table>
+
+            </p>
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Functions</h3>
+
+            <p>
+              If you have not already, write two functions to calculate position (y) and velocity (v) for a given time.
+            </p>
+            <p>
+              Let your function have default values for acceleration (9.8), initial velocity (0), and initial position (0).
+            </p>
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Class</h3>
+
+            <p>
+              Create a ballistics class that has methods to calculate the position and velocity when given a specific time.
+            </p>
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Maximum Height</h3>
+
+            <p>
+              Write a program/method to determine the maximum height of the object.
+            </p>
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+    </table>
+
+  </body>
+  <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+
+</html>
