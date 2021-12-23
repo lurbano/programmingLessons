@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Programming Paradigms Introduction</title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="../uSvg.js"></script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <!-- HEADERS -->
+    <div class="nav">
+      <a href="../index.html">← Main</a>
+      <a href="../quickRef/">Quick Ref</a>
+      <hr>
+    </div>
+    <!-- END HEADERS -->
+
+    <h1>Approaches to programming: Procedural vs. Object-Oriented</h1>
+
+    <div class="setup">
+      <div class="comment">
+        <p>
+          <ul>
+            <li>
+              <b>Procedural</b>: Step-by-step instructions using blocks of code (loops, logic statements, functions) to execute the program.
+            </li>
+            <li>
+              <b>Object-oriented</b>: Using objects to store data and do calculations.
+            </li>
+          </ul>
+
+      </div>
+
+      <div class="comment">
+        <h3>Problem: Perimeter of Triangle</h3>
+        Write a program to calculate the perimeter of a triangle given the coordinates of the three verticies.
+
+
+        <div class="uGraph" style="width:300px;">
+          <script type="text/javascript">
+            svg = new uSvgGraph({
+              elementInfo:{width:300,height:300}
+            });
+            p1 = new uPoint(4,3);
+            p2 = new uPoint(-4, 7);
+            p3 = new uPoint(-5, -4);
+
+            svg.drawPoints([p1,p2,p3]);
+            svg.labelPoint(p1);
+            svg.labelPoint(p2);
+            svg.labelPoint(p3);
+
+            svg.addPolyline([p1,p2,p3,p1]);
+
+          </script>
+        </div>
+
+        <p>
+          The distance between two points is:
+
+          $$ d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+        </p>
+
+        Write this program yourself before looking at the approaches below.
+
+      </div>
+
+    </div>
+
+
+    <table>
+
+
+
+      <tr>
+        <th>Notes and Code</th>
+        <th>Outcome</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Procedural: Basic</h3>
+
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+
+            <div class="pythonCode">
+              <div class="toggle-next">Show Notes ▼</div>
+                <pre class='line-numbers'><code class="language-python">
+                  # INPUT
+                  p1_x = 4
+                  p1_y = 3
+                  p2_x = -4
+                  p2_y = 7
+                  p3_x = -5
+                  p3_y = -4
+
+                  # CALCULATIONS
+                  # distance between (1) and (2)
+                  side1 = ((p2_x - p1_x)**2 + (p2_y - p1_y)**2)**0.5
+
+                  # distance between (2) and (3)
+                  side2 = ((p3_x - p2_x)**2 + (p3_y - p2_y)**2)**0.5
+
+                  # distance between (3) and (1)
+                  side3 = ((p1_x - p3_x)**2 + (p1_y - p3_y)**2)**0.5
+
+                  # Perimeter = total distance
+                  perimeter = side1 + side2 + side3
+
+
+                  # OUTPUT
+                  print("Perimeter: ", perimeter)
+
+                </code></pre>
+                <em>perimeter-p.py</em>
+
+              </div>
+            </div>
+
+            Output:
+            <div class="pythonCode">
+              <div class="toggle-next">Show Notes ▼</div>
+              <div class="test" hidden>
+
+                <pre><code class="language-bash">
+                  Perimeter:  31.3913871781778
+
+
+                </code></pre>
+              </div>
+            </div>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Procedural: Using a distance function</h3>
+
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+            <div class="pythonCode">
+              <div class="toggle-next">Show Notes ▼</div>
+                <pre class='line-numbers'><code class="language-python">
+                  # FUNCTIONS
+                  def distance(x1, y1, x2, y2):
+                      d = ((x2-x1)**2 + (y2-y1)**2)**0.5
+                      return d
+
+                  # INPUT
+                  p1_x = 4
+                  p1_y = 3
+                  p2_x = -4
+                  p2_y = 7
+                  p3_x = -5
+                  p3_y = -4
+
+                  # CALCULATIONS
+                  # distance between (1) and (2)
+                  side1 = distance(p1_x, p1_y, p2_x, p2_y)
+
+                  # distance between (2) and (3)
+                  side2 = distance(p2_x, p2_y, p3_x, p3_y)
+
+                  # distance between (3) and (1)
+                  side3 = distance(p3_x, p3_y, p1_x, p1_y)
+
+                  # Perimeter = total distance
+                  perimeter = side1 + side2 + side3
+
+
+                  # OUTPUT
+                  print("Perimeter: ", perimeter)
+
+                </code></pre>
+                <em>perimeter-p.py</em>
+
+              </div>
+            </div>
+
+            Output:
+            <div class="pythonCode">
+              <div class="toggle-next">Show Notes ▼</div>
+              <div class="test" hidden>
+
+                <pre><code class="language-bash">
+                  Perimeter:  31.3913871781778
+
+
+                </code></pre>
+              </div>
+            </div>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Object Oriented: Using a point class</h3>
+            Uses a point class with a distanceTo method that calculates the distance to another point.
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+            <div class="pythonCode">
+              <div class="toggle-next">Show Notes ▼</div>
+                <pre class='line-numbers'><code class="language-python">
+                  # CLASSES
+                  class point:
+                      def __init__(self, x, y):
+                          self.x = x
+                          self.y = y
+                      # Method to find the distance to another point (p)
+                      def distanceTo(self, p):
+                          d = ((self.x-p.x)**2 + (self.y-p.y)**2)**0.5
+                          return d
+
+                  # INPUT
+                  p1 = point(4,3)
+                  p2 = point(-4,7)
+                  p3 = point(-5,-4)
+
+                  # CALCULATIONS
+                  # distance between (1) and (2)
+                  side1 = p1.distanceTo(p2)
+
+                  # distance between (2) and (3)
+                  side2 = p2.distanceTo(p3)
+
+                  # distance between (3) and (1)
+                  side3 = p3.distanceTo(p1)
+
+                  # Perimeter = total distance
+                  perimeter = side1 + side2 + side3
+
+
+                  # OUTPUT
+                  print("Perimeter: ", perimeter)
+
+                </code></pre>
+                <em>perimeter-oo.py</em>
+
+              </div>
+            </div>
+
+            Output:
+            <div class="pythonCode">
+              <div class="toggle-next">Show Notes ▼</div>
+              <div class="test" hidden>
+
+                <pre><code class="language-bash">
+                  Perimeter:  31.3913871781778
+
+
+                </code></pre>
+              </div>
+            </div>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Object Oriented: Using a point class and a triangle class</h3>
+            Uses a point class with a distanceTo method that calculates the distance to another point and a triangle class that calculates the perimeter.
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+            <div class="pythonCode">
+              <div class="toggle-next">Show Notes ▼</div>
+                <pre class='line-numbers'><code class="language-python">
+                  # CLASSES
+                  class point:
+                      def __init__(self, x, y):
+                          self.x = x
+                          self.y = y
+                      # Method to find the distance to another point (p)
+                      def distanceTo(self, p):
+                          d = ((self.x-p.x)**2 + (self.y-p.y)**2)**0.5
+                          return d
+
+                  # Triangle class that takes three vertices as point class instances.
+                  class triangle:
+                      def __init__(self, p1, p2, p3):
+                          self.p1 = p1
+                          self.p2 = p2
+                          self.p3 = p3
+
+                      def perimeter(self):
+                          p = self.p1.distanceTo(self.p2)
+                          p += self.p2.distanceTo(self.p3)
+                          p += self.p3.distanceTo(self.p1)
+                          return p
+
+                  # INPUT
+                  p1 = point(4,3)
+                  p2 = point(-4,7)
+                  p3 = point(-5,-4)
+
+                  tri = triangle(p1, p2, p3)
+
+                  # CALCULATIONS
+                  perimeter = tri.perimeter()
+
+                  # OUTPUT
+                  print("Perimeter: ", perimeter)
+
+                </code></pre>
+                <em>perimeter-oo.py</em>
+
+              </div>
+            </div>
+
+            Output:
+            <div class="pythonCode">
+              <div class="toggle-next">Show Notes ▼</div>
+              <div class="test" hidden>
+
+                <pre><code class="language-bash">
+                  Area:  31.3913871781778
+
+
+                </code></pre>
+              </div>
+            </div>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Assignment: Area of a triangle</h3>
+            Write a program to calculate the area of the triangle.
+
+            <p>
+              You can use <b>Heron's formula</b> to determine the area of a triangle based on the lengths of its sides, or there is a formula you can use based on the vertices of triangle.
+            </p>
+
+          </div>
+
+          </div>
+
+        </td>
+        <td>
+
+          <div class="comment">
+
+            Output:
+            <div class="pythonCode">
+              <div class="toggle-next">Show Notes ▼</div>
+              <div class="test" hidden>
+
+                <pre><code class="language-bash">
+                  Perimeter:  46.000
+                </code></pre>
+              </div>
+            </div>
+
+            If you did not use an object-oriented approach, try this problem again doing so.
+
+          </div>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Assignment: Find the perimeter of a polygon.</h3>
+            Find the perimeter of the polygon. Explain which method you used and why.
+
+            <div class="uGraph" style="width:300px;">
+              <script type="text/javascript">
+                svg = new uSvgGraph({
+                  elementInfo:{width:300,height:300}
+                });
+                p1 = new uPoint(8, 0);
+                p2 = new uPoint(4, 7);
+                p3 = new uPoint(-4, 7);
+                p4 = new uPoint(-8, 0);
+                p5 = new uPoint(-4, -7);
+                p6 = new uPoint(4, -7);
+
+                svg.addPolyline([p1,p2,p3,p4, p5, p6, p1]);
+
+                svg.drawPoints([p1,p2,p3,p4,p5,p6]);
+                svg.labelPoint(p1);
+                svg.labelPoint(p2);
+                svg.labelPoint(p3);
+                svg.labelPoint(p4);
+                svg.labelPoint(p5);
+                svg.labelPoint(p6);
+
+
+              </script>
+            </div>
+
+            <p>
+              The distance between two points is:
+
+              $$ d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+            </p>
+
+          </div>
+
+          </div>
+
+        </td>
+        <td>
+
+          <div class="comment">
+
+            Output:
+            <div class="pythonCode">
+              <div class="toggle-next">Show Notes ▼</div>
+              <div class="test" hidden>
+
+                <pre><code class="language-bash">
+                  Perimeter:  47.17423524981518
+                </code></pre>
+              </div>
+            </div>
+
+            If you did not use an object-oriented approach, try this problem again doing so.
+
+          </div>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>Assignment: Find the Area of a polygon.</h3>
+            Find the area of the polygon. A convex polygon can be broken down into triangles.
+
+
+            <div class="uGraph" style="width:300px;">
+              <script type="text/javascript">
+                svg = new uSvgGraph({
+                  elementInfo:{width:300,height:300}
+                });
+                pts = [];
+                pts.push(new uPoint(6,0));
+                pts.push(new uPoint(4,7));
+                pts.push(new uPoint(-4,7));
+                pts.push(new uPoint(-6,0));
+                pts.push(new uPoint(-4,-7));
+                pts.push(new uPoint(4,-7));
+
+                p0 = new uPoint(0,0);
+                svg.drawPoints(pts);
+
+                for (let i=0; i<pts.length;i++){
+                  svg.addLine(pts[i], p0, {style:{'stroke-width':2}});
+                  svg.labelPoint(pts[i]);
+                }
+
+                pts.push(pts[0]);
+                svg.addPolyline(pts);
+
+
+
+
+
+              </script>
+            </div>
+
+
+          </div>
+
+          </div>
+
+        </td>
+        <td>
+
+          <div class="comment">
+
+            Output:
+            <div class="pythonCode">
+              <div class="toggle-next">Show Notes ▼</div>
+              <div class="test" hidden>
+
+                <pre><code class="language-bash">
+                  Area:  140
+                </code></pre>
+              </div>
+            </div>
+
+            If you did not use an object-oriented approach, try this problem again doing so.
+
+          </div>
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+
+
+
+    </table>
+
+  </body>
+  <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+
+</html>
