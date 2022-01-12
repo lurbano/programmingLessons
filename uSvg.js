@@ -220,7 +220,82 @@ class uSvg{
 
   }
 
+  addRightTriangle({pos = new uPoint(), a = 1, b = 1, flip = "", rotate = 0, style={}} = {}){
+    //a is the vertical side length
+    //rotate is counterclockwise
+    // flip can be vertical ("v"), horizontal ("h"), or both ("vh")
+
+    let p = this.elemCoords(pos);
+
+    let defaultStyle = {
+      fill:"none", stroke:"#000000",
+      "stroke-width": 2, points: "",
+      //"transform-origin": `${p.x} ${p.y}`
+    };
+    style = {...defaultStyle, ...style};
+
+    //flip vertically or horizontally
+    a = /v/.test(flip) ? -a : a;
+    b = /h/.test(flip) ? -b : b;
+
+    if (rotate != 0){
+      let t = `rotate(${-rotate}, ${p.x}, ${p.y})`;
+      style.transform = style.transform === undefined ? t : `${t} ${style.transform}`;
+    }
+
+    let p1 = pos;
+    let p2 = pos.addxy(0, a);
+    let p3 = pos.addxy(b, 0);
+
+    let pts = [p1, p2, p3, p1];
+    let line = this.addPolyline(pts, {style});
+
+    let tri = new uRightTriangle(a, b);
+    tri.line = line;
+    return tri;
+
+  }
+
+  addCylinder({pos= new uPoint(), r = 1, h = 1, rLabel = r, hLabel = h, style={}} = {}){
+
+    let defaultStyle = {
+      fill:"none", stroke:"#000000",
+      "stroke-width": 2, points: "",
+      //"transform-origin": `${p.x} ${p.y}`
+    };
+    style = {...defaultStyle, ...style};
+
+    let p1 = pos;
+    let p = this.elemCoords(p1);
+    this.addCircle(pos, {style:{
+      r: this.elemScale(r),
+      transform: "scale(1, 0.25)",
+      "transform-origin": `${p.x} ${p.y}`
+    }});
+
+    let p2 = pos.addxy(0,h);
+    p = this.elemCoords(p2);
+    this.addCircle(pos.addxy(0, h), {style:{
+      r: this.elemScale(r),
+      transform: "scale(1, 0.25)",
+      "transform-origin": `${p.x} ${p.y}`
+    }});
+
+    this.addLine(p1.addxy(r,0), p2.addxy(r,0), {style});
+    this.addLine(p1.addxy(-r,0), p2.addxy(-r,0), {style});
+
+    //radius
+    this.addLine(p1, p1.addxy(r,0), {style});
+    this.addText(rLabel, p1.addxy(r/2, 0.5));
+
+    //height
+    this.addText(hLabel, p1.addxy(r+0.5, h/2));
+
+  }
+
 }
+
+
 
 
 
@@ -609,5 +684,12 @@ class uVector{
   constructor(pos = new uPoint(), v = new uPoint(1,1)){
     this.pos = pos; this.v = v;
     this.endpt = this.pos.add(this.v);
+  }
+}
+
+class uRightTriangle{
+  constructor(a, b){
+    this.a = a; this.b = b;
+    this.c = (a**2 + b**2)**0.5;
   }
 }
