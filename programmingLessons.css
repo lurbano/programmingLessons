@@ -139,3 +139,7 @@ code {
   background-color: white;
   border: 1px solid grey;
 }
+
+.answerField {
+  background-color: PaleTurquoise;
+}

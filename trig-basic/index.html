@@ -8,10 +8,11 @@
     <link href="../prism.css" rel="stylesheet" />
     <link href="../programmingLessons.css" rel="stylesheet" />
 
-    <script type="text/javascript" src="../uSvg.js"></script>
+    <script type="text/javascript" src="../uSvg-0.2.js"></script>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
     </script>
+      <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
 
     <style media="screen">
 
@@ -24,7 +25,7 @@
       <a href="../index.html">← Main</a>
       <a href="../quickRef/">Quick Ref</a>
       <a href="../physics.html">Physics</a>
-      <a href="../preCalc.html">Physics</a>
+      <a href="../preCalc.html">preCalc</a>
       <hr>
     </div>
     <!-- END HEADERS -->
@@ -39,36 +40,24 @@
 
         <div class="uGraph" style="width:500px">
           <script type="text/javascript">
-            svg = new uSvg({
-              elementInfo:{width:500,height:400}
-            });
-            p1 = new uPoint(16,3);
-            p2 = p1.addxy(-3*4, 0)
-            p3 = p2.addxy(0, 3*3);
-            console.log(p1.asText(), p2.asText(), p3.asText());
-            //triangle = svg.addRightTriangle({pos:p1, a:3*3, b:4*4, flip:"h"});
-            //console.log(triangle.line.points[0]);
-            triangle = svg.addPolyline([p2,p3,p1,p2]);
+            svg = new uSvgGraph({elementInfo:{width:300,height:300}, axesInfo:{showAxes:false}});
 
-            //svg.addText("v₀ = 5 m/s", p1.addxy(0, -1.25));
+            a = 10;
+            theta = 30 *Math.PI/180;
+            b = a/ Math.tan(theta);
+
+
+            p1 = new uPoint(-8, -8);
+            tri = svg.addRightTriangle({
+              pos:p1,
+              a:a, b:b,
+              arc_r: 5,
+              show_A_angle: false
+            });
 
           </script>
         </div>
         </p>
-
-        The equation for the height (y) as a function of time for an object (ignoring air resistance) is:
-
-        $$ y(t) = \frac{1}{2} a t^2 + v_0 t + y_0 $$
-
-        where:
-        $$ a = \text{acceleration} $$
-        $$ t = \text{time} $$
-        $$ v_0 = \text{initial velocity} $$
-        $$ y_0 = \text{initial position/height} $$
-
-        and the velocity (v) is:
-
-        $$ v(t) = at + v_0 $$
 
       </div>
 
@@ -87,68 +76,64 @@
         <td>
           <div class="comment">
 
-            <h3>Basic Program</h3>
+            <h3>Find Hypothenuse Given Opposite Side and Angle</h3>
 
             <p>
-              Write a program that calculates the position and velocity of an object with:
-
-              <ul>
-                <li>Inital velocity = 5 m/s</li>
-                <li>Initial height = 20 m</li>
-                <li>acceleration = -9.8 m/s²</li>
-              </ul>
-
-              at the following times:
-
-              <table>
-                <tr>
-                  <th>Time (s)</th>
-                  <th>Position (m)</th>
-                  <th>Velocity (m/s)</th>
-                </tr>
-                <tr>
-                  <td>0</td><td></td><td></td>
-                </tr>
-                <tr>
-                  <td>1</td><td></td><td></td>
-                </tr>
-                <tr>
-                  <td>2</td><td></td><td></td>
-                </tr>
-                <tr>
-                  <td>3</td><td></td><td></td>
-                </tr>
-                <tr>
-                  <td>4</td><td></td><td></td>
-                </tr>
-                <tr>
-                  <td>5</td><td></td><td></td>
-                </tr>
-                <tr>
-                  <td>6</td><td></td><td></td>
-                </tr>
-                <tr>
-                  <td>7</td><td></td><td></td>
-                </tr>
-                <tr>
-                  <td>8</td><td></td><td></td>
-                </tr>
-                <tr>
-                  <td>9</td><td></td><td></td>
-                </tr>
-                <tr>
-                  <td>10</td><td></td><td></td>
-                </tr>
-              </table>
+              Write a program that finds the hypothenuse of a triangle given the length of the opposite side and an angle.
 
             </p>
+
+            <p>
+              Test Case:
+              <ul>
+                <li>angle (θ) = 30°</li>
+                <li>opposite side length = 10</li>
+              </ul>
+
+              <div class="uGraph" style="width:500px">
+                <script type="text/javascript">
+                  svg = new uSvgGraph({elementInfo:{width:400,height:300}, axesInfo:{showAxes:false}});
+
+                  a = 10;
+                  theta = 30 *Math.PI/180;
+                  b = a/ Math.tan(theta);
+
+
+                  p1 = new uPoint(-7.5, -6);
+                  tri = svg.addRightTriangle({
+                    pos:p1,
+                    a:a, b:b,
+                    arc_r: 5,
+                    show_A_angle: false
+                  });
+
+                  svg.addText("10", p1.addxy(-1, 5));
+                  svg.addText("h", p1.addxy(b/2+.5, a/2+.5));
+
+                </script>
+              </div>
+            </p>
+
 
           </div>
 
         </td>
         <td>
           <div class="comment">
+            <p>
+              Hints:
+              <ul>
+                <li>Do the algebra by hand and find the equation for <b><em>h</em></b>. </li>
+                <li>in Javascript, pi is given by <code>Math.PI</code> </li>
+                <li>the <code>Math.sin()</code> function in JavaScript expects the angle to be in <b>radians</b>. </li>
+              </ul>
 
+              <div class="toggle-next">Answer ▼</div>
+              <div id="q1-ans" class="answerField" hidden>x</div>
+              <script type="text/javascript">
+                $("#q1-ans").html(b.toFixed(1));
+              </script>
+            </p>
 
           </div>
 
@@ -239,7 +224,7 @@
     </table>
 
   </body>
-  <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+
   <script type="text/javascript" src="../prism.js"></script>
   <script type="text/javascript" src="../exercises.js"></script>
 
