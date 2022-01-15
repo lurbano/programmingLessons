@@ -76,7 +76,7 @@
         <td>
           <div class="comment">
 
-            <h3>Find Hypothenuse Given Opposite Side and Angle</h3>
+            <h3>I. Find Hypothenuse Given and Angle and the Opposite side.</h3>
 
             <p>
               Write a program that finds the hypothenuse of a triangle given the length of the opposite side and an angle.
@@ -108,7 +108,7 @@
                   });
 
                   svg.addText("10", p1.addxy(-1, 5));
-                  svg.addText("h", p1.addxy(b/2+.5, a/2+.5));
+                  svg.addText("h = ?", p1.addxy(b/2+.75, a/2+.5));
 
                 </script>
               </div>
@@ -125,13 +125,13 @@
               <ul>
                 <li>Do the algebra by hand and find the equation for <b><em>h</em></b>. </li>
                 <li>in Javascript, pi is given by <code>Math.PI</code> </li>
-                <li>the <code>Math.sin()</code> function in JavaScript expects the angle to be in <b>radians</b>. </li>
+                <li>the trigonometric functions (<code>Math.sin(), Math.cos(), Math.tan(), Math.asin(), etc.</code>) in Javascript (and most programming languages) expects the angle to be in <b>radians</b>. </li>
               </ul>
 
               <div class="toggle-next">Answer ▼</div>
               <div id="q1-ans" class="answerField" hidden>x</div>
               <script type="text/javascript">
-                $("#q1-ans").html(b.toFixed(1));
+                $("#q1-ans").html(`h = ${b.toFixed(1)}` );
               </script>
             </p>
 
@@ -143,24 +143,71 @@
       <!-- END ROW -->
 
 
+
+
+
       <!-- NEW ROW -->
       <tr>
         <td>
           <div class="comment">
 
-            <h3>Functions</h3>
+            <h3>II. Find Hypothenuse Given an Angle and the Adjacent Side.</h3>
 
             <p>
-              If you have not already, write two functions to calculate position (y) and velocity (v) for a given time.
+              Write a program that finds the hypothenuse of a triangle given the length of the adjacent side and an angle.
+
             </p>
+
             <p>
-              Let your function have default values for acceleration (9.8), initial velocity (0), and initial position (0).
+              Test Case:
+              <ul>
+                <li>angle (θ) = 40°</li>
+                <li>adjacent side length = 8</li>
+              </ul>
+
+              <div class="uGraph" style="width:500px">
+                <script type="text/javascript">
+                  svg = new uSvgGraph({elementInfo:{width:400,height:300}, axesInfo:{showAxes:false}});
+
+                  b = 8;
+                  theta = 40 *Math.PI/180;
+                  a = b * Math.tan(theta);
+
+                  console.log(a,b);
+                  p1 = new uPoint(-7.5, -6);
+                  tri = svg.addRightTriangle({
+                    pos:p1,
+                    a:a, b:b,
+                    arc_r: 3,
+                    show_A_angle: false
+                  });
+
+                  svg.addText("8", p1.addxy(b/2, -1));
+                  svg.addText("h = ?", p1.addxy(b/2+1, a/2+.5));
+
+                </script>
+              </div>
             </p>
+
+
           </div>
 
         </td>
         <td>
           <div class="comment">
+            <p>
+              Hints:
+              <ul>
+                <li>in Javascript, pi is given by <code>Math.PI</code> </li>
+                <li>the trigonometric functions (<code>Math.sin(), Math.cos(), Math.tan(), Math.asin(), etc.</code>) in Javascript (and most programming languages) expects the angle to be in <b>radians</b>. </li>
+              </ul>
+
+              <div class="toggle-next">Answer ▼</div>
+              <div id="q2-ans" class="answerField" hidden>x</div>
+              <script type="text/javascript">
+                $("#q2-ans").html(`h = ${a.toFixed(1)}` );
+              </script>
+            </p>
 
           </div>
 
@@ -171,52 +218,81 @@
 
 
 
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-
-            <h3>Class</h3>
-
-            <p>
-              Create a ballistics class that has methods to calculate the position and velocity when given a specific time.
-            </p>
-          </div>
-
-        </td>
-        <td>
-          <div class="comment">
-
-          </div>
 
 
-        </td>
-      </tr>
-      <!-- END ROW -->
+
+            <!-- NEW ROW -->
+            <tr>
+              <td>
+                <div class="comment">
+
+                  <h3>III. Find Adjacent Side Given an Angle and the Hypothenuse</h3>
+
+                  <p>
+                    Write a program that finds the length of the adjacent side of a right-angle triangle given the angle and the length of the hypothenuse.
+
+                  </p>
+
+                  <p>
+                    Test Case:
+                    <ul>
+                      <li>angle (θ) = 50°</li>
+                      <li>hypothenuse (h) = 12</li>
+                    </ul>
+
+                    <div class="uGraph" style="width:500px">
+                      <script type="text/javascript">
+                        svg = new uSvgGraph({elementInfo:{width:400,height:300}, axesInfo:{showAxes:false}});
+
+                        h = 12;
+                        theta = 50 *Math.PI/180;
+                        a = h * Math.sin(theta);
+                        b = h * Math.cos(theta);
 
 
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
+                        p1 = new uPoint(-7.5, -6);
+                        tri = svg.addRightTriangle({
+                          pos:p1,
+                          a:a, b:b,
+                          arc_r: 3,
+                          show_A_angle: false
+                        });
 
-            <h3>Maximum Height</h3>
+                        svg.addText("a = ?", p1.addxy(b/2, -1));
+                        svg.addText(h, p1.addxy(b/2+1, a/2+.5));
 
-            <p>
-              Write a program/method to determine the maximum height of the object.
-            </p>
-          </div>
-
-        </td>
-        <td>
-          <div class="comment">
-
-          </div>
+                      </script>
+                    </div>
+                  </p>
 
 
-        </td>
-      </tr>
-      <!-- END ROW -->
+                </div>
+
+              </td>
+              <td>
+                <div class="comment">
+                  <p>
+                    Hints:
+                    <ul>
+                      <li>in Javascript, pi is given by <code>Math.PI</code> </li>
+                      <li>the trigonometric functions (<code>Math.sin(), Math.cos(), Math.tan(), Math.asin(), etc.</code>) in Javascript (and most programming languages) expects the angle to be in <b>radians</b>. </li>
+                    </ul>
+
+                    <div class="toggle-next">Answer ▼</div>
+                    <div id="q3-ans" class="answerField" hidden>x</div>
+                    <script type="text/javascript">
+                      $("#q3-ans").html(`a = ${a.toFixed(1)}` );
+                    </script>
+                  </p>
+
+                </div>
+
+
+              </td>
+            </tr>
+            <!-- END ROW -->
+
+
 
 
 
