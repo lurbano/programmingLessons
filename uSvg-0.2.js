@@ -60,6 +60,7 @@ class uSvg{
     this.setAttributes(t, style);
     t.textContent = txt;
     this.svg.appendChild(t);
+    return t;
   }
 
   setAttributes(element, style){
@@ -108,7 +109,7 @@ class uSvg{
 
   addArcToVertex({r = 1,
     vertex = [new uPoint(1,0), new uPoint(0,0), new uPoint(0,1)],
-    angle_label = "angle", angle_label_f = 0.25, angle_label_rounding = 1,
+    angle_label = "use_angle", angle_label_f = 0.25, angle_label_rounding = 1,
     angleLabelStyle = {},
     style={}} = {}){
 
@@ -157,7 +158,7 @@ class uSvg{
       my = f*c.y + (1-f)* my;
       let mp = new uPoint(mx, my);
 
-      if (angle_label === 'angle'){
+      if (angle_label === 'use_angle'){
         angle_label = v.getAngle().toFixed(angle_label_rounding) + '°';
       }
       else if (angle_label === 'theta') { angle_label = 'θ'}
@@ -173,6 +174,171 @@ class uSvg{
 
   }
 
+
+
+  addAngle({arc_r = 1,
+    vertex = new uVertex(),
+    angle_label = "use_angle",
+    angle_label_f = 0.25,
+    angle_label_rounding = 1,
+    angleLabelStyle = {},
+    style={}} = {}){
+
+    let defaultStyle = {
+      r:4, fill:"none", stroke:"#000000",
+      "stroke-width": 1
+    };
+    style = {...defaultStyle, ...style};
+
+    let defaultAngleLabelStyle = {
+      "text-anchor": "middle",
+      "dominant-baseline":"central",
+      'font-style': 'italic'
+    };
+    angleLabelStyle = {...defaultAngleLabelStyle, ...angleLabelStyle};
+
+    let arc = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+    //let v = vertex;
+    let [s1, s2] = vertex.getArcPoints(arc_r);
+
+    let p1 = vertex.p1;
+    let c = vertex.center;
+    let p2 = vertex.p2;
+
+
+    // convert to graph coordinates
+    let cg = this.elemCoords(c);
+    let s1g = this.elemCoords(s1);
+    let s2g = this.elemCoords(s2);
+
+    let rg = this.elemScale(arc_r);
+
+    style.d = `M ${s1g.x} ${s1g.y} `;
+    style.d += `A ${rg} ${rg} 0 0 0 ${s2g.x} ${s2g.y}`;
+
+    this.setAttributes(arc, style);
+    this.svg.appendChild(arc);
+
+    //add label
+    let f = angle_label_f;
+    if (angle_label !== ""){
+      let mx = 0.5*s1.x + 0.5*s2.x;
+      mx = f*c.x + (1-f)*mx;
+      let my = 0.5*s1.y + 0.5*s2.y;
+      my = f*c.y + (1-f)* my;
+      let mp = new uPoint(mx, my);
+
+      if (angle_label === 'use_angle'){
+        angle_label = vertex.getAngle().toFixed(angle_label_rounding) + '°';
+      }
+      else if (angle_label === 'theta') { angle_label = 'θ'}
+      else if (angle_label === 'alpha') { angle_label = 'α'}
+      else if (angle_label === 'beta') { angle_label = 'β'}
+
+      this.addText(angle_label, mp, {style: angleLabelStyle});
+    }
+
+    //arc.vertices = [s1, c, s2];
+
+    return arc;
+
+  }
+
+  addAngleArc({arc_r = 1,
+    vertex = new uVertex(),
+    style={}} = {}){
+
+    let defaultStyle = {
+      r:4, fill:"none", stroke:"#000000",
+      "stroke-width": 1
+    };
+    style = {...defaultStyle, ...style};
+
+    let arc = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+    //let v = vertex;
+    let [s1, s2] = vertex.getArcPoints(arc_r);
+
+    let p1 = vertex.p1;
+    let c = vertex.center;
+    let p2 = vertex.p2;
+
+
+    // convert to graph coordinates
+    let cg = this.elemCoords(c);
+    let s1g = this.elemCoords(s1);
+    let s2g = this.elemCoords(s2);
+
+    let rg = this.elemScale(arc_r);
+
+    if (vertex.getAngle().toPrecision(5) != 90){
+      style.d = `M ${s1g.x} ${s1g.y} `;
+      style.d += `A ${rg} ${rg} 0 0 0 ${s2g.x} ${s2g.y}`;
+    }
+    else{
+      let p90 = cg.deltaP(s2g).rotate(45).scale(-(2**0.5));
+      p90 = cg.add(p90);
+      style.d = `M ${s1g.x} ${s1g.y} `;
+      style.d += `L ${p90.x} ${p90.y} L ${s2g.x} ${s2g.y}`;
+    }
+
+    this.setAttributes(arc, style);
+    this.svg.appendChild(arc);
+
+    return arc;
+
+  }
+
+  addAngleLabel({arc_r = 1,
+    vertex = new uVertex(),
+    angle_label = "use_angle",
+    angle_label_f = 0.25,
+    angle_label_rounding = 1,
+    style={}} = {}){
+
+    let defaultStyle = {
+      "text-anchor": "middle",
+      "dominant-baseline":"central",
+      'font-style': 'italic'
+    };
+    style = {...defaultStyle, ...style};
+
+    let [s1, s2] = vertex.getArcPoints(arc_r);
+
+    let p1 = vertex.p1;
+    let c = vertex.center;
+    let p2 = vertex.p2;
+
+    //add label
+    let f = angle_label_f;
+    let mx = 0.5*s1.x + 0.5*s2.x;
+    mx = f*c.x + (1-f)*mx;
+    let my = 0.5*s1.y + 0.5*s2.y;
+    my = f*c.y + (1-f)* my;
+    let mp = new uPoint(mx, my);
+
+    if (angle_label === 'use_angle'){
+      let a = vertex.getAngle().toFixed(angle_label_rounding);
+      if (a == 90) {
+        angle_label = "";
+      }
+      else {
+        angle_label = a + '°';
+      }
+    }
+    else if (angle_label === 'theta') { angle_label = 'θ'}
+    else if (angle_label === 'alpha') { angle_label = 'α'}
+    else if (angle_label === 'beta') { angle_label = 'β'}
+
+    let label = this.addText(angle_label, mp, {style: style});
+
+
+    //arc.vertices = [s1, c, s2];
+
+    return label;
+
+  }
 
   setMove(element, v = new uPoint(1,1)){
     console.log(element.tagName === 'circle', v);
@@ -312,92 +478,151 @@ class uSvg{
 
   }
 
-  addRightTriangle({pos = new uPoint(), a = 1, b = 1, flip = "", rotate = 0,
-    arc_r = 2,
-    show_A_angle=true,
-    show_B_angle=true,
-    A_angle_label= 'angle', // "α",
-    B_angle_label= 'angle', // "β",
-    angleLabelStyle = {},
-    show_a_side = true,
-    show_b_side = true,
-    show_c_side = true,  //hypothenuse
-    a_side_offset = 0.5,
-    b_side_offset = 0.5,
-    c_side_offset = 0.5,
-    a_side_label = "length",
-    b_side_label = "length",
-    sideLabelStyle = {},
-    style={}} = {}){
-    //a is the vertical side length
-    //rotate is counterclockwise
-    // flip can be vertical ("v"), horizontal ("h"), or both ("vh")
+  // addRightTriangle({pos = new uPoint(), a = 1, b = 1,
+  //   flip = "",
+  //   rotate = 0, //degrees
+  //   arc_r = 2,
+  //   show_A_angle=true,
+  //   show_B_angle=true,
+  //   A_angle_label= 'use_angle', // "α",
+  //   B_angle_label= 'use_angle', // "β",
+  //   angleLabelStyle = {},
+  //   show_a_side = true,
+  //   show_b_side = true,
+  //   show_c_side = true,  //hypothenuse
+  //   a_side_offset = new uPoint(-.5,0),
+  //   b_side_offset = new uPoint(0,-.5),
+  //   c_side_offset = new uPoint(.5, 0.5),
+  //   a_side_label = "use_length",
+  //   b_side_label = "use_length",
+  //   c_side_label = "use_length",
+  //   sideLabelStyle = {},
+  //   style={}} = {}){
+  //   //a is the vertical side length
+  //   //rotate is counterclockwise
+  //   // flip can be vertical ("v"), horizontal ("h"), or both ("vh")
+  //
+  //
+  //   let defaultStyle = {
+  //     fill:"none", stroke:"#000000",
+  //     "stroke-width": 2, points: "",
+  //     //"transform-origin": `${p.x} ${p.y}`
+  //   };
+  //   style = {...defaultStyle, ...style};
+  //
+  //   let defaultAngleLabelStyle = {
+  //     "text-anchor": "middle",
+  //     "dominant-baseline":"central",
+  //     "font-size": '0.75em'
+  //   };
+  //   angleLabelStyle = {...defaultAngleLabelStyle, ...angleLabelStyle};
+  //
+  //   let defaultSideLabelStyle = {
+  //     "text-anchor": "middle",
+  //     "dominant-baseline":"central",
+  //     //"font-size": '0.75em'
+  //   };
+  //   sideLabelStyle = {...defaultSideLabelStyle, ...sideLabelStyle};
+  //
+  //   //flip vertically or horizontally
+  //   a = /v/.test(flip) ? -a : a;
+  //   b = /h/.test(flip) ? -b : b;
+  //
+  //   let p = this.elemCoords(pos);
+  //   if (rotate != 0){
+  //     let t = `rotate(${-rotate}, ${p.x}, ${p.y})`;
+  //     style.transform = style.transform === undefined ? t : `${t} ${style.transform}`;
+  //   }
+  //
+  //   let p1 = pos;
+  //   let p2 = pos.addxy(0, a);
+  //   let p3 = pos.addxy(b, 0);
+  //
+  //   // draw triangle
+  //   let pts = [p1, p2, p3, p1];
+  //   let line = this.addPolyline(pts, {style});
+  //
+  //   let tri = new uRightTriangle(a, b);
+  //   tri.line = line;
+  //   //tri.vertices = [p1, p2, p3];
+  //
+  //   if (show_A_angle){
+  //     let arcA = this.addArcToVertex({
+  //       r: arc_r,
+  //       vertex: [p1, p2, p3],
+  //       angle_label: A_angle_label,
+  //       angleLabelStyle: angleLabelStyle
+  //     })
+  //   }
+  //   if (show_B_angle){
+  //     let arcB = this.addArcToVertex({
+  //       r: arc_r,
+  //       vertex: [p2, p3, p1],
+  //       angle_label: B_angle_label,
+  //       angleLabelStyle: angleLabelStyle
+  //     })
+  //   }
+  //
+  //   if (show_a_side){
+  //     a_side_label = (a_side_label === 'use_length') ? a : a_side_label;
+  //     this.labelLineSegment(p1, p2, a_side_label, a_side_offset, {style:sideLabelStyle});
+  //   }
+  //   if (show_b_side){
+  //     b_side_label = (b_side_label === 'use_length') ? b : b_side_label;
+  //     this.labelLineSegment(p1, p3, b_side_label, b_side_offset, {style:sideLabelStyle});
+  //   }
+  //   if (show_c_side){
+  //     this.labelLineSegment(p2, p3, c_side_label, c_side_offset, {style:sideLabelStyle});
+  //   }
+  //
+  //   return tri;
+  //
+  // }
 
-    let p = this.elemCoords(pos);
+  // labelLineSegment(
+  //                   p1 = new uPoint(),
+  //                   p2 = new uPoint(1,0),
+  //                   {
+  //                     label="use_length",
+  //                     offset = new uPoint(0, 1),
+  //                     label_rounding = 1,
+  //                     style={}
+  //                   } = {}
+  //                 ){
+  //
+  //   if (label === 'use_length'){
+  //     let n = p1.distanceTo(p2).toFixed(label_rounding);
+  //     label = n%1 ? n : Math.round(n) ;
+  //   }
+  //
+  //   let txt = this.addText(label, p1.midpoint(p2).add(offset), {style:style});
+  //
+  //   return txt;
+  //
+  // }
 
-    let defaultStyle = {
-      fill:"none", stroke:"#000000",
-      "stroke-width": 2, points: "",
-      //"transform-origin": `${p.x} ${p.y}`
-    };
-    style = {...defaultStyle, ...style};
+  labelLineSegment(
+                    segment = new uLineSegment(),
+                    {
+                      label="use_length",
+                      placement = 0.5,
+                      offset = 1,
+                      label_rounding = 1,
+                      style={}
+                    } = {}
+                  ){
 
-    let defaultAngleLabelStyle = {
-      "text-anchor": "middle",
-      "dominant-baseline":"central",
-      "font-size": '0.75em'
-    };
-    angleLabelStyle = {...defaultAngleLabelStyle, ...angleLabelStyle};
-
-    let defaultSideLabelStyle = {
-      "text-anchor": "middle",
-      "dominant-baseline":"central",
-      "font-size": '0.75em'
-    };
-    sideLabelStyle = {...defaultSideLabelStyle, ...sideLabelStyle};
-
-    //flip vertically or horizontally
-    a = /v/.test(flip) ? -a : a;
-    b = /h/.test(flip) ? -b : b;
-
-    if (rotate != 0){
-      let t = `rotate(${-rotate}, ${p.x}, ${p.y})`;
-      style.transform = style.transform === undefined ? t : `${t} ${style.transform}`;
+    if (label === 'use_length'){
+      let n = segment.length().toFixed(label_rounding);
+      label = n%1 ? n : Math.round(n) ;
     }
 
-    let p1 = pos;
-    let p2 = pos.addxy(0, a);
-    let p3 = pos.addxy(b, 0);
+    let lp = segment.perpTo({offset:offset});
 
-    let pts = [p1, p2, p3, p1];
-    let line = this.addPolyline(pts, {style});
+    let txt = this.addText(label, lp.p1, {style:style});
 
-    let tri = new uRightTriangle(a, b);
-    tri.line = line;
-    tri.vertices = [p1, p2, p3];
 
-    if (show_A_angle){
-      let arcA = this.addArcToVertex({
-        r: arc_r,
-        vertex: [p1, p2, p3],
-        angle_label: A_angle_label,
-        angleLabelStyle: angleLabelStyle
-      })
-    }
-    if (show_B_angle){
-      let arcB = this.addArcToVertex({
-        r: arc_r,
-        vertex: [p2, p3, p1],
-        angle_label: B_angle_label,
-        angleLabelStyle: angleLabelStyle
-      })
-    }
-
-    if (show_a_side){
-      //this.labelLineSegment(p1, p2, "a");
-    }
-
-    return tri;
+    return txt;
 
   }
 
@@ -759,6 +984,17 @@ class uPoint{
     let d = ((this.x-p.x)**2 + (this.y-p.y)**2)**0.5
     return d;
   }
+  mag(){
+    return this.distanceTo();
+  }
+  scale(f=1){
+    return new uPoint(this.x*f, this.y*f);
+  }
+  deltaP(p = new uPoint()){
+    let dx = this.x - p.x;
+    let dy = this.y - p.y;
+    return new uPoint(dx, dy);
+  }
   flip(ymax){
     this.y = ymax - this.y;
   }
@@ -788,13 +1024,32 @@ class uPoint{
     }
     return `(${this.x.toFixed(round)}, ${this.y.toFixed(round)})`;
   }
-  rotate(angle=0){ //rotate about the origin
+  midpoint(p = new uPoint(), weight=0.5){
+    let x = weight * this.x + (1-weight)*p.x;
+    let y = weight * this.y + (1-weight)*p.y;
+    return new uPoint(x,y);
+  }
+  rotate(angle=0, axis = new uPoint()){ //rotate about the origin
     angle = angle * Math.PI / 180;
     let c = Math.cos(angle);
     let s = Math.sin(angle);
     let x = this.x * c - this.y * s;
-    let y = this.y * c - this.x * s;
+    let y = this.y * c + this.x * s;
+
     return new uPoint(x,y);
+  }
+  rotateAxis(angle=0, axis = new uPoint()){ //rotate about an axis
+    angle = angle * Math.PI / 180;
+    let c = Math.cos(angle);
+    let s = Math.sin(angle);
+
+    let dx = this.x - axis.x  ;
+    let dy = this.y -axis.y  ;
+    let x = dx * c - dy * s;
+    let y = dy * c + dx * s;
+
+    let newPt = axis.add(new uPoint(x,y))
+    return newPt;
   }
 }
 
@@ -891,38 +1146,41 @@ class uVector{
   }
 }
 
-class uRightTriangle{
-  constructor(a, b){
-    this.a = a; this.b = b;
-    this.c = (a**2 + b**2)**0.5;
-
-    //local coordinates of triangle
-    this.C = new uPoint();
-    this.A = this.C.addxy(this.a, 0);
-    this.B = this.C.addxy(0, this.b);
-  }
-  angle_a(deg=false){
-    let a = Math.asin(this.b/this.c);
-    if (deg){a = a * 180/Math.PI;}
-    return a;
-  }
-  angle_b(deg=false){
-    let b = Math.asin(this.a/this.c);
-    if (deg){b = b * 180/Math.PI;}
-    return b;
-  }
-  rotate(angle=90){ //all in local coordinates
-    this.A = this.A.rotate(angle);
-    this.B = this.B.rotate(angle);
-
-  }
-}
+// class uRightTriangle{
+//   constructor(a, b){
+//     this.a = a; this.b = b;
+//     this.c = (a**2 + b**2)**0.5;
+//
+//     //local coordinates of triangle
+//     this.C = new uPoint();
+//     this.A = this.C.addxy(0, this.a);
+//     this.B = this.C.addxy( this.b, 0);
+//     this.vertexC = [this.A, this.C, this.B];
+//     this.vertexA = [this.C, this.A, this.B];
+//     this.vertexB = [this.C, this.B, this.A];
+//   }
+//   angle_a(deg=false){
+//     let a = Math.asin(this.b/this.c);
+//     if (deg){a = a * 180/Math.PI;}
+//     return a;
+//   }
+//   angle_b(deg=false){
+//     let b = Math.asin(this.a/this.c);
+//     if (deg){b = b * 180/Math.PI;}
+//     return b;
+//   }
+//   rotate(angle=90){ //all in local coordinates
+//     this.A = this.A.rotate(angle);
+//     this.B = this.B.rotate(angle);
+//
+//   }
+// }
 
 class uVertex{
   constructor(vertex = [new uPoint(1,0), new uPoint(0,0), new uPoint(0,1)]){
     this.vertex = vertex;
     this.p1 = vertex[0];
-    this.center = vertex[1];
+    this.p0 = this.center = vertex[1];
     this.p2 = vertex[2];
   }
   getArcPoints(r=1){
@@ -956,8 +1214,281 @@ class uVertex{
     let a1 = Math.atan2(this.p1.y - this.center.y, this.p1.x - this.center.x);
     let a2 = Math.atan2(this.p2.y - this.center.y, this.p2.x - this.center.x);
     let a = a2 - a1;
+
+    //get interior angle:
+    if (a < 0) {
+		    a += (2*Math.PI);
+  	}
+  	if (a > Math.PI) {
+  		a = 2*Math.PI - a;
+  	}
+
+    //console.log("angle (radians)", a);
     a = deg ? a * 180 / Math.PI : a;
+    //console.log("angle (deg?)", a);
+
     return a;
+  }
+
+}
+
+
+
+class uLineSegment{
+  constructor(
+              p0 = new uPoint(),
+              p1 = new uPoint(1, 0)
+            ){
+    [this.p0, this.p1] = [p0, p1];
+    this.midpoint = this.p0.midpoint(this.p1);
+  }
+  length(){
+    return this.p0.distanceTo(this.p1);
+  }
+  // midpoint(){
+  //   return this.p0.midpoint(this.p1);
+  // }
+  delta(){
+    let dx = (this.p1.x - this.p0.x);
+    let dy = (this.p1.y - this.p0.y);
+    return new uPoint(dx, dy);
+  }
+  pointAlong(f=0.5){ // f is a fraction of the distance from p0
+    let v = this.delta();
+    let dx = f * v.x;
+    let dy = f * v.y;
+    return this.p0.addxy(dx, dy);
+  }
+  distanceAlong(d=1){
+    let len = this.length();
+    let f = d / this.length();
+    return this.pointAlong(f);
+  }
+  // reverse(){
+  //   [this.p0, this.p1] = [this.p1, this.p0];
+  // }
+  perpTo({f=0.5, offset=1}={}){
+    //todo: location for a label
+    let halfSeg = new uLineSegment(this.midpoint, this.p1);
+    let pOff = halfSeg.distanceAlong(offset);
+    pOff = pOff.rotateAxis(90, this.midpoint);
+    let smallSeg = new uLineSegment(this.midpoint, pOff);
+    return smallSeg;
+  }
+}
+
+
+
+
+
+class uTriangle{
+  constructor(p0 = new uPoint(),
+              p1 = new uPoint(1,0),
+              p2 = new uPoint(0,1)
+            ){
+    this.setPoints(p0, p1, p2);
+    this.setVertices();
+    this.setLineSegments();
+  }
+
+  setPoints(p0 = new uPoint(),
+              p1 = new uPoint(1,0),
+              p2 = new uPoint(0,1)){
+    [this.p0, this.p1, this.p2] = [p0, p1, p2];
+    this.pts = [this.p0, this.p1, this.p2];
+  }
+
+  setVertices(){
+    this.v0 = new uVertex([this.p2, this.p0, this.p1]);
+    this.v1 = new uVertex([this.p0, this.p1, this.p2]);
+    this.v2 = new uVertex([this.p1, this.p2, this.p0]);
+    this.vertices = [this.v0, this.v1, this.v2];
+    this.angles = [this.v0.getAngle(), this.v1.getAngle(), this.v2.getAngle()];
+  }
+
+  setLineSegments(){
+    this.s0 = new uLineSegment(this.p0, this.p1);
+    this.s1 = new uLineSegment(this.p1, this.p2);
+    this.s2 = new uLineSegment(this.p2, this.p0);
+    this.lineSegments = [this.s0, this.s1, this.s2];
+  }
+
+  translate(p = new uPoint(), draw = true){
+    let p0 = this.p0.add(p);
+    let p1 = this.p1.add(p);
+    let p2 = this.p2.add(p);
+
+    this.setPoints(p0, p1, p2);
+
+    if (draw){ this.draw(this.svg, this.drawArguments)};
+  }
+
+  rotate(angle = 0, {axis = new uPoint(), draw = true} = {}){
+    //angle in degrees
+    let p0 = this.p0.rotateAxis(angle, axis);
+    let p1 = this.p1.rotateAxis(angle, axis);
+    let p2 = this.p2.rotateAxis(angle, axis);
+
+    this.setPoints(p0, p1, p2);
+
+    if (draw){ this.draw(this.svg, this.drawArguments)};
+  }
+
+  draw( svg,
+        {
+          showAngleLabels = [false, false, false],
+          angleLabels = ["use_angle", "use_angle", "use_angle"],
+          angleLabelRounding = [0, 0, 0],
+          showAngleArcs = [false, false, false],
+          angle_arc_r = [3, 3, 3],
+          angleFontStyle = {},
+          labelSides = [false, false, false],
+          sideLabels = ["use_length", "use_length", "use_length"],
+          sideLabelOffset = [1, 1, 1],
+          sideLabelRounding = [1, 1, 1],
+          sideLabelPlacement = [0.5, 0.5, 0.5],
+          sideLabelStyle = {},
+          style={}
+        } = {}
+      ){
+
+    //store passed arguments
+    this.svg = svg;
+    this.drawArguments = arguments[1];
+
+    let defaultStyle = {
+      fill:"none",
+      stroke:"#000000",
+      "stroke-width": 1,
+    };
+    style = {...defaultStyle, ...style};
+
+    let defaultAngleFontStyle = {
+      "text-anchor": "middle",
+      "dominant-baseline":"central",
+      "font-size": '0.75em'
+    };
+    angleFontStyle = {...defaultAngleFontStyle, ...angleFontStyle};
+
+    let defaultSideLabelStyle = {
+      "text-anchor": "middle",
+      "dominant-baseline":"central",
+      //"font-size": '0.75em'
+    };
+    sideLabelStyle = {...defaultSideLabelStyle, ...sideLabelStyle};
+
+    //remove old triangle
+    this.undraw();
+
+    //draw polygon
+    let pts = this.pts;
+    pts.push(this.p0);
+    this.polyline = svg.addPolyline(pts, {style:style});
+
+    //draw angles
+    this.setVertices();
+    this.arcs = [];
+    for (let i = 0; i < showAngleArcs.length; i++){
+      if (showAngleArcs[i]){
+        this.arcs.push(
+          svg.addAngleArc({
+            arc_r: angle_arc_r[i],
+            vertex: this.vertices[i]
+          })
+        );
+      }
+    }
+
+    this.labels = [];
+    for (let i = 0; i < showAngleLabels.length; i++){
+      if (showAngleLabels[i]){
+
+        let label = svg.addAngleLabel({
+          arc_r: angle_arc_r[i],
+          vertex: this.vertices[i],
+          angle_label: angleLabels[i],
+          angle_label_rounding: angleLabelRounding[i],
+          style: angleFontStyle
+        });
+        this.labels.push(label);
+      }
+    }
+
+    //label sides
+    this.setLineSegments();
+    this.sideLabels = [];
+    for (let i=0; i < labelSides.length; i++){
+      if (labelSides[i]){
+        let sLab = svg.labelLineSegment(
+          this.lineSegments[i],
+          {
+            label: sideLabels[i],
+            placement: sideLabelPlacement[i],
+            offset: sideLabelOffset[i],
+            label_rounding: sideLabelRounding[i],
+            style: sideLabelStyle
+          }
+        );
+        this.sideLabels.push(sLab);
+      }
+    }
+
+  }
+
+  undraw(){
+    if (this.polyline !== undefined){
+      this.polyline.remove();
+    }
+    if (this.arcs !== undefined){
+      for (let i=0; i<this.arcs.length; i++){
+        this.arcs[i].remove();
+      }
+    }
+    if (this.labels !== undefined){
+      for (let i=0; i<this.labels.length; i++){
+        this.labels[i].remove();
+      }
+    }
+    if (this.sideLabels !== undefined){
+      for (let i=0; i<this.sideLabels.length; i++){
+        this.sideLabels[i].remove();
+      }
+    }
+  }
+
+}
+
+
+
+class uRightTriangle extends uTriangle{
+  constructor(a = 1, b = 1, pos = new uPoint()){
+
+    super();
+
+    this.a = a;
+    this.b = b;
+    this.c = this.h = (a**2 + b**2)**0.5;
+    this.pos = pos;
+
+    //local coordinates of triangle
+    let p1 = pos; // the right angle
+    let p2 = p1.addxy(0, this.a);
+    let p3 = p1.addxy( this.b, 0);
+
+    this.setPoints(p1, p2, p3);
+
+
+
+  }
+  angle_a(deg=false){
+    let a = Math.asin(this.b/this.c);
+    if (deg){a = a * 180/Math.PI;}
+    return a;
+  }
+  angle_b(deg=false){
+    let b = Math.asin(this.a/this.c);
+    if (deg){b = b * 180/Math.PI;}
+    return b;
   }
 
 }

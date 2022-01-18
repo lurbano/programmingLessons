@@ -34,26 +34,39 @@
 
     <div class="setup">
       <div class="comment">
-        <h3>Sin</h3>
+        <h3>Solving Problems Using Trigonometry and Coding.</h3>
+
         <p>
+          You'll find a series of basic trigonometric problems below (finding angles and lengths of sides on right angle triangles). You can use one or more of three approaches to solving them:
+          <ul>
+            <li>Write one-off programs to solve each problem.</li>
+            <li>Write functions and make a little library.</li>
+            <li>Create a Class.</li>
+          </ul>
+        </p>
 
-
+        <p>
         <div class="uGraph" style="width:500px">
           <script type="text/javascript">
-            svg = new uSvgGraph({elementInfo:{width:300,height:300}, axesInfo:{showAxes:false}});
+            svg = new uSvgGraph({elementInfo:{width:400,height:300}, axesInfo:{showAxes:false}});
 
-            a = 10;
-            theta = 30 *Math.PI/180;
-            b = a/ Math.tan(theta);
+            let opp = 10;
+            let theta = 30 * Math.PI / 180;
+            let adj = opp/Math.tan(theta);
+            tri = new uRightTriangle(opp, adj, new uPoint(-7.5,-6));
 
-
-            p1 = new uPoint(-8, -8);
-            tri = svg.addRightTriangle({
-              pos:p1,
-              a:a, b:b,
-              arc_r: 5,
-              show_A_angle: false
-            });
+            tri.draw(
+              svg,
+              {
+                showAngleLabels: [false, false, true],
+                showAngleArcs: [true, false, true],
+                angle_arc_r: [1, 2, 5],
+                angleFontStyle: {'font-size': '1em'},
+                labelSides: [true, true, false],
+                sideLabels: ["use_length", "h = ?", "use_length"],
+                sideLabelOffset: [1, 1, 0.5]
+              }
+            );
 
           </script>
         </div>
@@ -76,7 +89,7 @@
         <td>
           <div class="comment">
 
-            <h3>I. Find Hypothenuse Given and Angle and the Opposite side.</h3>
+            <h3>I. Find Hypothenuse Given an Angle and the Opposite Side Length.</h3>
 
             <p>
               Write a program that finds the hypothenuse of a triangle given the length of the opposite side and an angle.
@@ -94,25 +107,29 @@
                 <script type="text/javascript">
                   svg = new uSvgGraph({elementInfo:{width:400,height:300}, axesInfo:{showAxes:false}});
 
-                  a = 10;
-                  theta = 30 *Math.PI/180;
-                  b = a/ Math.tan(theta);
+                  opp = 10;
+                  theta = 30 * Math.PI / 180;
+                  adj = opp/Math.tan(theta);
+                  tri = new uRightTriangle(opp, adj, new uPoint(-7.5,-6));
 
-
-                  p1 = new uPoint(-7.5, -6);
-                  tri = svg.addRightTriangle({
-                    pos:p1,
-                    a:a, b:b,
-                    arc_r: 5,
-                    show_A_angle: false
-                  });
-
-                  svg.addText("10", p1.addxy(-1, 5));
-                  svg.addText("h = ?", p1.addxy(b/2+.75, a/2+.5));
+                  tri.draw(
+                    svg,
+                    {
+                      showAngleLabels: [false, false, true],
+                      showAngleArcs: [true, false, true],
+                      angle_arc_r: [1, 2, 5],
+                      angleFontStyle: {'font-size': '1em'},
+                      labelSides: [true, true, false],
+                      sideLabels: ["use_length", "h = ?", "use_length"],
+                      sideLabelOffset: [1, 1, 0.5]
+                    }
+                  );
 
                 </script>
               </div>
             </p>
+
+
 
 
           </div>
@@ -121,18 +138,50 @@
         <td>
           <div class="comment">
             <p>
-              Hints:
+              <p>
+              <div class="toggle-next">Answer ▼</div>
+              <div id="q1-ans" class="answerField" hidden>x</div>
+              <script type="text/javascript">
+                $("#q1-ans").html(`h = ${tri.h.toFixed(1)}` );
+              </script>
+              </p>
+
+              <h3>Hints</h3>
+              Do the algebra by hand and find the equation for <b><em>h</em></b>.
+              <p>
+              Python:
+                  <ul>
+                    <li>
+                      You'll need to import the numpy library (if you're not using Glowscript) with <code>import numpy as np</code> </li>
+                    <li>
+                      to get the value of pi use <code>np.pi</code>
+                    </li>
+                    <li>
+                      <b>radians</b>: most programming languages work in radians, not degrees.
+                    </li>
+                    <li>
+                      to use a function like <em>sin</em> do <code>x = np.sin(2)</code>.
+                    </li>
+                  </ul>
+
+                  For example, to find the sine of 90 degrees (i.e. <em>sin(π/2)</em>)
+                  <div class="pythonCode">
+                    <pre class="line-numbers"><code class="language-python">
+                      import numpy as np
+                      angle = np.pi/2  # 90 degrees
+                      x = np.sin(angle)
+                      print(x)
+                    </pre></code>
+                  </div>
+
+              <p>
+              Javascript:
               <ul>
-                <li>Do the algebra by hand and find the equation for <b><em>h</em></b>. </li>
                 <li>in Javascript, pi is given by <code>Math.PI</code> </li>
                 <li>the trigonometric functions (<code>Math.sin(), Math.cos(), Math.tan(), Math.asin(), etc.</code>) in Javascript (and most programming languages) expects the angle to be in <b>radians</b>. </li>
               </ul>
 
-              <div class="toggle-next">Answer ▼</div>
-              <div id="q1-ans" class="answerField" hidden>x</div>
-              <script type="text/javascript">
-                $("#q1-ans").html(`h = ${b.toFixed(1)}` );
-              </script>
+
             </p>
 
           </div>
@@ -167,47 +216,41 @@
 
               <div class="uGraph" style="width:500px">
                 <script type="text/javascript">
-                  svg = new uSvgGraph({elementInfo:{width:400,height:300}, axesInfo:{showAxes:false}});
+                  svg = new uSvgGraph({elementInfo:{width:400,height:200}, axesInfo:{showAxes:false}});
 
-                  b = 8;
-                  theta = 40 *Math.PI/180;
-                  a = b * Math.tan(theta);
+                  adj = 8;
+                  theta = 40 * Math.PI / 180;
+                  opp = adj * Math.tan(theta);
+                  tri = new uRightTriangle(opp, adj, new uPoint(-7.5,-3.5));
 
-                  console.log(a,b);
-                  p1 = new uPoint(-7.5, -6);
-                  tri = svg.addRightTriangle({
-                    pos:p1,
-                    a:a, b:b,
-                    arc_r: 3,
-                    show_A_angle: false
-                  });
-
-                  svg.addText("8", p1.addxy(b/2, -1));
-                  svg.addText("h = ?", p1.addxy(b/2+1, a/2+.5));
+                  tri.draw(
+                    svg,
+                    {
+                      showAngleLabels: [false, false, true],
+                      showAngleArcs: [true, false, true],
+                      angle_arc_r: [1, 2, 3],
+                      angleFontStyle: {'font-size': '1em'},
+                      labelSides: [false, true, true],
+                      sideLabels: ["use_length", "h = ?", "use_length"],
+                      sideLabelOffset: [1, 1.25, 0.75]
+                    }
+                  );
 
                 </script>
               </div>
             </p>
-
 
           </div>
 
         </td>
         <td>
           <div class="comment">
-            <p>
-              Hints:
-              <ul>
-                <li>in Javascript, pi is given by <code>Math.PI</code> </li>
-                <li>the trigonometric functions (<code>Math.sin(), Math.cos(), Math.tan(), Math.asin(), etc.</code>) in Javascript (and most programming languages) expects the angle to be in <b>radians</b>. </li>
-              </ul>
 
-              <div class="toggle-next">Answer ▼</div>
-              <div id="q2-ans" class="answerField" hidden>x</div>
-              <script type="text/javascript">
-                $("#q2-ans").html(`h = ${a.toFixed(1)}` );
-              </script>
-            </p>
+            <div class="toggle-next">Answer ▼</div>
+            <div id="q2-ans" class="answerField" hidden>x</div>
+            <script type="text/javascript">
+              $("#q2-ans").html(`h = ${tri.h.toFixed(1)}` );
+            </script>
 
           </div>
 
@@ -221,76 +264,237 @@
 
 
 
-            <!-- NEW ROW -->
-            <tr>
-              <td>
-                <div class="comment">
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
 
-                  <h3>III. Find Adjacent Side Given an Angle and the Hypothenuse</h3>
+            <h3>III. Find Adjacent Side Given an Angle and the Hypothenuse</h3>
 
-                  <p>
-                    Write a program that finds the length of the adjacent side of a right-angle triangle given the angle and the length of the hypothenuse.
+            <p>
+              Write a program that finds the length of the adjacent side of a right-angle triangle given the angle and the length of the hypothenuse.
 
-                  </p>
+            </p>
 
-                  <p>
-                    Test Case:
-                    <ul>
-                      <li>angle (θ) = 50°</li>
-                      <li>hypothenuse (h) = 12</li>
-                    </ul>
+            <p>
+              Test Case:
+              <ul>
+                <li>angle (θ) = 35°</li>
+                <li>hypothenuse (h) = 12</li>
+              </ul>
 
-                    <div class="uGraph" style="width:500px">
-                      <script type="text/javascript">
-                        svg = new uSvgGraph({elementInfo:{width:400,height:300}, axesInfo:{showAxes:false}});
+              <div class="uGraph" style="width:500px">
+                <script type="text/javascript">
+                  svg = new uSvgGraph({elementInfo:{width:400,height:200}, axesInfo:{showAxes:false}});
 
-                        h = 12;
-                        theta = 50 *Math.PI/180;
-                        a = h * Math.sin(theta);
-                        b = h * Math.cos(theta);
+                  h = 12;
+                  theta = 35 * Math.PI / 180;
+                  adj = h * Math.cos(theta);
+                  opp = h * Math.sin(theta);
+                  tri = new uRightTriangle(opp, adj, new uPoint(-7.5,-3.5));
 
-
-                        p1 = new uPoint(-7.5, -6);
-                        tri = svg.addRightTriangle({
-                          pos:p1,
-                          a:a, b:b,
-                          arc_r: 3,
-                          show_A_angle: false
-                        });
-
-                        svg.addText("a = ?", p1.addxy(b/2, -1));
-                        svg.addText(h, p1.addxy(b/2+1, a/2+.5));
-
-                      </script>
-                    </div>
-                  </p>
-
-
-                </div>
-
-              </td>
-              <td>
-                <div class="comment">
-                  <p>
-                    Hints:
-                    <ul>
-                      <li>in Javascript, pi is given by <code>Math.PI</code> </li>
-                      <li>the trigonometric functions (<code>Math.sin(), Math.cos(), Math.tan(), Math.asin(), etc.</code>) in Javascript (and most programming languages) expects the angle to be in <b>radians</b>. </li>
-                    </ul>
-
-                    <div class="toggle-next">Answer ▼</div>
-                    <div id="q3-ans" class="answerField" hidden>x</div>
-                    <script type="text/javascript">
-                      $("#q3-ans").html(`a = ${a.toFixed(1)}` );
-                    </script>
-                  </p>
-
-                </div>
+                  tri.draw(
+                    svg,
+                    {
+                      showAngleLabels: [false, false, true],
+                      showAngleArcs: [true, false, true],
+                      angle_arc_r: [1, 2, 3],
+                      angleFontStyle: {'font-size': '1em'},
+                      labelSides: [false, true, true],
+                      sideLabels: ["use_length", "use_length", "a = ?"],
+                      sideLabelOffset: [1, .75, 0.75]
+                    }
+                  );
+                </script>
+              </div>
+            </p>
 
 
-              </td>
-            </tr>
-            <!-- END ROW -->
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+
+
+              <div class="toggle-next">Answer ▼</div>
+              <div id="q3-ans" class="answerField" hidden>x</div>
+              <script type="text/javascript">
+                $("#q3-ans").html(`h = ${tri.b.toFixed(1)}` );
+              </script>
+
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>IV. Find Angle Given Adjacent and Opposite Sides</h3>
+
+            <p>
+              Write a program that finds the angle (θ) given the lengths of the adjacent and opposite sides.
+
+            </p>
+
+            <p>
+              Test Case:
+              <ul>
+                <li>adjacent (a) = 15</li>
+                <li>opposite (o) = 12</li>
+              </ul>
+
+              <div class="uGraph" style="width:500px">
+                <script type="text/javascript">
+                  svg = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:false}});
+
+                  adj = 15;
+                  opp = 12;
+                  tri = new uRightTriangle(opp, adj, new uPoint(-7.5,-3.5));
+
+                  tri.draw(
+                    svg,
+                    {
+                      showAngleLabels: [false, false, true],
+                      angleLabels: ['use_angle', 'use_angle', 'theta'],
+                      showAngleArcs: [true, false, true],
+                      angle_arc_r: [1, 2, 3],
+                      angleFontStyle: {'font-size': '1.4em'},
+                      labelSides: [true, false, true],
+                      sideLabels: ["use_length", "use_length", "use_length"],
+                      sideLabelOffset: [1, .75, 0.75]
+                    }
+                  );
+                </script>
+              </div>
+            </p>
+
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+            <p>
+              <div class="toggle-next">Answer ▼</div>
+              <div id="q4-ans" class="answerField" hidden>x</div>
+              <script type="text/javascript">
+                $("#q4-ans").html(`θ = ${tri.angles[2].toFixed(1)}` );
+              </script>
+
+              <p>
+              <h3>Hints</h3>
+              <p>
+              Python:
+              <ul>
+                <li>inverse trig functions uses the <em>arc</em> nomenclature <code>np.arccos()</code>, you may be more familar with the notation "cos<sup>-1</sup>()"</li>
+                <li>The inverse trig functions also work in radians. </li>
+              </ul>
+
+              Javascript:
+              <ul>
+                <li>inverse trig functions are <code>Math.acos() ...</code>, you may be more familar with the notation "cos<sup>-1</sup>()"</li>
+                <li>The inverse trig functions also work in radians. </li>
+              </ul>
+
+
+            </p>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>V. Find Hypothenuse Given Two Sides</h3>
+
+            <p>
+              Write a program that finds the length of the hypothenuse of a right triangle given the length of the two other sides.
+
+            </p>
+
+            <p>
+              Test Case:
+              <ul>
+                <li>side a = 12</li>
+                <li>side b = 16</li>
+              </ul>
+
+              <div class="uGraph" style="width:500px">
+                <script type="text/javascript">
+                  svg = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:false}});
+
+                  adj = 16;
+                  opp = 12;
+                  tri = new uRightTriangle(opp, adj, new uPoint(-7.5,-3.5));
+
+                  tri.draw(
+                    svg,
+                    {
+                      showAngleLabels: [false, false, false],
+                      angleLabels: ['use_angle', 'use_angle', 'theta'],
+                      showAngleArcs: [true, false, false],
+                      angle_arc_r: [1, 2, 3],
+                      angleFontStyle: {'font-size': '1.4em'},
+                      labelSides: [true, true, true],
+                      sideLabels: ["use_length", "h = ?", "use_length"],
+                      sideLabelOffset: [1, 1.25, 0.75]
+                    }
+                  );
+                </script>
+              </div>
+            </p>
+
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+            <p>
+              <div class="toggle-next">Answer ▼</div>
+              <div id="q5-ans" class="answerField" hidden>x</div>
+              <script type="text/javascript">
+                $("#q5-ans").html(`h = ${tri.h.toFixed(1)}` );
+              </script>
+
+              <p>
+              <h3>Hints</h3>
+
+              <ul>
+                <li>squaring a number requires two stars: <em>3<sup>2</sup></em> is <code>3**2</code> </li>
+                <li>the square root (√) is the same as raising a number to the ½ power: </li>
+              </ul>
+
+
+            </p>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
 
 
 
