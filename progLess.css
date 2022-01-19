@@ -38,6 +38,10 @@ background-image:  url("protruding-squares.svg");
   background-color: white;
   z-index: 1;
 }
+#sidebar a:hover {
+  background-color: lightgray;
+}
+
 #mainPage {
   margin-left: 17%;
   postion: relative;
