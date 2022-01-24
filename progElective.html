@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Elective (Programming)</title>
+    <style media="screen">
+      body {
+        font-family: "Lucida Console", "Courier New", monospace;
+      }
+      .section {
+        border: 1px solid black;
+        max-width: 40em;
+        padding: 1em;
+        margin: 0.5em;
+      }
+      .topic {
+        font-family: 'Times New Roman', serif;
+        font-weight: bold;
+        margin-bottom: 0.5em;
+      }
+      .link {
+        margin-left: 2em;
+      }
+      .description {
+        margin-top: 0.5em;
+        margin-left: 3em;
+      }
+
+    </style>
+    <link href="./progLess.css" rel="stylesheet" />
+
+  </head>
+  <body>
+
+
+    <div class="box">
+
+      <div id="sidebar">
+        <b><a href="#mainPage">Programming Elective</a></b>
+            <ol>
+
+              <li> <a href="#python">Python</a>
+                <!-- <span class="dropdownSide">⇨</span> -->
+                <ol type="a" >
+                  <li> <a href="./quickRef/">Python Quick Reference</a>
+                  </li>
+                  <li> <a href="#oop">Intro: Object Oriented Prog.</a>
+                  </li>
+                    <ol>
+                      <li> <a href="./quadPIntro/quadProc.html">Quad.: Procedural</a>
+                      </li>
+                      <li> <a href="./quadPIntro/quadFuncs.html">Quad. w. Functions</a>
+                      </li>
+                      <li> <a href="./quadPIntro/quadClass.html">Quad= Class</a>
+                      </li>
+                    </ol>
+
+
+                </ol>
+              </li>
+
+              <li> <a href="./webDev.html">Websites w. HTML, CSS and Javascript</a>
+                <!-- <span class="dropdownSide">⇨</span> -->
+                <ol type="a" >
+                  <li> <a href="#cylinder">Cylinder Volume Website</a>
+                  </li>
+                </ol>
+              </li>
+
+            </ol>
+      </div>
+
+      <div id="mainPage">
+
+        <!-- HEADERS -->
+        <div class="nav">
+          <a href="./index.html">← Main</a>
+          <a href="./quickRef/">Python Ref</a>
+          <hr>
+        </div>
+        <!-- END HEADERS -->
+
+        <h1>Programming Elective</h1>
+
+        <h2 id="python">Python</h2>
+
+        <div class="section" id="oop">
+          <div class="topic">
+            Introduction to Object Oriented Programming (Solving Quadratics)
+          </div>
+          <ul>
+            <li>
+              <div class="link" id="QuadProcedural">
+                <a href="./quadPIntro/quadProc.html">Procedural Approach</a>
+              </div>
+            </li>
+            <li>
+              <div class="link" id="QuadFunctions">
+                <a href="./quadPIntro/quadProc.html">Using Functions</a>
+              </div>
+            </li>
+            <li>
+              <div class="link" id="QuadClass">
+                <a href="./quadPIntro/quadClass.html">A Quadratic Class</a>
+              </div>
+            </li>
+          </ul>
+
+          <div class="description">
+            Determining properties of quadratic equations, such as the maximum and minimum, the zeros (where it crosses the x-axis), and finding the slope of a tangent. We'll do this, first procedurally (just writing a simple, step-by-step program), then using functions to do each calculation, then, finally using a class to organize everything.
+          </div>
+
+        </div>
+
+<hr>
+<hr>
+
+        <h2 id="webDev">Websites</h2>
+
+        <div class="section" id="webCylinder">
+          <div class="topic">
+            Interactive Cylinder
+          </div>
+          <ul>
+            <li>
+              <div class="link" id="cylinderVolSite">
+                <a href="./webDev.html">Cylinder Website</a>
+              </div>
+            </li>
+          </ul>
+
+          <div class="description">
+            Build a website that calculates the surface area and volume of a cylinder when the user enters the height and the radius.
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+
+  </body>
+</html>
