@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Basic Trigonometry</title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="../uSvg-0.3.js"></script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+      <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <!-- HEADERS -->
+    <div class="nav">
+      <a href="../index.html">← Main</a>
+      <a href="../quickRef/">Quick Ref</a>
+      <a href="../physics.html">Physics</a>
+      <a href="../preCalc.html">preCalc</a>
+      <a href="../progElective.html">Prog. Elec.</a>
+      <hr>
+    </div>
+    <!-- END HEADERS -->
+
+    <h1>Quadratic Functions</h1>
+
+    <div class="setup">
+      <div class="comment">
+        <h3>Quadratics</h3>
+
+        <p>
+          Write a program to solve the following problems related to quadratic functions. To do these you are expected to be familiar with quadratics.
+          <ul>
+            <li>Find the zeros of a given quadratic. The zeros are the <em>x</em> values when the curve crosses the x-axis (i.e. when <em>y = 0</em>) </li>
+            <li>Find the x,y coordinates of the minimum or maximum of the function (the critical value).</li>
+            <li>Determine if the critical value is a maximum or a minimum.</li>
+            <li>For a given x value (say <em>x = 2</em>), find the slope of a tangent to the quadratic.</li>
+            <li>Given two x values, (say <em>x = -2</em> and <em>x = 2</em>)
+              <ul>
+                <li>find the length of a chord between the two points on the curve.</li>
+                <li>approximate the length of the curve between two points by using a series of chords.</li>
+              </ul>
+            </li>
+            <li></li>
+          </ul>
+        </p>
+
+        <p>
+          For testing, use the equation:
+
+          $$ y = x^2 - 2x - 3 \tag{1}$$
+
+        </p>
+
+        <p>
+        <div class="uGraph" style="width:500px">
+          <script type="text/javascript">
+            svg = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
+
+            quad = new uQuadratic(1, -2, -3);
+
+            svg.drawQuadratic(quad);
+            svg.addText('y = x²-2x-3', new uPoint(5,-5))
+
+          </script>
+        </div>
+        </p>
+
+      </div>
+
+
+    <table>
+
+
+
+      <tr>
+        <th>Notes and Code</th>
+        <th>Outcome</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>I. Find the Zeros</h3>
+
+            <p>
+              Find the zeros of a given quadratic. The zeros are the <em>x</em> values when the curve crosses the x-axis (i.e. when <em>y = 0</em>)
+
+            </p>
+
+            <p>
+              Test Case:
+              <div class="uGraph" style="width:500px">
+                <script type="text/javascript">
+                  svg2 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
+
+                  svg2.drawQuadratic(quad);
+                  svg2.addText('y = x²-2x-3', new uPoint(5,-5))
+
+                  let [z1, z2] = quad.zeros();
+
+                  svg2.drawPoints([z1, z2]);
+
+                  svg2.labelPoint(z1);
+                  svg2.labelPoint(z2);
+
+                </script>
+              </div>
+            </p>
+
+
+
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+            <p>
+              <p>
+              <div class="toggle-next">Answer ▼</div>
+              <div id="q1-ans" class="answerField" hidden>x</div>
+              <script type="text/javascript">
+                $("#q1-ans").html(`x<sub>1</sub> = ${z1.x.toFixed(1)}<br>x<sub>2</sub> = ${z2.x.toFixed(1)}` );
+              </script>
+              </p>
+
+              <h3>Hints</h3>
+
+              <div class="toggle-next">Hint ▼</div>
+                <div class="" hidden>
+                  The quadratic formula is:
+
+                  $$ x = \frac{-b \pm \sqrt{b^2-4ac}}{2a} $$
+                </div>
+
+
+            </p>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>II. Coordinates of the Vertex</h3>
+
+            <p>
+              Find the coordinates <em>(x, y)</em> of the vertex of the quadratic (it's maximum or minimum.)
+
+            </p>
+
+            <p>
+              <div class="uGraph" style="width:500px">
+                <script type="text/javascript">
+                  svg2 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
+
+                  svg2.drawQuadratic(quad);
+                  svg2.addText('y = x²-2x-3', new uPoint(5,-5))
+
+                  let v1 = quad.vertex();
+                  svg2.drawPoint(v1);
+
+                  svg2.labelPoint(v1);
+
+                </script>
+              </div>
+            </p>
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+
+            <div class="toggle-next">Answer ▼</div>
+            <div id="q2-ans" class="answerField" hidden>x</div>
+            <script type="text/javascript">
+              $("#q2-ans").html(`(x, y) = (${v1.x.toPrecision(2)}, ${v1.y.toPrecision(2)})` );
+            </script>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>III. Type of Critical Value (Max or Min)</h3>
+
+            <p>
+              Determine if the critical value is a maximum or minimum.
+
+            </p>
+
+            <p>
+              <div class="uGraph" style="width:500px">
+                <script type="text/javascript">
+                  svg3 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
+
+                  svg3.drawQuadratic(quad);
+
+
+                  svg3.addText(quad.critPointType(), new uPoint(5,-5))
+
+                  svg3.drawPoint(v1);
+
+                  svg3.labelPoint(v1);
+
+                </script>
+              </div>
+            </p>
+
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+
+
+              <div class="toggle-next">Answer ▼</div>
+              <div id="q3-ans" class="answerField" hidden>x</div>
+              <script type="text/javascript">
+                $("#q3-ans").html(`Critical Point is a <b>${quad.critPointType()}</b> ` );
+              </script>
+
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>IV. Slope of the line.</h3>
+
+            <p>
+              Find the slope of a line tangent to the quadratic when:
+              $$ x = 2 $$
+
+              If you have not taken calculus, see the hint to the right.
+
+            </p>
+
+            <p>
+              <div class="uGraph" style="width:500px">
+                <script type="text/javascript">
+                  svg4 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
+
+                  svg4.drawQuadratic(quad);
+
+                  x = 2
+
+                  pt = quad.getPoint(x);
+                  dydx = quad.dydx(x);
+
+                  //svg4.addText(dydx, new uPoint(5,-5))
+
+                  svg4.drawPoint(pt);
+
+                  tanLine = quad.tangentLine(x);
+                  console.log(tanLine);
+                  svg4.drawLinearFunction(tanLine, {style:{stroke:"blue"}});
+
+                  //svg4.labelPoint(v1);
+
+                </script>
+              </div>
+            </p>
+
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+            <p>
+              <div class="toggle-next">Answer ▼</div>
+              <div id="q4-ans" class="answerField" hidden>x</div>
+              <script type="text/javascript">
+                $("#q4-ans").html(`slope = ${dydx.toPrecision(2)}` );
+              </script>
+
+              <p>
+              <h3>Hints</h3>
+              <div class="toggle-next">Hint ▼</div>
+              <div class="" hidden>
+                The slope of a quadratic can be found by differentiating the function, so:
+                $$ y = a x^2 + bx+c $$
+                gives the slope equation (m)
+                $$ \frac{dy}{dx} = 2ax + b $$
+              </div>
+
+            </p>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>V. Chord Length</h3>
+
+            <p>
+              Given two x values (-2 and 2), find the length of a chord between the two points on the curve.
+
+            </p>
+
+            <p>
+              <div class="uGraph" style="width:500px">
+                <script type="text/javascript">
+                  svg5 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
+
+                  svg5.drawQuadratic(quad);
+
+                  x1 = -2;
+                  x2 = 2;
+
+                  p1 = quad.getPoint(x1);
+                  p2 = quad.getPoint(x2);
+
+                  line = new uLineSegment(p1, p2);
+
+                  //svg4.addText(dydx, new uPoint(5,-5))
+
+                  svg5.drawPoints([p1, p2]);
+
+                  svg5.addLine(p1, p2, {style:{stroke:"blue", 'stroke-width':2}});
+
+                  //svg4.labelPoint(v1);
+
+                </script>
+              </div>
+            </p>
+
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+            <p>
+              <div class="toggle-next">Answer ▼</div>
+              <div id="q5-ans" class="answerField" hidden>x</div>
+              <script type="text/javascript">
+              console.log(line);
+                $("#q5-ans").html(`length = ${line.length().toFixed(1)}` );
+              </script>
+
+              <p>
+              <h3>Hints</h3>
+
+
+            </p>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>VI. Line Length</h3>
+
+            <p>
+              Estimate the length of the curve between <em>x = -2</em> and <em>x = 2</em> by using a series of chords along the line.
+
+            </p>
+
+            <p>
+              <div class="uGraph" style="width:500px">
+                <script type="text/javascript">
+                  svg6 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
+
+                  svg6.drawQuadratic(quad);
+
+                  x1 = -2;
+                  x2 = 2;
+                  dx = 1;
+
+                  totLen = 0;
+
+                  for (let x = x1; x < x2; x+=dx){
+                    let p1 = quad.getPoint(x);
+                    let p2 = quad.getPoint(x+dx);
+
+                    line = new uLineSegment(p1, p2);
+                    totLen += line.length();
+                    svg6.drawPoint(p1);
+                    svg6.addLine(p1, p2, {style:{stroke:"blue", 'stroke-width':2}});
+                  }
+                  svg6.drawPoint(quad.getPoint(x1), {style:{fill:"red", 'stroke-width':2}});
+                  svg6.drawPoint(quad.getPoint(x2), {style:{fill:"red", 'stroke-width':1}});
+
+
+
+
+
+
+                  //svg4.labelPoint(v1);
+
+                </script>
+              </div>
+            </p>
+
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+            <p>
+              <div class="toggle-next">Answer ▼</div>
+              <div id="q6-ans" class="answerField" hidden>x</div>
+              <script type="text/javascript">
+              console.log(line);
+                $("#q6-ans").html(`length of line = ${totLen.toFixed(1)}` );
+              </script>
+
+              <p>
+              <h3>Hints</h3>
+
+
+            </p>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+
+
+
+
+    </table>
+
+  </body>
+
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+
+</html>
