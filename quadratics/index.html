@@ -8,7 +8,7 @@
     <link href="../prism.css" rel="stylesheet" />
     <link href="../programmingLessons.css" rel="stylesheet" />
 
-    <script type="text/javascript" src="../uSvg-0.3.js"></script>
+    <script type="text/javascript" src="../uSvg-0.4.js"></script>
     <script type="text/javascript" async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
     </script>
@@ -476,7 +476,7 @@
               <div id="q6-ans" class="answerField" hidden>x</div>
               <script type="text/javascript">
               console.log(line);
-                $("#q6-ans").html(`length of line (dx = 1) = ${totLen.toFixed(1)}` );
+                $("#q6-ans").html(`length of line (dx = 1) = ${totLen.toFixed(3)}` );
               </script>
 
               <p>
@@ -499,6 +499,200 @@
 
 
 
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>VII. Line Length: Taking it to the Limit</h3>
+
+            <p>
+              You can get a better/more accurate estimate of the distance along the curve by breaking the curve into smaller segments. Estimate the length of the curve between <em>x = -2</em> and <em>x = 2</em> by using more than just four line segments (use as many as you can).
+
+            </p>
+
+            <p>
+              <div class="uGraph" style="width:500px">
+                <script type="text/javascript">
+                  svg7 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
+
+                  svg7.drawQuadratic(quad);
+
+                  x1 = -2;
+                  x2 = 2;
+                  dx = 0.1;
+
+                  totLen = 0;
+
+                  for (let x = x1; x < x2; x+=dx){
+                    let p1 = quad.getPoint(x);
+                    let p2 = quad.getPoint(x+dx);
+
+                    line = new uLineSegment(p1, p2);
+                    totLen += line.length();
+                    svg7.drawPoint(p1);
+                    svg7.addLine(p1, p2, {style:{stroke:"blue", 'stroke-width':2}});
+                  }
+                  svg7.drawPoint(quad.getPoint(x1), {style:{fill:"red", 'stroke-width':2}});
+                  svg7.drawPoint(quad.getPoint(x2), {style:{fill:"red", 'stroke-width':1}});
+
+                </script>
+              </div>
+
+            </p>
+            <p>
+              We describe the process of adding up the sum of smaller and smaller cords as taking the limit as the change in x (dx) approaches zero; after all, if you made the step zero, you'd have infinite steps.
+
+            </p>
+            <p>Mathematically, the limit as <em>dx</em> goes to zero is written as:
+
+              $$ \lim_{\Delta x \to 0}  $$
+            </p>
+
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+            <p>
+              <div class="toggle-next">Answer ▼</div>
+              <div id="q7-ans" class="answerField" hidden>x</div>
+              <script type="text/javascript">
+              console.log(line);
+                $("#q7-ans").html(`length of line (dx = ${dx}) = ${totLen.toFixed(3)}` );
+              </script>
+
+              <p>
+              <h3>Hints</h3>
+
+              <div class="toggle-next">Hint ▼</div>
+              <div class="" hidden>
+                Check out how to make <a href="../quickRef/index.html#loops">loops</a>, however, the regular <code>range</code> loop will not do a step that is less than 1. Instead you'll need to use <code>arange</code> and import the <code>numpy</code> module (<a href="https://numpy.org/">numpy</a> may need to be installed.)
+              </div>
+
+
+            </p>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>VIII. Finding the Slope using the chord</h3>
+
+            <p>
+              You can also use the limit method to estimate the slope of the line.
+            </p>
+            <p>Say, you want to find the slope when <em>x = 2</em> (as in section IV). You could just take two points--when <em>x = 1</em> and <em>x = 2</em>, and find the slope of the chord between those two points.
+            </p>
+
+            <p>
+              <div class="uGraph" style="width:500px">
+                <script type="text/javascript">
+                  svg8 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
+
+                  svg8.drawQuadratic(quad);
+
+                  x1 = 1;
+                  x2 = 2;
+
+                  p1 = quad.getPoint(x1);
+                  p2 = quad.getPoint(x2);
+
+                  line = new uLineSegment(p1, p2);
+
+                  //svg4.addText(dydx, new uPoint(5,-5))
+
+                  svg8.drawPoints([p1, p2]);
+
+                  svg8.addLine(p1, p2, {style:{stroke:"blue", 'stroke-width':2}});
+
+                  svg8.addText(`dx = ${p2.x-p1.x}`,new uPoint(5, -5));
+                  svg8.addText(`chord slope = ${p1.slopeTo(p2).toPrecision(2)}`,new uPoint(5, -6));
+
+                </script>
+              </div>
+
+            </p>
+            <p>
+              If we instead take the second point to be when <em>x = 1.5 </em> with the first point still <em>x = 2</em>, the difference in <em>x (dx)</em> is 0.5, and the slope becomes closer to the actual slope:
+
+            </p>
+            <p>
+              <div class="uGraph" style="width:500px">
+                <script type="text/javascript">
+                  svg9 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
+
+                  svg9.drawQuadratic(quad);
+
+                  x1 = 1.5;
+                  x2 = 2;
+
+                  p1 = quad.getPoint(x1);
+                  p2 = quad.getPoint(x2);
+
+                  line = new uLineSegment(p1, p2);
+
+                  //svg4.addText(dydx, new uPoint(5,-5))
+
+                  svg9.drawPoints([p1, p2]);
+
+                  svg9.addLine(p1, p2, {style:{stroke:"blue", 'stroke-width':2}});
+
+                  svg9.addText(`dx = ${p2.x-p1.x}`,new uPoint(5, -5));
+                  svg9.addText(`chord slope = ${p1.slopeTo(p2).toPrecision(2)}`,new uPoint(5, -6));
+
+                </script>
+              </div>
+
+            </p>
+            <p>Mathematically, the slope at a point can be found by making dx as small as possible: i.e. taking the limit as <em>dx</em> goes to zero.
+            </p>
+            <p>
+              Find the slope at <b><em>x = 2</em> </b> by finding the slope of a very small chord.
+            </p>
+
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment">
+            <p>
+              <div class="toggle-next">Answer ▼</div>
+              <div id="q7-ans" class="answerField" hidden>x</div>
+              As we know from section IV, the slope should be 2.
+              </script>
+
+              <p>
+              <h3>Hints</h3>
+
+              <div class="toggle-next">Hint ▼</div>
+              <div class="" hidden>
+                Test your program by making sure it works with the two examples to the left (when dx = 1 and when dx = 0.5).
+              </div>
+
+
+            </p>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
 
 
 
