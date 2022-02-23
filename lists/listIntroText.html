@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Lists (Text)</title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="../uSvg-0.4.js"></script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+      <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <!-- HEADERS -->
+    <div class="nav">
+      <a href="../index.html">← Main</a>
+      <a href="../quickRef/">Quick Ref</a>
+      <a href="../physics.html">Physics</a>
+      <a href="../preCalc.html">preCalc</a>
+      <a href="../progElective.html">Prog. Elec.</a>
+      <hr>
+    </div>
+    <!-- END HEADERS -->
+
+    <h1>Text/Strings</h1>
+
+    <div class="refs">
+      <ul>
+        <li>
+          <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">Python Lists Documentation.</a>
+        </li>
+      </ul>
+
+    </div>
+
+    <div class="setup">
+      <div class="comment">
+        <h3>Lists</h3>
+
+        <p>
+          Python treats text strings as lists, so you can work with them in much the same way as you would a regular list.
+        </p>
+
+        <p>
+          In this exercise, we'll start with Ralph Ellison's (1953) famous opening line:
+
+          <q cite="">I am an invisible man.</q>
+        </p>
+
+
+      </div>
+
+
+    <table>
+
+
+
+      <tr>
+        <th>Notes and Code</th>
+        <th>Outcome</th>
+      </tr>
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>I. Referencing an item/character in a list</h3>
+
+            <p>
+              Let's create the string, and print out the 4th character.
+            </p>
+
+            <div class="pythonCode">
+              <pre class="line-numbers"><code class="language-python">
+                line = "I am an invisible man."
+                print(line[3])
+              </pre></code>
+            </div>
+
+            <p>
+              As we recall, the first item in a list is indexed as 0 so we use <code>line[3]</code> to refer to the 4th item (in this case character) in the list. So the result is:
+            </p>
+
+            <div class="pythonCode">
+              <pre><code class="language-bash">
+                m
+              </pre></code>
+            </div>
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment" >
+            <p>
+              <div class='assignment'>
+                <div class="instruction">
+                  <h5>Assignment</h5>
+                  Write a program that uses string indexing (like <code>line[3]</code>) to print out:
+                  <div class="pythonCode">
+                    <pre><code class="language-bash">
+                      The 11th character is "v"
+                    </pre></code>
+                  </div>
+                </div>
+
+                <div class="toggle-next">Answer ▼</div>
+                <div class="results" hidden>
+                  There are a few ways to do this, but the easiest is probably using fancier output formating, where we put an "f" in front of the string we're printing out and then variables or expression in curly brackets "{}":
+                  <div class="pythonCode">
+                    <pre class="line-numbers"><code class="language-python">
+                      line = "I am an invisible man."
+                      char11 = line[10]
+                      print(f'The 11th character is "{char11}"')
+                    </pre></code>
+                  </div>
+
+                  Notice that in order to print out the double quotation marks you need to delimit the whole string with single quotation marks. (You could also escape the inner double quotation marks using the back slash "\" like: <code>print(f"The 11th character is \"{char11}\"")</code>)
+
+                </div>
+              </div>
+            </p>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>II. Concatinating (joining) strings</h3>
+
+            <p>
+              To join two strings you just use the <code>+</code> operator.
+            </p>
+
+            <div class="pythonCode">
+              <pre class="line-numbers"><code class="language-python">
+                line = "I am an invisible man."
+                author = "Ralph Ellison"
+                outLine = line + " by " + author
+                print(outLine)
+              </pre></code>
+            </div>
+
+            <p>
+              We can add quotation marks around the quote, but have to use a different type of quotation mark.
+            </p>
+
+            <div class="pythonCode">
+              <pre><code class="language-bash">
+                line = "I am an invisible man."
+                author = "Ralph Ellison"
+                outLine = '"' + line + '"' + " by " + author
+                print(outLine)
+              </pre></code>
+            </div>
+
+
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment" >
+            <p>
+              <div class="assignment">
+                <div class="instruction">
+                  <h5>Assignment</h5>
+                  Write a program that uses string indexing (like <code>line[3]</code>) <b>and concatenation</b> (not the f"" formatting) to print out:
+                  <div class="pythonCode">
+                    <pre><code class="language-bash">
+                      The 11th character is "v"
+                    </pre></code>
+                  </div>
+                </div>
+
+
+                <div class="toggle-next">Answer ▼</div>
+                <div class="results" hidden>
+                  <div class="pythonCode">
+                    <pre class="line-numbers"><code class="language-python">
+                      line = "I am an invisible man."
+                      print('The 11th character is ' + '"' + line[10] + '"')
+                    </pre></code>
+                  </div>
+
+                </div>
+              </div>
+
+            </p>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>III. Looping through a list/string</h3>
+
+            <p>
+              We can use a for loop to get each letter in a string. So to count the number of characters in the string we could do:
+            </p>
+
+            <div class="pythonCode">
+              <pre class="line-numbers"><code class="language-python">
+                line = "I am an invisible man."
+                n = 0
+                for char in line:
+                    n = n + 1
+                    print(n, char)
+                print(f'There are {n} characters in the string: ' + line)
+              </pre></code>
+            </div>
+
+            <p>
+              which outputs:
+              <div class="pythonCode">
+                <pre><code class="language-bash">
+                  1 I
+                  2
+                  3 a
+                  4 m
+                  5
+                  6 a
+                  7 n
+                  8
+                  9 i
+                  10 n
+                  11 v
+                  12 i
+                  13 s
+                  14 i
+                  15 b
+                  16 l
+                  17 e
+                  18
+                  19 m
+                  20 a
+                  21 n
+                  22 .
+                  There are 22 characters in the string: I am an invisible man.
+                </pre></code>
+              </div>
+            </p>
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment" >
+            <p>
+              <div class="assignment">
+                <div class="instruction">
+                  <h5>Assignment</h5>
+                  Write a program counts the number of times the letter "a" occurs in the string.
+                </div>
+
+
+                <div class="toggle-next">Answer ▼</div>
+                <div class="results" hidden>
+                  <div class="pythonCode">
+                    <pre><code class="language-bash">
+                      There are 3 "a"s in the string: I am an invisible man.
+                    </pre></code>
+                  </div>
+
+                </div>
+
+                <div class="toggle-next">Code ▼</div>
+                <div class="results" hidden>
+                  <div class="pythonCode">
+                    <pre><code class="language-bash">
+                      line = "I am an invisible man."
+                      n = 0
+                      for char in line:
+                          if (char == 'a'):
+                              n = n + 1
+                      print(f'There are {n} "a"s in the string: ' + line)
+                    </pre></code>
+                  </div>
+
+                </div>
+              </div>
+
+
+            </p>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+      <!-- NEW ROW -->
+      <tr>
+        <td>
+          <div class="comment">
+
+            <h3>IV. Splitting Strings</h3>
+
+            <p>
+              To split the string into separate words we split using the space character (" ") as the seperator.
+            </p>
+
+            <div class="pythonCode">
+              <pre class="line-numbers"><code class="language-python">
+                line = "I am an invisible man."
+                words = line.split(" ")
+                print(words)
+              </pre></code>
+            </div>
+
+            <p>
+              which outputs a list:
+              <div class="pythonCode">
+                <pre><code class="language-bash">
+                  ['I', 'am', 'an', 'invisible', 'man.']
+                </pre></code>
+              </div>
+            </p>
+
+          </div>
+
+        </td>
+        <td>
+          <div class="comment" >
+            <p>
+              <div class="assignment">
+                <div class="instruction">
+                  <h5>Assignment 1</h5>
+                  Write a program that splits the string every time there is a lower case "i".
+                </div>
+
+
+                <div class="toggle-next">Answer ▼</div>
+                <div class="results" hidden>
+                  <div class="pythonCode">
+                    <pre><code class="language-bash">
+                      ['I am an ', 'nv', 's', 'ble man.']
+                    </pre></code>
+                  </div>
+
+                </div>
+
+                <div class="toggle-next">Code ▼</div>
+                <div class="results" hidden>
+                  <div class="pythonCode">
+                    <pre><code class="language-bash">
+                      line = "I am an invisible man."
+                      words = line.split("i")
+                      print(words)
+                    </pre></code>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="assignment">
+                <div class="instruction">
+                  <h5>Assignment 2</h5>
+                  Write a program that splits the string into words and counts the number of words.
+                </div>
+
+                <div class="toggle-next">Answer ▼</div>
+                <div class="results" hidden>
+                  <div class="pythonCode">
+                    <pre><code class="language-bash">
+                      There are 5 words in the string: I am an invisible man.
+                    </pre></code>
+                  </div>
+
+                </div>
+
+                <div class="toggle-next">Code ▼</div>
+                <div class="results" hidden>
+                  <div class="pythonCode">
+                    <pre><code class="language-bash">
+                      You can do this. We believe in you!
+                    </pre></code>
+                  </div>
+
+                </div>
+
+              </div>
+
+
+            </p>
+
+          </div>
+
+
+        </td>
+      </tr>
+      <!-- END ROW -->
+
+
+
+
+    </table>
+
+  </body>
+
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+
+</html>

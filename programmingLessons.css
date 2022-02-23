@@ -43,10 +43,24 @@ body {
   width: 12em;
   margin: 2px;
   color: blue;
+  padding-top: 0.4em;
 }
 .toggle-next:hover {
   cursor: pointer;
   background-color: #bbbbff;
+}
+
+.assignment {
+  border: 1px solid black;
+  margin-top: 1em;
+  padding: 0.25em;
+}
+.instruction {
+  font-family: "Trebuchet MS";
+  text-indent: 1em;
+}
+.instruction:hover {
+  background-color: lightblue;
 }
 
 table, th, td {
