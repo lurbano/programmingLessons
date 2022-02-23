@@ -436,22 +436,48 @@
             <h3>V. Changing Text (Substitution and Removal)</h3>
 
             <p>
-              the
+              Use the <code>replace</code> method to substitute parts of strings.
             </p>
 
             <div class="pythonCode">
               <pre class="line-numbers"><code class="language-python">
                 line = "I am an invisible man."
-                words = line.split(" ")
-                print(words)
+                newLine = line.replace("i", "*")
+                print(newLine)
               </pre></code>
             </div>
 
             <p>
-              which outputs a list:
+              which outputs:
               <div class="pythonCode">
                 <pre><code class="language-bash">
-                  ['I', 'am', 'an', 'invisible', 'man.']
+                  I am an *nv*s*ble man.
+                </pre></code>
+              </div>
+            </p>
+
+            <p>
+              You can also replace multiple characters, or replace with no characters to remove text. Here we replace "I am" with "I'm", and remove all the letter "i"'s from the string.
+            </p>
+
+            <div class="pythonCode">
+              <pre class="line-numbers"><code class="language-python">
+                line = "I am an invisible man."
+                print(line)
+                line2 = line.replace("I am", "I'm")
+                print(line2)
+                line3 = line.replace("i", "")
+                print(line3)
+              </pre></code>
+            </div>
+
+            <p>
+              which outputs:
+              <div class="pythonCode">
+                <pre><code class="language-bash">
+                  I am an invisible man.
+                  I'm an invisible man.
+                  I am an nvsble man.
                 </pre></code>
               </div>
             </p>
@@ -465,7 +491,7 @@
               <div class="assignment">
                 <div class="instruction">
                   <h5>Assignment 1</h5>
-                  Write a program that splits the string every time there is a lower case "i".
+                  Write a program to remove all punctuation marks from the string.
                 </div>
 
 
@@ -473,7 +499,7 @@
                 <div class="results" hidden>
                   <div class="pythonCode">
                     <pre><code class="language-bash">
-                      ['I am an ', 'nv', 's', 'ble man.']
+                      I am an invisible man
                     </pre></code>
                   </div>
 
@@ -483,9 +509,7 @@
                 <div class="results" hidden>
                   <div class="pythonCode">
                     <pre><code class="language-bash">
-                      line = "I am an invisible man."
-                      words = line.split("i")
-                      print(words)
+                      This one is on you.
                     </pre></code>
                   </div>
 
@@ -496,14 +520,14 @@
               <div class="assignment">
                 <div class="instruction">
                   <h5>Assignment 2</h5>
-                  Write a program that splits the string into words and counts the number of words.
+                  Write a program that removes all vowels from the text. (Be sure to look at the code below to see how I do it).
                 </div>
 
                 <div class="toggle-next">Answer ▼</div>
                 <div class="results" hidden>
                   <div class="pythonCode">
                     <pre><code class="language-bash">
-                      There are 5 words in the string: I am an invisible man.
+                       m n nvsbl mn.
                     </pre></code>
                   </div>
 
@@ -513,7 +537,11 @@
                 <div class="results" hidden>
                   <div class="pythonCode">
                     <pre><code class="language-bash">
-                      You can do this. We believe in you!
+                      line = "I am an invisible man."
+                      vowels = "aeiouAEIOU"
+                      for v in vowels:
+                          line = line.replace(v, '')
+                      print(line)
                     </pre></code>
                   </div>
 

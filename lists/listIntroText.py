@@ -47,3 +47,26 @@ n = 0
 for word in words:
     n = n + 1
 print(f'There are {n} words in the string: ' + line)
+
+
+line = "I am an invisible man."
+newLine = line.replace("i", "*")
+print(newLine)
+
+
+line = "I am an invisible man."
+print(line)
+line2 = line.replace("I am", "I'm")
+print(line2)
+line3 = line.replace("i", "")
+print(line3)
+
+line = "I am an invisible man."
+line = line.replace(".", '')
+print(line)
+
+line = "I am an invisible man."
+vowels = "aeiouAEIOU"
+for v in vowels:
+    line = line.replace(v, '')
+print(line)
