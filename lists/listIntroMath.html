@@ -34,6 +34,7 @@
     <h1>Lists</h1>
 
     <div class="refs">
+      References:
       <ul>
         <li>
           <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">Python Lists Documentation.</a>
@@ -42,7 +43,7 @@
 
     </div>
 
-    <div class="setup">
+    <div class="intro">
       <div class="comment">
         <h3>Lists</h3>
 
@@ -84,20 +85,18 @@
         </p>
 
       </div>
+    </div>
 
 
-    <table>
 
 
+    <div class="mainTable">
 
-      <tr>
-        <th>Notes and Code</th>
-        <th>Outcome</th>
-      </tr>
+      <div class="gridHeader"> Notes and Code </div>
+      <div class="gridHeader"> Outcome </div>
 
       <!-- NEW ROW -->
-      <tr>
-        <td>
+        <!-- LEFT COLUMN -->
           <div class="comment">
 
             <h3>I. Creating Lists</h3>
@@ -158,52 +157,88 @@
 
             </p>
 
-            <p>Assignment:</p>
-            <p>
-              Write a program that prints out Blas' name and his grade for exam 1.
-            </p>
 
           </div>
+        <!-- END LEFT COLUMN -->
 
-        </td>
-        <td>
+        <!-- RIGHT COLUMN -->
           <div class="comment" >
-            <p>
-              <p>
-                <div class="toggle-next">Answer ▼</div>
-                <div class="results" hidden>
-                  <div class="pythonCode">
-                    <pre class="line-numbers"><code class="language-python">
-                      students = ['Brooke', 'Coen', 'Blas', 'George']
-                      exam1 = [85, 90, 80, 50]
-                      exam2 = [ 95, 100, 100, 96]
 
-                      print(students)
+            <!-- BEGIN ASSIGNMENT -->
+            <div class='assignment'>
+              <div class="instruction">
+                <h5>Assignment</h5>
+                Write a program that prints out Blas' name and his grade for exam 1.
+              </div>
 
-                      # print out Blas' name and his grade for exam 1
-                      print(students[2], exam1[2])
-                    </pre></code>
-                  </div>
+              <div class="toggle-next">Answer ▼</div>
+              <div class="results" hidden>
 
-                  which yeilds:
-                  <div class="pythonCode">
-                    <pre><code class="language-bash">
-                      ['Brooke', 'Coen', 'Blas', 'George']
-                      Blas 80
-                    </pre></code>
-                  </div>
+                <div class="pythonCode">
+                  <pre class="line-numbers"><code class="language-python">
+                    students = ['Brooke', 'Coen', 'Blas', 'George']
+                    exam1 = [85, 90, 80, 50]
+                    exam2 = [ 95, 100, 100, 96]
+                    print(students[2], exam1[2])
+                  </pre></code>
                 </div>
 
-              </p>
+              </div>
+            </div>
+            <!-- END ASSIGNMENT -->
 
+            <!-- BEGIN ASSIGNMENT -->
+            <div class='assignment'>
+              <div class="instruction">
+                <h5>Assignment</h5>
+                Make a list with the days of the week and use the list to have it print out:
+                <div class="pythonCode">
+                  <pre><code class="language-bash">
+                    Monday and Friday
+                  </pre></code>
+                </div>
+              </div>
 
-            </p>
+              <div class="toggle-next">Answer ▼</div>
+              <div class="results" hidden>
+
+                <div class="pythonCode">
+                  <pre class="line-numbers"><code class="language-python">
+                    days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+                    print(days[1], "and", days[5])
+                  </pre></code>
+                </div>
+
+              </div>
+            </div>
+            <!-- END ASSIGNMENT -->
+
+            <!-- BEGIN ASSIGNMENT -->
+            <div class='assignment'>
+              <div class="instruction">
+                <h5>Assignment</h5>
+                Make a list with the first 10 multiples of 2 (<code>2, 4, 6...</code>), and have it print out the last number.
+              </div>
+
+              <div class="toggle-next">Answer ▼</div>
+              <div class="results" hidden>
+
+                <div class="pythonCode">
+                  <pre class="line-numbers"><code class="language-python">
+                    nums = [2, 4, 6, 9, 10, 12, 14, 16, 18, 20]
+                    print(nums[-1])
+                  </pre></code>
+                </div>
+
+                Notice the negative reference (<code>nums[-1]</code>) used to index the last item in the list.
+
+              </div>
+            </div>
+            <!-- END ASSIGNMENT -->
 
           </div>
+        <!-- END RIGHT COLUMN -->
 
-
-        </td>
-      </tr>
       <!-- END ROW -->
 
 
@@ -211,528 +246,150 @@
 
 
       <!-- NEW ROW -->
-      <tr>
-        <td>
+        <!-- BEGIN LEFT COLUMN -->
+
           <div class="comment">
 
             <h3>II. Referencing Items in a List</h3>
 
             <p>
-              Find the coordinates <em>(x, y)</em> of the vertex of the quadratic (it's maximum or minimum.)
+              <ul>
+                <li>
+                  <b>Forward Indexing</b>:
+                  <ul>
+                    <li>Starts at <code>0</code> for the first item. </li>
+                    <ul>
+                      <li><code>students[0]</code> --> 'Brooke'</li>
+                      <li><code>students[1]</code> --> 'Coen' </li>
+                    </ul>
+                  </ul>
+                </li>
+                <li>
+                  <b>Backward Indexing</b> (in python, but not all languages):
+                  <ul>
+                    <li>The last item in the list has the index <code>-1</code> </li>
+                    <ul>
+                      <li><code>students[-1]</code> --> 'George'</li>
+                      <li><code>students[-2]</code> --> 'Blas' </li>
+                    </ul>
+                  </ul>
+                </li>
+                <li>
+                  <b>Slicing</b>: To get a number of items from the sequence give the two indices separated by a colon (<code>:</code>):
+                  <ul>
+                    <li>The  </li>
+                    <ul>
+                      <li><code>students[1:3]</code> --> ['Coen', 'Blas']</li>
+                      <li><code>students[:2]</code> --> ['Brooke', 'Coen'] </li>
+                      <li><code>students[1:]</code> --> ['Coen', 'Blas', 'George'] </li>
+                      <li>Notice that slicing gives the results as a shorter list.</li>
+                    </ul>
+                  </ul>
+                </li>
+              </ul>
 
             </p>
 
+            So the program:
+            <div class="pythonCode">
+              <pre class="line-numbers"><code class="language-python">
+                students = ['Brooke', 'Coen', 'Blas', 'George']
+                print('students[0]:', students[0])
+                print('students[1]:', students[1])
+                print('students[-1]:', students[-1])
+                print('students[-2]:', students[-2])
+                print('students[1:3]:', students[1:3])
+                print('students[:2]:', students[:2])
+                print('students[1:]:', students[1:])
+              </pre></code>
+            </div>
 
-          </div>
+            <p>Outputs:</p>
 
-        </td>
-        <td>
-          <div class="comment">
-
-            <div class="toggle-next">Answer ▼</div>
-            <div class="result" hidden>
-              Hi.
+            <div class="pythonCode">
+              <pre><code class="language-bash">
+                students[0]: Brooke
+                students[1]: Coen
+                students[-1]: George
+                students[-2]: Blas
+                students[1:3]: ['Coen', 'Blas']
+                students[:2]: ['Brooke', 'Coen']
+                students[1:]: ['Coen', 'Blas', 'George']
+              </pre></code>
             </div>
 
           </div>
+        <!-- END LEFT COLUMN -->
 
+        <!-- BEGIN RIGHT COLUMN -->
+          <div class="comment">
 
-        </td>
-      </tr>
+            <!-- BEGIN ASSIGNMENT -->
+            <div class='assignment'>
+              <div class="instruction">
+                <h5>Assignment</h5>
+                Print the name of the second to last student <i><b>using both forward and backward indexing</b> </i>:
+              </div>
+
+              <div class="toggle-next">Result ▼</div>
+              <div class="results" hidden>
+
+                <div class="pythonCode">
+                  <pre class="line-numbers"><code class="language-python">
+                    Blas Blas
+                  </pre></code>
+                </div>
+              </div>
+
+              <div class="toggle-next">Code ▼</div>
+              <div class="results" hidden>
+
+                <div class="pythonCode">
+                  <pre class="line-numbers"><code class="language-python">
+                    students = ['Brooke', 'Coen', 'Blas', 'George']
+                    print( students[2], students[-2] )
+                  </pre></code>
+                </div>
+              </div>
+            </div>
+            <!-- END ASSIGNMENT -->
+
+            <!-- BEGIN ASSIGNMENT -->
+            <div class='assignment'>
+              <div class="instruction">
+                <h5>Assignment</h5>
+                Print the Exam 1 grades of the last two students <b><i>using slicing</i><b>:
+              </div>
+
+              <div class="toggle-next">Result ▼</div>
+              <div class="results" hidden>
+
+                <div class="pythonCode">
+                  <pre class="line-numbers"><code class="language-python">
+                    [80, 50]
+                  </pre></code>
+                </div>
+              </div>
+
+              <div class="toggle-next">Code ▼</div>
+              <div class="results" hidden>
+
+                <div class="pythonCode">
+                  <pre class="line-numbers"><code class="language-python">
+                    exam1 = [85, 90, 80, 50]
+                    print( exam1[2:] )
+                  </pre></code>
+                </div>
+              </div>
+            </div>
+            <!-- END ASSIGNMENT -->
+
+          </div>
+        <!-- END RIGHT COLUMN -->
       <!-- END ROW -->
 
 
-
-
-
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-
-            <h3>III. Type of Critical Value (Max or Min)</h3>
-
-            <p>
-              Determine if the critical value is a maximum or minimum.
-
-            </p>
-
-            <p>
-              <div class="uGraph" style="width:500px">
-                <script type="text/javascript">
-                  svg3 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
-
-                  svg3.drawQuadratic(quad);
-
-
-                  svg3.addText(quad.critPointType(), new uPoint(5,-5))
-
-                  svg3.drawPoint(v1);
-
-                  svg3.labelPoint(v1);
-
-                </script>
-              </div>
-            </p>
-
-
-          </div>
-
-        </td>
-        <td>
-          <div class="comment">
-
-
-              <div class="toggle-next">Answer ▼</div>
-              <div id="q3-ans" class="answerField" hidden>x</div>
-              <script type="text/javascript">
-                $("#q3-ans").html(`Critical Point is a <b>${quad.critPointType()}</b> ` );
-              </script>
-
-
-          </div>
-
-
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-
-
-
-
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-
-            <h3>IV. Slope of the line.</h3>
-
-            <p>
-              Find the slope of a line tangent to the quadratic when:
-              $$ x = 2 $$
-
-              If you have not taken calculus, see the hint to the right.
-
-            </p>
-
-            <p>
-              <div class="uGraph" style="width:500px">
-                <script type="text/javascript">
-                  svg4 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
-
-                  svg4.drawQuadratic(quad);
-
-                  x = 2
-
-                  pt = quad.getPoint(x);
-                  dydx = quad.dydx(x);
-
-                  //svg4.addText(dydx, new uPoint(5,-5))
-
-                  svg4.drawPoint(pt);
-
-                  tanLine = quad.tangentLine(x);
-                  console.log(tanLine);
-                  svg4.drawLinearFunction(tanLine, {style:{stroke:"blue"}});
-
-                  //svg4.labelPoint(v1);
-
-                </script>
-              </div>
-            </p>
-
-
-          </div>
-
-        </td>
-        <td>
-          <div class="comment">
-            <p>
-              <div class="toggle-next">Answer ▼</div>
-              <div id="q4-ans" class="answerField" hidden>x</div>
-              <script type="text/javascript">
-                $("#q4-ans").html(`slope = ${dydx.toPrecision(2)}` );
-              </script>
-
-              <p>
-              <h3>Hints</h3>
-              <div class="toggle-next">Hint ▼</div>
-              <div class="" hidden>
-                The slope of a quadratic can be found by differentiating the function, so:
-                $$ y = a x^2 + bx+c $$
-                gives the slope equation (m)
-                $$ \frac{dy}{dx} = 2ax + b $$
-              </div>
-
-            </p>
-
-          </div>
-
-
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-
-
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-
-            <h3>V. Chord Length</h3>
-
-            <p>
-              Given two x values (-2 and 2), find the length of a chord between the two points on the curve.
-
-            </p>
-
-            <p>
-              <div class="uGraph" style="width:500px">
-                <script type="text/javascript">
-                  svg5 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
-
-                  svg5.drawQuadratic(quad);
-
-                  x1 = -2;
-                  x2 = 2;
-
-                  p1 = quad.getPoint(x1);
-                  p2 = quad.getPoint(x2);
-
-                  line = new uLineSegment(p1, p2);
-
-                  //svg4.addText(dydx, new uPoint(5,-5))
-
-                  svg5.drawPoints([p1, p2]);
-
-                  svg5.addLine(p1, p2, {style:{stroke:"blue", 'stroke-width':2}});
-
-                  //svg4.labelPoint(v1);
-
-                </script>
-              </div>
-            </p>
-
-
-          </div>
-
-        </td>
-        <td>
-          <div class="comment">
-            <p>
-              <div class="toggle-next">Answer ▼</div>
-              <div id="q5-ans" class="answerField" hidden>x</div>
-              <script type="text/javascript">
-              console.log(line);
-                $("#q5-ans").html(`length = ${line.length().toFixed(1)}` );
-              </script>
-
-              <p>
-              <h3>Hints</h3>
-
-
-            </p>
-
-          </div>
-
-
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-
-
-
-
-
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-
-            <h3>VI. Line Length</h3>
-
-            <p>
-              Estimate the length of the curve between <em>x = -2</em> and <em>x = 2</em> by using a series of chords along the line.
-
-            </p>
-
-            <p>
-              <div class="uGraph" style="width:500px">
-                <script type="text/javascript">
-                  svg6 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
-
-                  svg6.drawQuadratic(quad);
-
-                  x1 = -2;
-                  x2 = 2;
-                  dx = 1;
-
-                  totLen = 0;
-
-                  for (let x = x1; x < x2; x+=dx){
-                    let p1 = quad.getPoint(x);
-                    let p2 = quad.getPoint(x+dx);
-
-                    line = new uLineSegment(p1, p2);
-                    totLen += line.length();
-                    svg6.drawPoint(p1);
-                    svg6.addLine(p1, p2, {style:{stroke:"blue", 'stroke-width':2}});
-                  }
-                  svg6.drawPoint(quad.getPoint(x1), {style:{fill:"red", 'stroke-width':2}});
-                  svg6.drawPoint(quad.getPoint(x2), {style:{fill:"red", 'stroke-width':1}});
-
-
-
-
-
-
-                  //svg4.labelPoint(v1);
-
-                </script>
-              </div>
-            </p>
-
-
-          </div>
-
-        </td>
-        <td>
-          <div class="comment">
-            <p>
-              <div class="toggle-next">Answer ▼</div>
-              <div id="q6-ans" class="answerField" hidden>x</div>
-              <script type="text/javascript">
-              console.log(line);
-                $("#q6-ans").html(`length of line (dx = 1) = ${totLen.toFixed(3)}` );
-              </script>
-
-              <p>
-              <h3>Hints</h3>
-
-              <div class="toggle-next">Hint ▼</div>
-              <div class="" hidden>
-                Check out how to make <a href="../quickRef/index.html#loops">loops</a>
-              </div>
-
-
-            </p>
-
-          </div>
-
-
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-
-
-
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-
-            <h3>VII. Line Length: Taking it to the Limit</h3>
-
-            <p>
-              You can get a better/more accurate estimate of the distance along the curve by breaking the curve into smaller segments. Estimate the length of the curve between <em>x = -2</em> and <em>x = 2</em> by using more than just four line segments (use as many as you can).
-
-            </p>
-
-            <p>
-              <div class="uGraph" style="width:500px">
-                <script type="text/javascript">
-                  svg7 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
-
-                  svg7.drawQuadratic(quad);
-
-                  x1 = -2;
-                  x2 = 2;
-                  dx = 0.1;
-
-                  totLen = 0;
-
-                  for (let x = x1; x < x2; x+=dx){
-                    let p1 = quad.getPoint(x);
-                    let p2 = quad.getPoint(x+dx);
-
-                    line = new uLineSegment(p1, p2);
-                    totLen += line.length();
-                    svg7.drawPoint(p1);
-                    svg7.addLine(p1, p2, {style:{stroke:"blue", 'stroke-width':2}});
-                  }
-                  svg7.drawPoint(quad.getPoint(x1), {style:{fill:"red", 'stroke-width':2}});
-                  svg7.drawPoint(quad.getPoint(x2), {style:{fill:"red", 'stroke-width':1}});
-
-                </script>
-              </div>
-
-            </p>
-            <p>
-              We describe the process of adding up the sum of smaller and smaller cords as taking the limit as the change in x (dx) approaches zero; after all, if you made the step zero, you'd have infinite steps.
-
-            </p>
-            <p>Mathematically, the limit as <em>dx</em> goes to zero is written as:
-
-              $$ \lim_{\Delta x \to 0}  $$
-            </p>
-
-
-          </div>
-
-        </td>
-        <td>
-          <div class="comment">
-            <p>
-              <div class="toggle-next">Answer ▼</div>
-              <div id="q7-ans" class="answerField" hidden>x</div>
-              <script type="text/javascript">
-              console.log(line);
-                $("#q7-ans").html(`length of line (dx = ${dx}) = ${totLen.toFixed(3)}` );
-              </script>
-
-              <p>
-              <h3>Hints</h3>
-
-              <div class="toggle-next">Hint ▼</div>
-              <div class="" hidden>
-                Check out how to make <a href="../quickRef/index.html#loops">loops</a>, however, the regular <code>range</code> loop will not do a step that is less than 1. Instead you'll need to use <code>arange</code> and import the <code>numpy</code> module (<a href="https://numpy.org/">numpy</a> may need to be installed.)
-              </div>
-
-
-            </p>
-
-          </div>
-
-
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-
-
-      <!-- NEW ROW -->
-      <tr>
-        <td>
-          <div class="comment">
-
-            <h3>VIII. Finding the Slope using the chord</h3>
-
-            <p>
-              You can also use the limit method to estimate the slope of the line.
-            </p>
-            <p>Say, you want to find the slope when <em>x = 2</em> (as in section IV). You could just take two points--when <em>x = 1</em> and <em>x = 2</em>, and find the slope of the chord between those two points.
-            </p>
-
-            <p>
-              <div class="uGraph" style="width:500px">
-                <script type="text/javascript">
-                  svg8 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
-
-                  svg8.drawQuadratic(quad);
-
-                  x1 = 1;
-                  x2 = 2;
-
-                  p1 = quad.getPoint(x1);
-                  p2 = quad.getPoint(x2);
-
-                  line = new uLineSegment(p1, p2);
-
-                  //svg4.addText(dydx, new uPoint(5,-5))
-
-                  svg8.drawPoints([p1, p2]);
-
-                  svg8.addLine(p1, p2, {style:{stroke:"blue", 'stroke-width':2}});
-
-                  svg8.addText(`dx = ${p2.x-p1.x}`,new uPoint(5, -5));
-                  svg8.addText(`chord slope = ${p1.slopeTo(p2).toPrecision(2)}`,new uPoint(5, -6));
-
-                </script>
-              </div>
-
-            </p>
-            <p>
-              If we instead take the second point to be when <em>x = 1.5 </em> with the first point still <em>x = 2</em>, the difference in <em>x (dx)</em> is 0.5, and the slope becomes closer to the actual slope:
-
-            </p>
-            <p>
-              <div class="uGraph" style="width:500px">
-                <script type="text/javascript">
-                  svg9 = new uSvgGraph({elementInfo:{width:400,height:400}, axesInfo:{showAxes:true}});
-
-                  svg9.drawQuadratic(quad);
-
-                  x1 = 1.5;
-                  x2 = 2;
-
-                  p1 = quad.getPoint(x1);
-                  p2 = quad.getPoint(x2);
-
-                  line = new uLineSegment(p1, p2);
-
-                  //svg4.addText(dydx, new uPoint(5,-5))
-
-                  svg9.drawPoints([p1, p2]);
-
-                  svg9.addLine(p1, p2, {style:{stroke:"blue", 'stroke-width':2}});
-
-                  svg9.addText(`dx = ${p2.x-p1.x}`,new uPoint(5, -5));
-                  svg9.addText(`chord slope = ${p1.slopeTo(p2).toPrecision(2)}`,new uPoint(5, -6));
-
-                </script>
-              </div>
-
-            </p>
-            <p>Mathematically, the slope at a point can be found by making dx as small as possible: i.e. taking the limit as <em>dx</em> goes to zero.
-            </p>
-            <p>
-              Find the slope at <b><em>x = 2</em> </b> by finding the slope of a very small chord.
-            </p>
-
-
-          </div>
-
-        </td>
-        <td>
-          <div class="comment">
-            <p>
-              <div class="toggle-next">Answer ▼</div>
-              <div id="q7-ans" class="answerField" hidden>x</div>
-              As we know from section IV, the slope should be 2.
-              </script>
-
-              <p>
-              <h3>Hints</h3>
-
-              <div class="toggle-next">Hint ▼</div>
-              <div class="" hidden>
-                Test your program by making sure it works with the two examples to the left (when dx = 1 and when dx = 0.5).
-              </div>
-
-
-            </p>
-
-          </div>
-
-
-        </td>
-      </tr>
-      <!-- END ROW -->
-
-
-
-
-
-    </table>
+  </div>
 
   </body>
 

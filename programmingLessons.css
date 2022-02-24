@@ -23,9 +23,17 @@ body {
   justify-self: left; -->
 }
 .comment {
-  /* border: 1px solid black; */
+  border: 1px solid black;
+  border-bottom: 4px double red;
   padding: 1em;
   width: 90%;
+  margin: 5px;
+  /* background-color: #effffe; */
+  background-color: #fffde2;
+  /* opacity: 1; */
+  background-image:  linear-gradient(#f6f6ff 2px, transparent 2px), linear-gradient(90deg, #f6f6ff 2px, transparent 2px), linear-gradient(#f6f6ff 1px, transparent 1px), linear-gradient(90deg, #f6f6ff 1px, #fffde2 1px);
+  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
 }
 .pythonCode {
   margin-top: 0.25em;
@@ -125,6 +133,9 @@ li {
 
 code {
   padding: 0.2em;
+  border: 1px solid black;
+  /* background-color: darkblue; */
+  /* color: white; */
 }
 
 .codeNote {
@@ -156,4 +167,14 @@ code {
 
 .answerField {
   background-color: PaleTurquoise;
+}
+
+.mainTable {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.gridHeader {
+  text-align: center;
+  font-weight: bold;
 }
