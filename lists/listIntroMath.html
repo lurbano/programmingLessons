@@ -242,9 +242,6 @@
       <!-- END ROW -->
 
 
-
-
-
       <!-- NEW ROW -->
         <!-- BEGIN LEFT COLUMN -->
 
@@ -329,7 +326,7 @@
             <div class='assignment'>
               <div class="instruction">
                 <h5>Assignment</h5>
-                Print the name of the second to last student <i><b>using both forward and backward indexing</b> </i>:
+                Print the name of the second to last student <em><b>using both forward and backward indexing</b> </em>:
               </div>
 
               <div class="toggle-next">Result ▼</div>
@@ -359,7 +356,7 @@
             <div class='assignment'>
               <div class="instruction">
                 <h5>Assignment</h5>
-                Print the Exam 1 grades of the last two students <b><i>using slicing</i><b>:
+                Print the Exam 1 grades of the last two students <em><b>using slicing</b></em>:
               </div>
 
               <div class="toggle-next">Result ▼</div>
@@ -388,6 +385,176 @@
           </div>
         <!-- END RIGHT COLUMN -->
       <!-- END ROW -->
+
+
+
+      <!-- NEW ROW -->
+        <!-- BEGIN LEFT COLUMN -->
+
+          <div class="comment">
+
+            <h3>III. Looping (Iterating) Through Lists</h3>
+
+            <p>
+              You can quickly go through each item in a list using a <code>for ... in ...</code> loop.
+            </p>
+
+            <div class="pythonCode">
+              <pre class="line-numbers"><code class="language-python">
+                students = ['Brooke', 'Coen', 'Blas', 'George']
+
+                for s in students:
+                    print( s, 'is a student')
+              </pre></code>
+            </div>
+
+            <p>In this case, the variable <code>s</code> takes the value of each item in the list. </p>
+
+            <p>Outputs:</p>
+
+            <div class="pythonCode">
+              <pre><code class="language-bash">
+                Brooke is a student
+                Coen is a student
+                Blas is a student
+                George is a student
+              </pre></code>
+            </div>
+
+            <p>It is sometimes necessary to get the index as well as the item while you go through the list, so you can reference parallel items in other lists.</p>
+
+            <p>Let's loop through the three lists and print out the total grade of each student (Exam 1 + Exam 2). We use the <code>enumerate</code> function to get the index and the item simultaneously. </p>
+
+            <div class="pythonCode">
+              <pre class="line-numbers"><code class="language-python">
+                students = ['Brooke', 'Coen', 'Blas', 'George']
+                exam1 = [85, 90, 80, 50]
+                exam2 = [ 95, 100, 100, 96]
+
+                for i, s in enumerate(students):
+                    total = exam1[i] + exam2[i]
+                    print( i, s, total)
+              </pre></code>
+            </div>
+
+            <p><code>i</code> becomes the index, and <code>s</code> is the value from the enumerated list. </p>
+
+            <p>Outputs:</p>
+
+            <div class="pythonCode">
+              <pre><code class="language-bash">
+                0 Brooke 180
+                1 Coen 190
+                2 Blas 180
+                3 George 146
+              </pre></code>
+            </div>
+
+          </div>
+        <!-- END LEFT COLUMN -->
+
+
+        <!-- BEGIN RIGHT COLUMN -->
+          <div class="comment">
+
+            <!-- BEGIN ASSIGNMENT -->
+            <div class='assignment'>
+              <div class="instruction">
+                <h5>Assignment</h5>
+                Find, and print out, the student name and their average score from the two exams:
+              </div>
+
+              <div class="toggle-next">Result ▼</div>
+              <div class="results" hidden>
+
+                <div class="pythonCode">
+                  <pre class="line-numbers"><code class="language-python">
+                    0 Brooke 90.0
+                    1 Coen 95.0
+                    2 Blas 90.0
+                    3 George 73.0
+                  </pre></code>
+                </div>
+              </div>
+
+              <div class="toggle-next">Code ▼</div>
+              <div class="results" hidden>
+
+                <div class="pythonCode">
+                  <pre class="line-numbers"><code class="language-python">
+                    students = ['Brooke', 'Coen', 'Blas', 'George']
+                    exam1 = [85, 90, 80, 50]
+                    exam2 = [ 95, 100, 100, 96]
+
+                    for i, s in enumerate(students):
+                        avg = (exam1[i] + exam2[i]) / 2
+                        print( i, s, avg)
+                  </pre></code>
+                </div>
+              </div>
+            </div>
+            <!-- END ASSIGNMENT -->
+
+            <!-- BEGIN ASSIGNMENT -->
+            <div class='assignment'>
+              <div class="instruction">
+                <h5>Assignment</h5>
+                For each of the students, print their name, grades on both exams, their total score, and their average score.</b></em>:
+              </div>
+
+              <div class="toggle-next">Result ▼</div>
+              <div class="results" hidden>
+                (Don't worry about trying to get the nice columns in the ouput.)
+                <div class="pythonCode">
+                  <pre class="line-numbers"><code class="language-python">
+                    index  student    Exam 1  Exam 2  Avg
+                      0    Brooke       85      95    90.00
+                      1    Coen         90      100   95.00
+                      2    Blas         80      100   90.00
+                      3    George       50      96    73.00
+                  </pre></code>
+                </div>
+              </div>
+
+              <div class="toggle-next">Code ▼</div>
+              <div class="results" hidden>
+                Without the fancy columns in the output:
+                <div class="pythonCode">
+                  <pre class="line-numbers"><code class="language-python">
+                    students = ['Brooke', 'Coen', 'Blas', 'George']
+                    exam1 = [85, 90, 80, 50]
+                    exam2 = [ 95, 100, 100, 96]
+                    print( 'index, student, Exam 1, Exam 2, Average')
+
+                    for i, s in enumerate(students):
+                        avg = (exam1[i] + exam2[i]) / 2
+                        print( i, s, exam1[i], exam2[i], avg)
+                  </pre></code>
+                </div>
+              </div>
+
+              <div class="toggle-next">Fancy Column Code ▼</div>
+              <div class="results" hidden>
+                <div class="pythonCode">
+                  <pre class="line-numbers"><code class="language-python">
+                    students = ['Brooke', 'Coen', 'Blas', 'George']
+                    exam1 = [85, 90, 80, 50]
+                    exam2 = [ 95, 100, 100, 96]
+                    print( f'{"index":^6} {"student":10} {"Exam 1":7} {"Exam 2":7} {"Avg":5}')
+
+                    for i, s in enumerate(students):
+                        avg = (exam1[i] + exam2[i]) / 2
+                        print( f'{i:^6d} {s:10} {exam1[i]:^7} {exam2[i]:^7} {avg:.2f}')
+                  </pre></code>
+                </div>
+              </div>
+
+            </div>
+            <!-- END ASSIGNMENT -->
+
+          </div>
+        <!-- END RIGHT COLUMN -->
+        <!-- END ROW -->
 
 
   </div>
