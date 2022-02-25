@@ -557,6 +557,129 @@
         <!-- END ROW -->
 
 
+
+
+
+        <!-- NEW ROW -->
+          <!-- BEGIN LEFT COLUMN -->
+
+            <div class="comment">
+
+              <h3>IV. Creating Lists with Loops</h3>
+
+              <p>
+                Use <code>for</code> loops to create numerical lists.
+              </p>
+
+              <p>
+                To create a list with the first 20 multiples of 3, we can first create an empty list (<code>nums = [] </code>) and then <code>append</code> items using a loop.
+              </p>
+
+              <div class="pythonCode">
+                <pre class="line-numbers"><code class="language-python">
+                  nums = []
+                  for i in range(20):
+                      n = i * 3
+                      nums.append(n)
+                  print(nums)
+                </pre></code>
+              </div>
+
+              <p>Outputs:</p>
+
+              <div class="pythonCode">
+                <pre><code class="language-bash">
+                  [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57]
+                </pre></code>
+              </div>
+
+              <p>You will have noticed that the output is not quite right, since it starts at zero instead of three. You can fix this either by changing the range function to <code>range(1, 21)</code> or by changing the calculation of n to <code>n = i * 3 + 3</code> </p>
+
+
+
+            </div>
+          <!-- END LEFT COLUMN -->
+
+
+          <!-- BEGIN RIGHT COLUMN -->
+            <div class="comment">
+
+              <!-- BEGIN ASSIGNMENT -->
+              <div class='assignment'>
+                <div class="instruction">
+                  <h5>Assignment</h5>
+                  Make a list of the first 10 multiples of 5.
+                </div>
+
+                <div class="toggle-next">Result ▼</div>
+                <div class="results" hidden>
+
+                  <div class="pythonCode">
+                    <pre class="line-numbers"><code class="language-python">
+                      [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+                    </pre></code>
+                  </div>
+                </div>
+
+                <div class="toggle-next">Code ▼</div>
+                <div class="results" hidden>
+
+                  <div class="pythonCode">
+                    <pre class="line-numbers"><code class="language-python">
+                      ?
+                    </pre></code>
+                  </div>
+                </div>
+              </div>
+              <!-- END ASSIGNMENT -->
+
+              <!-- BEGIN ASSIGNMENT -->
+              <div class='assignment'>
+                <div class="instruction">
+                  <h5>Assignment</h5>
+                  Create two lists, one of the first 10 multiples of 4, and the second of the first 10 multiples of 7. Then use these two lists to create a new list of the products of the corresponding numbers from  <b> only </b> the first five numbers of the two lists:
+                </div>
+
+                <div class="toggle-next">Result ▼</div>
+                <div class="results" hidden>
+                  (Don't worry about trying to get the nice columns in the ouput.)
+                  <div class="pythonCode">
+                    <pre class="line-numbers"><code class="language-python">
+                      multiples of 4: [4, 8, 12, 16, 20, 24, 28, 32, 36, 40]
+                      multiples of 7: [7, 14, 21, 28, 35, 42, 49, 56, 63, 70]
+                      products: [28, 112, 252, 448, 700]
+                    </pre></code>
+                  </div>
+                </div>
+
+                <div class="toggle-next">Code ▼</div>
+                <div class="results" hidden>
+                  
+                  <div class="pythonCode">
+                    <pre class="line-numbers"><code class="language-python">
+                      nprods = []
+                      for i in range(5):
+                          n = n4s[i] * n7s[i]
+                          nprods.append(n)
+                      print("multiples of 4:", n4s)
+                      print("multiples of 7:",  n7s)
+                      print("products:", nprods)
+                    </pre></code>
+                  </div>
+                </div>
+
+
+
+              </div>
+              <!-- END ASSIGNMENT -->
+
+            </div>
+          <!-- END RIGHT COLUMN -->
+          <!-- END ROW -->
+
+
+
+
   </div>
 
   </body>

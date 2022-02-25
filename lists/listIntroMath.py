@@ -68,3 +68,33 @@ print( 'index, student, Exam 1, Exam 2, Average')
 for i, s in enumerate(students):
     avg = (exam1[i] + exam2[i]) / 2
     print( i, s, exam1[i], exam2[i], avg)
+
+
+nums = []
+for i in range(20):
+    n = i * 3
+    nums.append(n)
+print(nums)
+
+nums = []
+for i in range(10):
+    n = i * 5 + 5
+    nums.append(n)
+print(nums)
+
+
+n4s = []
+n7s = []
+for i in range(10):
+    n4s.append(i*4+4)
+    n7s.append(i*7+7)
+
+print()
+
+nprods = []
+for i in range(5):
+    n = n4s[i] * n7s[i]
+    nprods.append(n)
+print("multiples of 4:", n4s)
+print("multiples of 7:",  n7s)
+print("products:", nprods)
