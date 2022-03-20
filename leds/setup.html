@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Lists (Math)</title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="../uSvg-0.4.js"></script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+      <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <!-- HEADERS -->
+    <div class="nav">
+      <a href="../index.html">← Main</a>
+      <a href="../quickRef/">Quick Ref</a>
+      <a href="../physics.html">Physics</a>
+      <a href="../preCalc.html">preCalc</a>
+      <a href="../progElective.html">Prog. Elec.</a>
+      <a href="../leds/index.html">LEDs</a>
+      <hr>
+    </div>
+    <!-- END HEADERS -->
+
+    <h1>Setup LEDs (Hardware and Software)</h1>
+
+    <div class="refs">
+      References:
+      <ul>
+        <li>
+          <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">Python Lists Documentation.</a>
+        </li>
+      </ul>
+
+    </div>
+
+    <div class="intro">
+      <div class="comment">
+        <h3>Hardware</h3>
+
+        <p>
+          You will need:
+          <ol>
+            <li>Raspberry Pi Zero W (should also work with the B). The setup assumes that the Pi has a wifi chip.</li>
+            <ol>
+              <li>The <a href="https://www.adafruit.com/product/3708">Pi Zero WH</a>, which includes headers would be the easiest to start with. Otherwise, you'll need to solder on your own.</li>
+              <li>I've also used the Pi Zero 2 W.</li>
+            </ol>
+            <li>WS281x LED strips (tested with WS2812B). These are individually addressable strips. The default programs use 20 LEDs.</li>
+            <ol>
+              <li>If you have a month of lead time, I've used <a href="https://www.aliexpress.com/item/4000744445376.html">these</a> before.</li>
+            </ol>
+            <li>Jumper cables</li>
+            <ol>
+              <li>If you have a Pi with headers, and a new LED strip, you should be able to connect everything just using <a href="https://www.adafruit.com/product/3142">male-to-male jumpers</a>. </li>
+            </ol>
+          </ol>
+        </p>
+
+
+      </div>
+
+
+      <div class="comment">
+        <h3>Software</h3>
+
+        <p>
+          <a href="https://github.com/lurbano/rpi-led-strip">rpi-led-strip</a>: Software setup instructions are detailed at the GitHub repository.
+          <ol>
+            <li>Assumes that the led strip is controlled by the <em>GPIO 18</em> pin.</li>
+          </ol>
+        </p>
+
+      </div>
+
+      <div class="comment">
+        <h3>Connecting</h3>
+
+        <p>
+          <a href="./connecting.html">Connecting and Command Line</a>: Instructions for connecting to the Pi and running programs to control the LEDs (using the command line).
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+  </body>
+
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+
+</html>
