@@ -11,3 +11,19 @@ $(".toggle-next").click(function(){
     $(this).html(txt);
   }
 })
+
+function getLEDs(){
+  //add element above
+  let targetDiv = document.createElement("div");
+  let scriptElement = document.currentScript;
+  let parentElement = scriptElement.parentNode;
+  parentElement.insertBefore(targetDiv, scriptElement);
+
+  var leds = []
+  for (let i = 0; i <= 20; i++){
+    leds.push(document.createElement("SPAN"));
+    leds[i].classList.add("led");
+    targetDiv.append(leds[i]);
+  }
+  return leds;
+}

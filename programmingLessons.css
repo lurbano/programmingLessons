@@ -179,3 +179,23 @@ code {
   text-align: center;
   font-weight: bold;
 }
+.command {
+  position: relative;
+  left: 2em;
+  width: 90%;
+}
+
+p {
+  line-height: 1.75;
+}
+
+.led {
+  position: relative;
+  border: 1px solid black;
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  display: inline-block;
+  border-radius: 2px;
+  margin-right: 1px;
+}
