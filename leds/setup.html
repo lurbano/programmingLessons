@@ -34,15 +34,6 @@
 
     <h1>Setup LEDs (Hardware and Software)</h1>
 
-    <div class="refs">
-      References:
-      <ul>
-        <li>
-          <a href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">Python Lists Documentation.</a>
-        </li>
-      </ul>
-
-    </div>
 
     <div class="intro">
       <div class="comment">
@@ -51,19 +42,19 @@
         <p>
           You will need:
           <ol>
-            <li>Raspberry Pi Zero W (should also work with the B). The setup assumes that the Pi has a wifi chip.</li>
-            <ol>
-              <li>The <a href="https://www.adafruit.com/product/3708">Pi Zero WH</a>, which includes headers would be the easiest to start with. Otherwise, you'll need to solder on your own.</li>
+            <li><b>Raspberry Pi Zero W</b> (should also work with the B). The setup assumes that the Pi has a wifi chip.</li>
+            <ul>
+              <li>The <a href="https://www.adafruit.com/product/3708">Pi Zero WH</a>, which includes headers would be the easiest to start with. Otherwise, you'll need to solder on your own headers (headers are the places wher you can plug in wires/jumpers).</li>
               <li>I've also used the Pi Zero 2 W.</li>
-            </ol>
-            <li>WS281x LED strips (tested with WS2812B). These are individually addressable strips. The default programs use 20 LEDs.</li>
-            <ol>
+            </ul>
+            <li><b>WS281x LED strips</b> (tested with WS2812B). These are individually addressable strips. The default programs use 20 LEDs.</li>
+            <ul>
               <li>If you have a month of lead time, I've used <a href="https://www.aliexpress.com/item/4000744445376.html">these</a> before.</li>
-            </ol>
-            <li>Jumper cables</li>
-            <ol>
+            </ul>
+            <li><b>Jumper cables</b></li>
+            <ul>
               <li>If you have a Pi with headers, and a new LED strip, you should be able to connect everything just using <a href="https://www.adafruit.com/product/3142">male-to-male jumpers</a>. </li>
-            </ol>
+            </ul>
           </ol>
         </p>
 
@@ -75,10 +66,11 @@
         <h3>Software</h3>
 
         <p>
-          <a href="https://github.com/lurbano/rpi-led-strip">rpi-led-strip</a>: Software setup instructions are detailed at the GitHub repository.
-          <ol>
+          <b><a href="https://github.com/lurbano/rpi-led-strip">rpi-led-strip</a></b>: Software setup instructions are detailed at the GitHub repository.
+          <ul>
+            <li>These lessons do not require the server to be set up. The server allows you to control the LEDs using a web page, and there are instructions about how to use and code this, however, with these lessons you'll use the command line.</li>
             <li>Assumes that the led strip is controlled by the <em>GPIO 18</em> pin.</li>
-          </ol>
+          </ul>
         </p>
 
       </div>
@@ -87,7 +79,7 @@
         <h3>Connecting</h3>
 
         <p>
-          <a href="./connecting.html">Connecting and Command Line</a>: Instructions for connecting to the Pi and running programs to control the LEDs (using the command line).
+          <b><a href="./connecting.html">Connecting and Command Line</a></b>: Instructions for connecting to the Pi and running programs to control the LEDs (using the command line).
         </p>
 
       </div>
