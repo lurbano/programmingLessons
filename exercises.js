@@ -12,7 +12,7 @@ $(".toggle-next").click(function(){
   }
 })
 
-function getLEDs(){
+function getLEDs(nPix=20){
   //add element above
   let targetDiv = document.createElement("div");
   targetDiv.classList.add("ledStrip");
@@ -21,10 +21,50 @@ function getLEDs(){
   parentElement.insertBefore(targetDiv, scriptElement);
 
   var leds = []
-  for (let i = 0; i < 20; i++){
+  for (let i = 0; i < nPix; i++){
     leds.push(document.createElement("div"));
     leds[i].classList.add("led");
     targetDiv.append(leds[i]);
   }
   return leds;
+}
+
+function getLedSiblingFromButton(elem){
+  let sibling = elem.nextElementSibling;
+  while (sibling) {
+    if (sibling.matches(".ledStrip")) return sibling;
+		sibling = sibling.nextElementSibling
+	}
+  return undefined; //if not found
+}
+
+function animateLEDs( f){
+  elem = document.activeElement;
+  let targetDiv = getLedSiblingFromButton(document.activeElement);
+  targetDiv.innerHTML = '';
+
+  var leds = []
+  for (let i = 0; i < nPix; i++){
+    leds.push(document.createElement("div"));
+    leds[i].classList.add("led");
+    targetDiv.append(leds[i]);
+  }
+  f(leds);
+
+}
+
+function resetLEDs(){
+  let targetDiv = getLedSiblingFromButton(document.activeElement);
+  targetDiv.innerHTML = '';
+
+  var leds = []
+  for (let i = 0; i < nPix; i++){
+    leds.push(document.createElement("div"));
+    leds[i].classList.add("led");
+    targetDiv.append(leds[i]);
+  }
+
+  // for (let i=0; i<leds.length; i+=2){
+  //   leds[i].style.backgroundColor = 'black';
+  // }
 }
