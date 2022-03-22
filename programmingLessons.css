@@ -203,3 +203,16 @@ li {
   border-radius: 2px;
   margin-right: 1px;
 }
+
+.imgDiv {
+  /* width: 95%; */
+}
+figcaption {
+  font-style: italic;
+  font-size: small;
+}
+
+figure {
+  border: 1px solid black;
+  padding: 5px;
+}
