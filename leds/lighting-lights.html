@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>LED Lighting</title>
+
+    <link href="../prism.css" rel="stylesheet" />
+    <link href="../programmingLessons.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="../uSvg-0.4.js"></script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG">
+    </script>
+    <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="../exercises.js"></script>
+
+    <style media="screen">
+
+    </style>
+
+  </head>
+  <body>
+    <!-- HEADERS -->
+    <div class="nav">
+      <a href="../index.html">← Main</a>
+      <a href="../quickRef/">Quick Ref</a>
+      <a href="../physics.html">Physics</a>
+      <a href="../preCalc.html">preCalc</a>
+      <a href="../progElective.html">Prog. Elec.</a>
+      <a href="../leds/index.html">LEDs</a>
+      <hr>
+    </div>
+    <!-- END HEADERS -->
+
+    <div class="intro">
+      <h1>Lesson 1: Lighting Lights</h1>
+
+      <div style="">
+        <div class="test" style='padding:2em;'>
+          The basics of controlling the LED strip.
+        </div>
+
+
+
+      </div>
+    </div>
+
+
+
+
+    <div class="mainTable" style="grid-template-columns: 2fr 1fr;">
+
+
+      <!-- NEW ROW -->
+        <!-- LEFT COLUMN -->
+        <div class="comment">
+          <h2>Turning on a light</h2>
+
+          <!-- led Sim -->
+          <script type="text/javascript">
+            var leds = getLEDs();
+            leds[2].style.backgroundColor = "red";
+          </script>
+          <!-- end led Sim -->
+
+          <p>
+            Examine the <i>test1.py</i> file:
+          </p>
+            <pre class="line-numbers"><code class="language-python" >
+            import board
+            import neopixel
+
+            pixels = neopixel.NeoPixel(board.D18, 20)
+
+            pixels[2] = (10,0,0)
+            </code></pre>
+
+            Looking through the code line by line:<br>
+            <p>
+              <b>Lines 1 and 2</b>:
+              <pre  class="line-numbers" data-start="1"><code class="language-python" >
+                import board
+                import neopixel
+              </code></pre>
+              Import two modules that we need to light the LED's.
+              <ul>
+                <li><b>import board</b>: The board module helps control the general purpose input/output (GPIO) pins on the Pi.</li>
+                <li><b>import neopixel</b>: The neopixel module specifically focuses on operating this type (WS2811) of individually addressable LED lights.</li>
+              </ul>
+            </p>
+            <p>
+              <b>Line 4</b>:
+              <pre class="line-numbers" data-start="4"><code class="language-python" >
+              pixels = neopixel.NeoPixel(board.D18, 20)
+              </code></pre>
+              This activates the LED strip. Specifically it indicates that:
+              <ul>
+                <li><b>pixels =</b>: It gives the strip a variable name, <b>pixels</b> so we can refer to it later.</li>
+                <li><b>neopixel.NeoPixel()</b>: it uses an object called <b>NeoPixel</b> from the <b>neopixel</b> library we imported on line 2.</li>
+                <li><b>board.D18</b>: indicates that the strip is being controlled by the <b>GPIO 18</b> pin, (you can look at the Pi and see that the data wire of the LED is connected to Pin 18)</li>
+                <li><b>20</b>: there are <b>20</b> LED's in the strip.</li>
+              </ul>
+            </p>
+            <p>
+              <b>Line 6</b>:
+              <pre  class="line-numbers" data-start="6"><code class="language-python" >
+              pixels[2] = (10,0,0)
+              </code></pre>
+              This makes the third light red.
+              <ul>
+                <li><b>pixels</b>: this is the variable that refers to the LED strip that we created on Line 4 that comes from the <i>neopixel</i> library we imported on Line 2.</li>
+                <li><b>[2]</b>: the <i>pixels</i> variable has an array that refers to each LED light, all 20 of them. However, the array indices starts at 0 so the <b>2</b> here refers to the third LED.</li>
+                <li><b>(10,0,0)</b>: sets the color. Colors are RGB--(red, blue, green). The color values range from <b>0</b> to <b>255</b>, so <code>(10,0,0)</code> indicates a low level of red, but no green or blue. Thus the third light shows a faint red.</li>
+              </ul>
+            </p>
+
+
+        </div>
+        <!-- END LEFT COLUMN -->
+
+        <!-- RIGHT COLUMN -->
+        <div class="comment">
+
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div class="instruction">
+              <h4>Assignment 1</h4>
+              Light up the 5th light.
+              <script type="text/javascript">
+                var leds = getLEDs("ex1");
+                leds[4].style.backgroundColor = "red";
+              </script>
+            </div>
+
+            <div class="toggle-next">Code ▼</div>
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers"><code class="language-python" >
+                import board
+                import neopixel
+
+                pixels = neopixel.NeoPixel(board.D18, 20)
+
+                pixels[4] = (10,0,0)
+                </code></pre>
+              </div>
+            </div>
+          </div>
+          <!-- END ASSIGNMENT -->
+
+
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div class="instruction">
+              <h4>Assignment 2</h4>
+              Make the second light green.
+              <script type="text/javascript">
+                var leds = getLEDs("ex1");
+                leds[1].style.backgroundColor = "green";
+              </script>
+            </div>
+
+            <div class="toggle-next">Code ▼</div>
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers"><code class="language-python" >
+                import board
+                import neopixel
+
+                pixels = neopixel.NeoPixel(board.D18, 20)
+
+                pixels[1] = (0,20,0)
+                </code></pre>
+              </div>
+            </div>
+          </div>
+          <!-- END ASSIGNMENT -->
+
+
+
+
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div class="instruction">
+              <h4>Assignment 3</h4>
+
+              Make the fourth light yellow.
+
+              <script type="text/javascript">
+                var leds = getLEDs("ex1");
+                leds[3].style.backgroundColor = "yellow";
+              </script>
+            </div>
+
+            <div class="toggle-next">Notes ▼</div>
+            <div class="results" hidden>
+
+              Colors are RGB (red, blue, green). With light, you get yellow when you mix red and green. You can search for "color picker" if you'd like to find your own custom color, just note that some colors are not represented accurately by the LED's.
+            </div>
+
+            <div class="toggle-next">Code ▼</div>
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers"><code class="language-python" >
+                import board
+                import neopixel
+
+                pixels = neopixel.NeoPixel(board.D18, 20)
+
+                pixels[3] = (255,255,0)
+                </code></pre>
+              </div>
+            </div>
+
+          </div>
+          <!-- END ASSIGNMENT -->
+
+
+
+
+        </div>
+        <!-- END RIGHT COLUMN -->
+
+      <!-- END ROW -->
+
+
+
+
+
+
+    </div>
+
+
+  </body>
+
+  <script type="text/javascript" src="../prism.js"></script>
+  <script type="text/javascript" src="../exercises.js"></script>
+
+</html>

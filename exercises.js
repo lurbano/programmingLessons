@@ -15,13 +15,14 @@ $(".toggle-next").click(function(){
 function getLEDs(){
   //add element above
   let targetDiv = document.createElement("div");
+  targetDiv.classList.add("ledStrip");
   let scriptElement = document.currentScript;
   let parentElement = scriptElement.parentNode;
   parentElement.insertBefore(targetDiv, scriptElement);
 
   var leds = []
-  for (let i = 0; i <= 20; i++){
-    leds.push(document.createElement("SPAN"));
+  for (let i = 0; i < 20; i++){
+    leds.push(document.createElement("div"));
     leds[i].classList.add("led");
     targetDiv.append(leds[i]);
   }

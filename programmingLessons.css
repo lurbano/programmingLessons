@@ -1,6 +1,9 @@
 body {
   font-family: "Lucida Console", "Courier New", monospace;
   line-height: 1.3em;
+  background-image:  url("protruding-squares.svg");
+  /* background by SVGBackgrounds.com */
+
 }
 
 .pRow {
@@ -193,6 +196,13 @@ li {
   line-height: 1.5;
 }
 
+.ledStrip {
+  display: grid;
+  grid-template-columns: repeat(20,  15px);
+  border: 1px solid black;
+  width: 300px;
+  padding: 5px;
+}
 .led {
   position: relative;
   border: 1px solid black;
@@ -200,7 +210,7 @@ li {
   height: 10px;
   background-color: black;
   display: inline-block;
-  border-radius: 2px;
+  border-radius: 4px;
   margin-right: 1px;
 }
 
@@ -215,4 +225,13 @@ figcaption {
 figure {
   border: 1px solid black;
   padding: 5px;
+}
+
+h1 {
+  line-height: 1.25;
+}
+
+.intro {
+  background-color: white;
+  padding: 1em;
 }
