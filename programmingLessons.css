@@ -27,7 +27,9 @@ body {
 }
 .comment {
   border: 1px solid black;
-  border-bottom: 4px double red;
+  /* border-bottom: 4px double red;
+  border-top: 4px double red; */
+  border: 4px outset grey;
   padding: 1em;
   padding-top: 2em;
   width: 90%;
@@ -178,6 +180,9 @@ code {
   display: grid;
   /* grid-template-columns: repeat(2,  minmax(100px, 1.2fr)); */
   grid-template-columns: 1.4fr 1fr;
+  grid-row-gap: 1em;
+  padding-top: 1em;
+  padding-left: 1em;
 }
 
 .gridHeader {
@@ -238,4 +243,6 @@ h2 {
 .intro {
   background-color: white;
   padding: 1em;
+  width: 95%;
+  border: 4px inset grey;
 }
