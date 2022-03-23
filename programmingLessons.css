@@ -29,6 +29,7 @@ body {
   border: 1px solid black;
   border-bottom: 4px double red;
   padding: 1em;
+  padding-top: 2em;
   width: 90%;
   margin: 5px;
   /* background-color: #effffe; */
@@ -175,7 +176,8 @@ code {
 
 .mainTable {
   display: grid;
-  grid-template-columns: repeat(2,  minmax(100px, 1.2fr));
+  /* grid-template-columns: repeat(2,  minmax(100px, 1.2fr)); */
+  grid-template-columns: 1.4fr 1fr;
 }
 
 .gridHeader {
@@ -230,7 +232,9 @@ figure {
 h1 {
   line-height: 1.25;
 }
-
+h2 {
+  padding: 1em;
+}
 .intro {
   background-color: white;
   padding: 1em;

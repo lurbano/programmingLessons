@@ -38,7 +38,7 @@
 
       <div style="">
         <div class="test" style='padding:2em;'>
-          The basics of controlling the LED strip.
+          The basics of controlling the LED strip. Loops and Lists.
         </div>
 
 
@@ -49,7 +49,7 @@
 
 
 
-    <div class="mainTable" style="grid-template-columns: 2fr 1fr;">
+    <div class="mainTable" >
 
 
       <!-- NEW ROW -->
@@ -821,6 +821,174 @@
         <!-- END RIGHT COLUMN -->
 
       <!-- END ROW -->
+
+
+
+      <!-- NEW ROW -->
+        <!-- LEFT COLUMN -->
+        <div class="comment">
+          <h2>Repeating sequences: Nesting Loops </h2>
+
+          <p>
+            Light up every light (0.25 second delay) and repeat this sequence three times. Wait 0.5 seconds in between each sequence.
+          </p>
+
+          <div class="LedAnimation">
+            <input type="button" onclick="ex_nest1()"  value="Play">
+            <input type="button" onclick="resetLEDs()"  value="Reset">
+            <script type="text/javascript">
+              //create blank led strip
+              var leds = getLEDs();
+              var ct = 0;
+
+              function ex_nest1(){
+                animateLEDs( function(leds){
+                  for (let i=0; i<leds.length; i++){
+                    setTimeout(function(){
+                      leds[i].style.backgroundColor = "red";
+                      if (i === leds.length-1){
+                        ct++;
+                        console.log("ct: ", ct)
+                        if (ct < 3) {
+                          setTimeout(ex_nest1(), 2000);
+                        } else {
+                          ct = 0;
+                        }
+                      }
+                    }, i*0.25*1000);
+                  }
+                })
+              }
+
+            </script>
+          </div>
+
+          <p>
+            You can place loops within loops to get this done.
+          </p>
+
+          <pre class="language-python" data-line="7,11"><code>
+                import board
+                import neopixel
+                import time
+
+                pixels = neopixel.NeoPixel(board.D18, 20)
+
+                for n in range(3):
+                  for i in range(20):
+                    pixels[i] = (10,0,0)
+                    time.sleep(0.25)
+                  time.sleep(0.5)
+              </code></pre>
+
+          <p>
+            In python, loops are defined by the indentation. So, notice how the inner loop (<code>for i in range(20)</code> is fully indented relative to the outer loop (<code>for n in range(3)</code>).
+          </p>
+          <p>
+            Also notice how the pause between the sequences (line 11) is dedented so it's not in the sequence loop, but still in the <b>n</b> loop.
+          </p>
+        </div>
+
+        <!-- END LEFT COLUMN -->
+
+        <!-- RIGHT COLUMN -->
+        <div class="comment">
+
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div class="instruction">
+              <h4>Assignment 13</h4>
+
+                Make a single light go back and forth 5 times.
+
+              <div class="LedAnimation">
+                <input type="button" onclick="ex_nest_forward()"  value="Play">
+                <input type="button" onclick="resetLEDs()"  value="Reset">
+                <script type="text/javascript">
+                  //create blank led strip
+                  var leds = getLEDs();
+                  var ct = 0;
+
+                  function ex_nest_forward(){
+                    animateLEDs( function(leds){
+                      console.log('f: ct:',ct);
+                      for (let i=0; i<leds.length; i++){
+                        setTimeout(function(){
+                          if (i>0){
+                            leds[i-1].style.backgroundColor = "black";
+                          }
+                          leds[i].style.backgroundColor = "red";
+
+                          if (i === leds.length-1){
+                            ct++;
+                            console.log("ct: ", ct)
+                            if (ct < 5) {
+                              setTimeout(ex_nest_backward(), 0.25*1000);
+                            } else {
+                              ct = 0;
+                            }
+                          }
+                        }, i*0.25*1000)
+
+                      }
+
+                    })
+                  }
+                  function ex_nest_backward(){
+                    animateLEDs( function(leds){
+                      console.log('b: ct:',ct);
+                      for (let i=0; i<leds.length; i++){
+                        setTimeout(function(){
+                          if (i>0){
+                            leds[leds.length-i].style.backgroundColor = "black";
+                          }
+                          leds[leds.length-i-1].style.backgroundColor = "red";
+
+                          if (i === leds.length-1){
+                            ct++;
+                            if (ct < 5) {
+                              setTimeout(ex_nest_forward(), 0.25*1000);
+                            } else {
+                              ct = 0;
+                            }
+                          }
+                        }, i*0.25*1000)
+
+                      }
+
+                    })
+                  }
+                </script>
+              </div>
+            </div>
+
+            <div class="toggle-next">Code ▼</div>
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers"><code class="language-python" >
+                import board
+                import neopixel
+
+                pixels = neopixel.NeoPixel(board.D18, 20)
+
+                for i in range(0, 20, 2):
+                  pixels[i] = (0,100,0)
+                  time.sleep(0.5);
+                </code></pre>
+              </div>
+            </div>
+          </div>
+          <!-- END ASSIGNMENT -->
+
+
+
+
+        </div>
+        <!-- END RIGHT COLUMN -->
+
+      <!-- END ROW -->
+
 
 
 
