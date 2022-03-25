@@ -17,6 +17,10 @@
     <script type="text/javascript" src="../jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="../exercises.js"></script>
 
+    <script type="text/javascript">
+      nPix = 20;
+    </script>
+
     <style media="screen">
 
     </style>
@@ -550,6 +554,51 @@
 
 
 
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div class="instruction">
+
+              <h4> Assignment 8 </h4>
+
+                Have the last LED slowly light up to full red over 2 seconds.
+
+                <div class="LedAnimation">
+                  <input type="button" onclick="ex_glow()"  value="Play">
+                  <input type="button" onclick="resetLEDs()"  value="Reset">
+                  <script type="text/javascript">
+                    //create blank led strip
+                    var leds = getLEDs();
+
+                    function ex_glow(){
+                      animateLEDs( function(leds){
+                        for (let i=0; i<20; i++){
+                          setTimeout(function(){
+                            leds[nPix-1].style.backgroundColor = `rgb(${i*12}, 0, 0)`;
+                          }, i*2000/20);
+                        }
+                      })
+                    }
+                  </script>
+                </div>
+
+            </div>
+
+            <div class="toggle-next">Notes ▼</div>
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers"><code class="language-python" >
+                the color codes are set as (red, green, blue), and the maximum for each value is 255
+                </code></pre>
+              </div>
+            </div>
+          </div>
+          <!-- END ASSIGNMENT -->
+
+
+
+
+
 
         </div>
         <!-- END RIGHT COLUMN -->
@@ -632,7 +681,7 @@
           <div class='assignment'>
             <div class="instruction">
 
-              <h4> Assignment 8 </h4>
+              <h4> Assignment 9 </h4>
 
                 Make a single light go back and forth 5 times.
 
@@ -715,7 +764,83 @@
           <div class='assignment'>
             <div class="instruction">
 
-              <h4> Assignment 9 </h4>
+              <h4> Assignment 10 </h4>
+
+                Make the last led pulse. Have it light up to full red over 2 seconds, then fade to black over the next two seconds. Repeat this pulse 5 times.
+
+                <div class="LedAnimation">
+                  <input type="button" onclick="ex_glowPulse()"  value="Play">
+                  <input type="button" onclick="resetLEDs()"  value="Reset">
+                  <script type="text/javascript">
+                    //create blank led strip
+                    var leds = getLEDs();
+                    var ct = 0;
+
+                    function ex_glowPulse(){
+                      for (let i = 0; i <=3; i++){
+                        setTimeout(function(){
+                          ex_glowUp();
+                        }, i*2*1000);
+                        setTimeout(function(){
+                          ex_glowDown();
+                        }, (i*2+1)*1000);
+
+                      }
+                    }
+
+                    function ex_glowUp(startTime=0){
+                      console.log('up startTime:', startTime)
+                      animateLEDs(
+                        function(leds){
+                          for (let i=0; i<20; i++){
+                            setTimeout(function(){
+                              leds[nPix-1].style.backgroundColor = `rgb(${i*13}, 0, 0)`;
+                            }, startTime + (i*50));
+                          }
+                        }
+                      )
+                    }
+
+                    function ex_glowDown(startTime=0){
+                      console.log('up startTime:', startTime)
+                      animateLEDs(
+                        function(leds){
+                          for (let i=0; i<20; i++){
+                            setTimeout(function(){
+                              leds[nPix-1].style.backgroundColor = `rgb(${(19-i)*13}, 0, 0)`;
+                            }, startTime + (i*50));
+                          }
+                        }
+                      )
+                    }
+
+
+                  </script>
+                </div>
+
+            </div>
+
+            <div class="toggle-next">Notes ▼</div>
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers"><code class="language-python" >
+                the color codes are set as (red, green, blue), and the maximum for each value is 255
+                </code></pre>
+              </div>
+            </div>
+          </div>
+          <!-- END ASSIGNMENT -->
+
+
+
+
+
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div class="instruction">
+
+              <h4> Assignment 11 </h4>
 
                 Create an animation sequence of your own.
             </div>
