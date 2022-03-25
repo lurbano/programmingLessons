@@ -246,3 +246,10 @@ h2 {
   width: 95%;
   border: 4px inset grey;
 }
+
+.alertNote {
+  background-color: yellow;
+  border: 2px solid black;
+  width: 90%;
+  padding: 1em;
+}

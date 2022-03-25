@@ -6,7 +6,7 @@
     <title>LEDs</title>
 
     <link rel="icon" type="image/png" href="ledFav-48.png" sizes="48x48">
-    
+
     <style media="screen">
       body {
         font-family: "Lucida Console", "Courier New", monospace;
@@ -107,23 +107,49 @@
             Setting up the Hardware and Software on the Pi
           </div>
           <div class="link">
-            <a href="./setup.html">Setup rpi-led-strip</a>
+            <ol>
+              <li>
+                <a href="./setup.html">Setup rpi-led-strip (For Pi computers: Zero, B etc.)</a>
+              </li>
+              <li>
+                <a href="https://github.com/lurbano/ledPixelsPico">Setup ledPixelsPico (For Pi Pico microcontroller board)</a>
+              </li>
+            </ol>
+
           </div>
           <div class="description">
-            Assemble hardware (Raspberry Pi and LED strip), install the operating system on the Pi, and connect Pi to the local wireless network.
+            Assemble hardware (Raspberry Pi and LED strip), install the operating system on the Pi. For the Pi Zero (or B's), connect Pi to the local wireless network. For the Pico, you just plug it in to the USB.
           </div>
         </div>
 
 
         <div class="section" id="Connecting">
           <div class="topic">
-            Connecting to the Pi and navigating using the command line.
+            [For Pi computers (Zero, B's)]: Connecting to the Pi and navigating using the command line.
           </div>
           <div class="link">
             <a href="./connecting.html">Connecting using the command line.</a>
           </div>
           <div class="description">
             Connect to the Raspberry Pi remotely, use the command line to navigate the file system, and run python programs that control the leds.
+          </div>
+        </div>
+
+        <div class="section" id="Learning to Code">
+          <div class="topic">
+            Lessons on learning to code using python on the Pi and a LED strip.
+          </div>
+          <div class="link">
+            Coding Lessons
+          </div>
+          <div class="description">
+            Basic coding by controlling a LED light strip using a Raspberry Pi. The code is almost identitical for the Pi computers and the Pico microcontroller, they just use different GPIO pins (<code>board.D18</code> vs <code>board.GP0</code>)
+            <ol>
+              <li> <a href="./lighting-lights.html">Lighting Lights (Basics)</a>
+              </li>
+              <li> <a href="./for-loops.html"><code>for</code> Loops (with light sequences)</a>
+              </li>
+            </ol>
           </div>
         </div>
 
