@@ -204,11 +204,12 @@
 
               <h4> Assignment 1 </h4>
 
-              Make the first 16 lights green.
+              Use a single <code>for</code> loop and an <code>if</code> statatement to make the first 8 lights blue and the rest red.
               <script type="text/javascript">
                 nPix = 20;  leds = getLEDs();
-                for (let i=0; i<16; i+=1){
-                  leds[i].style.backgroundColor = "lightGreen";
+                for (let i=0; i<nPix; i+=1){
+                  if (i < 8){ leds[i].style.backgroundColor = "deepskyblue";}
+                  else {leds[i].style.backgroundColor = "red";}
                 }
               </script>
             </div>
@@ -223,11 +224,16 @@
 
                 pixels = neopixel.NeoPixel(board.D18, 20)
 
-                for i in range(16):
-                  pixels[i] = (0,100,0)
+                for i in range(20):
+                  if i < 8:
+                    pixels[i] = (0,0,50)
+                  else:
+                    pixels[i] = (50, 0, 0)
                 </code></pre>
               </div>
+
             </div>
+
           </div>
           <!-- END ASSIGNMENT -->
 
@@ -239,83 +245,73 @@
 
               <h4> Assignment 2 </h4>
 
-              Make the first 5 lights red, and the rest blue.
+              Redo Assignment 1  using the <b>greater than (>) </b>  operator.
               <script type="text/javascript">
                 nPix = 20;  leds = getLEDs();
-                for (let i=0; i<5; i+=1){
-                  leds[i].style.backgroundColor = "red";
-                }
-                for (let i=5; i<nPix; i+=1){
-                  leds[i].style.backgroundColor = "deepskyblue";
+                for (let i=0; i<nPix; i+=1){
+                  if (i < 8){ leds[i].style.backgroundColor = "deepskyblue";}
+                  else {leds[i].style.backgroundColor = "red";}
                 }
               </script>
             </div>
 
-            <div class="toggle-next">Hint ▼</div>
-            <div class="results" hidden>
-              Use two loops.
-            </div>
 
             <div class="toggle-next">Code ▼</div>
-            <div class="results" hidden>
+            <div class="pythonCode" hidden>
+              <pre class="line-numbers"><code class="language-python" >
+              import board
+              import neopixel
 
-              <div class="pythonCode">
-                <pre class="line-numbers"><code class="language-python" >
-                import board
-                import neopixel
+              pixels = neopixel.NeoPixel(board.D18, 20)
 
-                pixels = neopixel.NeoPixel(board.D18, 20)
-
-                for i in range(5):
-                  pixels[i] = (100,0,0)
-                for i in range(5, 20):
-                  pixels[i] = (0,0,100)
-                </code></pre>
-              </div>
+              for i in range(20):
+                if i > 7:
+                  pixels[i] = (50,0,0)
+                else:
+                  pixels[i] = (0, 0, 50)
+              </code></pre>
             </div>
 
 
           </div>
           <!-- END ASSIGNMENT -->
-
-
 
 
           <!-- BEGIN ASSIGNMENT -->
           <div class='assignment'>
             <div class="instruction">
 
-              <h4> Assignment 3</h4>
+              <h4> Assignment 3 </h4>
 
-              From light 4 to light 16 make every other light red.
+              Redo Assignment 2  using the <b>greater than or equal to (>=) </b>  operator.
               <script type="text/javascript">
                 nPix = 20;  leds = getLEDs();
-                for (let i=3; i<16; i+=2){
-                  leds[i].style.backgroundColor = "red";
+                for (let i=0; i<nPix; i+=1){
+                  if (i < 8){ leds[i].style.backgroundColor = "deepskyblue";}
+                  else {leds[i].style.backgroundColor = "red";}
                 }
               </script>
             </div>
 
+
             <div class="toggle-next">Code ▼</div>
-            <div class="results" hidden>
+            <div class="pythonCode" hidden>
+              <pre class="line-numbers"><code class="language-python" >
+              import board
+              import neopixel
 
-              <div class="pythonCode">
-                <pre class="line-numbers"><code class="language-python" >
-                import board
-                import neopixel
+              pixels = neopixel.NeoPixel(board.D18, 20)
 
-                pixels = neopixel.NeoPixel(board.D18, 20)
-
-                for i in range(3, 16, 2):
-                  pixels[i] = (100,0,0)
-                </code></pre>
-              </div>
+              for i in range(20):
+                if i >= 8:
+                  pixels[i] = (50,0,0)
+                else:
+                  pixels[i] = (0, 0, 50)
+              </code></pre>
             </div>
-
 
           </div>
           <!-- END ASSIGNMENT -->
-
 
 
           <!-- BEGIN ASSIGNMENT -->
@@ -324,142 +320,37 @@
 
               <h4> Assignment 4 </h4>
 
-              Alternate the colors blue and red for the entire strip.
-
+              Make all the LED's green except for the second one (red) using the <b>not equal to (!=) </b>  operator.
               <script type="text/javascript">
                 nPix = 20;  leds = getLEDs();
-                for (let i=0; i<nPix; i+=2){
-                  leds[i].style.backgroundColor = "deepskyblue";
-                }
-                for (let i=1; i<nPix; i+=2){
-                  leds[i].style.backgroundColor = "red";
+                for (let i=0; i<nPix; i+=1){
+                  if (i != 1){ leds[i].style.backgroundColor = "lightgreen";}
+                  else {leds[i].style.backgroundColor = "red";}
                 }
               </script>
-
-              <p>
-                Use loops to do this. However, you could also use a single loop and a conditional statement (<code>if</code>).
-              </p>
-
             </div>
+
 
             <div class="toggle-next">Code ▼</div>
-            <div class="results" hidden>
+            <div class="pythonCode" hidden>
+              <pre class="line-numbers"><code class="language-python" >
+              import board
+              import neopixel
 
-              <div class="pythonCode">
-                <pre class="line-numbers"><code class="language-python" >
-                import board
-                import neopixel
+              pixels = neopixel.NeoPixel(board.D18, 20)
 
-                pixels = neopixel.NeoPixel(board.D18, 20)
-
-                for i in range(0, 20, 2):
-                  pixels[i] = (0,0,100)
-                for i in range(1, 20, 2):
-                  pixels[i] = (100,0,0)
-                </code></pre>
-              </div>
+              for i in range(20):
+                if i != 1:
+                  pixels[i] = (0,40,0)
+                else:
+                  pixels[i] = (40, 0, 0)
+              </code></pre>
             </div>
-
-            <div class="toggle-next">Code (if) ▼</div>
-            <div class="results" hidden>
-              <p>
-                This uses the modulus operator (<b>%</b>) to check if the remainder when <b>i</b> is divided by 2. If <b>i</b> is even then the remainder is <b>0</b> so we make the LED blue, <b>else</b> we make it red.
-              </p>
-
-              <div class="pythonCode">
-                <pre class="line-numbers"><code class="language-python" >
-                import board
-                import neopixel
-
-                pixels = neopixel.NeoPixel(board.D18, 20)
-
-                for i in range(0, 20, 2):
-                  if (i%2 == 0):
-                    pixels[i] = (0,0,100)
-                  else:
-                    pixels[i] = (100,0,0)
-                </code></pre>
-              </div>
-
-            </div>
-
 
           </div>
           <!-- END ASSIGNMENT -->
 
 
-        </div>
-        <!-- END RIGHT COLUMN -->
-
-      <!-- END ROW -->
-
-
-
-
-      <!-- NEW ROW -->
-        <!-- LEFT COLUMN -->
-        <div class="uSection">
-          <h2>Light Sequences: Change over time </h2>
-
-          <p>
-            Make all of the lights light up one at a time (with a 0.25 second delay between each lighting up.)
-          </p>
-
-          <div class="LedAnimation">
-            <input type="button" onclick="ex_light1()"  value="Play">
-            <input type="button" onclick="resetLEDs()"  value="Reset">
-            <script type="text/javascript">
-              //create blank led strip
-              var leds = getLEDs();
-
-              function ex_light1(){
-                animateLEDs( function(leds){
-                  for (let i=0; i<leds.length; i++){
-                    setTimeout(function(){
-                      leds[i].style.backgroundColor = "red";
-                    }, i*0.25*1000);
-                  }
-                })
-              }
-
-            </script>
-          </div>
-
-          <p>
-            Here you just need to wait a moment (0.25 seconds to be exact) before lighting up the next light. We can do this by using the <b>time</b> module and the <b>sleep</b> function.
-          </p>
-          <p>
-            First import <b>time</b>:
-          </p>
-            <pre><code class="language-python" >
-              import time
-            </code></pre>
-          <p>
-            Then use the <b>sleep</b> function to pause the program for the specified number of seconds, like so:
-          </p>
-          <pre class="language-python" ><code>
-            time.sleep(0.25)
-          </code></pre>
-
-          <p>
-            The <b>sleep</b> function needs to be inside the loop so that the loop pauses during each iteration. The full program would look like:
-          </p>
-          <pre class="language-python" data-line="3,9"><code>
-                import board
-                import neopixel
-                import time
-
-                pixels = neopixel.NeoPixel(board.D18, 20)
-
-                for i in range(20):
-                  pixels[i] = (10,0,0)
-                  time.sleep(0.25)
-              </code></pre>
-        </div>
-        <!-- END LEFT COLUMN -->
-
-        <!-- RIGHT COLUMN -->
-        <div class="uSection">
 
           <!-- BEGIN ASSIGNMENT -->
           <div class='assignment'>
@@ -467,194 +358,62 @@
 
               <h4> Assignment 5 </h4>
 
-                Light every other light, but pause 0.5 seconds before each new one lights up.
+              Make the strip green and use an <code>if</code> statement to make a single, red light move across the LED strip (use a 0.1 second delay).
 
               <div class="LedAnimation">
-                <input type="button" onclick="ex_light2()"  value="Play">
+                <input type="button" onclick="ex_walk()"  value="Play">
                 <input type="button" onclick="resetLEDs()"  value="Reset">
                 <script type="text/javascript">
                   //create blank led strip
                   var leds = getLEDs();
 
-                  function ex_light2(){
+                  function ex_walk(){
                     animateLEDs( function(leds){
-                      for (let i=0; i<leds.length; i+=2){
-                        setTimeout(function(){
-                          leds[i].style.backgroundColor = "red";
-                        }, i*0.25*1000);
-                      }
-                    })
-                  }
-                </script>
-              </div>
-            </div>
-
-            <div class="toggle-next">Code ▼</div>
-            <div class="results" hidden>
-
-              <div class="pythonCode">
-                <pre class="line-numbers"><code class="language-python" >
-                import board
-                import neopixel
-
-                pixels = neopixel.NeoPixel(board.D18, 20)
-
-                for i in range(0, 20, 2):
-                  pixels[i] = (0,100,0)
-                  time.sleep(0.5);
-                </code></pre>
-              </div>
-            </div>
-          </div>
-          <!-- END ASSIGNMENT -->
-
-
-          <!-- BEGIN ASSIGNMENT -->
-          <div class='assignment'>
-            <div class="instruction">
-
-              <h4> Assignment 6 </h4>
-
-                Make all of the lights green, keep them green for 0.5 seconds, and then change them to red going backwards from the end. Use a 0.1 second delay before each switch.
-
-              <div class="LedAnimation">
-                <input type="button" onclick="ex_light3()"  value="Play">
-                <input type="button" onclick="resetLEDs()"  value="Reset">
-                <script type="text/javascript">
-                  //create blank led strip
-                  var leds = getLEDs();
-
-                  function ex_light3(){
-                    animateLEDs( function(leds){
-
-                      for (let i=0; i<leds.length; i+=1){
-                        leds[i].style.backgroundColor = "green";
-                      }
-
-                      for (let i=0; i<leds.length; i+=1){
-                        setTimeout(function(){
-                          leds[19-i].style.backgroundColor = "red";
-                        }, 0.5*1000 + i*0.1*1000);
-                      }
-                    })
-                  }
-                </script>
-              </div>
-            </div>
-
-            <div class="toggle-next">Code ▼</div>
-            <div class="results" hidden>
-
-              <div class="pythonCode">
-                <pre class="line-numbers"><code class="language-python" >
-                import board
-                import neopixel
-
-                pixels = neopixel.NeoPixel(board.D18, 20)
-
-                for i in range(0, 20):
-                  pixels[i] = (0,100,0)
-                for i in range(0, 20):
-                  pixels[-i-1] = (100,0,0)
-                  time.sleep(0.5);
-                </code></pre>
-              </div>
-            </div>
-          </div>
-          <!-- END ASSIGNMENT -->
-
-
-          <!-- BEGIN ASSIGNMENT -->
-          <div class='assignment'>
-            <div class="instruction">
-
-              <h4> Assignment 7 </h4>
-
-                Over 2.5 seconds have a single light of the 20 light up and march across the strip, with all the other lights being black.
-
-                <div class="LedAnimation">
-                  <input type="button" onclick="ex_light2()"  value="Play">
-                  <input type="button" onclick="resetLEDs()"  value="Reset">
-                  <script type="text/javascript">
-                    //create blank led strip
-                    var leds = getLEDs();
-
-                    function ex_light2(){
-                      animateLEDs( function(leds){
-                        for (let i=0; i<leds.length; i++){
+                      for (let n=0; n < leds.length; n++){
+                        for (let i=0; i < leds.length; i++){
                           setTimeout(function(){
-                            if (i>0){
-                              leds[i-1].style.backgroundColor = "black";
+                            // if (i>0){
+                            //   leds[i-1].style.backgroundColor = "black";
+                            // }
+                            // leds[i].style.backgroundColor = "red";
+                            if (i != n) {
+                              leds[i].style.backgroundColor = "lightgreen";
+                            } else {
+                              leds[i].style.backgroundColor = "red";
                             }
-                            leds[i].style.backgroundColor = "red";
-                          }, i*0.25*1000);
+                          }, n*0.25*1000);
                         }
-                      })
-                    }
-                  </script>
-                </div>
+                      }
+                      }
+                    )
+                  }
+                </script>
+              </div>
 
             </div>
+
 
             <div class="toggle-next">Code ▼</div>
-            <div class="results" hidden>
+            <div class="pythonCode" hidden>
+              <pre class="line-numbers"><code class="language-python" >
+              import board
+              import neopixel
+              import time
 
-              <div class="pythonCode">
-                <pre class="line-numbers"><code class="language-python" >
-                consider this a challenge problem.
-                </code></pre>
-              </div>
+              pixels = neopixel.NeoPixel(board.D18, 20)
+
+              for n in range(20):
+                for i in range(20):
+                  if i != n:
+                    pixels[i] = (0,40,0)
+                  else:
+                    pixels[i] = (40, 0, 0)
+                time.sleep(0.1)
+              </code></pre>
             </div>
+
           </div>
           <!-- END ASSIGNMENT -->
-
-
-
-
-          <!-- BEGIN ASSIGNMENT -->
-          <div class='assignment'>
-            <div class="instruction">
-
-              <h4> Assignment 8 </h4>
-
-                Have the last LED slowly light up to full red over 2 seconds.
-
-                <div class="LedAnimation">
-                  <input type="button" onclick="ex_glow()"  value="Play">
-                  <input type="button" onclick="resetLEDs()"  value="Reset">
-                  <script type="text/javascript">
-                    //create blank led strip
-                    var leds = getLEDs();
-
-                    function ex_glow(){
-                      animateLEDs( function(leds){
-                        for (let i=0; i<20; i++){
-                          setTimeout(function(){
-                            leds[nPix-1].style.backgroundColor = `rgb(${i*12}, 0, 0)`;
-                          }, i*2000/20);
-                        }
-                      })
-                    }
-                  </script>
-                </div>
-
-            </div>
-
-            <div class="toggle-next">Notes ▼</div>
-            <div class="results" hidden>
-
-              <div class="pythonCode">
-                <pre class="line-numbers"><code class="language-python" >
-                the color codes are set as (red, green, blue), and the maximum for each value is 255
-                </code></pre>
-              </div>
-            </div>
-          </div>
-          <!-- END ASSIGNMENT -->
-
-
-
-
 
 
         </div>
@@ -664,71 +423,60 @@
 
 
 
+
+
+
+
+
+
+
       <!-- NEW ROW -->
         <!-- LEFT COLUMN -->
         <div class="uSection">
-          <h2>Repeating sequences: Nesting Loops </h2>
+          <h2>Using the Modulus Operator: <code>%</code> </h2>
 
           <p>
-            Light up every light (0.25 second delay) and repeat this sequence three times. Wait 0.5 seconds in between each sequence.
+            The modulus is the remainder if you divide two numbers. So:
           </p>
 
-          <div class="LedAnimation">
-            <input type="button" onclick="ex_nest1()"  value="Play">
-            <input type="button" onclick="resetLEDs()"  value="Reset">
-            <script type="text/javascript">
-              //create blank led strip
-              var leds = getLEDs();
-              var ct = 0;
-
-              function ex_nest1(){
-                animateLEDs( function(leds){
-                  for (let i=0; i<leds.length; i++){
-                    setTimeout(function(){
-                      leds[i].style.backgroundColor = "red";
-                      if (i === leds.length-1){
-                        ct++;
-                        console.log("ct: ", ct)
-                        if (ct < 3) {
-                          setTimeout(ex_nest1(), 2000);
-                        } else {
-                          ct = 0;
-                        }
-                      }
-                    }, i*0.25*1000);
-                  }
-                })
-              }
-
-            </script>
+          <div class="pythonCode">
+            11 % 4 = 3
           </div>
 
           <p>
-            You can place loops within loops to get this done.
+            You can use this to check if a number is exactly divisible by another number, because if it is the remainder is zero.
           </p>
-
-          <pre class="language-python" data-line="7,11"><code>
-                import board
-                import neopixel
-                import time
-
-                pixels = neopixel.NeoPixel(board.D18, 20)
-
-                for n in range(3):
-                  for i in range(20):
-                    pixels[i] = (10,0,0)
-                    time.sleep(0.25)
-                  time.sleep(0.5)
-              </code></pre>
 
           <p>
-            In python, loops are defined by the indentation. So, notice how the inner loop (<code>for i in range(20)</code> is fully indented relative to the outer loop (<code>for n in range(3)</code>).
+            So, if I want to make every third light green I could do:
           </p>
-          <p>
-            Also notice how the pause between the sequences (line 11) is dedented so it's not in the sequence loop, but still in the <b>n</b> loop.
-          </p>
+
+          <script type="text/javascript">
+            var leds = getLEDs();
+            for (let i=0; i<leds.length; i++){
+              if (i %3 == 0){
+                leds[i].style.backgroundColor = "lightgreen";
+              }
+              else {
+                leds[i].style.backgroundColor = "black";
+              }
+            }
+          </script>
+
+          <div class="pythonCode">
+            <pre class="line-numbers"><code class="language-python" >
+            import board
+            import neopixel
+
+            pixels = neopixel.NeoPixel(board.D18, 20)
+
+            for i in range(20):
+              if (i % 3) == 0:
+                pixels[i] = (0,40,0)
+            </code></pre>
+          </div>
+
         </div>
-
         <!-- END LEFT COLUMN -->
 
         <!-- RIGHT COLUMN -->
@@ -738,69 +486,20 @@
           <div class='assignment'>
             <div class="instruction">
 
-              <h4> Assignment 9 </h4>
+              <h4> Assignment 6 </h4>
 
-                Make a single light go back and forth 5 times.
-
-              <div class="LedAnimation">
-                <input type="button" onclick="ex_nest_forward()"  value="Play">
-                <input type="button" onclick="resetLEDs()"  value="Reset">
-                <script type="text/javascript">
-                  //create blank led strip
-                  var leds = getLEDs();
-                  var ct = 0;
-
-                  function ex_nest_forward(){
-                    animateLEDs( function(leds){
-                      console.log('f: ct:',ct);
-                      for (let i=0; i<leds.length; i++){
-                        setTimeout(function(){
-                          if (i>0){
-                            leds[i-1].style.backgroundColor = "black";
-                          }
-                          leds[i].style.backgroundColor = "red";
-
-                          if (i === leds.length-1){
-                            ct++;
-                            console.log("ct: ", ct)
-                            if (ct < 5) {
-                              setTimeout(ex_nest_backward(), 0.25*1000);
-                            } else {
-                              ct = 0;
-                            }
-                          }
-                        }, i*0.25*1000)
-
-                      }
-
-                    })
+              Use an <code>if</code> statement to make every LED that is <b>not divisible by 3</b> blue.
+              <script type="text/javascript">
+                var leds = getLEDs();
+                for (let i=0; i<leds.length; i++){
+                  if (i %3 != 0){
+                    leds[i].style.backgroundColor = "deepskyblue";
                   }
-                  function ex_nest_backward(){
-                    animateLEDs( function(leds){
-                      console.log('b: ct:',ct);
-                      for (let i=0; i<leds.length; i++){
-                        setTimeout(function(){
-                          if (i>0){
-                            leds[leds.length-i].style.backgroundColor = "black";
-                          }
-                          leds[leds.length-i-1].style.backgroundColor = "red";
-
-                          if (i === leds.length-1){
-                            ct++;
-                            if (ct < 5) {
-                              setTimeout(ex_nest_forward(), 0.25*1000);
-                            } else {
-                              ct = 0;
-                            }
-                          }
-                        }, i*0.25*1000)
-
-                      }
-
-                    })
+                  else {
+                    leds[i].style.backgroundColor = "black";
                   }
-                </script>
-              </div>
+                }
+              </script>
             </div>
 
             <div class="toggle-next">Code ▼</div>
@@ -808,102 +507,21 @@
 
               <div class="pythonCode">
                 <pre class="line-numbers"><code class="language-python" >
-                you got this.
+                import board
+                import neopixel
+
+                pixels = neopixel.NeoPixel(board.D18, 20)
+
+                for i in range(20):
+                  if (i % 3) != 0:
+                    pixels[i] = (0,0,30)
                 </code></pre>
               </div>
+
             </div>
+
           </div>
           <!-- END ASSIGNMENT -->
-
-
-
-          <!-- BEGIN ASSIGNMENT -->
-          <div class='assignment'>
-            <div class="instruction">
-
-              <h4> Assignment 10 </h4>
-
-                Make the last led pulse. Have it light up to full red over 2 seconds, then fade to black over the next two seconds. Repeat this pulse 5 times.
-
-                <div class="LedAnimation">
-                  <input type="button" onclick="ex_glowPulse()"  value="Play">
-                  <input type="button" onclick="resetLEDs()"  value="Reset">
-                  <script type="text/javascript">
-                    //create blank led strip
-                    var leds = getLEDs();
-                    var ct = 0;
-
-                    function ex_glowPulse(){
-                      for (let i = 0; i <=3; i++){
-                        setTimeout(function(){
-                          ex_glowUp();
-                        }, i*2*1000);
-                        setTimeout(function(){
-                          ex_glowDown();
-                        }, (i*2+1)*1000);
-
-                      }
-                    }
-
-                    function ex_glowUp(startTime=0){
-                      console.log('up startTime:', startTime)
-                      animateLEDs(
-                        function(leds){
-                          for (let i=0; i<20; i++){
-                            setTimeout(function(){
-                              leds[nPix-1].style.backgroundColor = `rgb(${i*13}, 0, 0)`;
-                            }, startTime + (i*50));
-                          }
-                        }
-                      )
-                    }
-
-                    function ex_glowDown(startTime=0){
-                      console.log('up startTime:', startTime)
-                      animateLEDs(
-                        function(leds){
-                          for (let i=0; i<20; i++){
-                            setTimeout(function(){
-                              leds[nPix-1].style.backgroundColor = `rgb(${(19-i)*13}, 0, 0)`;
-                            }, startTime + (i*50));
-                          }
-                        }
-                      )
-                    }
-
-
-                  </script>
-                </div>
-
-            </div>
-
-            <div class="toggle-next">Notes ▼</div>
-            <div class="results" hidden>
-
-              <div class="pythonCode">
-                <pre class="line-numbers"><code class="language-python" >
-                the color codes are set as (red, green, blue), and the maximum for each value is 255
-                </code></pre>
-              </div>
-            </div>
-          </div>
-          <!-- END ASSIGNMENT -->
-
-
-
-
-
-          <!-- BEGIN ASSIGNMENT -->
-          <div class='assignment'>
-            <div class="instruction">
-
-              <h4> Assignment 11 </h4>
-
-                Create an animation sequence of your own.
-            </div>
-          </div>
-          <!-- END ASSIGNMENT -->
-
 
 
         </div>
@@ -916,7 +534,9 @@
 
 
 
-    </div>
+
+
+
 
 
   </body>
