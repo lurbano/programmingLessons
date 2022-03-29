@@ -21,18 +21,18 @@
     <h1>Vectors (bouncing ball)</h1>
 
     <div class="setup">
-      <div class="comment">
+      <div class="uSection">
 
         The difference between velocity and speed is that velocity has a direction associated with it. Speed is a <b>scalar</b> and velocity is a <b>vector</b>.
 
       </div>
 
-      <div class="comment">
+      <div class="uSection">
         So, an object can be moving with a speed of 2 m/s to the right, hit a wall, bounce back, and still be moving at a speed of 2 m/s. However, its velocity would have changed: it would be 2 m/s when moving to the right, but -2 m/s after the bounce when moving to the left.
 
       </div>
 
-      <div class="comment">
+      <div class="uSection">
 
         We can draw an arrow that points in the <b>direction</b> of motion, and scale the length of the arrow to show the <b>magnitude</b> of the vector (the speed in this case).
 
@@ -50,14 +50,14 @@
       <!-- NEW ROW -->
       <tr>
         <td>
-          <div class="comment">
+          <div class="uSection">
             <h3>Creating a ball and an arrow (for its velocity vector) in vpython.</h3>
 
             We'll start by creating a simple ball, assigning it a velocity, and draw an arrow to show the vector.
 
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             Notice that:
             <ul>
               <li><b>Line 1</b>:
@@ -98,7 +98,7 @@
             </pre></code>
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             The result should look like:
           </div>
 
@@ -116,7 +116,7 @@
       <!-- NEW ROW -->
       <tr>
         <td>
-          <div class="comment">
+          <div class="uSection">
             <h3>Making the Ball Move (Animation)</h3>
             As we all know, velocity is the change in distance over time. Considering only motion in the x direction (v<sub>x</sub>):
 
@@ -150,7 +150,7 @@
         <td>
             <h3>Making the Ball Move (Animation): The Code</h3>
 
-          <div class="comment">
+          <div class="uSection">
             Notice that:
             <ul>
               <li><b>Line 9</b>:
@@ -194,7 +194,7 @@
             </code></pre>
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             The result should look like this (but only move once):
           </div>
 
@@ -215,11 +215,11 @@
         <td>
             <h3>Continuous Motion</h3>
 
-          <div class="comment">
+          <div class="uSection">
             To make the ball move continuously, we put the position update (and time sleep delay) into an infinite loop.
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             Notice that:
             <ul>
               <li><b>Line 9</b>:
@@ -251,7 +251,7 @@
             </code></pre>
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             The result should look like this (but continues on forever):
           </div>
 
@@ -273,7 +273,7 @@
         <td>
             <h3>Vertical Motion</h3>
 
-          <div class="comment">
+          <div class="uSection">
             Thus far, we have only seen horizontal motion. The ball has a component of velocity in the x-direction, but no velocity in any other direction.
             <p>The velocities in the 3 <em>orthogonal</em> directions are:</p>
             $$
@@ -287,7 +287,7 @@
             $$ \vec{v} = \: <5, 0, 0> $$
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             <h4>Vertical velocity component: v<sub>y</sub></h4>
             Let's introduce a vertical component to velocity of 2 m/s. Therefore:
             $$ v_y = 2 $$
@@ -296,7 +296,7 @@
             So, we need to change our program to account for the vertical component.
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             Notice that:
             <ul>
               <li><b>Line 3</b>:
@@ -335,7 +335,7 @@
             </code></pre>
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             The result should look like this (but continues on forever):
           </div>
 
@@ -359,11 +359,11 @@
         <td>
             <h3>Showing the Component Vectors (<em>v<sub>x</sub> and v<sub>y</sub>  </em>)</h3>
 
-          <div class="comment">
+          <div class="uSection">
             We can draw two vectors to show the components of the main vector in the x and y directions.
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             Notice that:
             <ul>
               <li><b>Line 6</b>:
@@ -402,7 +402,7 @@
             </code></pre>
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             The result should look like this:
           </div>
 
@@ -411,7 +411,7 @@
             <img src="bb-05.png" alt="result">
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             You may notice that when the ball moves off the component vectors stay at the origin. It would be nice if you could alter the code so the component vectors move with the ball.
           </div>
 
@@ -428,7 +428,7 @@
         <td>
             <h3>A Little Styling</h3>
 
-          <div class="comment">
+          <div class="uSection">
 
             <p> To make things a little easer to see, we'll:
               <ol>
@@ -471,7 +471,7 @@
             </code></pre>
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             The result should be a little prettier:
           </div>
 
@@ -493,14 +493,14 @@
         <td>
             <h3>Summing the Component Vectors</h3>
 
-          <div class="comment">
+          <div class="uSection">
             You can graphically add vectors by placing the vectors end-to-end. So where the last vector stops, the new one begins.
 
             <p> We'll do this to sum the component vectors by moving the <em>v<sub>y</sub></em> vector to the end of the <em>v<sub>x</sub></em> arrow.
             </p>
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             Notice that:
             <ul>
               <li><b>Line 10</b>:
@@ -543,7 +543,7 @@
             </code></pre>
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             The result should look like this:
           </div>
 
@@ -563,14 +563,14 @@
         <td>
             <h3>Building a Wall</h3>
 
-          <div class="comment">
+          <div class="uSection">
             As the ball moves to the right, it seems to get smaller as the field of view zooms out. Let's make it static, but putting in a wall for the ball to bounce off of.
 
             <p> First we draw the wall as a simple, vertical line that's 20 m tall and 10 m from the origin (along the x-axis).
             </p>
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             Notice that:
             <ul>
               <li><b>Line 2</b>:
@@ -620,7 +620,7 @@
             </code></pre>
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             The result should look like this, but the ball will not bounce off the wall:
           </div>
 
@@ -643,7 +643,7 @@
         <td>
             <h3>Bouncing off the Wall</h3>
 
-          <div class="comment">
+          <div class="uSection">
             The ball does not know that there is a wall. We need to write some code to let it know.
 
             <p> Since the wall is a vertical line 10 m away from the origin we can just say:
@@ -670,7 +670,7 @@
             </p>
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             Codewise, this looks like:
             <pre><code class="language-python">
               if ball.pos.x >= 10:
@@ -678,7 +678,7 @@
             </code></pre>
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             Note that we also need to update the directions of the arrows (axes in this case) so that they keep track of the actual vectors:
             <pre><code class="language-python">
               ball.arrow.axis = ball.v
@@ -731,7 +731,7 @@
             </code></pre>
           </div>
 
-          <div class="comment">
+          <div class="uSection">
             The result should look like this:
           </div>
 
@@ -753,7 +753,7 @@
         <td>
             <h3>Make Four Walls</h3>
 
-          <div class="comment">
+          <div class="uSection">
             Now, you should be able to make three more walls, such that the ball is bouncing around inside a box.
           </div>
 
@@ -761,7 +761,7 @@
         <td>
 
 
-          <div class="comment">
+          <div class="uSection">
 
           </div>
 

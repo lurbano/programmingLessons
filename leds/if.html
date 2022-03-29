@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>LED: For loops</title>
+    <title>LED: If</title>
 
     <link rel="icon" type="image/png" href="ledFav-48.png" sizes="48x48">
 
@@ -36,15 +36,15 @@
     <!-- END HEADERS -->
 
     <div class="intro">
-      <h1>Using <code>for</code> Loops </h1>
+      <h1>Using <code>if</code> Statements </h1>
 
       <div style="">
         <div class="test" style='padding:2em;'>
-          Using for loops to light groups of lights and to animate sequences.
+          If statements can be used to have the program do different things under different circumstances.
         </div>
 
         <div class='alertNote'>
-          <b>Note on Pico vs. Zero:</b>
+          <b>Note on the Pico vs. Zero:</b>
           <ol>
             <li>For the Pico use <code>board.GP0</code> instead of <code>board.D18</code> because they are set up to use different input pins by default. </li>
           </ol>
@@ -71,75 +71,124 @@
       <!-- NEW ROW -->
         <!-- LEFT COLUMN -->
         <div class="uSection">
-          <h2><code>for ... in ...</code> loops </h2>
+          <h2><code>if</code> statement </h2>
 
           <p>
-            Light up the first 10 lights.
+            Make the first 10 lights (red) except for the 5th light, which should be green.
+          </p>
+          <p>
+            While there are a number of ways to do this, we'll use an <code>if</code> statement to make the change.
           </p>
 
           <script type="text/javascript">
             var leds = getLEDs();
             for (let i=0; i<10; i++){
-              leds[i].style.backgroundColor = "deepskyblue";
+              if (i == 4){
+                leds[i].style.backgroundColor = "lightgreen";
+              }
+              else {
+                leds[i].style.backgroundColor = "red";
+              }
             }
           </script>
 
-          <p>
-            While you could type out all 10 lines of code, whenever you have to do the same thing over and over again, it's easier to make a loop.
-          </p>
           <div class="pythonCode">
             <pre><code class="language-python" >
+              import board
+              import neopixel
+
+              pixels = neopixel.NeoPixel(board.D18, 20)
+
               for i in range(10):
-                pixels[i] = (0,0,100)
+                if (i == 4):
+                  pixels[i] = (0, 100, 0) # green
+                else:
+                  pixels[i] = (100, 0, 0) # red
             </code></pre>
           </div>
 
           <p>
-            this makes a loop that repeats 10 times, but every time <b>i</b> takes a different value. <b>i</b> goes from 0 to 9: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]. Notice that in going from 0 to 9 there are 10 values.
+            Every turn through the loop, the <code>if</code> statement checks to see if <code>i</code> is equal to 4. If it is, it makes that LED green, else, it make the LED red.
           </p>
 
           <p>
-            The <code>range</code> function has more flexibility than just this if you pass it more values. The general form is:
+            You will notice that the if statement uses a double equal sign ("<code>==</code>").
           </p>
           <div class="pythonCode">
             <pre><code class="language-python" >
-              range(start, stop, step):
+              if (i == 4):
             </code></pre>
           </div>
 
           <p>
-            <ol>
-              <li><b>start</b>: starting value</li>
-              <li><b>stop</b>: stopping value (actually, it stops at one less than this value)</li>
-              <li><b>step</b>: how much to skip every time you go through the loop.</li>
-            </ol>
+            <code>==</code> is a comparison operator that tests to see if the things on either side are the same: "<b>equal to</b>" each other.
           </p>
 
           <p>
-            If you leave out the step value (e.g. <code>range(3, 10)</code>), it assumes a step of 1.
+            The other comparison operators are:
           </p>
 
 
           <p>
-            So the full code to turn first every other light you can use a step of 2:
+            <table>
+              <tr>
+                <th>Operator</th>
+                <th>Test</th>
+              </tr>
+              <tr>
+                <td>==</td><td>Equal To</td>
+              </tr>
+              <tr>
+                <td>!=</td><td>Not Equal To</td>
+              </tr>
+              <tr>
+                <td> < </td><td>Less Than</td>
+              </tr>
+              <tr>
+                <td> > </td><td>Greater Than</td>
+              </tr>
+              <tr>
+                <td> <= </td><td>Less Than Or Equal To</td>
+              </tr>
+              <tr>
+                <td> >= </td><td>Greater Than Or Equal To</td>
+              </tr>
+
+            </table>
+          </p>
+
+          <p>
+            Since the operators have opposites of each other, and they all test to see if the statement is true or false, you can be flexible and creative.
+          </p>
+
+          <p>
+            For example, the same program, to have 10 red lights and the fifth one green could be written as:
           </p>
 
           <script type="text/javascript">
             var leds = getLEDs();
-            for (let i=0; i<10; i+=2){
-              leds[i].style.backgroundColor = "deepskyblue";
+            for (let i=0; i<10; i++){
+              if (i == 4){
+                leds[i].style.backgroundColor = "lightgreen";
+              }
+              else {
+                leds[i].style.backgroundColor = "red";
+              }
             }
           </script>
 
           <div class="pythonCode">
-            <pre class="line-numbers"><code class="language-python" >
-            import board
-            import neopixel
+            <pre class="line-numbers" data-line="7"><code class="language-python" >
+              import board
+              import neopixel
 
-            pixels = neopixel.NeoPixel(board.D18, 20)
+              pixels = neopixel.NeoPixel(board.D18, 20)
 
-            for i in range(0, 10, 2):
-              pixels[i] = (0,0,100)
+              for i in range(10):
+                if (i != 4):
+                  pixels[i] = (100, 0, 0) # green
+                else:
+                  pixels[i] = (0, 100, 0) # red
             </code></pre>
           </div>
 
