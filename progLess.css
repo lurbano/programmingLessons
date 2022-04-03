@@ -38,6 +38,12 @@ background-image:  url("protruding-squares.svg");
   background-color: white;
   z-index: 1;
 }
+#sidebar ul {
+  padding-left: 0.5em;
+}
+#sidebar ol {
+  list-style-type: decimal;
+}
 #sidebar a:hover {
   background-color: lightgray;
 }

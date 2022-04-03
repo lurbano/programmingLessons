@@ -41,32 +41,37 @@
 
       <div id="sidebar">
         <b><a href="#mainPage">LEDs Index</a></b>
-            <ol>
+            <ul>
               <li> <a href="./quickRef/">Python Quick Reference</a>
               </li>
 
 
-              <li> <a href="#mainPage">Topics</a>
-                <!-- <span class="dropdownSide">⇨</span> -->
-                <ol type="a" >
-                  <li> <a href="./setup.html">Setting up</a>
-                    <ul>
-                      <li  style="margin-left: -2em;"><a href="https://github.com/lurbano/rpi-led-strip">GitHub Repo.</a> </li>
-                    </ul>
-                  </li>
-                  <li> <a href="./connecting.html">Connecting & Terminal</a>
-                  </li>
-                </ol>
+              <li> <a href="./setup.html">Set up</a>
               </li>
               <li> Coding
                 <ol type="a">
                   <li> <a href="./lighting-lights.html">Lighting Lights</a>
                   </li>
-                  <li> <a href="./for-loops.html">Loops</a>
+                  <li> <a href="./for-loops.html">Loops (for)</a>
+                    <ul>
+                      <li>
+                        <a href="./for-loops.html#time-sequences">Light Sequences</a>
+                      </li>
+                    </ul>
                   </li>
                   <li> <a href="./if.html">Logic: If/Then</a>
                   </li>
                   <li> <a href="./logic/">Logical Statements</a>
+                  </li>
+                  <li> <a href="./while-loops.html">Loops (while)</a>
+                    <ul>
+                      <li>
+                        <a href="./while-loops.html#infinite-loops">Infinite Loops</a>
+                      </li>
+                      <li>
+                        <a href="./while-loops.html#unpacking">Unpacking Tuples</a>
+                      </li>
+                    </ul>
                   </li>
                   <li> <a href="./functions/">Functions</a>
                   </li>
@@ -76,14 +81,14 @@
                 </ol>
               </li>
 
-            </ol>
+            </ul>
       </div>
 
       <div id="mainPage">
 
         <!-- HEADERS -->
         <div class="nav">
-          <a href="./index.html">← Main (Programming)</a>
+          <a href="../index.html">← Main (Programming)</a>
           <a href="../quickRef/">Python Ref</a>
           <hr>
         </div>
@@ -104,36 +109,20 @@
 
         <div class="section" id="Setup">
           <div class="topic">
-            Setting up the Hardware and Software on the Pi
-          </div>
-          <div class="link">
-            <ol>
-              <li>
-                <a href="./setup.html">Setup rpi-led-strip (For Pi computers: Zero, B etc.)</a>
-              </li>
-              <li>
-                <a href="https://github.com/lurbano/ledPixelsPico">Setup ledPixelsPico (For Pi Pico microcontroller board)</a>
-              </li>
-            </ol>
+            <a href="./setup.html">Setting up the Hardware and Software on the Pi.</a>
+
+            <ul>
+              <li>Skip this if you already have a device.</li>
+            </ul>
 
           </div>
-          <div class="description">
-            Assemble hardware (Raspberry Pi and LED strip), install the operating system on the Pi. For the Pi Zero (or B's), connect Pi to the local wireless network. For the Pico, you just plug it in to the USB.
+          <div class="link">
+            <ul>
+              <li>There are different instruction for setup on the Raspberry Pi Pico, which is a microcontroller, relative to the full Raspberry Pi computers setup (Zero, B+ etc.)</li>
+            </ul>
           </div>
         </div>
 
-
-        <div class="section" id="Connecting">
-          <div class="topic">
-            [For Pi computers (Zero, B's)]: Connecting to the Pi and navigating using the command line.
-          </div>
-          <div class="link">
-            <a href="./connecting.html">Connecting using the command line.</a>
-          </div>
-          <div class="description">
-            Connect to the Raspberry Pi remotely, use the command line to navigate the file system, and run python programs that control the leds.
-          </div>
-        </div>
 
         <div class="section" id="Learning to Code">
           <div class="topic">
@@ -148,6 +137,10 @@
               <li> <a href="./lighting-lights.html">Lighting Lights (Basics)</a>
               </li>
               <li> <a href="./for-loops.html"><code>for</code> Loops (with light sequences)</a>
+              </li>
+              <li> <a href="./if.html"><code>if</code> statements</a>
+              </li>
+              <li> <a href="./while-loops.html"><code>while</code> Loops </a>
               </li>
             </ol>
           </div>

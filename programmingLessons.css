@@ -41,6 +41,7 @@ body {
   background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
   background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
 }
+
 .pythonCode {
   margin-top: 0.25em;
   padding: 0.5em;
@@ -65,9 +66,12 @@ body {
 }
 
 .assignment {
-  border: 1px solid black;
+  border: 5px outset lightSeaGreen;
   margin-top: 1em;
   padding: 0.25em;
+  padding-bottom: 1em;
+  background-color: white;
+  width: 90%;
 }
 .instruction {
   font-family: "Trebuchet MS";
@@ -179,11 +183,15 @@ code {
 .mainTable {
   display: grid;
   /* grid-template-columns: repeat(2,  minmax(100px, 1.2fr)); */
-  grid-template-columns: 1.4fr 1fr;
+  /* grid-template-columns: 1.4fr 1fr; */
+  grid-template-columns: 1fr;
   grid-row-gap: 1em;
   padding-top: 1em;
   padding-left: 1em;
 }
+/* .mainTable:nth-child(odd){
+  background-color: yellow;
+} */
 
 .gridHeader {
   text-align: center;
@@ -239,6 +247,11 @@ h1 {
 }
 h2 {
   padding: 1em;
+}
+h4 {
+  /* color: white;
+  background-color: gray; */
+  text-decoration: underline;
 }
 .intro {
   background-color: white;

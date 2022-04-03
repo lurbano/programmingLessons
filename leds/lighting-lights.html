@@ -343,10 +343,114 @@
 
 
 
+      <!-- NEW ROW -->
+        <!-- LEFT COLUMN -->
+        <div class="uSection">
+          <h2>Mixing Colors</h2>
+
+          <p>
+            Each LED Pixel really has three small LED's inside: one each of red, blue, and green.
+          </p>
+          <p>
+            To create different colors you'll just need to mix different levels of red, blue, and green. These are refered to as rgb values because the intensity of each color is given in that order. So, to make <b>yellow</b> you'll need to mix red and green:
+          </p>
+
+          <script type="text/javascript">
+            var leds = getLEDs();
+            leds[0].style.backgroundColor = "yellow";
+          </script>
+
+          <div class="pythonCode">
+            <pre><code class="language-python" >
+              pixels[0] = (20,20,0)
+            </code></pre>
+          </div>
+
+          <p>
+            And if you look carefully, you might be able to see the red and green led's are lit in the pixel.
+          </p>
+
+          <p>
+            Mix the three colors equally to get white, and no color at all (0,0,0) gives black.
+          </p>
+
+
+          <p>
+            If you do an internet search for "color picker" you should get something that gives you rgb values for different colors.
+          </p>
+
+        <!-- END LEFT COLUMN -->
+
+        <!-- RIGHT COLUMN -->
+        <div class="uSection">
+
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div class="instruction">
+              <h4>Assignment 6</h4>
+              Make the second light pink.
+              <script type="text/javascript">
+                var leds = getLEDs();
+                leds[1].style.backgroundColor = "pink";
+              </script>
+            </div>
+
+            <div class="toggle-next">Code ▼</div>
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers"><code class="language-python" >
+                import board
+                import neopixel
+
+                pixels = neopixel.NeoPixel(board.D18, 20)
+
+                pixels[1] = (25,0,25)
+                ...
+                </code></pre>
+              </div>
+            </div>
+
+          </div>
+          <!-- END ASSIGNMENT -->
+
+
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div class="instruction">
+              <h4>Assignment 7</h4>
+              Make the third light white.
+              <script type="text/javascript">
+                var leds = getLEDs();
+                leds[2].style.backgroundColor = "white";
+              </script>
+            </div>
+
+
+          </div>
+          <!-- END ASSIGNMENT -->
+
+
+
+        </div>
+        <!-- END RIGHT COLUMN -->
+
+      <!-- END ROW -->
+
+
+
 
 
 
     </div>
+
+    <!-- FOOTER -->
+    <div class="nav">
+      <hr>
+      <a href="../leds/index.html">LEDs Index</a>
+      <a href="./for-loops.html">Next: Loops</a>
+    </div>
+    <!-- END FOOTER -->
 
 
   </body>
