@@ -233,7 +233,7 @@
           </p>
 
           <p>
-            Let's redo <a href="#functions-assignment-1">Assignment 1</a> but use a function to turn the lights off. The function is defined on lines 7-10.
+            Let's redo <a href="#functions-assignment-1">Assignment 1</a> but use a function to turn the lights off. The function is defined on lines 7-10, and called twice on lines 20 and 31.
           </p>
 
           <div class="LedAnimation">
@@ -258,7 +258,7 @@
           </div>
 
           <div class="pythonCode">
-            <pre class="line-numbers" data-line="7-10,20,31"><code class="language-python" >
+            <pre class="line-numbers" data-line="7-10,19-20,30-31"><code class="language-python" >
             import board
             import neopixel
             import time
@@ -305,6 +305,107 @@
         <!-- RIGHT COLUMN -->
         <div class="uSection">
 
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div id="functions-assignment-1" class="instruction">
+
+              <h4> Assignment 2 </h4>
+
+                Write a function called <code>allBlue</code> that turns all of the lights blue (in sequence with a 0.1 second timestep), and use it in a program that:
+
+                <ol>
+                  <li>
+                    Light up all of the lights (blue) (in sequence with a 0.1 second delay),
+                  </li>
+                  <li>
+                    Turn off the lights
+                  </li>
+                  <li>
+                    Wait for 1 second,
+                  </li>
+                  <li>
+                    Light up all the lights again (red)
+                  </li>
+                  <li>
+                    Turn off the lights
+                  </li>
+                  <li>
+                    Wait for 1 second,
+                  </li>
+                  <li>
+                    Light up all the lights again (blue)
+                  </li>
+                </ol>
+
+              <div class="LedAnimation">
+                <input type="button" onclick="ex_fpat1()"  value="Play">
+                <input type="button" onclick="resetLEDs()"  value="Reset">
+                <script type="text/javascript">
+                  //create blank led strip
+                  var leds = getLEDs();
+                  var ct = 0;
+
+                  function ex_fpat1(){
+                    animateLEDs( function(leds){
+                      t = lightSequence(leds, { color:"deepskyblue"});
+                      t = clearLeds(leds, {startTime:t, pauseAfter:1});
+                      t = lightSequence(leds, {startTime:t});
+                      t = clearLeds(leds, {startTime:t});
+                      t = lightSequence(leds, {startTime:t, color:"deepskyblue"});
+
+                    })
+                  }
+
+                </script>
+              </div>
+
+            </div>
+
+            <div class="toggle-next">Code ▼</div>
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers"><code class="language-python" >
+                  import board
+                  import neopixel
+                  import time
+
+                  pixels = neopixel.NeoPixel(board.GP0, 20)
+
+                  # FUNCTION: to turn off all the lights
+                  def lightsOff():
+                    for i in range(20):
+                      pixels[i] = (0,0,0)
+
+                  # FUNCTION: to make all leds blue
+                  def allBlue():
+                    for i in range(20):
+                      pixels[i] = (0,0,10)
+                      time.sleep(0.1)
+
+                  # MAIN PROGRAM STARTS HERE
+
+                  allBlue()       # make lights blue
+                  lightsOff()     # turn off lights
+                  time.sleep(1)   # wait one second
+
+                  # make lights red in sequence
+                  for i in range(20):
+                    pixels[i] = (10,0,0)
+                    time.sleep(0.1)
+
+                  # CALL the function to turn off lights
+                  lightsOff()     # turn lights off
+                  time.sleep(1)   # wait one second
+                  allBlue()       # make lights blue
+
+                </code></pre>
+              </div>
+            </div>
+
+
+          </div>
+          <!-- END ASSIGNMENT -->
 
         </div>
         <!-- END RIGHT COLUMN -->
@@ -321,114 +422,44 @@
         <!-- LEFT COLUMN -->
         <div class="uSection">
 
-          <h2 id="infinite-loops">Infinite Loops </h2>
+          <h2 id="passing-parameters">Passing Parameters </h2>
 
           <p>
-            Sometimes you want your program to run forever. Then you can create an infinite loop using a <code>while</code> condition that is always true, such as:
+            We could make separate functions that light up all the different colors in sequence (you may have already done so for the red lights in Assignment 2). However, this would be easier to handle if we could tell the function which color to use.
           </p>
 
-          <div class="pythonCode">
-            <pre><code class="language-python" >
-                while True:
-            </code></pre>
-          </div>
+          <p>
+            So we'll <b>pass a parameter</b> called <code>color</code> to a function, which will use that color.
+          </p>
 
-          So, let's take a program that lights up every other light (0.1 second delay between lights),
-
-          <div class="LedAnimation">
-            <input type="button" onclick="ex_2x2()"  value="Play">
-            <input type="button" onclick="resetLEDs()"  value="Reset">
-            <script type="text/javascript">
-              //create blank led strip
-              var leds = getLEDs();
-              var ct = 0;
-
-              function ex_2x2(){
-                animateLEDs( function(leds){
-                  for (let i=0; i<leds.length; i+=2){
-                    setTimeout(function(){
-                      leds[i].style.backgroundColor = "lightGreen";
-                    }, (i/2)*0.1*1000);
-                  }
-                })
-              }
-
-            </script>
-          </div>
-
+          <p>
+            Let's call the function <code>lightSequence</code>.
+          </p>
 
           <div class="pythonCode">
             <pre class="line-numbers"><code class="language-python" >
-              import board
-              import neopixel
-              import time
-
-              pixels = neopixel.NeoPixel(board.GP0, 20)
-
-              i = 0   # initialize variable
-              while (i < 20):   # loop
-                  pixels[i] = (0,10,0)
-                  i = i + 2   # increment i
+              def lightSequence(color):
+                for i in range(20):
+                  pixels[i] = color
                   time.sleep(0.1)
+
+              lightSequence( (10,0,0) )       # call to make lights red
+              lightSequence( (0,0,10) )       # call to make lights blue
             </code></pre>
           </div>
 
           <p>
-            Now to make it run forever, we stick it into an infinite loop (line 7). And we also need reset the pixels (make them black) in-between each iteration of the infinite loop (lines 14-16):
+            In the call to the function with <code>lightSequence( (10,0,0) )</code>, we pass the color (e.g. red <code>(10,0,0)</code> in the first call).
           </p>
 
-          <div class="LedAnimation">
-            <input type="button" onclick="ex_2x()"  value="Play">
-            <input type="button" onclick="resetLEDs()"  value="Reset">
-            <script type="text/javascript">
-              //create blank led strip
-              var leds = getLEDs();
-              var ct = 0;
-
-              function ex_2x(){
-                animateLEDs( function(leds){
-                  for (let n=0; n<10; n++){
-                    dt = n * 12*0.1*1000;
-                    for (let i=0; i<leds.length; i+=2){
-                      setTimeout(function(){
-                        leds[i].style.backgroundColor = "lightGreen";
-                      }, dt+10+(i/2)*0.1*1000);
-                    }
-                    for (let i=0; i<leds.length; i+=2){
-                      setTimeout(function(){
-                        leds[i].style.backgroundColor = "black";
-                      }, dt);
-                    }
-                  }
-
-                })
-              }
-
-            </script>
-          </div>
+          <p>
+            The function definition, <code>def lightSequence(color):</code> expects to be passed one <b><em>parameter</em> </b> called "color", that the function uses to set the led colors on line 3.
+          </p>
 
 
-          <div class="pythonCode">
-            <pre class="line-numbers" data-line="7, 14-16"><code class="language-python" >
-              import board
-              import neopixel
-              import time
 
-              pixels = neopixel.NeoPixel(board.GP0, 20)
 
-              while True:
-                  i = 0   # initialize variable
-                  while (i < 20):   # loop
-                      pixels[i] = (0,10,0)
-                      i = i + 2   # increment i
-                      time.sleep(0.1)
 
-                  # reset leds
-                  for n in range(20):
-                      pixels[n] = (0,0,0)
-
-            </code></pre>
-          </div>
 
 
         </div>
@@ -436,7 +467,114 @@
 
         <!-- RIGHT COLUMN -->
         <div class="uSection">
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div id="functions-assignment-1" class="instruction">
 
+              <h4> Assignment 3 </h4>
+
+                Use the <code>lightSequence</code> function to:
+                <ol>
+                  <li>
+                    Light up all of the lights (red) (in sequence with a 0.1 second delay),
+                  </li>
+                  <li>
+                    Turn off the lights
+                  </li>
+                  <li>
+                    Wait for 1 second,
+                  </li>
+                  <li>
+                    Light up all the lights again (green)
+                  </li>
+                  <li>
+                    Turn off the lights
+                  </li>
+                  <li>
+                    Wait for 1 second,
+                  </li>
+                  <li>
+                    Light up all the lights again (blue)
+                  </li>
+                  <li>
+                    Turn off the lights
+                  </li>
+                  <li>
+                    Wait for 1 second,
+                  </li>
+                  <li>
+                    Light up all the lights again (yellow)
+                  </li>
+                </ol>
+
+                <div class="LedAnimation">
+                  <input type="button" onclick="ex_fpat1()"  value="Play">
+                  <input type="button" onclick="resetLEDs()"  value="Reset">
+                  <script type="text/javascript">
+                    //create blank led strip
+                    var leds = getLEDs();
+                    var ct = 0;
+
+                    function ex_fpat1(){
+                      animateLEDs( function(leds){
+                        t = lightSequence(leds, { color:"red"});
+                        t = clearLeds(leds, {startTime:t, pauseAfter:1});
+                        t = lightSequence(leds, {startTime:t, color:"lightSeaGreen"});
+                        t = clearLeds(leds, {startTime:t});
+                        t = lightSequence(leds, {startTime:t, color:"deepskyblue"});
+                      })
+                    }
+
+                  </script>
+                </div>
+
+            </div>
+
+            <div class="toggle-next">Code ▼</div>
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers"><code class="language-python" >
+                  import board
+                  import neopixel
+                  import time
+
+                  pixels = neopixel.NeoPixel(board.GP0, 20)
+
+                  # FUNCTION: to turn off all the lights
+                  def lightsOff():
+                      for i in range(20):
+                        pixels[i] = (0,0,0)
+
+                  # FUNCTION: to light up all the lights with a given color
+                  def lightSequence(color):
+                      for i in range(20):
+                        pixels[i] = color
+                        time.sleep(0.1)
+
+                  # MAIN PROGRAM STARTS HERE
+
+                  lightSequence( (10,0,0) )       # make lights red
+                  lightsOff()
+                  time.sleep(1)
+
+                  lightSequence( (0,10,0) )       # make lights green
+                  lightsOff()
+                  time.sleep(1)
+
+                  lightSequence( (0,0,10) )       # make lights blue
+                  lightsOff()
+                  time.sleep(1)   
+
+                  lightSequence( (10,10,0) )       # make lights yellow
+
+                </code></pre>
+              </div>
+            </div>
+
+
+          </div>
+          <!-- END ASSIGNMENT -->
 
         </div>
         <!-- END RIGHT COLUMN -->
