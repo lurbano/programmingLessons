@@ -453,7 +453,7 @@
 
                 for i in range(0, 20, 2):
                   pixels[i] = (0,100,0)
-                  time.sleep(0.5);
+                  time.sleep(0.5)
                 </code></pre>
               </div>
             </div>
@@ -508,7 +508,7 @@
                   pixels[i] = (0,100,0)
                 for i in range(0, 20):
                   pixels[-i-1] = (100,0,0)
-                  time.sleep(0.5);
+                  time.sleep(0.5)
                 </code></pre>
               </div>
             </div>
@@ -525,13 +525,13 @@
                 Over 2.5 seconds have a single light of the 20 light up and march across the strip, with all the other lights being black.
 
                 <div class="LedAnimation">
-                  <input type="button" onclick="ex_light2()"  value="Play">
+                  <input type="button" onclick="ex_light7()"  value="Play">
                   <input type="button" onclick="resetLEDs()"  value="Reset">
                   <script type="text/javascript">
                     //create blank led strip
                     var leds = getLEDs();
 
-                    function ex_light2(){
+                    function ex_light7(){
                       animateLEDs( function(leds){
                         for (let i=0; i<leds.length; i++){
                           setTimeout(function(){

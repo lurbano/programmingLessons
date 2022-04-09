@@ -74,137 +74,25 @@
       <!-- NEW ROW -->
         <!-- LEFT COLUMN -->
         <div class="uSection">
-          <h2> Writing a Function </h2>
-
-          To see why we need functions, write a program for Assignment 1.
-
-          <!-- BEGIN ASSIGNMENT -->
-          <div class='assignment'>
-            <div class="instruction">
-
-              <h4> Assignment 1 </h4>
-
-              Write a program to do the following:
-              <ol>
-                <li>
-                  Light up the first 5 lights (in sequence with a 0.1 second delay),
-                </li>
-                <li>
-                  Turn off the lights,
-                </li>
-                <li>
-                  Light up the first 12 lights in sequencce.
-                </li>
-                <li>
-                  Turn off the lights,
-                </li>
-                <li>
-                  Light up all of the lights in sequencce.
-                </li>
-              </ol>
-
-
-              <div class="LedAnimation">
-                <input type="button" onclick="ex_pat1()"  value="Play">
-                <input type="button" onclick="resetLEDs()"  value="Reset">
-                <script type="text/javascript">
-                  //create blank led strip
-                  var leds = getLEDs();
-                  var ct = 0;
-
-                  function ex_pat1(){
-                    animateLEDs( function(leds){
-                      // lightSequence(leds, {n:5, dt:0.1});
-                      // clearLeds(leds, {startTime:0.8});
-                      // lightSequence(leds, {n:12, dt:0.1, startTime:1.0});
-                      // clearLeds(leds, {startTime:3});
-                      // lightSequence(leds, {n:20, dt:0.1, startTime:3.25});
-                      t = lightSequence(leds, {n:5, dt:0.1});
-                      clearLeds(leds, {startTime:t});
-                      t = lightSequence(leds, {n:12, dt:0.1, startTime:t});
-                      clearLeds(leds, {startTime:t});
-                      t = lightSequence(leds, {n:20, dt:0.1, startTime:t});
-
-                    })
-                  }
-
-                </script>
-              </div>
-
-            </div>
-
-            <div class="toggle-next">Code ▼</div>
-            <div class="results" hidden>
-
-              <div class="pythonCode">
-                <pre class="line-numbers"><code class="language-python" >
-                import board
-                import neopixel
-                import time
-
-                pixels = neopixel.NeoPixel(board.D18, 20)
-
-                i = 0   # initialize variable
-                while (i < 20):   # loop
-                    pixels[i] = (0,10,0)
-                    i = i + 2   # increment i
-                    time.sleep(0.1)
-                </code></pre>
-              </div>
-            </div>
-
-
-          </div>
-          <!-- END ASSIGNMENT -->
-
-
-
-
-
+          <h2> Why Functions </h2>
 
           <p>
-            We can do this with a <code>for i in range(10):</code> loop, but we can also use a <code>while</code> loop.
+            To turn off all the lights we just need a simple loop:
           </p>
-          <p>
-            The <code>while</code> loop checks to see if a condition is true each time before it goes throught the loop. In this case we'll create a variable, <code>i</code>, give it an initial value (0), and increase it by 1 every time we loop.
-          </p>
-          <div class="pythonCode">
-            <pre class='line-numbers'><code class="language-python" >
-              i = 0   # initialize variable
-              while (i < 10):   # loop with check
-                pixels[i] = (10,0,0)
-                i = i + 1   # increase the value of i
-            </code></pre>
-          </div>
-
-          <p>
-            this makes a loop that repeats 10 times, but every time we have to tell <b>i</b> to increase by 1 (line 4).
-          </p>
-
-          <p>
-            The full program looks like:
-          </p>
-
-          <script type="text/javascript">
-            var leds = getLEDs();
-            for (let i=0; i<10; i++){
-              leds[i].style.backgroundColor = "deepskyblue";
-            }
-          </script>
 
           <div class="pythonCode">
             <pre class="line-numbers"><code class="language-python" >
-              import board
-              import neopixel
-
-              pixels = neopixel.NeoPixel(board.GP0, 20)
-
-              i = 0   # iniatialize variable
-              while (i < 10):   # loop with check
-                  pixels[i] = (10,0,0)
-                  i = i + 1   # increase the value of i
+            for i in range(20):
+              pixels[i] = (0,0,0)
             </code></pre>
           </div>
+
+          <p>
+            However, as we write more interesting lighting sequences, we'll find that we need to do this quite often, so we can create a shortcut that we'll call a function.
+          </p>
+
+
+
 
         </div>
         <!-- END LEFT COLUMN -->
@@ -215,27 +103,45 @@
 
           <!-- BEGIN ASSIGNMENT -->
           <div class='assignment'>
-            <div class="instruction">
+            <div id="functions-assignment-1" class="instruction">
 
               <h4> Assignment 1 </h4>
 
-              Use a <code>while</code> loop light up ever other pixel in the strip (green).
+              Write a program to do the following,
+              <ol>
+                <li>
+                  Light up all of the lights (green) (in sequence with a 0.1 second delay),
+                </li>
+                <li>
+                  Turn off the lights
+                </li>
+                <li>
+                  Wait for 1 second,
+                </li>
+                <li>
+                  Light up all the lights again (red)
+                </li>
+                <li>
+                  Turn off the lights
+                </li>
+              </ol>
+
 
               <div class="LedAnimation">
-                <input type="button" onclick="ex_2x()"  value="Play">
+                <input type="button" onclick="ex_fpat1()"  value="Play">
                 <input type="button" onclick="resetLEDs()"  value="Reset">
                 <script type="text/javascript">
                   //create blank led strip
                   var leds = getLEDs();
                   var ct = 0;
 
-                  function ex_2x(){
+                  function ex_fpat1(){
                     animateLEDs( function(leds){
-                      for (let i=0; i<leds.length; i+=2){
-                        setTimeout(function(){
-                          leds[i].style.backgroundColor = "lightGreen";
-                        }, (i/2)*0.1*1000);
-                      }
+                      t = lightSequence(leds, { color:"lightgreen"});
+                      t = clearLeds(leds, {startTime:t, pauseAfter:1});
+                      t = lightSequence(leds, {startTime:t});
+                      t = clearLeds(leds, {startTime:t});
+
                     })
                   }
 
@@ -253,133 +159,29 @@
                 import neopixel
                 import time
 
-                pixels = neopixel.NeoPixel(board.D18, 20)
+                pixels = neopixel.NeoPixel(board.GP0, 20)
 
-                i = 0   # initialize variable
-                while (i < 20):   # loop
-                    pixels[i] = (0,10,0)
-                    i = i + 2   # increment i
-                    time.sleep(0.1)
-                </code></pre>
-              </div>
-            </div>
+                # make lights green in sequence
+                for i in range(20):
+                  pixels[i] = (0,10,0)
+                  time.sleep(0.1)
 
+                # turn off lights
+                for i in range(20):
+                  pixels[i] = (0,0,0)
 
-          </div>
-          <!-- END ASSIGNMENT -->
+                # wait 1 second
+                time.sleep(1)
 
+                # make lights red in sequence
+                for i in range(20):
+                  pixels[i] = (10,0,0)
+                  time.sleep(0.1)
 
+                # turn off lights
+                for i in range(20):
+                  pixels[i] = (0,0,0)
 
-
-
-          <!-- BEGIN ASSIGNMENT -->
-          <div class='assignment'>
-            <div class="instruction">
-
-              <h4> Assignment 2 </h4>
-
-              Use a <code>while</code> loop to light up the last 10 lights (green), going backwards with a 0.1 second delay between each one.
-
-              <div class="LedAnimation">
-                <input type="button" onclick="ex_10back()"  value="Play">
-                <input type="button" onclick="resetLEDs()"  value="Reset">
-                <script type="text/javascript">
-                  //create blank led strip
-                  var leds = getLEDs();
-                  var ct = 0;
-
-                  function ex_10back(){
-                    animateLEDs( function(leds){
-                      for (let i=leds.length-1; i>=10; i--){
-                        setTimeout(function(){
-                          leds[i].style.backgroundColor = "lightGreen";
-                        }, (20-i)*0.1*1000);
-                      }
-                    })
-                  }
-
-                </script>
-              </div>
-
-            </div>
-
-            <div class="toggle-next">Code ▼</div>
-            <div class="results" hidden>
-
-              <div class="pythonCode">
-                <pre class="line-numbers"><code class="language-python" >
-                import board
-                import neopixel
-                import time
-
-                pixels = neopixel.NeoPixel(board.D18, 20)
-
-                i = 19   # initialize variable
-                while (i > 10):   # loop while greater than 10
-                    pixels[i] = (0,10,0)
-                    i = i - 1   # decrement i
-                    time.sleep(0.1)
-                </code></pre>
-              </div>
-            </div>
-
-
-          </div>
-          <!-- END ASSIGNMENT -->
-
-
-
-
-
-          <!-- BEGIN ASSIGNMENT -->
-          <div class='assignment'>
-            <div class="instruction">
-
-              <h4> Assignment 5 </h4>
-
-              Light up each light that is a <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci Number</a>.
-
-              <p>
-                The Fibonacci sequence starts with 0, 1, and then increases by adding the two previous numbers together to get the next number. So the sequence goes 0, 1, 1, 2, 3, 5, 8, 13, 21 ....
-              </p>
-
-              <script type="text/javascript">
-                nPix = 20;  leds = getLEDs();
-                let n1 = 0;
-                let n2 = 1;
-                leds[n1].style.backgroundColor = "deepskyblue";
-                while (n2 < nPix){
-                  leds[n2].style.backgroundColor = "deepskyblue";
-                  n2Old = n2;
-                  n2 = n1 + n2;
-                  n1 = n2Old;
-                }
-              </script>
-
-            </div>
-
-            <div class="toggle-next">Code (Version 1) ▼</div>
-            <div class="results" hidden>
-
-              <div class="pythonCode">
-                <pre class="line-numbers"><code class="language-python" >
-                import board
-                import neopixel
-
-                pixels = neopixel.NeoPixel(board.D18, 20)
-
-                n1 = 0
-                n2 = 1
-
-                while (n2 < 20):
-                    pixels[n2] = (0,10,10)   # set pixel color
-
-                    # save the old value of n2
-                    n2Old = n2
-                    # update n2 (Fibonacci sequence)
-                    n2 = n1 + n2
-                    # make n1 the old value of n2
-                    n1 = n2Old
                 </code></pre>
               </div>
             </div>
@@ -404,84 +206,98 @@
         <!-- LEFT COLUMN -->
         <div class="uSection">
 
-          <h2 id="unpacking">Unpacking (Tuples and Arrays) </h2>
+          <h2>Writing Functions (Turn off the lights) </h2>
+
+          <p>
+            A function to turn off the lights looks like this:
+          </p>
 
           <div class="pythonCode">
-            <pre><code class="language-python" >
-                (n1, n2) = (n2, n1 + n2)
+            <pre class="line-numbers"><code class="language-python" >
+              def lightsOff():
+                for i in range(20):
+                  pixels[i] = (0,0,0)
             </code></pre>
           </div>
 
           <p>
-            In Assignment 2, that lights up the Fibonacci sequence, the code example takes three lines (13, 15, and 17) to update the two numbers in the Fibonacci sequence (n1 and n2).
+            <ul>
+              <li><code>def lightsOff():</code> </li>
+              <ul>
+                <li>Define the function and give it a name "lightsOff"</li>
+              </ul>
+              <li>Everything tabbed over after the function definition is in the function: it's what's done when the function is <em>called</em>.</li>
+              <li>The function is usually defined at or near the top of the code (later on we'll actually put it in its own file.)</li>
+              <li>The function is <b><em>called</em></b> in the program when it's needed. </li>
+            </ul>
           </p>
 
-          <script type="text/javascript">
-            nPix = 20;  leds = getLEDs();
-            n1 = 0;
-            n2 = 1;
-            leds[n1].style.backgroundColor = "deepskyblue";
-            while (n2 < nPix){
-              leds[n2].style.backgroundColor = "deepskyblue";
-              n2Old = n2;
-              n2 = n1 + n2;
-              n1 = n2Old;
-            }
-          </script>
+          <p>
+            Let's redo <a href="#functions-assignment-1">Assignment 1</a> but use a function to turn the lights off. The function is defined on lines 7-10.
+          </p>
+
+          <div class="LedAnimation">
+            <input type="button" onclick="ex_fpat2()"  value="Play">
+            <input type="button" onclick="resetLEDs()"  value="Reset">
+            <script type="text/javascript">
+              //create blank led strip
+              var leds = getLEDs();
+              var ct = 0;
+
+              function ex_fpat2(){
+                animateLEDs( function(leds){
+                  t = lightSequence(leds, { color:"deepskyblue"});
+                  t = clearLeds(leds, {startTime:t, pauseAfter:1});
+                  t = lightSequence(leds, {startTime:t});
+                  t = clearLeds(leds, {startTime:t});
+
+                })
+              }
+
+            </script>
+          </div>
 
           <div class="pythonCode">
-            <pre class="line-numbers" data-line="12-17"><code class="language-python" >
+            <pre class="line-numbers" data-line="7-10,20,31"><code class="language-python" >
             import board
             import neopixel
+            import time
 
-            pixels = neopixel.NeoPixel(board.D18, 20)
+            pixels = neopixel.NeoPixel(board.GP0, 20)
 
-            n1 = 0
-            n2 = 1
+            # FUNCTION: to turn off all the lights
+            def lightsOff():
+              for i in range(20):
+                pixels[i] = (0,0,0)
 
-            while (n2 < 20):
-                pixels[n2] = (0,10,10)   # set pixel color
 
-                # save the old value of n2
-                n2Old = n2
-                # update n2 (Fibonacci sequence)
-                n2 = n1 + n2
-                # make n1 the old value of n2
-                n1 = n2Old
+            # MAIN PROGRAM STARTS HERE
+            # make lights blue in sequence
+            for i in range(20):
+              pixels[i] = (0,0,10)
+              time.sleep(0.1)
+
+            # CALL the function to turn off lights
+            lightsOff()
+
+            # wait 1 second
+            time.sleep(1)
+
+            # make lights red in sequence
+            for i in range(20):
+              pixels[i] = (10,0,0)
+              time.sleep(0.1)
+
+            # CALL the function to turn off lights
+            lightsOff()
+
             </code></pre>
           </div>
 
           <p>
-            In python, you can avoid having to save the old value of n2 by updating both numbers at the same time using something called <em><a href="https://www.w3schools.com/python/python_tuples_unpack.asp">tuple assignment/unpacking tuples</a>.</em>
+
           </p>
 
-          <div class="pythonCode">
-            <pre><code class="language-python" >
-                # update n2 and n2 (Fibonacci sequence)
-                (n1, n2) = (n2, n1+n2)
-            </code></pre>
-          </div>
-
-          <div class="results">
-
-            <div class="pythonCode">
-              <pre class="line-numbers" data-line="12-13"><code class="language-python" >
-              import board
-              import neopixel
-
-              pixels = neopixel.NeoPixel(board.D18, 20)
-
-              n1 = 0
-              n2 = 1
-
-              while (n2 < 20):
-                  pixels[n2] = (0,10,10)   # set pixel color
-
-                  # update n2 and n2 (Fibonacci sequence)
-                  (n1, n2) = (n2, n1+n2)
-              </code></pre>
-            </div>
-          </div>
 
         </div>
         <!-- END LEFT COLUMN -->
