@@ -810,7 +810,7 @@
                       for i in range(20):
                         pixels[i] = (0,0,0)
 
-                  # FUNCTION: to light up all the lights with a given color
+                  # FUNCTION: to light up a given number of lights (n) with a given color (color)
                   def lightUp(n, color):
                       for i in range(n):
                         pixels[i] = color
@@ -832,18 +832,851 @@
           <!-- END ASSIGNMENT -->
 
 
+
+
+
         </div>
         <!-- END RIGHT COLUMN -->
 
       <!-- END ROW -->
 
 
-To Do:
-<ul>
-  <li>Default Parameters</li>
-  <li>Returning values from Functions</li>
-  <li>importing from other files</li>
-</ul>
+
+
+      <!-- NEW ROW -->
+        <!-- LEFT COLUMN -->
+        <div class="uSection">
+
+          <h2 id="parameters-errors">Error Messages: Passing Parameters</h2>
+
+          <p>
+            What happens when you pass too many, or too few parameters?
+          </p>
+          <p>
+            Understanding error messages is a lot easier if you've seen them before. So it's useful to make intentional errors and observe the resulting errom messages.
+          </p>
+
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div id="functions-assignment-1" class="instruction">
+
+                <p>
+                  What error message do you get when you forget to pass a variable to a function that needs one?
+                </p>
+                <p>
+                  The <code>lightRGB</code> function below requires 3 parameters (a, b, and c), but if we put in only two paramters in the function call:
+                </p>
+
+            </div>
+
+            <div class="demo-code">
+
+              <div class="pythonCode">
+                <pre class="line-numbers" data-line="1,7"><code class="language-python" >
+                  def lightRGB(a, b, c):  # requires 3 parameters
+                    pixels[a] = (10,0,0)
+                    pixels[b] = (0,10,0)
+                    pixels[c] = (0,0,10)
+
+                  # function call
+                  lightRGB(1, 4)  #passing only 2 paramters
+                </code></pre>
+              </div>
+            </div>
+
+            <div class="toggle-next">Error Message ▼</div>
+            <div class="results">
+
+              <div class="pythonCode">
+                <pre class="line-numbers"><code class="language-bash" >
+                  Traceback (most recent call last):
+                    File "<stdin>", line 13, in <module>
+                  TypeError: function takes 3 positional arguments but 2 were given
+                </code></pre>
+              </div>
+            </div>
+
+
+          </div>
+          <!-- END ASSIGNMENT -->
+
+
+        </div>
+        <!-- END LEFT COLUMN -->
+
+        <!-- RIGHT COLUMN -->
+        <div class="uSection">
+
+
+
+
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div id="functions-assignment-1" class="instruction">
+
+              <h4> Assignment 6: Error Messages when Passing Parameters </h4>
+
+                What error message do you get when you pass too many variables to the <code>lightRGB</code> function?
+
+            </div>
+
+            <div class="toggle-next">Code ▼</div>
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers" data-line="7,13"><code class="language-python" >
+                  import board
+                  import neopixel
+                  import time
+
+                  pixels = neopixel.NeoPixel(board.GP0, 20)
+
+                  def lightRGB(a, b, c):
+                    pixels[a] = (10,0,0)
+                    pixels[b] = (0,10,0)
+                    pixels[c] = (0,0,10)
+
+                  # function call
+                  lightRGB(1, 4, 10, 15)
+
+                </code></pre>
+              </div>
+            </div>
+
+            <div class="toggle-next">Error Message ▼</div>
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers"><code class="language-bash" >
+                  Traceback (most recent call last):
+                    File "<stdin>", line 13, in <module>
+                  TypeError: function takes 3 positional arguments but 4 were given
+                </code></pre>
+              </div>
+            </div>
+
+
+          </div>
+          <!-- END ASSIGNMENT -->
+
+
+
+
+
+        </div>
+        <!-- END RIGHT COLUMN -->
+
+      <!-- END ROW -->
+
+
+
+
+
+
+      <!-- NEW ROW -->
+        <!-- LEFT COLUMN -->
+        <div class="uSection">
+
+          <h2 id="default-parameters">Default Parameters</h2>
+
+          <p>
+            The <code>lightUp</code> function can light any given number of leds and sets their color.
+          </p>
+
+          <div class="pythonCode">
+            <pre class="line-numbers" data-line="1,7"><code class="language-python" >
+              def lightUp(n, color):
+                  for i in range(n):
+                    pixels[i] = color
+                    time.sleep(0.1)
+            </code></pre>
+          </div>
+
+          <p>
+            However, we might frequently want to light up all the leds. We can set it up so that the function does that by default if you don't pass it a number parameter (n). Because python does not like it if you have non-default parameters after default parameters, we'll also set a default color ("blue").
+            <ul>
+              <li>Default <code>n</code>: 20 </li>
+              <li>Default <code>color</code>: (0, 0, 10) </li>
+            </ul>
+          </p>
+
+          <div class="pythonCode">
+            <pre class="line-numbers" data-line="1"><code class="language-python" >
+              def lightUp(n=20, color=(0,0,10)):
+                  for i in range(n):
+                    pixels[i] = color
+                    time.sleep(0.1)
+            </code></pre>
+          </div>
+
+          <p>
+            Now we can call the function without any argumements and it will still work.
+          </p>
+
+          <div class="LedAnimation">
+            <input type="button" onclick="ex_defdemo()"  value="Play">
+            <input type="button" onclick="resetLEDs()"  value="Reset">
+            <script type="text/javascript">
+              //create blank led strip
+              var leds = getLEDs();
+              var ct = 0;
+
+              function ex_defdemo(){
+                animateLEDs( function(leds){
+                  t = lightSequence(leds, {  color:"deepskyblue"});
+                })
+              }
+
+            </script>
+          </div>
+
+          <div class="pythonCode">
+            <pre class="line-numbers" data-line="7,13"><code class="language-python" >
+              import board
+              import neopixel
+              import time
+
+              pixels = neopixel.NeoPixel(board.GP0, 20)
+
+              def lightUp(n=20, color=(0,0,10)):
+                for i in range(n):
+                  pixels[i] = color
+                  time.sleep(0.1)
+
+              # function call
+              lightUp()
+            </code></pre>
+          </div>
+
+          <p>
+            We can pass either parameter if we want, but it can get tricky if we don't name them. The rule is that you still need to pass the parameters in the right positional order. In this case, that means if you called the function with <code>lightUp(5)</code>, that would work, but trying to set only the color, <code>lightUp((0,10,0))</code> would fail (you should try them yourself to see the error messages).
+          </p>
+          <p>
+            To avoid this issue we can just name the parameters as we pass them. So to make all 20 leds green we can use:
+          </p>
+
+
+
+          <div class="pythonCode">
+            <pre data-line='6'><code class="language-python" >
+              def lightUp(n=20, color=(0,0,10)):
+                for i in range(n):
+                  pixels[i] = color
+                  time.sleep(0.1)
+
+              lightUp(color=(0,10,0))
+            </code></pre>
+          </div>
+
+          <div class="LedAnimation">
+            <input type="button" onclick="ex_defdemo()"  value="Play">
+            <input type="button" onclick="resetLEDs()"  value="Reset">
+            <script type="text/javascript">
+              //create blank led strip
+              var leds = getLEDs();
+              var ct = 0;
+
+              function ex_defdemo(){
+                animateLEDs( function(leds){
+                  t = lightSequence(leds, {  color:"lightGreen"});
+                })
+              }
+
+            </script>
+          </div>
+
+
+
+        </div>
+        <!-- END LEFT COLUMN -->
+
+        <!-- RIGHT COLUMN -->
+        <div class="uSection">
+
+
+
+
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div id="functions-assignment-1" class="instruction">
+
+              <h4> Assignment 7: Using Default Parameters </h4>
+
+                Use the <code>lightUp</code> function, while taking maximum advantage of the default parameters to:
+
+                <ol>
+                  <li>
+                    Light up all the lights (blue) in sequence,
+                  </li>
+                  <li>
+                    Light up the first 10 lights (red) in sequence
+                  </li>
+                  <li>
+                    Light up all the lights (green) in sequence
+                  </li>
+                  <li>
+                    Light up all the lights (blue) in sequence
+                  </li>
+                  <li>
+                    Light just the first 10 lights (yellow) in sequence
+                  </li>
+                </ol>
+            </div>
+
+            <div class="LedAnimation">
+              <input type="button" onclick="ex_defPar1()"  value="Play">
+              <input type="button" onclick="resetLEDs()"  value="Reset">
+              <script type="text/javascript">
+                //create blank led strip
+                var leds = getLEDs();
+                var ct = 0;
+
+                function ex_defPar1(){
+                  animateLEDs( function(leds){
+                    t = lightSequence(leds, {  color:"deepskyblue"});
+                    t = lightSequence(leds, {n: 10, startTime:t, color:"red"});
+                    t = lightSequence(leds, {startTime:t, color:"lightGreen"});
+                    t = lightSequence(leds, {startTime:t, color:"deepskyblue"});
+                    t = lightSequence(leds, {n: 10, startTime:t, color:"yellow"});
+                  })
+                }
+
+              </script>
+            </div>
+
+            <div class="toggle-next">Code ▼</div>
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers" data-line="7,13"><code class="language-python" >
+                  import board
+                  import neopixel
+                  import time
+
+                  pixels = neopixel.NeoPixel(board.GP0, 20)
+
+                  def lightUp(n=20, color=(0,0,10)):
+                    for i in range(n):
+                      pixels[i] = color
+                      time.sleep(0.1)
+
+                  # function call
+                  lightUp()
+                  lightUp(n=10, color=(10,0,0))
+                  lightUp(color=(0,10,0))
+                  lightUp()
+                  lightUp(10, (5,5,0))
+
+                </code></pre>
+              </div>
+            </div>
+
+
+
+          </div>
+          <!-- END ASSIGNMENT -->
+
+
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div id="functions-assignment-1" class="instruction">
+
+              <h4> Assignment 8: Last Lights </h4>
+
+                Write a function <code>lastLights</code> that:
+
+                <ol>
+                  <li>
+                    lights up the last <b>n</b> lights in sequence, given the number of lights (n) and their color.
+                  </li>
+                  <li>
+                    By default, it should light up all the leds.
+                  </li>
+                  <li>
+                    Default color: green
+                  </li>
+                </ol>
+
+                For example, if you passed <code>lastLights(n=7)</code> it should do this:
+            </div>
+
+            <div class="LedAnimation">
+              <input type="button" onclick="ex_ll()"  value="Play">
+              <input type="button" onclick="resetLEDs()"  value="Reset">
+              <script type="text/javascript">
+                //create blank led strip
+                var leds = getLEDs();
+                var ct = 0;
+
+                function ex_ll(){
+                  animateLEDs( function(leds){
+                    t = lightSequence(leds, {startLight:20-7,  color:"lightGreen"});
+                  })
+                }
+
+              </script>
+            </div>
+
+            <div class="toggle-next">Code ▼</div>
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers" data-line="7,13"><code class="language-python" >
+                  We believe in you.
+
+                </code></pre>
+              </div>
+            </div>
+
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers" data-line="7,13"><code class="language-python" >
+                  import board
+                  import neopixel
+                  import time
+
+                  pixels = neopixel.NeoPixel(board.GP0, 20)
+
+                  def lastLights(n=20, color=(0,10,0)):
+                    startLed = 20-n
+                    for i in range(startLed, 20):
+                      print(i)
+                      pixels[i] = color
+                      time.sleep(0.1)
+
+                  # function call
+                  lastLights(7)
+
+                </code></pre>
+              </div>
+            </div>
+
+
+
+          </div>
+          <!-- END ASSIGNMENT -->
+
+
+
+
+
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div id="functions-assignment-1" class="instruction">
+
+              <h4> Assignment 9: Step Lights </h4>
+
+                Write a function <code>stepLights</code> that:
+
+                <ol>
+                  <li>
+                    Lights up all the leds that are multiples of the given <b>step</b>
+                  </li>
+                  <li>
+                    The default step = 1
+                  </li>
+                  <li>
+                    Default color: green
+                  </li>
+                  <li>
+                    Default time between steps = 0.1 seconds
+                  </li>
+                </ol>
+
+                For example, if you passed <code>stepLights(step=2, dt=1)</code> it should do this:
+            </div>
+
+            <div class="LedAnimation">
+              <input type="button" onclick="ex_step()"  value="Play">
+              <input type="button" onclick="resetLEDs()"  value="Reset">
+              <script type="text/javascript">
+                //create blank led strip
+                var leds = getLEDs();
+                var ct = 0;
+
+                function ex_step(){
+                  animateLEDs( function(leds){
+                    t = lightSequence(leds, {step:2,  dt:0.5, color:"lightGreen"});
+                  })
+                }
+
+              </script>
+            </div>
+
+            <div class="toggle-next">Code ▼</div>
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers" data-line="7,13"><code class="language-python" >
+                  We believe in you.
+
+                </code></pre>
+              </div>
+            </div>
+
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers" data-line="7,13"><code class="language-python" >
+                  import board
+                  import neopixel
+                  import time
+
+                  pixels = neopixel.NeoPixel(board.GP0, 20)
+
+                  def stepLights(step=1, color=(0,10,0), dt=0.1):
+                    for i in range(0, 20, step):
+                      pixels[i] = color
+                      time.sleep(dt)
+
+                  # function call
+                  stepLights(step=2, dt=1)
+                </code></pre>
+              </div>
+            </div>
+
+
+
+          </div>
+          <!-- END ASSIGNMENT -->
+
+
+
+
+
+
+        </div>
+        <!-- END RIGHT COLUMN -->
+
+      <!-- END ROW -->
+
+
+
+
+
+
+      <!-- NEW ROW -->
+        <!-- LEFT COLUMN -->
+        <div class="uSection">
+
+          <h2 id="function-return">Returning Values from Functions</h2>
+
+          <p>
+            To make interesting color patterns, it can be useful to use <a href="https://en.wikipedia.org/wiki/Complementary_colors">complementary colors</a>. These are matched colors that go well together.
+          </p>
+          <p>
+            A simple way to find a complementary color to a given color is to figure out what color would need to be added to give white.
+          </p>
+          <p>
+            For example, the RGB color code for blue is (0,0,255) and white is (255,255,255), so if we subtract blue from white we get:
+          </p>
+
+
+          <div class="pythonCode">
+            <pre><code class="language-python" >
+              (255, 255, 255) - (0, 0, 255) = (255, 255, 0)
+            </code></pre>
+          </div>
+
+          <p>
+            (255, 255, 0) is yellow, which is the complementary color for blue.
+          </p>
+
+          <p>
+            Example: Write a function called <code>complementaryColor</code>that returns the complementary color for any given color.
+          </p>
+
+          <div class="pythonCode">
+            <pre class="line-numbers" data-line="5"><code class="language-python" >
+              def complementaryColor(color):
+                r = 255 - color[0]
+                g = 255 - color[1]
+                b = 255 - color[2]
+                return (r, g, b)
+
+              # MAIN PROGRAM: find the complementary color of blue
+              blue = (0, 0, 255)
+              compColor = complementaryColor(blue)
+              print(compColor)
+            </code></pre>
+          </div>
+
+          <p>
+            In the function:
+            <ul>
+              <li>
+                Lines 2-4 calculate the complementary colors.
+              </li>
+              <li>
+                Line 5 returns the values calculated by the function to the main program.
+              </li>
+            </ul>
+          </p>
+
+          <p>
+            To see this in practice. Here is a program that lights up the first light with a color (<code>color1</code>) and the last light with its complementary color (<code>compColor</code>), using the <code>complementaryColor</code> function:
+          </p>
+
+          <script type="text/javascript">
+            nPix = 20;  leds = getLEDs();
+            leds[0].style.backgroundColor = "deepskyblue";
+            leds[19].style.backgroundColor = "yellow";
+          </script>
+
+          <div class="pythonCode">
+            <pre class="line-numbers" data-line="7,13"><code class="language-python" >
+              import board
+              import neopixel
+              import time
+
+              pixels = neopixel.NeoPixel(board.GP0, 20)
+
+              def complementaryColor(color):
+                  r = 255 - color[0]
+                  g = 255 - color[1]
+                  b = 255 - color[2]
+                  return (r, g, b)
+
+              # MAIN PROGRAM
+              color1 = (0, 0, 255)
+              compColor = complementaryColor( color1 )
+              print(f'complementary color of {color1} is {compColor}')
+
+              pixels[0] = color1
+              pixels[-1] = compColor
+            </code></pre>
+          </div>
+
+
+
+
+        </div>
+        <!-- END LEFT COLUMN -->
+
+        <!-- RIGHT COLUMN -->
+        <div class="uSection">
+
+
+
+
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div id="compCol-assignment" class="instruction">
+
+              <h4> Assignment 10: Scaling Complementary Colors </h4>
+
+                <p>
+                  Finding the complementary color by subtracting from 255 makes for some very bright lights. We can instead use a different number, call it a <em>scaling value</em> to subtract the rgb values from instead.
+                </p>
+                <p>
+                  Write a function that takes <b>two input parameters (a color and a scaling value)</b> and <b>returns the scaled complementary color</b>.
+                </p>
+                Inputs:
+                <ol>
+                  <li>
+                    A color (in the form <b>(r, g, b)</b>)
+                  </li>
+                  <li>
+                    A scaling value that is used instead of 255 to calculate the complementary color.
+                  </li>
+                </ol>
+
+                <p>
+                  For example. If the input color is <b> color = (10, 5, 7)</b> and the <b> scaling value = 10</b>, then the complementary color returned should be <b>(0, 5, 3)</b>.
+                </p>
+                <p>
+                  Use the function to make the first 10 lights the starting color, and the second 10 the complementary color.
+            </div>
+
+            <script type="text/javascript">
+              nPix = 20;  leds = getLEDs();
+              [c, compC] = complementaryColors([7,2,10], 10)
+              for (let i=0; i<10; i+=1){
+                leds[i].style.backgroundColor = c;
+                leds[i+10].style.backgroundColor = compC;
+              }
+            </script>
+
+            <div class="toggle-next">Code ▼</div>
+            <div class="results" hidden>
+
+              <div class="pythonCode">
+                <pre class="line-numbers" data-line="7,13"><code class="language-python" >
+                  import board
+                  import neopixel
+                  import time
+
+                  pixels = neopixel.NeoPixel(board.GP0, 20)
+
+                  def complementaryColor(color, scaleFactor):
+                      r = scaleFactor - color[0]
+                      g = scaleFactor - color[1]
+                      b = scaleFactor - color[2]
+                      return (r, g, b)
+
+                  # MAIN PROGRAM
+                  color1 = (7,2,10)
+                  compColor = complementaryColor( color1 , 10)
+                  print(f'complementary color of {color1} is {compColor}')
+
+                  for i in range(10):
+                      pixels[i] = color1
+                      pixels[i+10] = compColor
+
+                </code></pre>
+              </div>
+            </div>
+
+
+
+          </div>
+          <!-- END ASSIGNMENT -->
+
+
+
+
+
+        </div>
+        <!-- END RIGHT COLUMN -->
+
+      <!-- END ROW -->
+
+
+
+
+
+
+      <!-- NEW ROW -->
+        <!-- LEFT COLUMN -->
+        <div class="uSection">
+
+          <h2 id="function-return">Importing Functions from Other Files</h2>
+
+          <p>
+            We've made an number of functions that will be useful in designing light patterns. However, keeping them all in the same file adds some clutter we can aleviate by moving our functions into a separate file and importing them when we need them.
+          </p>
+          <p>
+            This is particularly useful when you're sharing a Pi Pico, because you can save your functions in a separate file that does not get overwritten by other students.
+          </p>
+          <p>
+            First, let's create a file with the functions, <code>lightsOff</code>, <code>lightUp</code>, <code>lastLights</code>, and <code>complementaryColor</code> (you can put other functions in if you like). I'm going to call my file <b><em>docFuncs.py</em> </b>, but you should give yours a unique name.
+          </p>
+
+
+          <div class="pythonCode">
+            <em>docFuncs.py</em>
+            <pre class="line-numbers" data-line="7,13"><code class="language-python" >
+              import board
+              import neopixel
+              import time
+
+              pixels = neopixel.NeoPixel(board.GP0, 20)
+
+              def lightsOff():
+                  for i in range(20):
+                      pixels[i] = (0,0,0)
+
+              def lightUp(n=20, color=(0,0,10)):
+                  for i in range(n):
+                      pixels[i] = color
+                      time.sleep(0.1)
+
+              def lastLights(n=20, color=(0,10,0)):
+                  startLed = 20-n
+                  for i in range(startLed, 20):
+                    print(i)
+                    pixels[i] = color
+                    time.sleep(0.1)
+
+              def complementaryColor(color):
+                  r = 255 - color[0]
+                  g = 255 - color[1]
+                  b = 255 - color[2]
+                  return (r, g, b)
+
+            </code></pre>
+          </div>
+
+          <p>
+            Now, we can write a much shorter program that imports the functions.
+          </p>
+
+          <div class="pythonCode">
+            <em>code.py</em>
+            <pre class="line-numbers" data-line="5"><code class="language-python" >
+              from docFuncs import *
+
+              lightUp()
+              lightsOff()
+              lastLights(8)
+
+            </code></pre>
+          </div>
+
+          <div class="LedAnimation">
+            <input type="button" onclick="ex_ll()"  value="Play">
+            <input type="button" onclick="resetLEDs()"  value="Reset">
+            <script type="text/javascript">
+              //create blank led strip
+              var leds = getLEDs();
+              var ct = 0;
+
+              function ex_ll(){
+                animateLEDs( function(leds){
+                  t = lightSequence(leds, {  color:"deepskyblue"});
+                  t = clearLeds(leds, {startTime:t})
+                  t = lightSequence(leds, {startTime:t, startLight:20-7,  color:"lightGreen"});
+                })
+              }
+
+            </script>
+          </div>
+
+
+
+
+
+        </div>
+        <!-- END LEFT COLUMN -->
+
+        <!-- RIGHT COLUMN -->
+        <div class="uSection">
+
+
+
+
+          <!-- BEGIN ASSIGNMENT -->
+          <div class='assignment'>
+            <div id="importing functions" class="instruction">
+
+              <h4> Assignment 11: Importing Functions </h4>
+
+                <p>
+                  Add as many functions as you'd like to your functions file and make an interesting lighting pattern using them.
+                </p>
+
+            </div>
+
+
+
+          </div>
+          <!-- END ASSIGNMENT -->
+
+
+
+
+
+        </div>
+        <!-- END RIGHT COLUMN -->
+
+      <!-- END ROW -->
+
+
+
+
+
+
 
 
 
