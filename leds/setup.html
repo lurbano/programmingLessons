@@ -36,6 +36,8 @@
         <div class="test" style='padding:2em;'>
           Hardware and software required to get the Raspberry Pi and LED strip up and running.
 
+          <p>Raspberry Pi Options:</p>
+
           <ul>
             <li> Raspberry Pi <b>Pico (microcontroller)</b>: </li>
               <ul>
@@ -88,7 +90,7 @@
           <p>
             You will need:
             <ol>
-              <li><b>Raspberry Pi Zero W</b> (should also work with the B). The setup assumes that the Pi has a wifi chip.
+              <li><b>Raspberry Pi Zero W or Raspberry Pi Pico</b> (should also work with the B series). The server setup assumes that the Pi has a wifi chip so you won't be able to control the Pico remotely.
                 <ul>
                   <li>The <a href="https://www.adafruit.com/product/3708">Pi Zero WH</a>, which includes headers would be the easiest to start with. Otherwise, you'll need to solder on your own headers (headers are the places wher you can plug in wires/jumpers).</li>
                   <li>I've also used the Pi Zero 2 W.</li>
@@ -149,8 +151,9 @@
           <p>
             <b><a href="https://github.com/lurbano/rpi-led-strip">rpi-led-strip</a></b>: Software setup instructions are detailed at the GitHub repository.
             <ul>
-              <li>These lessons do not require the server to be set up. The server allows you to control the LEDs using a web page, and there are instructions about how to use and code this, however, with these lessons you'll use the command line.</li>
+              <li>These lessons do not require the server to be set up.The server allows you to control the LEDs using a web page, and there are instructions about how to use and code this, however, with these lessons you'll use the command line.</li>
               <li>Assumes that the led strip is controlled by the <em>GPIO 18</em> pin.</li>
+              <li>You need to use a Pi computer (Zero, B+ etc) for the server to work. The Pico has no built-in wifi.</li>
             </ul>
           </p>
 
