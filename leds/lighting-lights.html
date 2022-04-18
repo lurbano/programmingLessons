@@ -83,7 +83,7 @@
             import board
             import neopixel
 
-            pixels = neopixel.NeoPixel(board.D18, 20)
+            pixels = neopixel.NeoPixel(board.GP0, 20)
 
             pixels[2] = (10,0,0)
             </code></pre>
@@ -104,13 +104,13 @@
             <p>
               <b>Line 4</b>:
               <pre class="line-numbers" data-start="4"><code class="language-python" >
-              pixels = neopixel.NeoPixel(board.D18, 20)
+              pixels = neopixel.NeoPixel(board.GP0, 20)
               </code></pre>
               This activates the LED strip. Specifically it indicates that:
               <ul>
                 <li><b>pixels =</b>: It gives the strip a variable name, <b>pixels</b> so we can refer to it later.</li>
                 <li><b>neopixel.NeoPixel()</b>: it uses an object called <b>NeoPixel</b> from the <b>neopixel</b> library we imported on line 2.</li>
-                <li><b>board.D18</b>: indicates that the strip is being controlled by the <b>GPIO 18</b> pin, (you can look at the Pi and see that the data wire of the LED is connected to Pin 18)</li>
+                <li><b>board.GP0</b>: indicates that the strip is being controlled by the <b>GPIO 18</b> pin, (you can look at the Pi and see that the data wire of the LED is connected to Pin 18)</li>
                 <li><b>20</b>: there are <b>20</b> LED's in the strip.</li>
               </ul>
             </p>
@@ -153,7 +153,7 @@
                 import board
                 import neopixel
 
-                pixels = neopixel.NeoPixel(board.D18, 20)
+                pixels = neopixel.NeoPixel(board.GP0, 20)
 
                 pixels[4] = (10,0,0)
                 </code></pre>
@@ -182,7 +182,7 @@
                 import board
                 import neopixel
 
-                pixels = neopixel.NeoPixel(board.D18, 20)
+                pixels = neopixel.NeoPixel(board.GP0, 20)
 
                 pixels[1] = (0,20,0)
                 </code></pre>
@@ -221,7 +221,7 @@
                 import board
                 import neopixel
 
-                pixels = neopixel.NeoPixel(board.D18, 20)
+                pixels = neopixel.NeoPixel(board.GP0, 20)
 
                 pixels[3] = (255,255,0)
                 </code></pre>
@@ -290,7 +290,7 @@
             import board
             import neopixel
 
-            pixels = neopixel.NeoPixel(board.D18, 20)
+            pixels = neopixel.NeoPixel(board.GP0, 20)
 
             pixels[-1] = (0,0,100)
             </code></pre>
@@ -323,7 +323,7 @@
                 import board
                 import neopixel
 
-                pixels = neopixel.NeoPixel(board.D18, 20)
+                pixels = neopixel.NeoPixel(board.GP0, 20)
 
                 pixels[-3] = (100,0,0)
                 pixels[-2] = (0,100,0)
@@ -403,7 +403,7 @@
                 import board
                 import neopixel
 
-                pixels = neopixel.NeoPixel(board.D18, 20)
+                pixels = neopixel.NeoPixel(board.GP0, 20)
 
                 pixels[1] = (25,0,25)
                 ...
