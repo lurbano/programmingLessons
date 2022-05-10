@@ -42,7 +42,7 @@
       <div id="sidebar">
         <b><a href="#mainPage">LEDs Index</a></b>
             <ul>
-              <li> <a href="./quickRef/">Python Quick Reference</a>
+              <li> <a href="../quickRef/">Python Quick Reference</a>
               </li>
 
 
@@ -63,8 +63,8 @@
                   </li>
                   <li> <a href="./if.html">Logic: If/Then</a>
                   </li>
-                  <li> <a href="./logic/">Logical Statements</a>
-                  </li>
+                  <!-- <li> <a href="./logic/">Logical Statements</a>
+                  </li> -->
                   <li> <a href="./while-loops.html">Loops (while)</a>
                     <ul>
                       <li>
@@ -99,50 +99,58 @@
         <div style="display:grid; grid-template-columns: 1fr 220px;">
           <div class="test">
             Learn to program using LED strips controlled by a Raspberry Pi.
+
+            <p>
+              <b>Setup:</b>
+            </p>
+            <ul>
+              <li>
+                <a href="./setup.html">[Optional] Make your own Pi Strip.</a> (Skip if you already have a device).
+              </li>
+              <li>
+                <a href="https://thonny.org/">Install Thonny</a>: You can use any python interpreter, but Thonny makes it easier when you set the interpreter to <b>CircuitPython</b>.
+                <ul>
+                  <li><a href="https://core-electronics.com.au/guides/how-to-setup-a-raspberry-pi-pico-and-code-with-thonny/">Set the interpreter to CircuitPython</a>: either on the bottom right corner of the Thonny Window or through Tools-> Options -> Interpreter. You may also need to set the Port to "RPi" in the Interpreter window.</li>
+                  <li>Linux: you may have to run the command <code>sudo usermod -a -G dialout $USER</code>.</li>
+                </ul>
+              </li>
+
+            </ul>
           </div>
 
           <div class="imgDiv">
+            <a href="pico_strip.jpg"><img style="width:200px" src="pico_strip.jpg" alt=""> </a>
             <a href="led-strip4-1K.jpg"><img src="led-strip4-200.jpg" alt=""> </a>
+            
           </div>
 
         </div>
 
-        <div class="section" id="Setup">
-          <div class="topic">
-            <a href="./setup.html">Setting up the Hardware and Software on the Pi.</a>
-
-            <ul>
-              <li>Skip this if you already have a device.</li>
-            </ul>
-
-          </div>
-          <div class="link">
-            <ul>
-              <li>There are different instruction for setup on the Raspberry Pi Pico, which is a microcontroller, relative to the full Raspberry Pi computers setup (Zero, B+ etc.)</li>
-            </ul>
-          </div>
-        </div>
+        <h3>Coding Lessons</h3>
 
 
         <div class="section" id="Learning to Code">
-          <div class="topic">
-            Lessons on learning to code using python on the Pi and a LED strip.
-          </div>
-          <div class="link">
-            Coding Lessons
-          </div>
+
           <div class="description">
-            Basic coding by controlling a LED light strip using a Raspberry Pi. The code is almost identitical for the Pi computers and the Pico microcontroller, they just use different GPIO pins (<code>board.D18</code> vs <code>board.GP0</code>)
+            Basic coding by controlling a LED light strip using a Raspberry Pi. <b>The default is for the Raspberry Pi Pico Strips</b>. The code is almost identitical for the Pi computers and the Pico microcontroller, however, they just use different default GPIO pins (<code>board.D18</code> vs <code>board.GP0</code>)
             <ol>
-              <li> <a href="./lighting-lights.html">Lighting Lights (Basics)</a>
+              <li>
+                <a href="./lighting-lights.html">Lighting Lights (Basics)</a>
               </li>
-              <li> <a href="./for-loops.html"><code>for</code> Loops (with light sequences)</a>
+              <li>
+                <a href="./for-loops.html"><code>for</code> Loops (with light sequences)</a>
               </li>
-              <li> <a href="./functions.html">Functions</a>
+              <li>
+                <a href="./functions.html">Functions</a>
               </li>
-              <li> <a href="./if.html"><code>if</code> statements</a>
+              <li>
+                <a href="./if.html"><code>if</code> statements</a>
               </li>
-              <li> <a href="./while-loops.html"><code>while</code> Loops </a>
+              <!-- <li>
+                <a href="./logic/">Logical Statements</a>
+              </li> -->
+              <li>
+                <a href="./while-loops.html"><code>while</code> Loops </a>
               </li>
             </ol>
           </div>
